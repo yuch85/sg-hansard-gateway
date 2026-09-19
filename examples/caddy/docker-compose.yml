@@ -10,8 +10,9 @@
 
 services:
   hansard:
-    # Replace with your published image, or use `build: ../..` for a local build.
-    image: ghcr.io/EXAMPLE/sg-hansard-gateway
+    # Published image. For a local build instead, comment the image line and
+    # use `build: ../..`.
+    image: ghcr.io/yuch85/sg-hansard-gateway:latest
     ports:
       - "8000:8000"
     volumes:

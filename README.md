@@ -7,19 +7,65 @@ verbatim footer, and no headless browser is involved anywhere.
 
 The included Caddy configuration is a reference reverse-proxy deployment; Caddy is not required by the application and may be replaced by any HTTPS reverse proxy.
 
+## Demo
+
+A walkthrough of the gateway as driven by **ChatGPT** (link-only client —
+click navigation from one constant URL, no headless browser):
+
+<video src="media/demo-chatgpt.mp4" controls width="320"></video>
+
+The full video is in [media/demo-chatgpt.mp4](media/demo-chatgpt.mp4).
+
 ## Quickstart
 
+**Run the published image (fastest):**
+
 ```bash
-git clone <repo-url> && cd <repo-dir>
+# one-time: authenticate to GHCR (a token with read:packages scope, or `gh auth login`)
+docker login ghcr.io
+docker pull ghcr.io/yuch85/sg-hansard-gateway:latest
+docker run --rm -p 8000:8000 ghcr.io/yuch85/sg-hansard-gateway:latest   # boots in the empty state
+```
+
+**Build from source:**
+
+```bash
+git clone https://github.com/yuch85/sg-hansard-gateway.git && cd sg-hansard-gateway
 uv sync --extra dev
 uv run python -m pytest -m 'not live'   # full offline suite, no secrets needed
-docker build -t hansard-gateway:latest .
-docker run --rm -p 8000:8000 hansard-gateway:latest   # boots in the empty state
+docker build -t sg-hansard-gateway:latest .
+docker run --rm -p 8000:8000 sg-hansard-gateway:latest   # boots in the empty state
 ```
 
 The container boots with no index and no tokens and degrades to an empty
 state (`/health` still returns `{"status":"ok"}`). Add a token and an index
 below and the same container serves.
+
+### Quick Docker Compose
+
+A minimal single-service compose (no Caddy — put your own HTTPS reverse
+proxy in front, or use the [examples/caddy/](examples/caddy/) reference for
+a two-container Caddy setup):
+
+```yaml
+services:
+  gateway:
+    image: ghcr.io/yuch85/sg-hansard-gateway:latest
+    ports:
+      - "8000:8000"
+    environment:
+      HANSARD_PUBLIC_BASE_URL: https://your-domain.example   # REQUIRED — your domain
+      HANSARD_LOG_STREAM: "1"
+    volumes:
+      - hansard-data:/data          # index.db + tokens.yaml live here (persistent)
+    restart: unless-stopped
+
+volumes:
+  hansard-data:
+```
+
+Generate a token and place it + an index on the volume before first start
+(see [Token management](#token-management--the-easy-way) and [Crawl](#crawl--easy-to-run)).
 
 ## Token management — the easy way
 
@@ -125,22 +171,23 @@ the default above; the file is served verbatim).
 **robots.txt is retrieval policy, NOT access control** (RFC 9309): the token
 remains the only gate, and a crawler without one gets the identical byte-404.
 
-The four groups and why the wildcard carries the Allow: Claude's user-facing
-agents (Claude-User, user-directed retrieval, and Claude-SearchBot) and
-ClaudeBot get explicit `Allow: /a/` groups, but Claude's fetcher does not
+The four groups and why the wildcard carries the Allow: user-directed
+retrieval agents get explicit `Allow: /a/` groups, but some fetchers do not
 expose a distinct product user agent — under RFC 9309 an unknown product
 token falls through to the wildcard, so only the wildcard's `Allow: /a/`
-makes the policy robust for it. The wildcard then `Disallow: /` for
+makes the policy robust for them. The wildcard then `Disallow: /` for
 everything else. Note also that `noindex` (via `X-Robots-Tag` on every
 protected page) controls *indexing*, not *fetch permission* — they are
 different policies and both are in place.
 
-Worked example: on 2026-09-18 Claude's user-directed retrieval client began
-refusing the site with a `ROBOTS_DISALLOWED` error even though the permissive
-robots file had been fetched and honored — the site was refused on Claude's
-side and the cause was never resolved upstream. The escalation packet
-prepared at the time (server-side logs, exact robots bytes, an independent
-client control fetch) is the diagnostic record of that incident.
+**Compatibility.** The gateway has been **tested with ChatGPT** (the
+link-only client flow in the demo below). It is expected to work with other
+chat apps that drive a similar link-only / fetch-then-navigate environment,
+though that is not exhaustively verified. Some clients (notably Claude) have
+shown inconsistent behavior around robots.txt interpretation; if a client
+refuses the site despite a permissive robots file, treat it as a
+client-side policy decision, not a gateway defect — the token remains the
+only real gate, and the robots file is advisory retrieval policy.
 
 ## Security notes
 
