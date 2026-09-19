@@ -10,11 +10,12 @@ The included Caddy configuration is a reference reverse-proxy deployment; Caddy 
 ## Demo
 
 A walkthrough of the gateway as driven by **ChatGPT** (link-only client —
-click navigation from one constant URL, no headless browser):
+click navigation from one constant URL, no headless browser). The image
+below is the video — click to play:
 
-<video src="media/demo-chatgpt.mp4" controls width="320"></video>
+<img src="media/demo-chatgpt.mp4#t=0.1" alt="ChatGPT demo of the Hansard Gateway" width="320">
 
-The full video is in [media/demo-chatgpt.mp4](media/demo-chatgpt.mp4).
+Download: [media/demo-chatgpt.mp4](media/demo-chatgpt.mp4)
 
 ## Quickstart
 
