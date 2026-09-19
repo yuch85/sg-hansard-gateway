@@ -20,10 +20,9 @@ security model (rotatable, revocable, digests-only at rest).
 | Trust | The client is fenced by the instructions ("never invent a URL") | No fence needed — the client is already programmatic |
 
 Mode 2 is a strict superset of Mode 1: every Mode 2 URL is exactly the link
-a Mode 1 page renders. If your client can do both, Mode 1 is the proven path
-(it passed the 2026-09-18 acceptance test: full research, click-only, zero
-URL construction); Mode 2 is the escape hatch for clients whose browsing
-tool refuses the start page.
+a Mode 1 page renders. If your client can do both, Mode 1 is the proven
+path; Mode 2 is the escape hatch for clients whose browsing tool refuses the
+start page.
 
 ## Demo
 
