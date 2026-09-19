@@ -222,11 +222,22 @@ This project builds on prior work in the Singapore parliamentary data
 ecosystem:
 
 - [sgparl](https://github.com/wongpeiting/sgparl) (wongpeiting) — the
-  maintained reference implementation for the SPRS API. The search
-  sweep/dedupe algorithm in `hansard_gateway/search/sprs.py` (probe the
-  load-balanced `maxResult` totals, sweep 20-row pages, dedupe by
-  `reportId` until a no-gain budget is reached) is ported from it.
-  Licensed CC0 1.0 (public domain); credited here as good practice.
+  maintained reference implementation for the SPRS API, and the primary
+  source for this project's SPRS API model. Ported or derived from it:
+  the required request headers (bare requests are rejected upstream);
+  the search sweep/dedupe algorithm in
+  `hansard_gateway/search/sprs.py` (probe the load-balanced `maxResult`
+  totals, sweep 20-row pages, dedupe by `reportId` until a no-gain budget
+  is reached — the two backend nodes disagree on totals and orderings);
+  the finding that the legacy `getHansardReport` endpoint is retired
+  (both eras are served by `searchResult` + `getHansardTopic`, tagged
+  `reportVersion` sprs2/sprs3); the upstream retry policy (500s are
+  intermittent noise; "No Results Found" 500 is a terminal empty
+  result); trailing-`#` stripping of `reportId` before topic fetches;
+  and both speaker-extraction parsers (pre-2012 `<!--MP_NAME:...-->`
+  HTML comments with `<b>` fallback; post-2012 `<p><strong>` walks with
+  carry-forward). Licensed CC0 1.0 (public domain); credited here as good
+  practice.
 - [singapore-parliament-speeches](https://github.com/parleh-mate/singapore-parliament-speeches)
   and its [dbt model](https://github.com/parleh-mate/singapore-parliament-speeches-dbt)
   (parleh-mate) — raw Hansard extraction; prior art consulted during
