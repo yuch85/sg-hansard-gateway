@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% block title %}Hansard search — {{ query }}{% endblock %}
+{% block content %}
+  <h1>Hansard search results</h1>
+  <p>
+    Query: {{ query }}<br>
+    {{ results_line }}
+    {% if page_note %}<br><em>{{ page_note }}</em>{% endif %}
+  </p>
+  <p>
+    This page as:
+    <a href="{{ json_url }}">JSON</a>
+    <span class="u">{{ json_url }}</span>
+    ·
+    <a href="{{ text_url }}">text</a>
+    <span class="u">{{ text_url }}</span>
+  </p>
+  {% if hits %}
+  {% for hit in hits %}
+  <article class="search-result">
+    <h2>
+      <a href="{{ report_url(hit.link_id) }}">{{ hit.title }}</a>
+      <span class="u">{{ report_url(hit.link_id) }}</span>
+    </h2>
+    <dl>
+      <dt>Date</dt>
+      <dd>{{ hit.date.strftime("%d %B %Y") if hit.date else "unknown" }}</dd>
+      <dt>Report ID</dt>
+      <dd><code>{{ hit.link_id }}</code></dd>
+      {% if hit.report_type %}
+      <dt>Section</dt>
+      <dd>{{ hit.report_type }}</dd>
+      {% endif %}
+      {% if hit.speaker %}
+      <dt>Speaker</dt>
+      <dd>{{ hit.speaker }}</dd>
+      {% endif %}
+    </dl>
+    {% if hit.excerpt %}
+    <p class="excerpt">{{ hit.excerpt }}</p>
+    {% endif %}
+  </article>
+  {% endfor %}
+
+  {% if refine %}
+  {% if refine.limits %}
+  <h2>Page size</h2>
+  <ul>
+    {% for link in refine.limits %}
+    <li>
+      <a href="{{ link.url }}">{{ link.label }}</a>
+      <span class="u">{{ link.url }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if refine.refine_date %}
+  <h2>Refine by date</h2>
+  <ul>
+    {% for link in refine.refine_date %}
+    <li>
+      <a href="{{ link.url }}">{{ link.label }}</a>
+      <span class="u">{{ link.url }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if refine.refine_speaker %}
+  <h2>Refine by speaker</h2>
+  <ul>
+    {% for link in refine.refine_speaker %}
+    <li>
+      <a href="{{ link.url }}">{{ link.label }}</a>
+      <span class="u">{{ link.url }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if refine.related %}
+  <h2>Related topics</h2>
+  <ul>
+    {% for link in refine.related %}
+    <li>
+      <a href="{{ link.url }}">{{ link.label }}</a>
+      <span class="u">{{ link.url }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if refine.pagination %}
+  <h2>Pages</h2>
+  <ul>
+    {% for link in refine.pagination %}
+    <li>
+      <a href="{{ link.url }}">{{ link.label }}</a>
+      <span class="u">{{ link.url }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endif %}
+
+  <footer>
+    <p><a href="{{ home_url }}">Back to your home</a>
+    <span class="u">{{ home_url }}</span></p>
+  </footer>
+  {% else %}
+  <p>No results found for “{{ query }}”.</p>
+  {% if refine.limits %}
+  <h2>Page size</h2>
+  <ul>
+    {% for link in refine.limits %}
+    <li>
+      <a href="{{ link.url }}">{{ link.label }}</a>
+      <span class="u">{{ link.url }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if refine.did_you_mean %}
+  <h2>Did you mean</h2>
+  <ul>
+    {% for link in refine.did_you_mean %}
+    <li>
+      <a href="{{ link.url }}">{{ link.label }}</a>
+      <span class="u">{{ link.url }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if refine.broader %}
+  <h2>Broader searches</h2>
+  <ul>
+    {% for link in refine.broader %}
+    <li>
+      <a href="{{ link.url }}">{{ link.label }}</a>
+      <span class="u">{{ link.url }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if refine.ladder %}
+  <h2>Find it in the A-Z index</h2>
+  <ul>
+    {% for link in refine.ladder %}
+    <li>
+      <a href="{{ link.url }}">{{ link.label }}</a>
+      <span class="u">{{ link.url }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <footer>
+    <p><a href="{{ home_url }}">Back to your home</a>
+    <span class="u">{{ home_url }}</span></p>
+  </footer>
+  {% endif %}
+{% endblock %}

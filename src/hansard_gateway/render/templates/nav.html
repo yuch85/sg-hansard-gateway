@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Singapore Hansard Gateway — {{ page.prefix }}{% endblock %}
+{% block content %}
+  <h1>Topics starting with “{{ page.prefix }}”</h1>
+
+  {% if terms %}
+  <h2>Topics</h2>
+  <ul>
+    {% for t in terms %}
+    <li>
+      <a href="{{ search_url(t.surface) }}">{{ t.surface }}</a>
+      <span class="u">{{ search_url(t.surface) }}</span>
+      — {{ t.kind }}, {{ t.doc_count }} report{% if t.doc_count != 1 %}s{% endif %}
+      {% if t.first_date %}, {{ t.first_date }} – {{ t.last_date }}{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% if truncated %}
+  <p>
+    This list is truncated. Narrowing by one more letter
+    (use “Narrow further” below) shows the rest.
+  </p>
+  {% endif %}
+  {% else %}
+  <p>No topics under this prefix yet — use the links below to navigate.</p>
+  {% endif %}
+
+  {% if children %}
+  <h2>Narrow further</h2>
+  <ul>
+    {% for c in children %}
+    <li>
+      <a href="{{ nav_url(c.child) }}">{{ c.child }}</a>
+      <span class="u">{{ nav_url(c.child) }}</span> — {{ c.n_terms }} topics
+    </li>
+    {% if c.grandchild %}
+    <li>
+      (skip level) <a href="{{ nav_url(c.grandchild) }}">{{ c.grandchild }}</a>
+      <span class="u">{{ nav_url(c.grandchild) }}</span> — {{ c.gc_n_terms }} topics
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <h2>Navigation</h2>
+  <ul>
+    {% if up_url %}
+    <li>
+      <a href="{{ up_url }}">Up one level</a>
+      <span class="u">{{ up_url }}</span>
+    </li>
+    {% endif %}
+    <li>
+      <a href="{{ letter_index_url }}">Back to the letter index</a>
+      <span class="u">{{ letter_index_url }}</span>
+    </li>
+    <li>
+      <a href="{{ launcher_url }}">Back to the launcher</a>
+      <span class="u">{{ launcher_url }}</span>
+    </li>
+  </ul>
+
+  <h2>Formats</h2>
+  <ul>
+    <li>
+      <a href="{{ json_url }}">This page as JSON</a>
+      <span class="u">{{ json_url }}</span>
+    </li>
+    <li>
+      <a href="{{ text_url }}">This page as text</a>
+      <span class="u">{{ text_url }}</span>
+    </li>
+  </ul>
+{% endblock %}

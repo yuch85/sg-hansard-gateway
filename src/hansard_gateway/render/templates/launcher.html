@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Singapore Hansard Gateway — Navigation{% endblock %}
+{% block content %}
+  <h1>Singapore Hansard Gateway</h1>
+  <p>
+    You are reading a navigation page. Do not construct or guess URLs —
+    requests to URLs you build yourself will fail. Move only by following the
+    links on this page. To find a topic, click the first letters of any
+    distinctive word in it under "Find a topic by word".
+  </p>
+
+  <h2>Find a topic by word</h2>
+  <ul>
+    {% for c in alphabet %}
+    <li>
+      <a href="{{ nav_url(c) }}">{{ c }}</a>
+      <span class="u">{{ nav_url(c) }}</span> — {{ letter_counts.get(c, 0) }} topics
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h2>Common topics</h2>
+  <ul>
+    {% for surface, doc_count in common_terms %}
+    <li>
+      <a href="{{ search_url(surface) }}">{{ surface }}</a>
+      <span class="u">{{ search_url(surface) }}</span> — {{ doc_count }} reports
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h2>Recent sittings</h2>
+  <ul>
+    {% for day in recent_sittings %}
+    <li>
+      <a href="{{ date_url(day) }}">{{ day }}</a>
+      <span class="u">{{ date_url(day) }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h2>Browse</h2>
+  <ul>
+    <li>
+      <a href="{{ years_url }}">Browse by year</a>
+      <span class="u">{{ years_url }}</span>
+    </li>
+    <li>
+      <a href="{{ members_url }}">Browse by member</a>
+      <span class="u">{{ members_url }}</span>
+    </li>
+    <li>
+      <a href="{{ bills_url }}">Bills A-Z</a>
+      <span class="u">{{ bills_url }}</span>
+    </li>
+  </ul>
+
+  <h2>Formats</h2>
+  <ul>
+    <li>
+      <a href="{{ launcher_json_url }}">This page as JSON</a>
+      <span class="u">{{ launcher_json_url }}</span>
+    </li>
+  </ul>
+{% endblock %}

@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+.venv/
+logs/
+tokens.yaml
+.pytest_cache/
+.uv/
+*.egg-info/
+dist/
+# Term index DB (Phase 27.1) — a build artifact under ~/.hansard/ (0600),
+# never committed: it holds member names + report structure.
+index.db
+index.db.staging
+index.db.old
+# Prior-art reference clones (Phase 27.2 survey) — never shipped, never tracked.
+reference/
+# Env files (27.2-REQ-01): ignore all .env* except the committed example.
+.env
+.env.*
+!.env.example
+
+# Live-acceptance suite: holds the live production launcher token (spec §9)
+# and must never ship in the public clone (27.2-REQ-01 / mission 006 OPEN-1).
+# Run locally after a deploy: uv run python -m pytest live_acceptance/ -m live -q
+live_acceptance/

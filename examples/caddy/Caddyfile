@@ -1,0 +1,31 @@
+# Reference reverse proxy for the Gateway container (see docker-compose.yml).
+# Self-contained: no host-local snippets are imported (cf-tls /
+# security-headers do not exist in this context).
+#
+# hansard.example.org is a placeholder — substitute your domain. For local
+# testing use :80 instead; Caddy handles auto-HTTPS for real domains.
+
+hansard.example.org {
+    # Response compression.
+    encode zstd gzip
+
+    # Case-law-adjacent content: never indexed externally.
+    header X-Robots-Tag "noindex, nofollow"
+
+    # Body size cap — the app also enforces its own limits.
+    request_body {
+        max_size 50KB
+    }
+
+    # Deliberately no access-logging directive here (D-09/D-10): the
+    # capability token rides in the URL path, and proxy access logs record
+    # full URIs — so the proxy must not log token-bearing URIs. Sanitized
+    # application-level structured logging (token label only) is the
+    # audit trail.
+
+    reverse_proxy hansard:8000 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+    }
+}

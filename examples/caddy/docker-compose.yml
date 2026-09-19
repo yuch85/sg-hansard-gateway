@@ -1,0 +1,52 @@
+# Reference Docker Compose deployment (Gateway + Caddy).
+#
+# The included Caddy configuration is a reference reverse-proxy deployment;
+# Caddy is not required by the application and may be replaced by any HTTPS
+# reverse proxy.
+#
+# Operator substitutions: the image name below is a placeholder, the domain
+# in the Caddyfile is a placeholder, and HANSARD_PUBLIC_BASE_URL MUST be set
+# to your domain.
+
+services:
+  hansard:
+    # Replace with your published image, or use `build: ../..` for a local build.
+    image: ghcr.io/EXAMPLE/sg-hansard-gateway
+    ports:
+      - "8000:8000"
+    volumes:
+      # Named volume for the index DB. For a LIVE deployment bind-mount the
+      # host index dir instead (e.g. type: bind, source: <HOME_HANSARD_DIR>,
+      # target: /data) so the host crawl timer's atomic swap lands on the
+      # same path the container reads.
+      - hansard-index:/data
+      # tokens.yaml is generated on the host via
+      # `uv run hg-tokens generate <label>` (prints the plaintext once),
+      # then mounted read-only here.
+      - type: bind
+        source: ./tokens.yaml
+        target: /data/tokens.yaml
+        read_only: true
+    environment:
+      # MUST be set to your domain (the code default is the live origin).
+      HANSARD_PUBLIC_BASE_URL: https://hansard.example.org
+      # JSON request lines to stderr for container log collection (D-09).
+      HANSARD_LOG_STREAM: "1"
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - hansard
+
+volumes:
+  hansard-index:
+  caddy_data:
+  caddy_config:

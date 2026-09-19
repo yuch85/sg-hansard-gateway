@@ -1,0 +1,34 @@
+# Second wall against secret shipping (27.2-REQ-02 / Pitfall 5).
+# The image needs only pyproject.toml, uv.lock, src/, crawl/,
+# manage_tokens.py — everything local or sensitive stays OUT of the
+# build context.
+
+# VCS + tooling caches
+.git/
+.pytest_cache/
+.uv/
+__pycache__/
+*.egg-info/
+dist/
+
+# Local venv (the image builds its own at /app/.venv via uv sync)
+.venv/
+
+# Live artifacts — the token store, the index, logs: NEVER in the image
+tokens.yaml
+index.db
+index.db.staging
+index.db.old
+logs/
+
+# Env files (the image carries its defaults in ENV; .env.example is docs)
+.env
+.env.*
+
+# Prior-art reference clones + tests + deploy artifacts: not runtime
+reference/
+tests/
+live_acceptance/
+deploy/
+examples/
+README.md

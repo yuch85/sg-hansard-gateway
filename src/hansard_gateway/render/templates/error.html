@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Upstream temporarily unavailable{% endblock %}
+{% block content %}
+  <h1>Upstream Hansard temporarily unavailable</h1>
+  <p>Requested report: <code>{{ report_id }}</code></p>
+  <p>
+    The gateway could not retrieve the report from SPRS.
+    No transcript has been generated or substituted.
+  </p>
+  {% if token %}
+  {% if status == 422 %}
+  <p>
+    What was wrong:
+    {{ detail }}
+  </p>
+  {% endif %}
+  {% if status in (429, 502, 503, 504) %}
+  <p>
+    This is a temporary condition — try again in a minute or two (bounded
+    backoff; no retry schedule is published).
+  </p>
+  {% endif %}
+  <p><a href="{{ nav_home_url }}">Back to your home</a>
+  <span class="u">{{ nav_home_url }}</span></p>
+  {% if correction_url %}
+  <p>
+    Corrected form:
+    <a href="{{ correction_url }}">{{ correction_url }}</a>
+    <span class="u">{{ correction_url }}</span>
+  </p>
+  {% endif %}
+  {% else %}
+  <p><a href="/">Back to the home page</a></p>
+  {% endif %}
+{% endblock %}

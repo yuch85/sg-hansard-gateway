@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Singapore Parliament — {{ date_long }}{% endblock %}
+{% block content %}
+  {% if toc_nav %}
+  <nav class="page-nav">
+    {% if toc_nav.prev_sitting_url %}
+    <p>Previous sitting:
+      <a href="{{ toc_nav.prev_sitting_url }}">{{ toc_nav.prev_sitting_label }}</a>
+      <span class="u">{{ toc_nav.prev_sitting_url }}</span></p>
+    {% endif %}
+    {% if toc_nav.next_sitting_url %}
+    <p>Next sitting:
+      <a href="{{ toc_nav.next_sitting_url }}">{{ toc_nav.next_sitting_label }}</a>
+      <span class="u">{{ toc_nav.next_sitting_url }}</span></p>
+    {% endif %}
+    {% if toc_nav.year_url %}
+    <p>
+      <a href="{{ toc_nav.year_url }}">{{ toc_nav.year_label }}</a>
+      <span class="u">{{ toc_nav.year_url }}</span>
+    </p>
+    {% endif %}
+    {% if toc_nav.search_url %}
+    <p>
+      <a href="{{ toc_nav.search_url }}">Back to search</a>
+      <span class="u">{{ toc_nav.search_url }}</span>
+    </p>
+    {% endif %}
+  </nav>
+  {% endif %}
+  <h1>Singapore Parliament — {{ date_long }}</h1>
+  <p>{{ hits | length }} reports in this sitting.</p>
+  <p>
+    This page as:
+    <a href="{{ json_url }}">JSON</a>
+    <span class="u">{{ json_url }}</span>
+    ·
+    <a href="{{ text_url }}">text</a>
+    <span class="u">{{ text_url }}</span>
+  </p>
+  {% if hits %}
+  <ol>
+    {% for hit in hits %}
+    <li>
+      <a href="{{ report_url(hit.link_id) }}">{{ hit.title }}</a>
+      <span class="u">{{ report_url(hit.link_id) }}</span>
+      {% if hit.report_type %}
+      <dl>
+        <dt>Section</dt>
+        <dd>{{ hit.report_type }}</dd>
+      </dl>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  <p>No reports found for this date.</p>
+  {% endif %}
+  <footer>
+    <p>
+      <a href="{{ home_url }}">Back to your home</a>
+      <span class="u">{{ home_url }}</span>
+    </p>
+  </footer>
+{% endblock %}

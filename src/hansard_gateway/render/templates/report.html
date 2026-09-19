@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}{{ report.title }} — {{ date_long }}{% endblock %}
+{% block content %}
+  <nav class="page-nav">
+    <p>
+      <a href="{{ sitting_url }}">This sitting</a>
+      <span class="u">{{ sitting_url }}</span>
+      ·
+      <a href="{{ home_url }}">Home</a>
+      <span class="u">{{ home_url }}</span>
+    </p>
+    {% if report_nav %}
+    {% if report_nav.prev_report_url %}
+    <p>Previous report:
+      <a href="{{ report_nav.prev_report_url }}">{{ report_nav.prev_report_label }}</a>
+      <span class="u">{{ report_nav.prev_report_url }}</span></p>
+    {% endif %}
+    {% if report_nav.next_report_url %}
+    <p>Next report:
+      <a href="{{ report_nav.next_report_url }}">{{ report_nav.next_report_label }}</a>
+      <span class="u">{{ report_nav.next_report_url }}</span></p>
+    {% endif %}
+    {% if report_nav.title_terms %}
+    <p>Search title terms:
+      {% for link in report_nav.title_terms %}
+      <a href="{{ link.url }}">{{ link.label }}</a>
+      <span class="u">{{ link.url }}</span>
+      {% endfor %}
+    </p>
+    {% endif %}
+    {% endif %}
+  </nav>
+  <h1>{{ report.title }}</h1>
+  <dl>
+    <dt>Date</dt>
+    <dd>{{ date_long }}</dd>
+    <dt>Report ID</dt>
+    <dd><code>{{ report.report_id }}</code></dd>
+    {% if report.parliament_no %}<dt>Parliament No</dt><dd>{{ report.parliament_no }}</dd>{% endif %}
+    {% if report.session_no %}<dt>Session No</dt><dd>{{ report.session_no }}</dd>{% endif %}
+    {% if report.sitting_no %}<dt>Sitting No</dt><dd>{{ report.sitting_no }}</dd>{% endif %}
+    {% if report.volume %}<dt>Volume</dt><dd>{{ report.volume }}</dd>{% endif %}
+    {% if report.topic_type %}<dt>Section</dt><dd>{{ report.topic_type }}</dd>{% endif %}
+    <dt>Source</dt>
+    <dd>Singapore Parliamentary Reports</dd>
+    <dt>Retrieved</dt>
+    <dd>{{ retrieved }}</dd>
+    <dt>Official SPRS sitting record</dt>
+    <dd>
+      <a href="{{ report.source_url }}" rel="noopener noreferrer">{{ report.source_url }}</a>
+      <span class="u">{{ report.source_url }}</span>
+      <small>(the sitting this report belongs to — SPRS has no public per-report page; the topic id <code>{{ report.report_id }}</code> is the gateway's)</small>
+    </dd>
+  </dl>
+  <p><code>Transcript SHA-256: {{ report.transcript_sha256 }}</code></p>
+  <section id="transcript">
+    <h2>Transcript</h2>
+    {% for speech in report.speeches %}
+    <article class="speech">
+      <h3>{{ speech.speaker_original if speech.speaker_original else "[procedural]" }}</h3>
+      {% for paragraph in speech.paragraphs %}
+      <p>{{ paragraph }}</p>
+      {% endfor %}
+    </article>
+    {% endfor %}
+  </section>
+  <footer>
+    <p>Retrieved live from Singapore Parliamentary Reports.</p>
+    <p><a href="{{ report.source_url }}" rel="noopener noreferrer">Official SPRS sitting record</a>
+    <span class="u">{{ report.source_url }}</span></p>
+    <p>
+      This report as:
+      <a href="{{ json_url }}">JSON</a>
+      <span class="u">{{ json_url }}</span>
+      ·
+      <a href="{{ text_url }}">text</a>
+      <span class="u">{{ text_url }}</span>
+    </p>
+    <p><a href="{{ sitting_url }}">This sitting's table of contents</a>
+    <span class="u">{{ sitting_url }}</span></p>
+    <p><a href="{{ home_url }}">Back to your home</a>
+    <span class="u">{{ home_url }}</span></p>
+  </footer>
+{% endblock %}

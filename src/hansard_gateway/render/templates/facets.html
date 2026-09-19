@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Singapore Hansard Gateway — {{ heading }}{% endblock %}
+{% block content %}
+  <h1>{{ heading }}</h1>
+
+  {% if entries %}
+  <ul>
+    {% for e in entries %}
+    <li>
+      <a href="{{ e.url }}">{{ e.label }}</a>
+      <span class="u">{{ e.url }}</span>
+      {% if e.count is not none %} — {{ e.count }} {{ e.count_label }}{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>Nothing under this facet yet — use the links below to navigate.</p>
+  {% endif %}
+
+  <h2>Navigation</h2>
+  <ul>
+    {% for n in nav %}
+    <li>
+      <a href="{{ n.url }}">{{ n.label }}</a>
+      <span class="u">{{ n.url }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h2>Formats</h2>
+  <ul>
+    <li>
+      <a href="{{ json_url }}">This page as JSON</a>
+      <span class="u">{{ json_url }}</span>
+    </li>
+    <li>
+      <a href="{{ text_url }}">This page as text</a>
+      <span class="u">{{ text_url }}</span>
+    </li>
+  </ul>
+{% endblock %}

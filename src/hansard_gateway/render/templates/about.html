@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}About — Singapore Hansard Gateway{% endblock %}
+{% block content %}
+  <h1>About this service</h1>
+  <p>
+    This service retrieves publicly available Singapore Parliamentary Reports
+    from the official Parliament of Singapore SPRS service on demand. It does
+    not alter the substantive transcript text. This service is not affiliated
+    with or operated by the Parliament of Singapore.
+  </p>
+  <h2>Source</h2>
+  <p>
+    All parliamentary content is retrieved live from the official SPRS service
+    at <a href="https://sprs.parl.gov.sg" rel="noopener noreferrer">sprs.parl.gov.sg</a>.
+    Each report page links to its official source record.
+  </p>
+  <h2>Transformation policy</h2>
+  <p>
+    HTML sanitisation and structural parsing only. No substantive text
+    rewriting, summarisation, or paraphrase. Procedural markers, column marks,
+    and clock marks are preserved verbatim.
+  </p>
+  <h2>Caching policy</h2>
+  <p>
+    Upstream content is cached briefly server-side (token-independent) as an
+    optimization only. The service remains conceptually query-time retrieval.
+  </p>
+{% endblock %}

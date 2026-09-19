@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Singapore Hansard Gateway{% endblock %}
+{% block content %}
+  <h1>Singapore Hansard Gateway</h1>
+  <p>
+    A gateway to the publicly available Singapore Parliamentary Reports served
+    by the official Parliament of Singapore SPRS service. Reports are retrieved
+    on demand and the substantive transcript text is not altered.
+  </p>
+  <p>
+    This service is <strong>not affiliated with or operated by</strong> the
+    Parliament of Singapore.
+  </p>
+  <h2>Access</h2>
+  <p>
+    Retrieval requires a capability token. The public OpenAPI specification at
+    <a href="/openapi.json"><code>/openapi.json</code></a> documents every
+    endpoint and its request/response shapes.
+  </p>
+  <p>
+    See the <a href="/about">about page</a> for the provenance and
+    transformation policy.
+  </p>
+{% endblock %}

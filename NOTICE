@@ -1,0 +1,23 @@
+Hansard Gateway — third-party notices
+=====================================
+
+This project contains no vendored third-party code. It does, however, port
+one algorithm from a prior-art project:
+
+- The search sweep/dedupe algorithm in `src/hansard_gateway/search/sprs.py`
+  (probe the load-balanced `maxResult` totals, sweep 20-row pages, dedupe
+  by `reportId` until a no-gain budget is reached) is ported from
+  sgparl <https://github.com/wongpeiting/sgparl> by wongpeiting.
+
+  sgparl is licensed CC0 1.0 Universal (public domain dedication). No
+  attribution is legally required; this notice is given as good practice.
+  The port was independently re-implemented against live SPRS API
+  behavior; no sgparl source files are distributed with this project.
+
+Other prior-art projects consulted during research (no code taken):
+parleh-mate/singapore-parliament-speeches (CC0 1.0),
+parleh-mate/singapore-parliament-speeches-dbt (CC0 1.0),
+limdingwen/parliament-summary (CC0 1.0),
+isaacyclai/second-reading (MIT).
+
+This project is distributed under the Apache License, Version 2.0 (see LICENSE). The notices below are provided per Section 4(c) of that license.
