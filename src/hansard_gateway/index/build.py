@@ -3,7 +3,7 @@
 Takes raw sitting-TOC row dicts (already normalised to the index's report
 shape by the caller) and materialises: report rows, the term table, the
 cross-word prefix table (prefix lengths 1..ladder_depth, stopwords excluded),
-the prefix_children fan-out (with fat-branch grandchild skip-levels, YC
+the prefix_children fan-out (with fat-branch grandchild skip-levels, operator
 addition 2026-09-18), and the ``meta.build_id`` stamp.
 
 Logging, never silent: a depth-max prefix whose term list exceeds
@@ -141,8 +141,7 @@ def _materialise_children(
 
     A child whose count exceeds ``fat_threshold`` additionally stores its
     top grandchild (2-char extension of the child) + the grandchild's term
-    count, so Block B can render the skip-level without a scan (YC addition
-    2026-09-18); ordinary children carry NULL grandchild fields. The queries
+    count, so Block B can render the skip-level without a scan (skip-level addition); ordinary children carry NULL grandchild fields. The queries
     run over the indexed ``term_prefix(prefix)`` — offline build-time only.
     """
     conn.execute("DELETE FROM prefix_children")

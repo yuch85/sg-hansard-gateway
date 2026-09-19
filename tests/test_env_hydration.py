@@ -84,7 +84,7 @@ def test_env_settings_clean_env_returns_locked_defaults(
     assert s.app_port == 8765
     assert s.index_db_path == Path("~/.hansard/index.db").expanduser()
     assert s.tokens_path == Path("tokens.yaml")
-    assert s.public_base_url == "https://hansard.098020.xyz"
+    assert s.public_base_url == "https://hansard.example.org"
     assert s.log_file == ""
     assert s.robots_path is None
 

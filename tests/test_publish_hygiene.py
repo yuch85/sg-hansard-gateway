@@ -65,16 +65,11 @@ def _machine_string_scan_targets() -> list[Path]:
     """Tracked files subject to the machine-string scan.
 
     Excludes ``tests/fixtures/`` (the committed 404 fingerprint fixture) AND
-    the two hygiene-gate test files, whose ``_FORBIDDEN_*`` constants must
-    carry the forbidden tokens verbatim to define the gate (the literal lists
-    are pinned by ``test_gate_literals_are_intact`` here and by
-    ``test_gate_literals_match_hygiene_gate`` in
-    ``tests/test_deploy_artifacts.py``).
+    the hygiene-gate test file (this one), whose ``_FORBIDDEN_*`` constants
+    must carry the forbidden tokens verbatim to define the gate (the literal
+    list is checked by ``test_gate_literals_are_intact`` below).
     """
-    gate_sources = {
-        Path(__file__).resolve(),
-        (REPO_ROOT / "tests" / "test_deploy_artifacts.py").resolve(),
-    }
+    gate_sources = {Path(__file__).resolve()}
     return [
         path
         for path in _tracked_files()

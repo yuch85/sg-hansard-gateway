@@ -48,7 +48,7 @@ def children_for_prefix(
     """Child fan-out for ``prefix``: (child, n_terms, grandchild, gc_n_terms).
 
     Grandchild fields are NULL for ordinary children and populated only for
-    fat branches (skip-levels, YC addition 2026-09-18).
+    fat branches (skip-levels, operator addition).
     """
     cur = conn.execute(
         "SELECT child, n_terms, grandchild, gc_n_terms "

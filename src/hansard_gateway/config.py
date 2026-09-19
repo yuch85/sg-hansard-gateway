@@ -86,7 +86,7 @@ class Settings:
     #: Canonical public origin of THIS gateway. Used to build absolute
     #: token-preserving URLs in JSON/HTML so a client (e.g. an LLM web tool)
     #: can follow a server-issued link without reconstructing it.
-    public_base_url: str = "https://hansard.098020.xyz"
+    public_base_url: str = "https://hansard.example.org"
 
     # --- Capability-token shape guard (min/max total length of a valid token) ---
     token_min_len: int = 23
@@ -121,14 +121,14 @@ class Settings:
     # --- Term index / prefix ladder (Phase 27.1, spec §3 + §4) ---
     #: Local metadata-only index DB (0600, gitignored; built by the offline crawl).
     index_db_path: Path = field(default_factory=lambda: Path("~/.hansard/index.db").expanduser())
-    #: Max prefix depth a term is reachable at (spec §4.2; depth 5 confirmed by YC).
+    #: Max prefix depth a term is reachable at (spec §4.2; depth 5 confirmed against live SPRS).
     ladder_depth: int = 5
     #: Block A renders at most this many terms; above it, truncate (spec §4.2).
     ladder_term_cap: int = 300
     #: Block A renders this many terms when the cap is exceeded (spec §4.2).
     ladder_truncate_at: int = 200
     #: A child holding more than this many terms is "fat": Block B skip-level
-    #: renders its grandchildren alongside it (YC addition 2026-09-18).
+    #: renders its grandchildren alongside it (skip-level addition).
     fat_branch_threshold: int = 2000
     #: Launcher "Common topics" count (spec §4.1).
     common_topics_n: int = 150

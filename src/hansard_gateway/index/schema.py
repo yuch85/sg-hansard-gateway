@@ -6,7 +6,7 @@ column — verbatim transcripts stay live-retrieved from SPRS (spec §3).
 The ``prefix_children`` table extends the spec's (prefix, child, n_terms)
 shape with a nullable ``grandchild`` column (and its count) so a fat branch
 (child holding more than ``fat_branch_threshold`` terms) can render its
-grandchildren as skip-levels without a scan (YC addition 2026-09-18).
+grandchildren as skip-levels without a scan (skip-level addition).
 """
 
 from __future__ import annotations
