@@ -14,7 +14,7 @@ click navigation from one constant URL, no headless browser). The video
 below is a screen recording of that session — ChatGPT answers from the
 gateway and cites it:
 
-[![ChatGPT demo of the Hansard Gateway](docs/demo-poster.png)](https://yuch85.github.io/sg-hansard-gateway/demo-chatgpt.mp4)
+[![ChatGPT demo of the Hansard Gateway](docs/demo-poster.png)](https://yuch85.github.io/sg-hansard-gateway/media/demo-chatgpt.mp4)
 <sub><b>▶️ Watch the demo</b> (plays in a new tab · ~55 s · [mp4](media/demo-chatgpt.mp4), 7.1 MB)</sub>
 
 ## Quickstart
