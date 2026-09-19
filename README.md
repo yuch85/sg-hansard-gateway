@@ -41,10 +41,49 @@ the report ids and SHA-256 footers it read. This is the only AI client
 verified end-to-end; the design targets the capability envelope, not
 ChatGPT specifically — see [Why two modes?](#why-two-modes).
 
+## Why this exists
+
+The Hansard is publicly available to anyone using a normal browser — but a
+chat client's web-fetching capability does not necessarily execute or
+interact with the site's JavaScript in the same way. The official
+Singapore Parliamentary Reporting System (SPRS) presents Hansard through a
+JavaScript-driven web application; a plain HTTP `GET` of a page from it does
+not give a fetching client the same usable search and navigation experience
+a human gets in a browser. The point is not that SPRS is inaccessible — it
+is that a human-accessible web application is not, by itself, an
+AI-fetchable web resource.
+
+This gateway closes that gap: it exposes the same Hansard capability as
+ordinary server-rendered HTTP — pages with no JavaScript to execute and
+links to follow.
+
+### The trick: make Hansard link-navigable
+
+Mode 1 is not "an HTML version of the API." It turns the searchable Hansard
+corpus into a **finite, pre-indexed navigation tree**: a start page,
+topic-search and A–Z ladder pages, result pages, sitting pages, and report
+pages, where every page carries rendered links to the next. The gateway's
+local index is what makes the traversal bounded — the client never needs to
+invent or construct the next URL. It opens one page, reads it, follows a
+link, and repeats:
+
+> start page → ladder / topic link → search results → report link → full
+> transcript
+
+A constrained AI does not need API access, URL construction, JavaScript
+execution, browser automation, or an MCP integration. It only needs to be
+able to open a page and follow links. Mode 1 reduces the problem from
+"Can the AI operate this web application?" to "Can the AI follow a link?"
+
 ## Why two modes?
 
-AI clients have different web capabilities, and the gateway exposes the
-same Hansard resource to both ends of that envelope:
+Different AI clients have different web capabilities, and the gateway
+exposes the same Hansard resource to both ends of that envelope. The design
+rule: don't build for the most sophisticated client — identify the smallest
+capability that is widely available (open a URL, follow rendered links),
+and build the thinnest server-side layer that converts Hansard into that
+interaction model. More capable clients skip the constraint and issue direct
+`GET`s:
 
 - **Some clients can open a URL and follow rendered links, but cannot
   reliably construct arbitrary URLs** (ChatGPT's web tool is the reference
@@ -59,7 +98,7 @@ modes over the same server-rendered content.
 | | **Mode 1 — drop-in (click-only)** | **Mode 2 — direct GET** |
 |---|---|---|
 | For | Chat apps whose web tool can open a URL and follow links (ChatGPT is the reference client — see the [demo](#demo)) | More capable agents that can issue plain HTTP GETs (code tools, API tools) |
-| How | Paste the [instruction sheet](docs/chat-instructions.md) with your URL + token. The client opens the start page `{your-url}/a/{token}/` and moves **only by following links rendered on the page** — it never constructs a URL | The same content as plain `GET`s: `/a/{token}/search?q=…`, `/a/{token}/date/YYYY-MM-DD`, `/a/{token}/report/REPORT_ID` |
+| How | Paste the [instruction sheet](docs/chat-instructions.md) with your URL + token. The client opens the start page `{your-url}/a/{token}/` and moves **only by following rendered links** — the pre-indexed navigation tree described in [The trick](#the-trick-make-hansard-link-navigable) | The same content as plain `GET`s: `/a/{token}/search?q=…`, `/a/{token}/date/YYYY-MM-DD`, `/a/{token}/report/REPORT_ID` |
 | Setup | The sample sheet is [`docs/chat-instructions.md`](docs/chat-instructions.md) — paste PART A as-is (it's written to be dropped in as the first message or a system instruction) | Nothing to install; endpoints are documented inline in the sheet and in the public machine contract `{your-url}/openapi.json` |
 | Trust | The client is fenced by the instructions ("never invent a URL") | No fence needed — the client is already programmatic |
 | Status | **Verified** with ChatGPT (the demo above) | **Verified** at the HTTP level (the offline test suite exercises every endpoint directly); no individual agent product is verified end-to-end |
