@@ -7,6 +7,21 @@ verbatim footer, and no headless browser is involved anywhere.
 
 The included Caddy configuration is a reference reverse-proxy deployment; Caddy is not required by the application and may be replaced by any HTTPS reverse proxy.
 
+## Independent Project Notice
+
+This is an independent, open-source software project and is not
+affiliated with, operated by, sponsored by, or endorsed by the
+Parliament of Singapore or any Singapore Government agency.
+
+The project provides an interoperability layer for AI-assisted
+research against publicly available Singapore Parliamentary Hansard
+resources. The official Parliamentary record remains the authoritative
+source. Users should verify research results against the official
+source before relying on them.
+
+This project does not bypass authentication, access controls,
+paywalls, or other technical restrictions.
+
 ## Demo
 
 A walkthrough of the gateway as driven by **ChatGPT** (link-only client —
