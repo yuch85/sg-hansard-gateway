@@ -1,33 +1,36 @@
-# Hansard Gateway
+# sg-hansard-gateway
 
-A live, token-gated, server-rendered HTTP gateway over Singapore Hansard
-(sprs.parl.gov.sg) for link-only LLM clients: every page is plain HTML with
-click navigation from one constant URL, each transcript carries a SHA-256
-verbatim footer, and no headless browser is involved anywhere.
+**Give any chat app access to Singapore Parliamentary Hansard.**
 
-The included Caddy configuration is a reference reverse-proxy deployment; Caddy is not required by the application and may be replaced by any HTTPS reverse proxy.
+Bring up the gateway on a VPS or self-hosted box, generate a token, and hand
+your chat window your server URL + a short instruction sheet. From then on
+the chat app researches Hansard for you — search, sit by date, full verbatim
+transcripts with a SHA-256 provenance footer — and every answer is
+re-verifiable. No MCP server, no connector, no SDK, no headless browser:
+the gateway is plain server-rendered HTTP, and the token is the entire
+security model (rotatable, revocable, digests-only at rest).
 
-## Independent Project Notice
+## The two modes
 
-This is an independent, open-source software project and is not
-affiliated with, operated by, sponsored by, or endorsed by the
-Parliament of Singapore or any Singapore Government agency.
+| | **Mode 1 — drop-in (click-only)** | **Mode 2 — direct GET** |
+|---|---|---|
+| For | Chat apps whose web tool can open a URL and follow links (ChatGPT is the reference client — see the [demo](#demo)) | More capable agents that can issue plain HTTP GETs (code tools, API tools) |
+| How | Paste one instruction sheet into the chat window with your URL + token. The client opens the start page and moves **only by following links rendered on the page** — it never constructs a URL | The same content as plain `GET`s: `/a/{token}/search?q=…`, `/a/{token}/date/YYYY-MM-DD`, `/a/{token}/report/REPORT_ID` |
+| Setup | The sample sheet is [`docs/chat-instructions.md`](docs/chat-instructions.md) — paste it as-is (it's written to be dropped in as the first message or a system instruction) | Nothing to install; endpoints are documented inline in the sheet and in the public machine contract `{your-url}/openapi.json` |
+| Trust | The client is fenced by the instructions ("never invent a URL") | No fence needed — the client is already programmatic |
 
-The project provides an interoperability layer for AI-assisted
-research against publicly available Singapore Parliamentary Hansard
-resources. The official Parliamentary record remains the authoritative
-source. Users should verify research results against the official
-source before relying on them.
-
-This project does not bypass authentication, access controls,
-paywalls, or other technical restrictions.
+Mode 2 is a strict superset of Mode 1: every Mode 2 URL is exactly the link
+a Mode 1 page renders. If your client can do both, Mode 1 is the proven path
+(it passed the 2026-09-18 acceptance test: full research, click-only, zero
+URL construction); Mode 2 is the escape hatch for clients whose browsing
+tool refuses the start page.
 
 ## Demo
 
-A walkthrough of the gateway as driven by **ChatGPT** (link-only client —
-click navigation from one constant URL, no headless browser). The video
-below is a screen recording of that session — ChatGPT answers from the
-gateway and cites it:
+A walkthrough of the gateway as driven by **ChatGPT** (Mode 1 — click
+navigation from one constant URL, no headless browser). The video below is a
+screen recording of that session — ChatGPT answers from the gateway and
+cites it:
 
 [![ChatGPT demo of the Hansard Gateway](docs/demo-poster.png)](https://yuch85.github.io/sg-hansard-gateway/media/demo-chatgpt.mp4)
 <sub><b>▶️ Watch the demo</b> (plays in a new tab · ~55 s · [mp4](media/demo-chatgpt.mp4), 7.1 MB)</sub>
@@ -84,6 +87,10 @@ Generate a token and place it + an index on the volume before first start
 (see [Token management](#token-management--the-easy-way) and [Crawl](#crawl--easy-to-run)).
 
 ## Token management — the easy way
+
+Tokens are how your URLs are secured: every content URL embeds one, you can
+rotate or revoke any of them, and a client holding a dead token gets a
+byte-identical 404 (no enumeration signal).
 
 One CLI in every runtime. The flow is exactly three steps: generate on the
 host, mount read-only, start the container.
@@ -197,7 +204,7 @@ protected page) controls *indexing*, not *fetch permission* — they are
 different policies and both are in place.
 
 **Compatibility.** The gateway has been **tested with ChatGPT** (the
-link-only client flow in the demo below). It is expected to work with other
+link-only client flow in the demo above). It is expected to work with other
 chat apps that drive a similar link-only / fetch-then-navigate environment,
 though that is not exhaustively verified. Some clients (notably Claude) have
 shown inconsistent behavior around robots.txt interpretation; if a client
@@ -215,6 +222,21 @@ only real gate, and the robots file is advisory retrieval policy.
 - Upstream requests go only to the host allowlist, never to an operator-
   supplied URL.
 - Protected content responses carry `Cache-Control: private, no-store`.
+
+## Independent Project Notice
+
+This is an independent, open-source software project and is not
+affiliated with, operated by, sponsored by, or endorsed by the
+Parliament of Singapore or any Singapore Government agency.
+
+The project provides an interoperability layer for AI-assisted
+research against publicly available Singapore Parliamentary Hansard
+resources. The official Parliamentary record remains the authoritative
+source. Users should verify research results against the official
+source before relying on them.
+
+This project does not bypass authentication, access controls,
+paywalls, or other technical restrictions.
 
 ## Acknowledgements
 
@@ -246,8 +268,8 @@ ecosystem:
   (limdingwen) — oversight/summary site; prior art consulted during
   research. Licensed CC0 1.0.
 - [second-reading](https://github.com/isaacyclai/second-reading)
-  (isaacyclai) — modern Hansard UI; prior art consulted during research.
-  Licensed MIT.
+  (isaacyclai) — modern Hansard UI; prior art consulted during
+  research. Licensed MIT.
 
 The gateway itself is independent software — no code is vendored from the
 above projects.
