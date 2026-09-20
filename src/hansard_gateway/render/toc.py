@@ -25,7 +25,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from hansard_gateway.models import HansardReport, Speech
-from hansard_gateway.render.cite import PROCEDURAL_LABEL
+
+#: The anchor text for a speech with no speaker name (procedural turn) —
+#: the ONE source for the TOC label AND the speech h3 (re-exported by
+#: :mod:`.cite` for existing imports).
+PROCEDURAL_LABEL: str = "[procedural]"
 
 #: Preview length (chars) for a TOC entry's first-word line (G-A8-2: the
 #: preview is a verbatim prefix of the first paragraph, truncated to ~60

@@ -202,6 +202,36 @@ def test_machine_surface_matches_wave0(
         f"{entry.name}: nav_strip must be 2 (top+bottom, R8), got "
         f"{surface['nav_strip']}"
     )
+    # Wave-2 TOC delta: the offline render of the report page (a live-source
+    # entry rendered against the committed E2E topic fixture) gains N in-page
+    # #speech-N hrefs for the TOC (N = min(speech_count, TOC_max), capped per
+    # M3). The absolute-link count and .u spans must NOT change (the TOC links
+    # are same-page fragment anchors — no token, no .u twin).
+    if entry.name == "report_bill-774":
+        toc_hrefs = [h for h in surface["hrefs"] if h.startswith("#speech-")]
+        assert len(toc_hrefs) > 0, (
+            f"report: no #speech-N TOC hrefs found in the offline render"
+        )
+        # absolute + .u unchanged from wave0 (the TOC adds in-page anchors only)
+        assert surface["counts"]["absolute_anchors"] == baseline["counts"]["absolute_anchors"], (
+            f"report: absolute_anchors changed from wave0 "
+            f"({baseline['counts']['absolute_anchors']} -> "
+            f"{surface['counts']['absolute_anchors']}) — the TOC must not "
+            f"add absolute links"
+        )
+        assert surface["counts"]["u_spans"] == baseline["counts"]["u_spans"], (
+            f"report: u_spans changed from wave0 "
+            f"({baseline['counts']['u_spans']} -> "
+            f"{surface['counts']['u_spans']}) — the TOC must not add .u spans"
+        )
+        # total_anchors = wave0 total + N TOC hrefs
+        assert surface["counts"]["total_anchors"] == (
+            baseline["counts"]["total_anchors"] + len(toc_hrefs)
+        ), (
+            f"report: total_anchors {surface['counts']['total_anchors']} != "
+            f"wave0 {baseline['counts']['total_anchors']} + TOC "
+            f"{len(toc_hrefs)}"
+        )
     # .u <-> href correspondence: every absolute token-bearing href has a
     # visible .u twin (R2) — the invariant a restyle must not break.
     for corr in surface["correspondence"]:

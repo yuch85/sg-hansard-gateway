@@ -159,11 +159,29 @@ pre-existing external SPRS provenance links.
   `--verify` against wave1/ passes on the 0.1.2 deployment (no drift); the
   FINAL `--verify` against this wave0/ directory will show the +14 report
   delta once 0.1.3 is live (Plan 05 Task 4).
-- **Wave 2 (report restyle, Plan 03)**: report pages gain N in-page
-  `#speech-N` hrefs for the TOC (N = rendered TOC entries, capped). This adds
-  hrefs containing `#` to **report** entries (the first citation/TOC `#`
-  fragments). `hrefs`, `counts.total_anchors`, `anchor_texts` change on report
-  only. The other entries must NOT change.
+- **Wave 2 (report restyle, Plan 03)** — CONSUMED 2026-09-20 (Plan 03
+  Task 3): report pages gain N in-page `#speech-N` hrefs for the TOC
+  (N = min(speech_count, TOC_max), capped per M3; for the offline E2E
+  fixture, N = 5 — all speeches, since 5 < any cap). This adds hrefs
+  containing `#` to **report** entries (the first TOC `#` fragments).
+  `hrefs`, `counts.total_anchors`, `anchor_texts` change on report only;
+  `counts.absolute_anchors` and `counts.u_spans` do NOT change (the TOC
+  links are same-page fragment anchors — no token, no .u twin). Plus a
+  fixed +3452-byte inline-CSS delta on EVERY page (the a8 wireframe
+  system in base.html, inherited by all 8 entries) ON TOP of the Wave-1
+  +604-byte delta. Search/launcher/nav/date/facet href/.u sets must NOT
+  change. **Attribution note (two-dir scheme):** the `baselines/wave2/`
+  fixture directory holds the per-wave regression capture; its
+  `report_bill-774.json` is the LIVE reference (captured from the 0.1.2
+  deployment, which does not yet carry the TOC feature — the v0.1.3
+  cutover is Plan 05), so the +5 TOC delta is NOT yet visible in wave2/.
+  The delta itself is proven offline by `tests/test_report_restyle.py`
+  (TOC structure, capped per M3) and the offline regression gate
+  (`test_machine_baseline.py`: the report entry's offline render gains
+  exactly +N in-page `#speech-N` hrefs, absolute/.u unchanged). The
+  per-wave `--verify` against wave2/ passes on the 0.1.2 deployment (no
+  drift); the FINAL `--verify` against this wave0/ directory will show
+  the +14 Cite + +N TOC report delta once 0.1.3 is live (Plan 05 Task 4).
 - **Wave 3 / Wave 4 (search/launcher/nav/date restyle, Plan 03/04)**: layout-
   only. The href/`.u` sets must NOT change on search/launcher/nav/date/facet
   pages. If `<details>` echo grouping ships (EXPERIMENTAL), the `.u`/href sets

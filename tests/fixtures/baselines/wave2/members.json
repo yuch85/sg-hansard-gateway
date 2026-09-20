@@ -1,0 +1,347 @@
+{
+  "hrefs": [
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills",
+    "https://hansard.example.org/a/hg_…/members/a",
+    "https://hansard.example.org/a/hg_…/members/b",
+    "https://hansard.example.org/a/hg_…/members/c",
+    "https://hansard.example.org/a/hg_…/members/d",
+    "https://hansard.example.org/a/hg_…/members/e",
+    "https://hansard.example.org/a/hg_…/members/f",
+    "https://hansard.example.org/a/hg_…/members/g",
+    "https://hansard.example.org/a/hg_…/members/h",
+    "https://hansard.example.org/a/hg_…/members/i",
+    "https://hansard.example.org/a/hg_…/members/j",
+    "https://hansard.example.org/a/hg_…/members/k",
+    "https://hansard.example.org/a/hg_…/members/l",
+    "https://hansard.example.org/a/hg_…/members/m",
+    "https://hansard.example.org/a/hg_…/members/n",
+    "https://hansard.example.org/a/hg_…/members/o",
+    "https://hansard.example.org/a/hg_…/members/p",
+    "https://hansard.example.org/a/hg_…/members/q",
+    "https://hansard.example.org/a/hg_…/members/r",
+    "https://hansard.example.org/a/hg_…/members/s",
+    "https://hansard.example.org/a/hg_…/members/t",
+    "https://hansard.example.org/a/hg_…/members/u",
+    "https://hansard.example.org/a/hg_…/members/v",
+    "https://hansard.example.org/a/hg_…/members/w",
+    "https://hansard.example.org/a/hg_…/members/x",
+    "https://hansard.example.org/a/hg_…/members/y",
+    "https://hansard.example.org/a/hg_…/members/z",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/members?format=json",
+    "https://hansard.example.org/a/hg_…/members?format=text",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills"
+  ],
+  "anchor_texts": [
+    "Home",
+    "Find a topic A-Z",
+    "Years",
+    "Members",
+    "Bills",
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+    "Back to the launcher",
+    "This page as JSON",
+    "This page as text",
+    "Home",
+    "Find a topic A-Z",
+    "Years",
+    "Members",
+    "Bills"
+  ],
+  "u_texts": [
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills",
+    "https://hansard.example.org/a/hg_…/members/a",
+    "https://hansard.example.org/a/hg_…/members/b",
+    "https://hansard.example.org/a/hg_…/members/c",
+    "https://hansard.example.org/a/hg_…/members/d",
+    "https://hansard.example.org/a/hg_…/members/e",
+    "https://hansard.example.org/a/hg_…/members/f",
+    "https://hansard.example.org/a/hg_…/members/g",
+    "https://hansard.example.org/a/hg_…/members/h",
+    "https://hansard.example.org/a/hg_…/members/i",
+    "https://hansard.example.org/a/hg_…/members/j",
+    "https://hansard.example.org/a/hg_…/members/k",
+    "https://hansard.example.org/a/hg_…/members/l",
+    "https://hansard.example.org/a/hg_…/members/m",
+    "https://hansard.example.org/a/hg_…/members/n",
+    "https://hansard.example.org/a/hg_…/members/o",
+    "https://hansard.example.org/a/hg_…/members/p",
+    "https://hansard.example.org/a/hg_…/members/q",
+    "https://hansard.example.org/a/hg_…/members/r",
+    "https://hansard.example.org/a/hg_…/members/s",
+    "https://hansard.example.org/a/hg_…/members/t",
+    "https://hansard.example.org/a/hg_…/members/u",
+    "https://hansard.example.org/a/hg_…/members/v",
+    "https://hansard.example.org/a/hg_…/members/w",
+    "https://hansard.example.org/a/hg_…/members/x",
+    "https://hansard.example.org/a/hg_…/members/y",
+    "https://hansard.example.org/a/hg_…/members/z",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/members?format=json",
+    "https://hansard.example.org/a/hg_…/members?format=text",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills"
+  ],
+  "correspondence": [
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 35
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 35
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/years",
+      "u_twin": true,
+      "u_index": 36
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members",
+      "u_twin": true,
+      "u_index": 37
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/bills",
+      "u_twin": true,
+      "u_index": 38
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/a",
+      "u_twin": true,
+      "u_index": 5
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/b",
+      "u_twin": true,
+      "u_index": 6
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/c",
+      "u_twin": true,
+      "u_index": 7
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/d",
+      "u_twin": true,
+      "u_index": 8
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/e",
+      "u_twin": true,
+      "u_index": 9
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/f",
+      "u_twin": true,
+      "u_index": 10
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/g",
+      "u_twin": true,
+      "u_index": 11
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/h",
+      "u_twin": true,
+      "u_index": 12
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/i",
+      "u_twin": true,
+      "u_index": 13
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/j",
+      "u_twin": true,
+      "u_index": 14
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/k",
+      "u_twin": true,
+      "u_index": 15
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/l",
+      "u_twin": true,
+      "u_index": 16
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/m",
+      "u_twin": true,
+      "u_index": 17
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/n",
+      "u_twin": true,
+      "u_index": 18
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/o",
+      "u_twin": true,
+      "u_index": 19
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/p",
+      "u_twin": true,
+      "u_index": 20
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/q",
+      "u_twin": true,
+      "u_index": 21
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/r",
+      "u_twin": true,
+      "u_index": 22
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/s",
+      "u_twin": true,
+      "u_index": 23
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/t",
+      "u_twin": true,
+      "u_index": 24
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/u",
+      "u_twin": true,
+      "u_index": 25
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/v",
+      "u_twin": true,
+      "u_index": 26
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/w",
+      "u_twin": true,
+      "u_index": 27
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/x",
+      "u_twin": true,
+      "u_index": 28
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/y",
+      "u_twin": true,
+      "u_index": 29
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members/z",
+      "u_twin": true,
+      "u_index": 30
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 35
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members?format=json",
+      "u_twin": true,
+      "u_index": 32
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members?format=text",
+      "u_twin": true,
+      "u_index": 33
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 35
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 35
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/years",
+      "u_twin": true,
+      "u_index": 36
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members",
+      "u_twin": true,
+      "u_index": 37
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/bills",
+      "u_twin": true,
+      "u_index": 38
+    }
+  ],
+  "counts": {
+    "total_anchors": 39,
+    "absolute_anchors": 39,
+    "u_spans": 39
+  },
+  "nav_strip": 2,
+  "format_links": {
+    "json": [
+      "https://hansard.example.org/a/hg_…/members?format=json"
+    ],
+    "text": [
+      "https://hansard.example.org/a/hg_…/members?format=text"
+    ]
+  },
+  "byte_size": 14083,
+  "meta": {
+    "entry": "members",
+    "route": "/members",
+    "source": "offline",
+    "token_shape": "hg_…(offline test token)",
+    "html_sha256": "7144ddd1d4c33134ff0dcbfd6537e14e704fd779307f219ee5395f92a04bc421",
+    "text_sha256": "aa4897d48d792e1f9ef63a08d19cc136c1bbee7607f0669e482f45c5315d6d80",
+    "text_bytes": 2591,
+    "base_url": "https://hansard.example.org"
+  }
+}
