@@ -145,6 +145,12 @@ The gateway is deliberately a thin layer, not a platform:
   persistent state is the `/data` volume (index DB + token store) and the
   response cache in memory.
 
+## Releases
+
+`latest` tracks the newest release — see [RELEASES.md](RELEASES.md) for the
+per-version notes (current: **0.1.2**). Upgrading is a pull + container
+recreate; your `/data` volume (index + tokens) carries over unchanged.
+
 ## Quickstart
 
 The minimal end-to-end path, in order:
