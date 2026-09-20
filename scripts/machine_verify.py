@@ -22,12 +22,16 @@ import json
 from pathlib import Path
 
 from baseline_corpus import CORPUS, entry_path
-from machine_surface import extract_surface, surface_to_dict
+from machine_surface import extract_surface, redact_surface, surface_to_dict
 from offline_render import live_get
 
-#: The surface fields the drift check compares (stable across captures).
+#: The surface fields the drift check compares. ``byte_size`` is EXCLUDED: the
+#: live report page embeds a "Retrieved <timestamp>" that changes per request,
+#: so the byte count wobbles even when the machine surface is unchanged. The
+#: structural machine surface (hrefs/.u/correspondence/counts/nav/format) is
+#: what the restyle must not silently change.
 _COMPARED_KEYS: tuple[str, ...] = (
-    "counts", "nav_strip", "byte_size", "hrefs", "u_texts",
+    "counts", "nav_strip", "hrefs", "u_texts",
     "anchor_texts", "correspondence", "format_links",
 )
 
@@ -36,9 +40,10 @@ def run_verify(*, baseline_dir: Path, live_token: str,
                repo_root: Path) -> int:
     """Re-run extraction LIVE and diff against the committed baseline dir.
 
-    For each LIVE corpus entry, re-fetch the page, re-extract, and compare the
-    machine surface against ``<baseline_dir>/<entry>.json``. Returns 0 if all
-    live entries match, 1 otherwise.
+    For each LIVE corpus entry, re-fetch the page, re-extract, redact the token
+    to the ``hg_…`` shape (the committed baselines store redacted URLs), and
+    compare the machine surface against ``<baseline_dir>/<entry>.json``.
+    Returns 0 if all live entries match, 1 otherwise.
     """
     baseline_dir = (
         baseline_dir if baseline_dir.is_absolute() else repo_root / baseline_dir
@@ -52,7 +57,7 @@ def run_verify(*, baseline_dir: Path, live_token: str,
             (baseline_dir / f"{entry.name}.json").read_text(encoding="utf-8")
         )
         html = live_get(entry_path(entry), token=live_token)
-        surface = surface_to_dict(extract_surface(html))
+        surface = redact_surface(surface_to_dict(extract_surface(html)))
         for key in _COMPARED_KEYS:
             if surface.get(key) != committed.get(key):
                 failures.append(f"{entry.name}: surface[{key}] drifted")

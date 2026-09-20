@@ -190,3 +190,23 @@ def redact_url(url: str) -> str:
     after = url[idx + len("/a/"):]
     _token, sep, tail = after.partition("/")
     return f"{url[:idx]}/a/hg_…{sep}{tail}" if sep else f"{url[:idx]}/a/hg_…"
+
+
+def redact_surface(surface: dict[str, Any]) -> dict[str, Any]:
+    """Return a copy of a surface dict with every URL redacted to ``hg_…``.
+
+    The committed wave0 baselines store redacted URLs, so the regression test
+    must redact its rendered surface the SAME way before comparing (the offline
+    render carries the real offline token; the baseline carries ``hg_…``).
+    """
+    out = dict(surface)
+    for key in ("hrefs", "anchor_texts", "u_texts"):
+        out[key] = [redact_url(x) for x in out[key]]
+    out["correspondence"] = [
+        {**c, "href": redact_url(c["href"])} for c in out["correspondence"]
+    ]
+    out["format_links"] = {
+        fmt: [redact_url(x) for x in urls]
+        for fmt, urls in out["format_links"].items()
+    }
+    return out
