@@ -64,9 +64,11 @@ gold-highlights that exact speech.
   does not exercise the live worst-case page, so this release does
   not claim universal budget enforcement across every live page.
 
-Digest: `<sha256 of the 0.1.3 manifest — recorded in the mission log at push time>`
-(= `latest`). Source: commit `845cbd4`
-(github.com/yuch85/sg-hansard-gateway).
+Digest: `sha256:adc6b241784fb5d255815730666df876c59844066d174d2dd44b66d6db09274a`
+(= `latest` — both tags' registry digests extracted via
+`docker buildx imagetools inspect` and asserted equal at push time).
+Source: commit `aee162d` (github.com/yuch85/sg-hansard-gateway; the
+app code is the wave-4 close `845cbd4` plus the 0.1.3 release docs).
 
 ## 0.1.2 (2026-09-20)
 
