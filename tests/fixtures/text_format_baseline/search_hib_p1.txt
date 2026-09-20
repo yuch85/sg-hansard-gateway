@@ -1,0 +1,349 @@
+Query: Health Information Bill
+Showing 66 of ~1,032 estimated results
+Page: 1 (limit 50)
+
+- Government’s Response to the “2026 Review of Salaries for Political Appointment Holders and Members of Parliament”
+  url: https://hansard.098020.xyz/a/hg_…/report/ministerial-statement-3030
+  date: 2026-09-10
+  section: ministerial-statement
+
+- Clear Disclosure of Treatment Costs and Options before Consent for Patients in Non-subsidised Wards
+  url: https://hansard.098020.xyz/a/hg_…/report/written-answer-na-24828
+  date: 2026-09-10
+  section: written-answer-na
+
+- Study on Veterinary Price Transparency and Workforce Trends
+  url: https://hansard.098020.xyz/a/hg_…/report/oral-answer-4208
+  date: 2026-09-10
+  section: oral-answer
+
+- Regulation of Epigenetic and Biological Age Tests as Clinical Diagnostics and Extension of Safeguards to Protect Genetic Information Results
+  url: https://hansard.098020.xyz/a/hg_…/report/written-answer-24567
+  date: 2026-09-09
+  section: written-answer
+
+- Health Sciences Authority (Amendment) and Other Matters Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-811
+  date: 2026-09-09
+  section: bill
+
+- Securing Singapore's Food Future
+  url: https://hansard.098020.xyz/a/hg_…/report/motion-3026
+  date: 2026-09-09
+  section: motion
+
+- Securing Singapore's Food Future
+  url: https://hansard.098020.xyz/a/hg_…/report/motion-3028
+  date: 2026-09-09
+  section: motion
+
+- Land Titles (Strata) (Amendment) Bill 
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-806
+  date: 2026-09-08
+  section: bill
+
+- An Economy of the Future that Works for All
+  url: https://hansard.098020.xyz/a/hg_…/report/motion-3008
+  date: 2026-08-05
+  section: motion
+
+- Road Traffic (Miscellaneous Amendments) Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-803
+  date: 2026-08-04
+  section: bill
+
+- Road Traffic (Miscellaneous Amendments) Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-804
+  date: 2026-08-04
+  section: bill
+
+- Reinforcing Singapore's Position as a Global Transport Hub
+  url: https://hansard.098020.xyz/a/hg_…/report/motion-2996
+  date: 2026-07-07
+  section: motion
+
+- Statutes (Miscellaneous Amendments) Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-799
+  date: 2026-05-07
+  section: bill
+
+- An Artificial Intelligence (AI) Transition with No Jobless Growth
+  url: https://hansard.098020.xyz/a/hg_…/report/motion-2976
+  date: 2026-05-06
+  section: motion
+
+- Skills and Workforce Development Agency Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-794
+  date: 2026-05-05
+  section: bill
+
+- Cross-Border Railways (Border Control Co-Location) Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-793
+  date: 2026-05-05
+  section: bill
+
+- Skills and Workforce Development Agency Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-795
+  date: 2026-05-05
+  section: bill
+
+- Veterinary Practice Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-792
+  date: 2026-04-08
+  section: bill
+
+- Energy Conservation (Amendment) Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-789
+  date: 2026-04-07
+  section: bill
+
+- Impact of the Middle East Situation on Singapore
+  url: https://hansard.098020.xyz/a/hg_…/report/ministerial-statement-2952
+  date: 2026-04-07
+  section: ministerial-statement
+
+- Tobacco (Control of Advertisements and Sale) (Amendment) and Other Matters Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-785
+  date: 2026-03-06
+  section: bill
+
+- Committee of Supply – Head O (Ministry of Health)
+  url: https://hansard.098020.xyz/a/hg_…/report/budget-2928
+  date: 2026-03-05
+  section: budget
+
+- Committee of Supply – Head I (Ministry of Social and Family Development)
+  url: https://hansard.098020.xyz/a/hg_…/report/budget-2930
+  date: 2026-03-05
+  section: budget
+
+- Committee of Supply – Head T (Ministry of National Development)
+  url: https://hansard.098020.xyz/a/hg_…/report/budget-2914
+  date: 2026-03-04
+  section: budget
+
+- Committee of Supply – Head W (Ministry of Transport)
+  url: https://hansard.098020.xyz/a/hg_…/report/budget-2915
+  date: 2026-03-04
+  section: budget
+
+- Committee of Supply – Head O (Ministry of Health)
+  url: https://hansard.098020.xyz/a/hg_…/report/budget-2916
+  date: 2026-03-04
+  section: budget
+
+- Committee of Supply – Head L (Ministry of Sustainability and the Environment)
+  url: https://hansard.098020.xyz/a/hg_…/report/budget-2913
+  date: 2026-03-04
+  section: budget
+
+- Committee of Supply – Head L (Ministry of Sustainability and the Environment)
+  url: https://hansard.098020.xyz/a/hg_…/report/budget-2907
+  date: 2026-03-03
+  section: budget
+
+- Consolidation of Small Medical Practices by Corporate Chains and Supporting Viability of Independent Clinics
+  url: https://hansard.098020.xyz/a/hg_…/report/written-answer-22461
+  date: 2026-03-03
+  section: written-answer
+
+- Committee of Supply – Head Q (Ministry of Digital Development and Information)
+  url: https://hansard.098020.xyz/a/hg_…/report/budget-2895
+  date: 2026-03-02
+  section: budget
+
+- Committee of Supply – Head R (Ministry of Law)
+  url: https://hansard.098020.xyz/a/hg_…/report/budget-2893
+  date: 2026-03-02
+  section: budget
+
+- Committee of Supply – Head N (Ministry of Foreign Affairs)
+  url: https://hansard.098020.xyz/a/hg_…/report/budget-2883
+  date: 2026-02-27
+  section: budget
+
+- Committee of Supply – Head U (Prime Minister's Office)
+  url: https://hansard.098020.xyz/a/hg_…/report/budget-2876
+  date: 2026-02-26
+  section: budget
+
+- Debate on Annual Budget Statement
+  url: https://hansard.098020.xyz/a/hg_…/report/budget-2867
+  date: 2026-02-25
+  section: budget
+
+- Debate on Annual Budget Statement
+  url: https://hansard.098020.xyz/a/hg_…/report/budget-2857
+  date: 2026-02-24
+  section: budget
+
+- Assessment of Transboundary Haze Episodes, and Review of Bilateral and Regional Haze-mitigation Measures
+  url: https://hansard.098020.xyz/a/hg_…/report/oral-answer-4021
+  date: 2026-02-12
+  section: oral-answer
+
+- Projected Expenditure on Government's Pursuit of Global Leadership in Growth Areas and AI-empowered Economy
+  url: https://hansard.098020.xyz/a/hg_…/report/oral-answer-4023
+  date: 2026-02-12
+  section: oral-answer
+
+- Plans for Onboarding Traditional Chinese Medicine Practitioners to National Electronic Health Record
+  url: https://hansard.098020.xyz/a/hg_…/report/written-answer-na-22080
+  date: 2026-02-12
+  section: written-answer-na
+
+- Land Transport and Related Matters Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-781
+  date: 2026-02-04
+  section: bill
+
+- Assent to Bills Passed
+  url: https://hansard.098020.xyz/a/hg_…/report/atbp-04022026
+  date: 2026-02-04
+  section: atbp
+
+- Land Transport and Related Matters Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-780
+  date: 2026-02-03
+  section: bill
+
+- MAS and Life Insurance Association of Singapore (LIAS) Collaboration on Clinical Guidance for Insurance Medical Record Disclosure Context Requirements for Claims
+  url: https://hansard.098020.xyz/a/hg_…/report/written-answer-21746
+  date: 2026-02-03
+  section: written-answer
+
+- National Council of Social Service (Amendment) Bill 
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-776
+  date: 2026-01-13
+  section: bill
+
+- Health Information Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-773
+  date: 2026-01-12
+  section: bill
+
+- Public Sector (Governance) (Amendment) Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-772
+  date: 2026-01-12
+  section: bill
+
+- Health Information Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-774
+  date: 2026-01-12
+  section: bill
+
+- Health Information Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-775
+  date: 2026-01-12
+  section: bill
+
+- Tracking and Issuing Guidelines on Listed Prices for Subsidised Procedures at Public Hospitals
+  url: https://hansard.098020.xyz/a/hg_…/report/written-answer-na-21199
+  date: 2025-11-06
+  section: written-answer-na
+
+- Health Information Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-intro-668
+  date: 2025-11-05
+  section: bill-intro
+
+- Online Safety (Relief and Accountability) Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-768
+  date: 2025-11-05
+  section: bill
+
+- Option to Opt Out of Sharing Patient Health Data with National Electronic Health Record
+  url: https://hansard.098020.xyz/a/hg_…/report/written-answer-18411
+  date: 2025-01-07
+  section: Written Answers to Questions
+  speaker: Ong Ye Kung; Yip Hon Weng
+
+- NATIONAL REGISTRY OF DISEASES BILL
+  url: https://hansard.098020.xyz/a/hg_…/report/021_20071112_S0004_T0008
+  date: 2007-11-12
+  section: 3
+  speaker: Lam Pin Min; Chiam See Tong; Abdullah Bin Tarmugi; Thio Li-Ann; Khaw Boon Wan; Sam Tan Chin Siong; Fatimah Lateef; Halimah Yacob
+
+- HEALTH PRODUCTS BILL
+  url: https://hansard.098020.xyz/a/hg_…/report/018_20070212_S0004_T0003
+  date: 2007-02-12
+  section: 3
+  speaker: Lam Pin Min; Khaw Boon Wan; Sam Tan Chin Siong; Fatimah Lateef; Halimah Yacob
+
+- MediShield Life Scheme Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-130
+  date: 2015-01-29
+  section: 3
+  speaker: Lim Wee Kiak; Penny Low; Jessica Tan Soon Neo; Lee Bee Wah; Alex Yam Ziming; Lina Chiam; Halimah Yacob; Chia Shi-Lu; Baey Yam Keng; Ang Wei Neng; Tin Pei Ling; Ellen Lee; Amy Khor Lean Suan; Lily Neo; Lee Li Lian; Teo Chee Hean; Fatimah Lateef; Lam Pin Min; Denise Phua Lay Peng; Zaqy Mohamad; K Karthikeyan; Janil Puthucheary; Gerald Giam Yean Song; Gan Kim Yong; Png Eng Huat; Gan Thiam Poh; Chia Yong Yong; Charles Chong; Hri Kumar Nair
+
+- Infectious Diseases (Amendment) Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-345
+  date: 2019-01-14
+  section: 3
+  speaker: Chia Shi-Lu; Lam Pin Min; Murali Pillai; Louis Ng Kok Kwang; Irene Quay Siew Ching; Lee Bee Wah; Fatimah Lateef
+
+- MEDICINES (AMENDMENT) BILL
+  url: https://hansard.098020.xyz/a/hg_…/report/026_19980219_S0003_T0008
+  date: 1998-02-19
+  section: 3
+  speaker: S Jayakumar
+
+- PRIVATE HOSPITALS AND MEDICAL CLINICS (AMENDMENT) BILL
+  url: https://hansard.098020.xyz/a/hg_…/report/021_19990415_S0003_T0006
+  date: 1999-04-15
+  section: 3
+  speaker: Claire Chiang See Ngoh; Lily Neo; Aline K Wong; Tan Soo Khoon
+
+- Healthcare Services Bill 
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-418
+  date: 2020-01-06
+  section: 3
+  speaker: Chia Shi-Lu; Sylvia Lim; Murali Pillai; Louis Ng Kok Kwang; Edwin Tong Chun Fai; Gan Thiam Poh; Christopher De Souza; Irene Quay Siew Ching; Leon Perera; Lee Bee Wah; Joan Pereira; Lim Biow Chuan; Fatimah Lateef; Melvin Yong Yik Chye
+
+- Workplace Fairness Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-743
+  date: 2025-01-08
+  section: 3
+  speaker: Leong Mun Wai; Tan See Leng; Patrick Tay Teck Guan; Louis Ng Kok Kwang; Pritam Singh; Seah Kian Peng
+
+- Cybersecurity Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-264
+  date: 2018-02-05
+  section: 3
+  speaker: Ganesh Rajaram; Pritam Singh; Daniel Goh Pei Siong; Azmoon Ahmad; Christopher De Souza; Zaqy Mohamad; K Thanaletchimi; Darryl David; Kwek Hian Chuan Henry; Joan Pereira
+
+- HEALTH PROMOTION BOARD BILL
+  url: https://hansard.098020.xyz/a/hg_…/report/030_20010222_S0003_T0010
+  date: 2001-02-22
+  section: 3
+  speaker: Yeo Guat Kwang; Tan Soo Khoon; Lim Hng Kiang; Lily Neo; Chiam See Tong
+
+- Median Out-of-pocket Bill Amounts for Common Chronic Conditions and Day Surgeries at Public Health Institutions
+  url: https://hansard.098020.xyz/a/hg_…/report/written-answer-na-20573
+  date: 2025-10-15
+  section: Written Answers to Questions for Oral Answer Not Answered by End of Question Time
+  speaker: Ong Ye Kung; Wan Rizal
+
+- DESTRUCTION OF DISEASE-BEARING INSECTS BILL
+  url: https://hansard.098020.xyz/a/hg_…/report/011_19680801_S0002_T0003
+  date: 1968-08-01
+  section: 3
+  speaker: Chua Sian Chin; Chan Choy Siong; Yeoh Ghim Seng; L P Rodrigo; Teong Eng Siong; J F Conceicao
+
+- ENVIRONMENTAL PUBLIC HEALTH BILL
+  url: https://hansard.098020.xyz/a/hg_…/report/020_19681216_S0002_T0002
+  date: 1968-12-16
+  section: 3
+  speaker: Chua Sian Chin; Ho Kah Leong; Hwang Soo Jin; Yeoh Ghim Seng; P Selvadurai; L P Rodrigo; Ch'Ng Jit Koon; Lee Teck Him; P Coomaraswamy
+
+- INFECTIOUS DISEASES (AMENDMENT) BILL
+  url: https://hansard.098020.xyz/a/hg_…/report/3_20080422_S0003_T0002
+  date: 2008-04-22
+  section: 3
+  speaker: Lam Pin Min; Sylvia Lim; Abdullah Bin Tarmugi; Thio Li-Ann; Khaw Boon Wan; Fatimah Lateef; Halimah Yacob
+
+- Tobacco (Control of Advertisements and Sale) (Amendment) Bill
+  url: https://hansard.098020.xyz/a/hg_…/report/bill-350
+  date: 2019-02-11
+  section: 3
+  speaker: Dennis Tan Lip Fong; Chia Shi-Lu; Lim Sun Sun; Gan Thiam Poh; Louis Ng Kok Kwang; Edwin Tong Chun Fai; Lee Bee Wah; Fatimah Lateef

@@ -1,0 +1,195 @@
+{
+  "hrefs": [
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills",
+    "https://hansard.example.org/a/hg_…/search?q=Health%20Information",
+    "https://hansard.example.org/a/hg_…/search?q=Health%20Information%20Bill",
+    "https://hansard.example.org/a/hg_…/search?q=Health%20Information%20Bill%20%28Amendment%20No.%202%29",
+    "https://hansard.example.org/a/hg_…/search?q=Heng%20Chee%20How",
+    "https://hansard.example.org/a/hg_…/nav/he",
+    "https://hansard.example.org/a/hg_…/nav/ho",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/nav/h?format=json",
+    "https://hansard.example.org/a/hg_…/nav/h?format=text",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills"
+  ],
+  "anchor_texts": [
+    "Home",
+    "Find a topic A-Z",
+    "Years",
+    "Members",
+    "Bills",
+    "Health Information",
+    "Health Information Bill",
+    "Health Information Bill (Amendment No. 2)",
+    "Heng Chee How",
+    "he",
+    "ho",
+    "Back to the letter index",
+    "Back to the launcher",
+    "This page as JSON",
+    "This page as text",
+    "Home",
+    "Find a topic A-Z",
+    "Years",
+    "Members",
+    "Bills"
+  ],
+  "u_texts": [
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills",
+    "https://hansard.example.org/a/hg_…/search?q=Health%20Information",
+    "https://hansard.example.org/a/hg_…/search?q=Health%20Information%20Bill",
+    "https://hansard.example.org/a/hg_…/search?q=Health%20Information%20Bill%20%28Amendment%20No.%202%29",
+    "https://hansard.example.org/a/hg_…/search?q=Heng%20Chee%20How",
+    "https://hansard.example.org/a/hg_…/nav/he",
+    "https://hansard.example.org/a/hg_…/nav/ho",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/nav/h?format=json",
+    "https://hansard.example.org/a/hg_…/nav/h?format=text",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills"
+  ],
+  "correspondence": [
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 16
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 16
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/years",
+      "u_twin": true,
+      "u_index": 17
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members",
+      "u_twin": true,
+      "u_index": 18
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/bills",
+      "u_twin": true,
+      "u_index": 19
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Health%20Information",
+      "u_twin": true,
+      "u_index": 5
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Health%20Information%20Bill",
+      "u_twin": true,
+      "u_index": 6
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Health%20Information%20Bill%20%28Amendment%20No.%202%29",
+      "u_twin": true,
+      "u_index": 7
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Heng%20Chee%20How",
+      "u_twin": true,
+      "u_index": 8
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/he",
+      "u_twin": true,
+      "u_index": 9
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/ho",
+      "u_twin": true,
+      "u_index": 10
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 16
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 16
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/h?format=json",
+      "u_twin": true,
+      "u_index": 13
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/h?format=text",
+      "u_twin": true,
+      "u_index": 14
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 16
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 16
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/years",
+      "u_twin": true,
+      "u_index": 17
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members",
+      "u_twin": true,
+      "u_index": 18
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/bills",
+      "u_twin": true,
+      "u_index": 19
+    }
+  ],
+  "counts": {
+    "total_anchors": 20,
+    "absolute_anchors": 20,
+    "u_spans": 20
+  },
+  "nav_strip": 2,
+  "format_links": {
+    "json": [
+      "https://hansard.example.org/a/hg_…/nav/h?format=json"
+    ],
+    "text": [
+      "https://hansard.example.org/a/hg_…/nav/h?format=text"
+    ]
+  },
+  "byte_size": 6022,
+  "meta": {
+    "entry": "nav_h",
+    "route": "/nav/h",
+    "source": "offline",
+    "token_shape": "hg_…(offline test token)",
+    "html_sha256": "d5d8764e8dc2482dbb2178959cca9efbd3ed56751d90019b42a15220feef0563",
+    "text_sha256": "aaabf3bb4a18ce220da2ab6b7752b33a1f5da2c96adc4de32464f6a547d2c76d",
+    "text_bytes": 837,
+    "base_url": "https://hansard.example.org"
+  }
+}

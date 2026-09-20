@@ -1,0 +1,14 @@
+Browse by year
+
+- 2025 — 1 sittings
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/year/2025
+- 2024 — 1 sittings
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/year/2024
+- 2023 — 1 sittings
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/year/2023
+- 2020 — 1 sittings
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/year/2020
+- 2001 — 1 sittings
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/year/2001
+- 1988 — 1 sittings
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/year/1988

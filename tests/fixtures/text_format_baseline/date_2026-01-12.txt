@@ -1,0 +1,43 @@
+Sitting: 2026-01-12
+Reports: 20
+
+- ASSENTS TO BILLS PASSED
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/003_20041019_S0002
+- INCOME TAX (AMENDMENT) BILL
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/026_20041019_S0004_T0016
+- BUILDING MAINTENANCE AND STRATA MANAGEMENT BILL (As reported from Select Committee)
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/038_20041019_S0004_T0004
+- FIVE-DAY WORK WEEK IN SCHOOLS
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/007_20041019_S0006_T0003
+- SINGAPORE ARMED FORCES (AMENDMENT NO. 2) BILL
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/037_20041019_S0004_T0023
+- UTILITIES BILL
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/045_20041019_S0007_T0005
+- TRAINING PROGRAMMES
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/050_20041019_S0009_T0006
+- MERCHANT SHIPPING (AMENDMENT) BILL
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/021_20041019_S0004_T0018
+- EXEMPTED BUSINESS (Motion)
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/036_20041019_S0004_T0012
+- MEDIFUND (Review of eligibility criteria)
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/010_20041019_S0006_T0006
+- PROGRAMMES FOR RETIRING POLICE OFFICERS
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/043_20041019_S0007_T0002
+- FIRE-RATED DOORS FOR HDB FLATS
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/047_20041019_S0009_T0003
+- CARPARK CHARGES
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/044_20041019_S0007_T0001
+- PARKS AND TREES BILL
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/023_20041019_S0004_T0019
+- SECURITIES AND FUTURES (AMENDMENT NO. 2) BILL
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/014_20041019_S0004_T0022
+- STAMP DUTIES (AMENDMENT) BILL
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/028_20041019_S0004_T0024
+- EMPLOYABILITY SKILLS SYSTEM (Rationale for implementation)
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/008_20041019_S0006_T0002
+- REGISTERED DESIGNS (AMENDMENT) BILL
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/033_20041019_S0004_T0021
+- SYNTHETIC DRUGS
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/041_20041019_S0007_T0004
+- SINGAPORE CITIZENSHIP
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/report/046_20041019_S0009_T0005

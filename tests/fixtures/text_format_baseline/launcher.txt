@@ -1,0 +1,66 @@
+Singapore Hansard Gateway — navigation
+
+Find a topic by word:
+- a — 1 topics
+- b — 1 topics
+- c — 0 topics
+- d — 1 topics
+- e — 1 topics
+- f — 2 topics
+- g — 1 topics
+- h — 4 topics
+- i — 0 topics
+- j — 0 topics
+- k — 0 topics
+- l — 0 topics
+- m — 0 topics
+- n — 0 topics
+- o — 1 topics
+- p — 0 topics
+- q — 0 topics
+- r — 0 topics
+- s — 0 topics
+- t — 1 topics
+- u — 1 topics
+- v — 0 topics
+- w — 1 topics
+- x — 0 topics
+- y — 0 topics
+- z — 0 topics
+- 0 — 0 topics
+- 1 — 0 topics
+- 2 — 0 topics
+- 3 — 0 topics
+- 4 — 0 topics
+- 5 — 0 topics
+- 6 — 0 topics
+- 7 — 0 topics
+- 8 — 0 topics
+- 9 — 0 topics
+
+Common topics:
+- oral-answer (4 reports)
+- bill (3 reports)
+- written-answer (3 reports)
+- Economic Recovery and Jobs (2 reports)
+- Fisheries and Marine Policy (2 reports)
+- Government Accounting and Audit (2 reports)
+- Health Information (2 reports)
+- Tan Chun Seng (2 reports)
+- Alice Tan (1 reports)
+- Data Protection and Cybersecurity (1 reports)
+- Foo Ah Kow (1 reports)
+- Health Information Bill (1 reports)
+- Health Information Bill (Amendment No. 2) (1 reports)
+- Heng Chee How (1 reports)
+- Use of Bus Boarding Ramps (1 reports)
+
+Recent sittings:
+- 2025-01-08
+- 2024-02-20
+- 2023-05-10
+- 2020-03-01
+- 2001-06-20
+- 1988-11-15
+
+Facets: years https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/years members https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/members bills https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/bills

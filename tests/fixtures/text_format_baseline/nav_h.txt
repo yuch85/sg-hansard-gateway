@@ -1,0 +1,17 @@
+Prefix: h
+Terms: 4
+
+- Health Information (2 reports)
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/search?q=Health%20Information
+- Health Information Bill (1 reports)
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/search?q=Health%20Information%20Bill
+- Health Information Bill (Amendment No. 2) (1 reports)
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/search?q=Health%20Information%20Bill%20%28Amendment%20No.%202%29
+- Heng Chee How (1 reports)
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/search?q=Heng%20Chee%20How
+
+Narrow further: 2 children
+- he — 4 topics
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/nav/he
+- ho — 1 topics
+  url: https://hansard.example.org/a/hg_testvalidtoken0123456789abcdef/nav/ho
