@@ -20,7 +20,16 @@
     {% if token %}
     nav.global-nav { margin: 0.5rem 0 1rem; font-size: 0.9rem; }
     nav.global-nav.bottom { margin-top: 1.5rem; }
-    span.u { font-size: 0.7rem; color: #777; word-break: break-all; }
+    span.u { font-size: 0.65rem; color: #8a8178; word-break: break-all; display: inline; }
+    article.speech { position: relative; }
+    article.speech:target { background: #fff3b0; border-left-color: #b8860b; }
+    article.speech:target::after { content: "Cited passage"; position: absolute;
+                                   top: 0.25rem; right: 0.5rem; font-size: 0.65rem;
+                                   letter-spacing: 0.12em; text-transform: uppercase;
+                                   color: #b8860b; }
+    .cite { margin: 0.2rem 0 0; font-size: 0.75rem; color: #8a8178; }
+    .cite a { color: #8a8178; }
+    .cite-note { font-size: 0.85rem; color: #8a8178; }
     {% endif %}
   </style>
 </head>

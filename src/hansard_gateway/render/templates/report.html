@@ -55,9 +55,16 @@
   <p><code>Transcript SHA-256: {{ report.transcript_sha256 }}</code></p>
   <section id="transcript">
     <h2>Transcript</h2>
+    {% if cite_note %}
+    <p class="cite-note">To cite a specific speech, copy its Cite URL — opening it in a browser highlights that speech.</p>
+    {% endif %}
     {% for speech in report.speeches %}
-    <article class="speech">
+    {% set cite = speech_cites[loop.index0] %}
+    <article class="speech" id="speech-{{ speech.sequence }}">
       <h3>{{ speech.speaker_original if speech.speaker_original else "[procedural]" }}</h3>
+      {% if cite is defined and cite[0] is not none %}
+      <p class="cite">Cite: <a href="{{ cite[0] }}">{{ cite[1] }}</a><span class="u">{{ cite[0] }}</span></p>
+      {% endif %}
       {% for paragraph in speech.paragraphs %}
       <p>{{ paragraph }}</p>
       {% endfor %}

@@ -310,10 +310,24 @@ def test_report_bodies_verbatim(
             f"/a/{TEST_TOKEN}/report/{E2E_REPORT_ID}?format=json"
         )
     data = json.loads(r.text)
+    # The parser normalizes whitespace (sprs legacy _clean_text: collapse all
+    # runs to single spaces), so the page carries the collapsed form — that IS
+    # the verbatim normalized transcript the SHA footer fingerprints. The
+    # speaker name renders in the h3 header AND at the body's start (legacy
+    # documents carry it in the segment), so the full collapsed paragraph is
+    # a verbatim substring of the rendered body either way.
+    import re as _re
+
     for speech in data["speeches"]:
         for paragraph in speech["paragraphs"]:
-            assert _html.escape(paragraph) in rendered_report, (
-                f"paragraph not verbatim on the page: {paragraph[:60]!r}"
+            collapsed = _re.sub(r"\s+", " ", paragraph)
+            # Jinja autoescape renders & < > " ' as &#38; &#60; &#62; &#34;
+            # &#39; (never the named &amp;/&lt;/&gt; or bare quotes) — mirror
+            # it so the verbatim check is exact.
+            jinja_escaped = _html.escape(collapsed, quote=False).replace(
+                '"', "&#34;").replace("'", "&#39;")
+            assert jinja_escaped in rendered_report, (
+                f"paragraph not verbatim on the page: {collapsed[:60]!r}"
             )
 
 

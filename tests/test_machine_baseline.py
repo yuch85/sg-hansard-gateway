@@ -72,6 +72,15 @@ PAGE_BUDGET_LINKS = 400
 #: headroom check asserts absolute + this stays under the 400-link budget.
 WAVE1_REPORT_ABS_DELTA = 60
 
+#: Wave-1 CSS delta (bytes of inline CSS added to base.html by the :target
+#: rules + the production .u rule + .cite/.cite-note rules — the wave1
+#: citation feature). Every page type inherits base.html, so the offline
+#: byte_size equality accounts for this fixed additive delta; the per-page
+#: Cite lines are report-only (the other offline entries have no speeches).
+#: Measured: launcher 19144-18540 = nav 6626-6022 = ... = 604 bytes on every
+#: offline page (identical, because the delta is the shared base <style>).
+WAVE1_BASE_CSS_DELTA = 604
+
 #: The surface fields compared for FULL equality on offline entries.
 _EQUALITY_KEYS: tuple[str, ...] = (
     "hrefs", "u_texts", "anchor_texts", "correspondence",
@@ -153,9 +162,22 @@ def test_machine_surface_matches_wave0(
 
     if entry.source == "offline":
         for key in _EQUALITY_KEYS:
-            assert surface[key] == baseline[key], (
-                f"{entry.name}: surface[{key}] != wave0 baseline"
-            )
+            if key == "byte_size":
+                # Wave-1 base.html CSS delta (the :target + .u + .cite rules)
+                # is inherited by EVERY page type — the machine surface fields
+                # (hrefs/.u/counts/correspondence) stay byte-identical to
+                # wave0; only the shared <style> block grew. Account for it
+                # explicitly (Wave-1 is the last wave to touch base.html's
+                # shared CSS; later restyle waves refresh these fixtures via
+                # the per-wave wave<N>/ dir instead).
+                assert surface[key] == baseline[key] + WAVE1_BASE_CSS_DELTA, (
+                    f"{entry.name}: byte_size {surface[key]} != wave0 "
+                    f"{baseline[key]} + Wave-1 CSS delta {WAVE1_BASE_CSS_DELTA}"
+                )
+            else:
+                assert surface[key] == baseline[key], (
+                    f"{entry.name}: surface[{key}] != wave0 baseline"
+                )
         return
 
     # Live-source entry: structural invariants (not full equality).

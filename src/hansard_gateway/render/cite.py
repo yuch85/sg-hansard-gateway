@@ -26,7 +26,9 @@ silently renumbers citations.
 
 from __future__ import annotations
 
-from typing import Optional
+import re
+from typing import Any, Optional
+from urllib.parse import urlsplit
 
 from hansard_gateway.models import HansardReport, Speech
 from hansard_gateway.render.urls import abs_report_url
@@ -68,6 +70,47 @@ def cite_speech_limit(
     link_branch = max(0, (page_budget_links - non_cite_links) // CITE_CAP_DIVISOR)
     byte_branch = max(0, (page_budget_bytes - base_bytes) // est_bytes_per_cite)
     return min(speech_count, link_branch, byte_branch)
+
+
+def measure_non_cite_page(
+    *,
+    template: str,
+    token: str,
+    context: dict[str, Any],
+) -> tuple[int, int]:
+    """Render a report template WITHOUT Cite lines and measure it.
+
+    Returns ``(non_cite_absolute_link_count, byte_size)`` — the two inputs the
+    cap rule needs (G-A6-2: the cap is computed from the WHOLE page's measured
+    surface, not just the speech count). Rendered through the same Jinja
+    environment the production render uses (``render._env``/shared base
+    context), so the measurement is of the real pre-Cite page.
+    """
+    from hansard_gateway.render import _env, _nav_context, _PROTECTED_ROBOTS, _REFERRER_POLICY
+    from hansard_gateway.config import settings
+
+    env = _env()
+    html = env.get_template(template).render(
+        robots=_PROTECTED_ROBOTS,
+        referrer=_REFERRER_POLICY,
+        base=settings.public_base_url.rstrip("/"),
+        token=token,
+        **_nav_context(token),
+        speech_cites=[],
+        cite_note=False,
+        **context,
+    )
+    count = 0
+    for match in re.finditer(r"<a [^>]*href=[\"']([^\"']+)[\"']", html):
+        href = match.group(1)
+        parts = urlsplit(href)
+        if (
+            parts.scheme == "https"
+            and parts.netloc
+            and "/a/hg_" in href
+        ):
+            count += 1
+    return count, len(html.encode("utf-8"))
 
 
 def cite_label(*, sequence: int, speech: Speech) -> str:

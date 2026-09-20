@@ -18,6 +18,10 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from hansard_gateway.models import HansardReport, SearchHit, SearchPage
 from hansard_gateway.config import settings
+from hansard_gateway.render.cite import (
+    build_cite_context,
+    measure_non_cite_page,
+)
 # Absolute token-bearing URL builders live in :mod:`.urls` (spec R1/R3/R5);
 # re-exported here so existing imports keep working (plan 27.1-02).
 from hansard_gateway.render.urls import (  # noqa: F401
@@ -138,20 +142,37 @@ def render_about() -> str:
 
 def render_report(*, report: HansardReport, token: str, retrieved: str,
                   report_nav: Optional[dict[str, Any]] = None) -> str:
-    """Render a report page (spec §5 contract) with token-preserving links."""
+    """Render a report page (spec §5 contract) with token-preserving links.
+
+    Citation (Phase 27.3 Wave 1): the page is rendered once WITHOUT Cite lines
+    to measure its non-Cite absolute-link count (B) and base byte size, then
+    the cap (``cite.build_cite_context``) is computed from those measurements
+    and the page re-rendered with per-speech Cite context. The cap is applied
+    to the measured whole page (G-A6-2)."""
     self_url = abs_report_url(token=token, link_id=report.report_id)
-    context: dict[str, Any] = {
+    base_context: dict[str, Any] = {
         "report": report,
         "retrieved": retrieved,
         "date_long": date_long(report.date),
         "report_nav": report_nav or {},
         "sitting_url": abs_date_url(token=token, day_iso=report.date.isoformat()),
         "home_url": abs_launcher_url(token=token),
-        "report_nav": report_nav or {},
         "json_url": abs_format_sibling(url=self_url, fmt="json"),
         "text_url": abs_format_sibling(url=self_url, fmt="text"),
     }
-    return _render("report.html", protected=True, token=token, **context)
+    non_cite_links, base_bytes = measure_non_cite_page(
+        template="report.html", token=token, context=base_context,
+    )
+    cite_urls, cite_labels = build_cite_context(
+        report=report, token=token,
+        non_cite_links=non_cite_links, base_bytes=base_bytes,
+    )
+    return _render(
+        "report.html", protected=True, token=token,
+        speech_cites=list(zip(cite_urls, cite_labels)),
+        cite_note=any(url is not None for url in cite_urls),
+        **base_context,
+    )
 
 
 def results_line(*, page: SearchPage, hits: list[SearchHit]) -> str:
