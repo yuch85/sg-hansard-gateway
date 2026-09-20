@@ -10,6 +10,7 @@ encoded (R5).
 
 from __future__ import annotations
 
+from typing import Optional
 from urllib.parse import quote
 
 from hansard_gateway.config import settings
@@ -20,9 +21,20 @@ def _base() -> str:
     return settings.public_base_url.rstrip("/")
 
 
-def abs_report_url(*, token: str, link_id: str) -> str:
-    """Absolute, token-bearing URL for one report (self-navigating link)."""
-    return f"{_base()}/a/{token}/report/{quote(link_id, safe='')}"
+def abs_report_url(*, token: str, link_id: str,
+                   fragment: Optional[str] = None) -> str:
+    """Absolute, token-bearing URL for one report (self-navigating link).
+
+    With ``fragment`` set, appends ``#<fragment>`` (quote()d defensively —
+    ``speech-N`` is already safe). Fragments are PURE CLIENT-SIDE navigation:
+    they never reach the handler (G-A4-1), so the fragment does not change the
+    cached document, only the :target highlight. ``None`` returns the
+    pre-change byte form (existing call sites untouched).
+    """
+    url = f"{_base()}/a/{token}/report/{quote(link_id, safe='')}"
+    if fragment is not None:
+        url += f"#{quote(fragment, safe='-_')}"
+    return url
 
 
 def abs_search_url(
