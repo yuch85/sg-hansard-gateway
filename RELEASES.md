@@ -5,6 +5,69 @@ points at the newest release. The gateway is a self-contained container —
 upgrading is `docker pull` + recreate (your `/data` volume carries the index
 and tokens; no migration is needed between these releases).
 
+## 0.1.3 (2026-09-21)
+
+**Human-facing restyle + speech citation** (mission 010, phase 27.3).
+
+The gateway's pages were LLM-readable but not human-readable. 0.1.3
+restyles every page type in a newspaper-warm system (cream paper, ink
+serif, terracotta accents) and adds a citation highlight: every speech
+carries a stable `#speech-N` Cite URL that an AI can discover in the
+page and that, opened directly in a browser, scrolls to and
+gold-highlights that exact speech.
+
+- **Human-facing restyle, all page types** — masthead + provenance
+  footnote on reports, sticky speaker index (turn number + speaker +
+  first words), turn numbers, two-level speaker hierarchy, a
+  persistent-speaker sticky header (the current speaker's name stays
+  pinned while reading their speech), a print stylesheet, a quiet
+  one-line nav bar kept at top AND bottom, and card-grid layouts for
+  the search, launcher, nav, date, and facet pages. Zero JavaScript,
+  zero forms, zero iframes, no external resources — every page is
+  still one HTML document with inline CSS.
+- **Citation highlight** — every speech on a report page gains
+  `id="speech-N"` and one `Cite:` line carrying the absolute URL
+  `…/report/{id}#speech-N` (plus its visible `.u` twin). Opening that
+  URL in a browser scrolls to the speech and shows the gold
+  "Cited passage" highlight — **per-navigation**: the highlight shows
+  on the navigation that lands on the URL (there is no persistence,
+  and there is no JavaScript to add one). Cite lines are **capped per
+  page** so long sittings stay within the gateway's link/size budgets
+  (the first N speeches in sequence order are indexed; when a cap
+  drops a speech, a note line on the page says so).
+- **Machine contract unchanged** — `?format=json` and `?format=text`
+  are byte-identical to 0.1.2 for the corpus pages; the
+  invalid-token 404 body remains byte-pinned (it moved to the
+  token-free, nav-free 0.1.3 page — the new pin is
+  `db5bd37212a04ab36d3eb130cdc7abfd`, the old pin
+  `1a29cc1330d50031993c3cbcde2318d7` is the 0.1.2 value); transcript
+  verbatim + SHA-256 footer untouched. The R1–R9 conformance suite
+  was extended with the new assertions: the Cite cap arithmetic,
+  `.u` visibility in screen AND print, and the rendered extraction
+  corpus against a frozen machine-surface baseline.
+- **Upgrade note** — `docker pull` + container recreate, exactly as
+  prior releases; the `/data` volume carries the index and tokens
+  over (no migration step). See the "v0.1.3 upgrade (image
+  rollover)" section of `deploy/RUNBOOK.md` (steps 0–6, including the
+  pre-upgrade image-identity capture and the image-rollover rollback).
+- **Ordinal note** — Cite URLs reference the report's current speech
+  numbering. Report content is immutable once crawled, so the
+  `#speech-N` ordinals are stable for the life of a published report;
+  this is the accepted v1 semantic (durable per-speech identifiers
+  are a future consideration).
+- **Known pre-existing exception** — the live worst-case search page
+  renders 105.9 KB against the 100 KB page budget. This condition
+  predates 0.1.3; 0.1.3 does not increase the page beyond the
+  existing condition except for its approved shared-CSS change. It is
+  not treated as a 0.1.3 regression. Future work will reduce the
+  worst-case search page below 100 KB. The offline conformance suite
+  does not exercise the live worst-case page, so this release does
+  not claim universal budget enforcement across every live page.
+
+Digest: `<sha256 of the 0.1.3 manifest — recorded in the mission log at push time>`
+(= `latest`). Source: commit `845cbd4`
+(github.com/yuch85/sg-hansard-gateway).
+
 ## 0.1.2 (2026-09-20)
 
 **Provenance links point at the exact Hansard section** (mission 008).
