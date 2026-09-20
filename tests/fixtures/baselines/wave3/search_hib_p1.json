@@ -1,0 +1,1683 @@
+{
+  "hrefs": [
+    "https://hansard.098020.xyz/a/hg_…/",
+    "https://hansard.098020.xyz/a/hg_…/",
+    "https://hansard.098020.xyz/a/hg_…/years",
+    "https://hansard.098020.xyz/a/hg_…/members",
+    "https://hansard.098020.xyz/a/hg_…/bills",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=50&format=json",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=50&format=text",
+    "https://hansard.098020.xyz/a/hg_…/report/ministerial-statement-3030",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-na-24828",
+    "https://hansard.098020.xyz/a/hg_…/report/oral-answer-4208",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-24567",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-811",
+    "https://hansard.098020.xyz/a/hg_…/report/motion-3026",
+    "https://hansard.098020.xyz/a/hg_…/report/motion-3028",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-806",
+    "https://hansard.098020.xyz/a/hg_…/report/motion-3008",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-803",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-804",
+    "https://hansard.098020.xyz/a/hg_…/report/motion-2996",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-799",
+    "https://hansard.098020.xyz/a/hg_…/report/motion-2976",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-794",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-793",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-795",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-792",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-789",
+    "https://hansard.098020.xyz/a/hg_…/report/ministerial-statement-2952",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-785",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2928",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2930",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2914",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2915",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2916",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2913",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2907",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-22461",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2895",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2893",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2883",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2876",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2867",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2857",
+    "https://hansard.098020.xyz/a/hg_…/report/oral-answer-4021",
+    "https://hansard.098020.xyz/a/hg_…/report/oral-answer-4023",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-na-22080",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-781",
+    "https://hansard.098020.xyz/a/hg_…/report/atbp-04022026",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-780",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-21746",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-776",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-773",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-772",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-774",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-775",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-na-21199",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-intro-668",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-768",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-18411",
+    "https://hansard.098020.xyz/a/hg_…/report/021_20071112_S0004_T0008",
+    "https://hansard.098020.xyz/a/hg_…/report/018_20070212_S0004_T0003",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-130",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-345",
+    "https://hansard.098020.xyz/a/hg_…/report/026_19980219_S0003_T0008",
+    "https://hansard.098020.xyz/a/hg_…/report/021_19990415_S0003_T0006",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-418",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-743",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-264",
+    "https://hansard.098020.xyz/a/hg_…/report/030_20010222_S0003_T0010",
+    "https://hansard.098020.xyz/a/hg_…/report/011_19680801_S0002_T0003",
+    "https://hansard.098020.xyz/a/hg_…/report/020_19681216_S0002_T0002",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-na-20573",
+    "https://hansard.098020.xyz/a/hg_…/report/3_20080422_S0003_T0002",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-350",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=100",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=200",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2026-01-01&to=2026-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2025-01-01&to=2025-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2024-01-01&to=2024-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2023-01-01&to=2023-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2022-01-01&to=2022-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2021-01-01&to=2021-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2020-01-01&to=2020-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2019-01-01&to=2019-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2018-01-01&to=2018-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2017-01-01&to=2017-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2016-01-01&to=2016-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2015-01-01&to=2015-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2014-01-01&to=2014-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2013-01-01&to=2013-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2012-01-01&to=2012-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2011-01-01&to=2011-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2010-01-01&to=2010-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2009-01-01&to=2009-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2008-01-01&to=2008-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2007-01-01&to=2007-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2006-01-01&to=2006-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2005-01-01&to=2005-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2004-01-01&to=2004-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2003-01-01&to=2003-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2002-01-01&to=2002-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2001-01-01&to=2001-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2000-01-01&to=2000-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1999-01-01&to=1999-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1998-01-01&to=1998-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1997-01-01&to=1997-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1996-01-01&to=1996-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1995-01-01&to=1995-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1994-01-01&to=1994-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1993-01-01&to=1993-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1992-01-01&to=1992-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1991-01-01&to=1991-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1990-01-01&to=1990-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1989-01-01&to=1989-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1988-01-01&to=1988-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1987-01-01&to=1987-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1986-01-01&to=1986-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1985-01-01&to=1985-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1984-01-01&to=1984-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1983-01-01&to=1983-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1982-01-01&to=1982-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1981-01-01&to=1981-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1980-01-01&to=1980-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1979-01-01&to=1979-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1978-01-01&to=1978-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1977-01-01&to=1977-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1976-01-01&to=1976-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1975-01-01&to=1975-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1974-01-01&to=1974-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1973-01-01&to=1973-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1972-01-01&to=1972-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1971-01-01&to=1971-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1970-01-01&to=1970-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1969-01-01&to=1969-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1968-01-01&to=1968-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1967-01-01&to=1967-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1966-01-01&to=1966-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1965-01-01&to=1965-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1964-01-01&to=1964-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1963-01-01&to=1963-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1962-01-01&to=1962-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1961-01-01&to=1961-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1960-01-01&to=1960-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1959-01-01&to=1959-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1958-01-01&to=1958-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1957-01-01&to=1957-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1956-01-01&to=1956-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1955-01-01&to=1955-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2020-01-01&to=2029-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2010-01-01&to=2019-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2000-01-01&to=2009-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1990-01-01&to=1999-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1980-01-01&to=1989-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1970-01-01&to=1979-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1960-01-01&to=1969-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1950-01-01&to=1959-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Chia%20Shi-Lu%3B%20Lam%20Pin%20Min%3B%20Murali%20Pillai%3B%20Louis%20Ng%20Kok%20Kwang%3B%20Irene%20Quay%20Siew%20Ching%3B%20Lee%20Bee%20Wah%3B%20Fatimah%20Lateef",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Chia%20Shi-Lu%3B%20Sylvia%20Lim%3B%20Murali%20Pillai%3B%20Louis%20Ng%20Kok%20Kwang%3B%20Edwin%20Tong%20Chun%20Fai%3B%20Gan%20Thiam%20Poh%3B%20Christopher%20De%20Souza%3B%20Irene%20Quay%20Siew%20Ching%3B%20Leon%20Perera%3B%20Lee%20Bee%20Wah%3B%20Joan%20Pereira%3B%20Lim%20Biow%20Chuan%3B%20Fatimah%20Lateef%3B%20Melvin%20Yong%20Yik%20Chye",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Chua%20Sian%20Chin%3B%20Chan%20Choy%20Siong%3B%20Yeoh%20Ghim%20Seng%3B%20L%20P%20Rodrigo%3B%20Teong%20Eng%20Siong%3B%20J%20F%20Conceicao",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Chua%20Sian%20Chin%3B%20Ho%20Kah%20Leong%3B%20Hwang%20Soo%20Jin%3B%20Yeoh%20Ghim%20Seng%3B%20P%20Selvadurai%3B%20L%20P%20Rodrigo%3B%20Ch%27Ng%20Jit%20Koon%3B%20Lee%20Teck%20Him%3B%20P%20Coomaraswamy",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Claire%20Chiang%20See%20Ngoh%3B%20Lily%20Neo%3B%20Aline%20K%20Wong%3B%20Tan%20Soo%20Khoon",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Dennis%20Tan%20Lip%20Fong%3B%20Chia%20Shi-Lu%3B%20Lim%20Sun%20Sun%3B%20Gan%20Thiam%20Poh%3B%20Louis%20Ng%20Kok%20Kwang%3B%20Edwin%20Tong%20Chun%20Fai%3B%20Lee%20Bee%20Wah%3B%20Fatimah%20Lateef",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Ganesh%20Rajaram%3B%20Pritam%20Singh%3B%20Daniel%20Goh%20Pei%20Siong%3B%20Azmoon%20Ahmad%3B%20Christopher%20De%20Souza%3B%20Zaqy%20Mohamad%3B%20K%20Thanaletchimi%3B%20Darryl%20David%3B%20Kwek%20Hian%20Chuan%20Henry%3B%20Joan%20Pereira",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Lam%20Pin%20Min%3B%20Chiam%20See%20Tong%3B%20Abdullah%20Bin%20Tarmugi%3B%20Thio%20Li-Ann%3B%20Khaw%20Boon%20Wan%3B%20Sam%20Tan%20Chin%20Siong%3B%20Fatimah%20Lateef%3B%20Halimah%20Yacob",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Lam%20Pin%20Min%3B%20Khaw%20Boon%20Wan%3B%20Sam%20Tan%20Chin%20Siong%3B%20Fatimah%20Lateef%3B%20Halimah%20Yacob",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Lam%20Pin%20Min%3B%20Sylvia%20Lim%3B%20Abdullah%20Bin%20Tarmugi%3B%20Thio%20Li-Ann%3B%20Khaw%20Boon%20Wan%3B%20Fatimah%20Lateef%3B%20Halimah%20Yacob",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Leong%20Mun%20Wai%3B%20Tan%20See%20Leng%3B%20Patrick%20Tay%20Teck%20Guan%3B%20Louis%20Ng%20Kok%20Kwang%3B%20Pritam%20Singh%3B%20Seah%20Kian%20Peng",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Lim%20Wee%20Kiak%3B%20Penny%20Low%3B%20Jessica%20Tan%20Soon%20Neo%3B%20Lee%20Bee%20Wah%3B%20Alex%20Yam%20Ziming%3B%20Lina%20Chiam%3B%20Halimah%20Yacob%3B%20Chia%20Shi-Lu%3B%20Baey%20Yam%20Keng%3B%20Ang%20Wei%20Neng%3B%20Tin%20Pei%20Ling%3B%20Ellen%20Lee%3B%20Amy%20Khor%20Lean%20Suan%3B%20Lily%20Neo%3B%20Lee%20Li%20Lian%3B%20Teo%20Chee%20Hean%3B%20Fatimah%20Lateef%3B%20Lam%20Pin%20Min%3B%20Denise%20Phua%20Lay%20Peng%3B%20Zaqy%20Mohamad%3B%20K%20Karthikeyan%3B%20Janil%20Puthucheary%3B%20Gerald%20Giam%20Yean%20Song%3B%20Gan%20Kim%20Yong%3B%20Png%20Eng%20Huat%3B%20Gan%20Thiam%20Poh%3B%20Chia%20Yong%20Yong%3B%20Charles%20Chong%3B%20Hri%20Kumar%20Nair",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Ong%20Ye%20Kung%3B%20Wan%20Rizal",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Ong%20Ye%20Kung%3B%20Yip%20Hon%20Weng",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=S%20Jayakumar",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Yeo%20Guat%20Kwang%3B%20Tan%20Soo%20Khoon%3B%20Lim%20Hng%20Kiang%3B%20Lily%20Neo%3B%20Chiam%20See%20Tong",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill",
+    "https://hansard.098020.xyz/a/hg_…/search?q=bill",
+    "https://hansard.098020.xyz/a/hg_…/search?q=bill-intro",
+    "https://hansard.098020.xyz/a/hg_…/search?q=SUPPLY%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=INCOME%20TAX%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=CENTRAL%20PROVIDENT%20FUND%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=SUPPLEMENTARY%20SUPPLY%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=CONSTITUTION%20OF%20THE%20REPUBLIC%20OF%20SINGAPORE%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=ROAD%20TRAFFIC%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=BUDGET%2C%20MINISTRY%20OF%20HEALTH",
+    "https://hansard.098020.xyz/a/hg_…/search?q=LEGAL%20PROFESSION%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=HOUSING%20AND%20DEVELOPMENT%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=ECONOMIC%20EXPANSION%20INCENTIVES%20%28RELIEF%20FROM%20INCOME%20TAX%29%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=CUSTOMS%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Goods%20and%20Services%20Tax%20%28Amendment%29%20Bill",
+    "https://hansard.098020.xyz/a/hg_…/search?q=COMPANIES%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=CRIMINAL%20PROCEDURE%20CODE%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=STATUTES%20%28MISCELLANEOUS%20AMENDMENTS%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=CRIMINAL%20LAW%20%28TEMPORARY%20PROVISIONS%29%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=PARLIAMENTARY%20ELECTIONS%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=2&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=3&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=4&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=5&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=6&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=7&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=2&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/",
+    "https://hansard.098020.xyz/a/hg_…/",
+    "https://hansard.098020.xyz/a/hg_…/",
+    "https://hansard.098020.xyz/a/hg_…/years",
+    "https://hansard.098020.xyz/a/hg_…/members",
+    "https://hansard.098020.xyz/a/hg_…/bills"
+  ],
+  "anchor_texts": [
+    "Home",
+    "Find a topic A-Z",
+    "Years",
+    "Members",
+    "Bills",
+    "JSON",
+    "text",
+    "Government’s Response to the “2026 Review of Salaries for Political Appointment Holders and Members of Parliament”",
+    "Clear Disclosure of Treatment Costs and Options before Consent for Patients in Non-subsidised Wards",
+    "Study on Veterinary Price Transparency and Workforce Trends",
+    "Regulation of Epigenetic and Biological Age Tests as Clinical Diagnostics and Extension of Safeguards to Protect Genetic Information Results",
+    "Health Sciences Authority (Amendment) and Other Matters Bill",
+    "Securing Singapore's Food Future",
+    "Securing Singapore's Food Future",
+    "Land Titles (Strata) (Amendment) Bill",
+    "An Economy of the Future that Works for All",
+    "Road Traffic (Miscellaneous Amendments) Bill",
+    "Road Traffic (Miscellaneous Amendments) Bill",
+    "Reinforcing Singapore's Position as a Global Transport Hub",
+    "Statutes (Miscellaneous Amendments) Bill",
+    "An Artificial Intelligence (AI) Transition with No Jobless Growth",
+    "Skills and Workforce Development Agency Bill",
+    "Cross-Border Railways (Border Control Co-Location) Bill",
+    "Skills and Workforce Development Agency Bill",
+    "Veterinary Practice Bill",
+    "Energy Conservation (Amendment) Bill",
+    "Impact of the Middle East Situation on Singapore",
+    "Tobacco (Control of Advertisements and Sale) (Amendment) and Other Matters Bill",
+    "Committee of Supply – Head O (Ministry of Health)",
+    "Committee of Supply – Head I (Ministry of Social and Family Development)",
+    "Committee of Supply – Head T (Ministry of National Development)",
+    "Committee of Supply – Head W (Ministry of Transport)",
+    "Committee of Supply – Head O (Ministry of Health)",
+    "Committee of Supply – Head L (Ministry of Sustainability and the Environment)",
+    "Committee of Supply – Head L (Ministry of Sustainability and the Environment)",
+    "Consolidation of Small Medical Practices by Corporate Chains and Supporting Viability of Independent Clinics",
+    "Committee of Supply – Head Q (Ministry of Digital Development and Information)",
+    "Committee of Supply – Head R (Ministry of Law)",
+    "Committee of Supply – Head N (Ministry of Foreign Affairs)",
+    "Committee of Supply – Head U (Prime Minister's Office)",
+    "Debate on Annual Budget Statement",
+    "Debate on Annual Budget Statement",
+    "Assessment of Transboundary Haze Episodes, and Review of Bilateral and Regional Haze-mitigation Measures",
+    "Projected Expenditure on Government's Pursuit of Global Leadership in Growth Areas and AI-empowered Economy",
+    "Plans for Onboarding Traditional Chinese Medicine Practitioners to National Electronic Health Record",
+    "Land Transport and Related Matters Bill",
+    "Assent to Bills Passed",
+    "Land Transport and Related Matters Bill",
+    "MAS and Life Insurance Association of Singapore (LIAS) Collaboration on Clinical Guidance for Insurance Medical Record Disclosure Context Requirements for Claims",
+    "National Council of Social Service (Amendment) Bill",
+    "Health Information Bill",
+    "Public Sector (Governance) (Amendment) Bill",
+    "Health Information Bill",
+    "Health Information Bill",
+    "Tracking and Issuing Guidelines on Listed Prices for Subsidised Procedures at Public Hospitals",
+    "Health Information Bill",
+    "Online Safety (Relief and Accountability) Bill",
+    "Option to Opt Out of Sharing Patient Health Data with National Electronic Health Record",
+    "NATIONAL REGISTRY OF DISEASES BILL",
+    "HEALTH PRODUCTS BILL",
+    "MediShield Life Scheme Bill",
+    "Infectious Diseases (Amendment) Bill",
+    "MEDICINES (AMENDMENT) BILL",
+    "PRIVATE HOSPITALS AND MEDICAL CLINICS (AMENDMENT) BILL",
+    "Healthcare Services Bill",
+    "Workplace Fairness Bill",
+    "Cybersecurity Bill",
+    "HEALTH PROMOTION BOARD BILL",
+    "DESTRUCTION OF DISEASE-BEARING INSECTS BILL",
+    "ENVIRONMENTAL PUBLIC HEALTH BILL",
+    "Median Out-of-pocket Bill Amounts for Common Chronic Conditions and Day Surgeries at Public Health Institutions",
+    "INFECTIOUS DISEASES (AMENDMENT) BILL",
+    "Tobacco (Control of Advertisements and Sale) (Amendment) Bill",
+    "Limit 50 per page (current)",
+    "Limit 100 per page",
+    "Limit 200 per page",
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012",
+    "2011",
+    "2010",
+    "2009",
+    "2008",
+    "2007",
+    "2006",
+    "2005",
+    "2004",
+    "2003",
+    "2002",
+    "2001",
+    "2000",
+    "1999",
+    "1998",
+    "1997",
+    "1996",
+    "1995",
+    "1994",
+    "1993",
+    "1992",
+    "1991",
+    "1990",
+    "1989",
+    "1988",
+    "1987",
+    "1986",
+    "1985",
+    "1984",
+    "1983",
+    "1982",
+    "1981",
+    "1980",
+    "1979",
+    "1978",
+    "1977",
+    "1976",
+    "1975",
+    "1974",
+    "1973",
+    "1972",
+    "1971",
+    "1970",
+    "1969",
+    "1968",
+    "1967",
+    "1966",
+    "1965",
+    "1964",
+    "1963",
+    "1962",
+    "1961",
+    "1960",
+    "1959",
+    "1958",
+    "1957",
+    "1956",
+    "1955",
+    "2020s",
+    "2010s",
+    "2000s",
+    "1990s",
+    "1980s",
+    "1970s",
+    "1960s",
+    "1950s",
+    "Chia Shi-Lu; Lam Pin Min; Murali Pillai; Louis Ng Kok Kwang; Irene Quay Siew Ching; Lee Bee Wah; Fatimah Lateef",
+    "Chia Shi-Lu; Sylvia Lim; Murali Pillai; Louis Ng Kok Kwang; Edwin Tong Chun Fai; Gan Thiam Poh; Christopher De Souza; Irene Quay Siew Ching; Leon Perera; Lee Bee Wah; Joan Pereira; Lim Biow Chuan; Fatimah Lateef; Melvin Yong Yik Chye",
+    "Chua Sian Chin; Chan Choy Siong; Yeoh Ghim Seng; L P Rodrigo; Teong Eng Siong; J F Conceicao",
+    "Chua Sian Chin; Ho Kah Leong; Hwang Soo Jin; Yeoh Ghim Seng; P Selvadurai; L P Rodrigo; Ch'Ng Jit Koon; Lee Teck Him; P Coomaraswamy",
+    "Claire Chiang See Ngoh; Lily Neo; Aline K Wong; Tan Soo Khoon",
+    "Dennis Tan Lip Fong; Chia Shi-Lu; Lim Sun Sun; Gan Thiam Poh; Louis Ng Kok Kwang; Edwin Tong Chun Fai; Lee Bee Wah; Fatimah Lateef",
+    "Ganesh Rajaram; Pritam Singh; Daniel Goh Pei Siong; Azmoon Ahmad; Christopher De Souza; Zaqy Mohamad; K Thanaletchimi; Darryl David; Kwek Hian Chuan Henry; Joan Pereira",
+    "Lam Pin Min; Chiam See Tong; Abdullah Bin Tarmugi; Thio Li-Ann; Khaw Boon Wan; Sam Tan Chin Siong; Fatimah Lateef; Halimah Yacob",
+    "Lam Pin Min; Khaw Boon Wan; Sam Tan Chin Siong; Fatimah Lateef; Halimah Yacob",
+    "Lam Pin Min; Sylvia Lim; Abdullah Bin Tarmugi; Thio Li-Ann; Khaw Boon Wan; Fatimah Lateef; Halimah Yacob",
+    "Leong Mun Wai; Tan See Leng; Patrick Tay Teck Guan; Louis Ng Kok Kwang; Pritam Singh; Seah Kian Peng",
+    "Lim Wee Kiak; Penny Low; Jessica Tan Soon Neo; Lee Bee Wah; Alex Yam Ziming; Lina Chiam; Halimah Yacob; Chia Shi-Lu; Baey Yam Keng; Ang Wei Neng; Tin Pei Ling; Ellen Lee; Amy Khor Lean Suan; Lily Neo; Lee Li Lian; Teo Chee Hean; Fatimah Lateef; Lam Pin Min; Denise Phua Lay Peng; Zaqy Mohamad; K Karthikeyan; Janil Puthucheary; Gerald Giam Yean Song; Gan Kim Yong; Png Eng Huat; Gan Thiam Poh; Chia Yong Yong; Charles Chong; Hri Kumar Nair",
+    "Ong Ye Kung; Wan Rizal",
+    "Ong Ye Kung; Yip Hon Weng",
+    "S Jayakumar",
+    "Yeo Guat Kwang; Tan Soo Khoon; Lim Hng Kiang; Lily Neo; Chiam See Tong",
+    "Health Information Bill",
+    "bill",
+    "bill-intro",
+    "SUPPLY BILL",
+    "INCOME TAX (AMENDMENT) BILL",
+    "CENTRAL PROVIDENT FUND (AMENDMENT) BILL",
+    "SUPPLEMENTARY SUPPLY BILL",
+    "CONSTITUTION OF THE REPUBLIC OF SINGAPORE (AMENDMENT) BILL",
+    "ROAD TRAFFIC (AMENDMENT) BILL",
+    "BUDGET, MINISTRY OF HEALTH",
+    "LEGAL PROFESSION (AMENDMENT) BILL",
+    "HOUSING AND DEVELOPMENT (AMENDMENT) BILL",
+    "ECONOMIC EXPANSION INCENTIVES (RELIEF FROM INCOME TAX) (AMENDMENT) BILL",
+    "CUSTOMS (AMENDMENT) BILL",
+    "Goods and Services Tax (Amendment) Bill",
+    "COMPANIES (AMENDMENT) BILL",
+    "CRIMINAL PROCEDURE CODE (AMENDMENT) BILL",
+    "STATUTES (MISCELLANEOUS AMENDMENTS) BILL",
+    "CRIMINAL LAW (TEMPORARY PROVISIONS) (AMENDMENT) BILL",
+    "PARLIAMENTARY ELECTIONS (AMENDMENT) BILL",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "Next",
+    "Back to your home",
+    "Home",
+    "Find a topic A-Z",
+    "Years",
+    "Members",
+    "Bills"
+  ],
+  "u_texts": [
+    "https://hansard.098020.xyz/a/hg_…/",
+    "https://hansard.098020.xyz/a/hg_…/",
+    "https://hansard.098020.xyz/a/hg_…/years",
+    "https://hansard.098020.xyz/a/hg_…/members",
+    "https://hansard.098020.xyz/a/hg_…/bills",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=50&format=json",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=50&format=text",
+    "https://hansard.098020.xyz/a/hg_…/report/ministerial-statement-3030",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-na-24828",
+    "https://hansard.098020.xyz/a/hg_…/report/oral-answer-4208",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-24567",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-811",
+    "https://hansard.098020.xyz/a/hg_…/report/motion-3026",
+    "https://hansard.098020.xyz/a/hg_…/report/motion-3028",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-806",
+    "https://hansard.098020.xyz/a/hg_…/report/motion-3008",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-803",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-804",
+    "https://hansard.098020.xyz/a/hg_…/report/motion-2996",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-799",
+    "https://hansard.098020.xyz/a/hg_…/report/motion-2976",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-794",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-793",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-795",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-792",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-789",
+    "https://hansard.098020.xyz/a/hg_…/report/ministerial-statement-2952",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-785",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2928",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2930",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2914",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2915",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2916",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2913",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2907",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-22461",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2895",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2893",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2883",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2876",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2867",
+    "https://hansard.098020.xyz/a/hg_…/report/budget-2857",
+    "https://hansard.098020.xyz/a/hg_…/report/oral-answer-4021",
+    "https://hansard.098020.xyz/a/hg_…/report/oral-answer-4023",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-na-22080",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-781",
+    "https://hansard.098020.xyz/a/hg_…/report/atbp-04022026",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-780",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-21746",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-776",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-773",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-772",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-774",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-775",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-na-21199",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-intro-668",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-768",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-18411",
+    "https://hansard.098020.xyz/a/hg_…/report/021_20071112_S0004_T0008",
+    "https://hansard.098020.xyz/a/hg_…/report/018_20070212_S0004_T0003",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-130",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-345",
+    "https://hansard.098020.xyz/a/hg_…/report/026_19980219_S0003_T0008",
+    "https://hansard.098020.xyz/a/hg_…/report/021_19990415_S0003_T0006",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-418",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-743",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-264",
+    "https://hansard.098020.xyz/a/hg_…/report/030_20010222_S0003_T0010",
+    "https://hansard.098020.xyz/a/hg_…/report/011_19680801_S0002_T0003",
+    "https://hansard.098020.xyz/a/hg_…/report/020_19681216_S0002_T0002",
+    "https://hansard.098020.xyz/a/hg_…/report/written-answer-na-20573",
+    "https://hansard.098020.xyz/a/hg_…/report/3_20080422_S0003_T0002",
+    "https://hansard.098020.xyz/a/hg_…/report/bill-350",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=100",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=200",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2026-01-01&to=2026-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2025-01-01&to=2025-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2024-01-01&to=2024-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2023-01-01&to=2023-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2022-01-01&to=2022-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2021-01-01&to=2021-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2020-01-01&to=2020-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2019-01-01&to=2019-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2018-01-01&to=2018-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2017-01-01&to=2017-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2016-01-01&to=2016-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2015-01-01&to=2015-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2014-01-01&to=2014-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2013-01-01&to=2013-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2012-01-01&to=2012-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2011-01-01&to=2011-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2010-01-01&to=2010-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2009-01-01&to=2009-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2008-01-01&to=2008-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2007-01-01&to=2007-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2006-01-01&to=2006-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2005-01-01&to=2005-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2004-01-01&to=2004-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2003-01-01&to=2003-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2002-01-01&to=2002-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2001-01-01&to=2001-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2000-01-01&to=2000-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1999-01-01&to=1999-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1998-01-01&to=1998-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1997-01-01&to=1997-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1996-01-01&to=1996-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1995-01-01&to=1995-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1994-01-01&to=1994-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1993-01-01&to=1993-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1992-01-01&to=1992-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1991-01-01&to=1991-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1990-01-01&to=1990-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1989-01-01&to=1989-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1988-01-01&to=1988-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1987-01-01&to=1987-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1986-01-01&to=1986-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1985-01-01&to=1985-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1984-01-01&to=1984-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1983-01-01&to=1983-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1982-01-01&to=1982-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1981-01-01&to=1981-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1980-01-01&to=1980-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1979-01-01&to=1979-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1978-01-01&to=1978-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1977-01-01&to=1977-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1976-01-01&to=1976-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1975-01-01&to=1975-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1974-01-01&to=1974-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1973-01-01&to=1973-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1972-01-01&to=1972-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1971-01-01&to=1971-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1970-01-01&to=1970-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1969-01-01&to=1969-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1968-01-01&to=1968-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1967-01-01&to=1967-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1966-01-01&to=1966-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1965-01-01&to=1965-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1964-01-01&to=1964-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1963-01-01&to=1963-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1962-01-01&to=1962-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1961-01-01&to=1961-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1960-01-01&to=1960-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1959-01-01&to=1959-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1958-01-01&to=1958-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1957-01-01&to=1957-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1956-01-01&to=1956-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1955-01-01&to=1955-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2020-01-01&to=2029-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2010-01-01&to=2019-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2000-01-01&to=2009-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1990-01-01&to=1999-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1980-01-01&to=1989-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1970-01-01&to=1979-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1960-01-01&to=1969-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1950-01-01&to=1959-12-31",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Chia%20Shi-Lu%3B%20Lam%20Pin%20Min%3B%20Murali%20Pillai%3B%20Louis%20Ng%20Kok%20Kwang%3B%20Irene%20Quay%20Siew%20Ching%3B%20Lee%20Bee%20Wah%3B%20Fatimah%20Lateef",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Chia%20Shi-Lu%3B%20Sylvia%20Lim%3B%20Murali%20Pillai%3B%20Louis%20Ng%20Kok%20Kwang%3B%20Edwin%20Tong%20Chun%20Fai%3B%20Gan%20Thiam%20Poh%3B%20Christopher%20De%20Souza%3B%20Irene%20Quay%20Siew%20Ching%3B%20Leon%20Perera%3B%20Lee%20Bee%20Wah%3B%20Joan%20Pereira%3B%20Lim%20Biow%20Chuan%3B%20Fatimah%20Lateef%3B%20Melvin%20Yong%20Yik%20Chye",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Chua%20Sian%20Chin%3B%20Chan%20Choy%20Siong%3B%20Yeoh%20Ghim%20Seng%3B%20L%20P%20Rodrigo%3B%20Teong%20Eng%20Siong%3B%20J%20F%20Conceicao",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Chua%20Sian%20Chin%3B%20Ho%20Kah%20Leong%3B%20Hwang%20Soo%20Jin%3B%20Yeoh%20Ghim%20Seng%3B%20P%20Selvadurai%3B%20L%20P%20Rodrigo%3B%20Ch%27Ng%20Jit%20Koon%3B%20Lee%20Teck%20Him%3B%20P%20Coomaraswamy",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Claire%20Chiang%20See%20Ngoh%3B%20Lily%20Neo%3B%20Aline%20K%20Wong%3B%20Tan%20Soo%20Khoon",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Dennis%20Tan%20Lip%20Fong%3B%20Chia%20Shi-Lu%3B%20Lim%20Sun%20Sun%3B%20Gan%20Thiam%20Poh%3B%20Louis%20Ng%20Kok%20Kwang%3B%20Edwin%20Tong%20Chun%20Fai%3B%20Lee%20Bee%20Wah%3B%20Fatimah%20Lateef",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Ganesh%20Rajaram%3B%20Pritam%20Singh%3B%20Daniel%20Goh%20Pei%20Siong%3B%20Azmoon%20Ahmad%3B%20Christopher%20De%20Souza%3B%20Zaqy%20Mohamad%3B%20K%20Thanaletchimi%3B%20Darryl%20David%3B%20Kwek%20Hian%20Chuan%20Henry%3B%20Joan%20Pereira",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Lam%20Pin%20Min%3B%20Chiam%20See%20Tong%3B%20Abdullah%20Bin%20Tarmugi%3B%20Thio%20Li-Ann%3B%20Khaw%20Boon%20Wan%3B%20Sam%20Tan%20Chin%20Siong%3B%20Fatimah%20Lateef%3B%20Halimah%20Yacob",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Lam%20Pin%20Min%3B%20Khaw%20Boon%20Wan%3B%20Sam%20Tan%20Chin%20Siong%3B%20Fatimah%20Lateef%3B%20Halimah%20Yacob",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Lam%20Pin%20Min%3B%20Sylvia%20Lim%3B%20Abdullah%20Bin%20Tarmugi%3B%20Thio%20Li-Ann%3B%20Khaw%20Boon%20Wan%3B%20Fatimah%20Lateef%3B%20Halimah%20Yacob",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Leong%20Mun%20Wai%3B%20Tan%20See%20Leng%3B%20Patrick%20Tay%20Teck%20Guan%3B%20Louis%20Ng%20Kok%20Kwang%3B%20Pritam%20Singh%3B%20Seah%20Kian%20Peng",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Lim%20Wee%20Kiak%3B%20Penny%20Low%3B%20Jessica%20Tan%20Soon%20Neo%3B%20Lee%20Bee%20Wah%3B%20Alex%20Yam%20Ziming%3B%20Lina%20Chiam%3B%20Halimah%20Yacob%3B%20Chia%20Shi-Lu%3B%20Baey%20Yam%20Keng%3B%20Ang%20Wei%20Neng%3B%20Tin%20Pei%20Ling%3B%20Ellen%20Lee%3B%20Amy%20Khor%20Lean%20Suan%3B%20Lily%20Neo%3B%20Lee%20Li%20Lian%3B%20Teo%20Chee%20Hean%3B%20Fatimah%20Lateef%3B%20Lam%20Pin%20Min%3B%20Denise%20Phua%20Lay%20Peng%3B%20Zaqy%20Mohamad%3B%20K%20Karthikeyan%3B%20Janil%20Puthucheary%3B%20Gerald%20Giam%20Yean%20Song%3B%20Gan%20Kim%20Yong%3B%20Png%20Eng%20Huat%3B%20Gan%20Thiam%20Poh%3B%20Chia%20Yong%20Yong%3B%20Charles%20Chong%3B%20Hri%20Kumar%20Nair",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Ong%20Ye%20Kung%3B%20Wan%20Rizal",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Ong%20Ye%20Kung%3B%20Yip%20Hon%20Weng",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=S%20Jayakumar",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Yeo%20Guat%20Kwang%3B%20Tan%20Soo%20Khoon%3B%20Lim%20Hng%20Kiang%3B%20Lily%20Neo%3B%20Chiam%20See%20Tong",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill",
+    "https://hansard.098020.xyz/a/hg_…/search?q=bill",
+    "https://hansard.098020.xyz/a/hg_…/search?q=bill-intro",
+    "https://hansard.098020.xyz/a/hg_…/search?q=SUPPLY%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=INCOME%20TAX%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=CENTRAL%20PROVIDENT%20FUND%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=SUPPLEMENTARY%20SUPPLY%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=CONSTITUTION%20OF%20THE%20REPUBLIC%20OF%20SINGAPORE%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=ROAD%20TRAFFIC%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=BUDGET%2C%20MINISTRY%20OF%20HEALTH",
+    "https://hansard.098020.xyz/a/hg_…/search?q=LEGAL%20PROFESSION%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=HOUSING%20AND%20DEVELOPMENT%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=ECONOMIC%20EXPANSION%20INCENTIVES%20%28RELIEF%20FROM%20INCOME%20TAX%29%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=CUSTOMS%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Goods%20and%20Services%20Tax%20%28Amendment%29%20Bill",
+    "https://hansard.098020.xyz/a/hg_…/search?q=COMPANIES%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=CRIMINAL%20PROCEDURE%20CODE%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=STATUTES%20%28MISCELLANEOUS%20AMENDMENTS%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=CRIMINAL%20LAW%20%28TEMPORARY%20PROVISIONS%29%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=PARLIAMENTARY%20ELECTIONS%20%28AMENDMENT%29%20BILL",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=2&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=3&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=4&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=5&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=6&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=7&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=2&limit=50",
+    "https://hansard.098020.xyz/a/hg_…/",
+    "https://hansard.098020.xyz/a/hg_…/",
+    "https://hansard.098020.xyz/a/hg_…/",
+    "https://hansard.098020.xyz/a/hg_…/years",
+    "https://hansard.098020.xyz/a/hg_…/members",
+    "https://hansard.098020.xyz/a/hg_…/bills"
+  ],
+  "correspondence": [
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/",
+      "u_twin": true,
+      "u_index": 202
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/",
+      "u_twin": true,
+      "u_index": 202
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/years",
+      "u_twin": true,
+      "u_index": 203
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/members",
+      "u_twin": true,
+      "u_index": 204
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/bills",
+      "u_twin": true,
+      "u_index": 205
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=50&format=json",
+      "u_twin": true,
+      "u_index": 5
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=50&format=text",
+      "u_twin": true,
+      "u_index": 6
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/ministerial-statement-3030",
+      "u_twin": true,
+      "u_index": 7
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/written-answer-na-24828",
+      "u_twin": true,
+      "u_index": 8
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/oral-answer-4208",
+      "u_twin": true,
+      "u_index": 9
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/written-answer-24567",
+      "u_twin": true,
+      "u_index": 10
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-811",
+      "u_twin": true,
+      "u_index": 11
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/motion-3026",
+      "u_twin": true,
+      "u_index": 12
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/motion-3028",
+      "u_twin": true,
+      "u_index": 13
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-806",
+      "u_twin": true,
+      "u_index": 14
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/motion-3008",
+      "u_twin": true,
+      "u_index": 15
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-803",
+      "u_twin": true,
+      "u_index": 16
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-804",
+      "u_twin": true,
+      "u_index": 17
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/motion-2996",
+      "u_twin": true,
+      "u_index": 18
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-799",
+      "u_twin": true,
+      "u_index": 19
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/motion-2976",
+      "u_twin": true,
+      "u_index": 20
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-794",
+      "u_twin": true,
+      "u_index": 21
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-793",
+      "u_twin": true,
+      "u_index": 22
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-795",
+      "u_twin": true,
+      "u_index": 23
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-792",
+      "u_twin": true,
+      "u_index": 24
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-789",
+      "u_twin": true,
+      "u_index": 25
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/ministerial-statement-2952",
+      "u_twin": true,
+      "u_index": 26
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-785",
+      "u_twin": true,
+      "u_index": 27
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/budget-2928",
+      "u_twin": true,
+      "u_index": 28
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/budget-2930",
+      "u_twin": true,
+      "u_index": 29
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/budget-2914",
+      "u_twin": true,
+      "u_index": 30
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/budget-2915",
+      "u_twin": true,
+      "u_index": 31
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/budget-2916",
+      "u_twin": true,
+      "u_index": 32
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/budget-2913",
+      "u_twin": true,
+      "u_index": 33
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/budget-2907",
+      "u_twin": true,
+      "u_index": 34
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/written-answer-22461",
+      "u_twin": true,
+      "u_index": 35
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/budget-2895",
+      "u_twin": true,
+      "u_index": 36
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/budget-2893",
+      "u_twin": true,
+      "u_index": 37
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/budget-2883",
+      "u_twin": true,
+      "u_index": 38
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/budget-2876",
+      "u_twin": true,
+      "u_index": 39
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/budget-2867",
+      "u_twin": true,
+      "u_index": 40
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/budget-2857",
+      "u_twin": true,
+      "u_index": 41
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/oral-answer-4021",
+      "u_twin": true,
+      "u_index": 42
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/oral-answer-4023",
+      "u_twin": true,
+      "u_index": 43
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/written-answer-na-22080",
+      "u_twin": true,
+      "u_index": 44
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-781",
+      "u_twin": true,
+      "u_index": 45
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/atbp-04022026",
+      "u_twin": true,
+      "u_index": 46
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-780",
+      "u_twin": true,
+      "u_index": 47
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/written-answer-21746",
+      "u_twin": true,
+      "u_index": 48
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-776",
+      "u_twin": true,
+      "u_index": 49
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-773",
+      "u_twin": true,
+      "u_index": 50
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-772",
+      "u_twin": true,
+      "u_index": 51
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-774",
+      "u_twin": true,
+      "u_index": 52
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-775",
+      "u_twin": true,
+      "u_index": 53
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/written-answer-na-21199",
+      "u_twin": true,
+      "u_index": 54
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-intro-668",
+      "u_twin": true,
+      "u_index": 55
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-768",
+      "u_twin": true,
+      "u_index": 56
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/written-answer-18411",
+      "u_twin": true,
+      "u_index": 57
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/021_20071112_S0004_T0008",
+      "u_twin": true,
+      "u_index": 58
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/018_20070212_S0004_T0003",
+      "u_twin": true,
+      "u_index": 59
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-130",
+      "u_twin": true,
+      "u_index": 60
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-345",
+      "u_twin": true,
+      "u_index": 61
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/026_19980219_S0003_T0008",
+      "u_twin": true,
+      "u_index": 62
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/021_19990415_S0003_T0006",
+      "u_twin": true,
+      "u_index": 63
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-418",
+      "u_twin": true,
+      "u_index": 64
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-743",
+      "u_twin": true,
+      "u_index": 65
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-264",
+      "u_twin": true,
+      "u_index": 66
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/030_20010222_S0003_T0010",
+      "u_twin": true,
+      "u_index": 67
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/011_19680801_S0002_T0003",
+      "u_twin": true,
+      "u_index": 68
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/020_19681216_S0002_T0002",
+      "u_twin": true,
+      "u_index": 69
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/written-answer-na-20573",
+      "u_twin": true,
+      "u_index": 70
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/3_20080422_S0003_T0002",
+      "u_twin": true,
+      "u_index": 71
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/report/bill-350",
+      "u_twin": true,
+      "u_index": 72
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=50",
+      "u_twin": true,
+      "u_index": 192
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=100",
+      "u_twin": true,
+      "u_index": 74
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=200",
+      "u_twin": true,
+      "u_index": 75
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2026-01-01&to=2026-12-31",
+      "u_twin": true,
+      "u_index": 76
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2025-01-01&to=2025-12-31",
+      "u_twin": true,
+      "u_index": 77
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2024-01-01&to=2024-12-31",
+      "u_twin": true,
+      "u_index": 78
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2023-01-01&to=2023-12-31",
+      "u_twin": true,
+      "u_index": 79
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2022-01-01&to=2022-12-31",
+      "u_twin": true,
+      "u_index": 80
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2021-01-01&to=2021-12-31",
+      "u_twin": true,
+      "u_index": 81
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2020-01-01&to=2020-12-31",
+      "u_twin": true,
+      "u_index": 82
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2019-01-01&to=2019-12-31",
+      "u_twin": true,
+      "u_index": 83
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2018-01-01&to=2018-12-31",
+      "u_twin": true,
+      "u_index": 84
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2017-01-01&to=2017-12-31",
+      "u_twin": true,
+      "u_index": 85
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2016-01-01&to=2016-12-31",
+      "u_twin": true,
+      "u_index": 86
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2015-01-01&to=2015-12-31",
+      "u_twin": true,
+      "u_index": 87
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2014-01-01&to=2014-12-31",
+      "u_twin": true,
+      "u_index": 88
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2013-01-01&to=2013-12-31",
+      "u_twin": true,
+      "u_index": 89
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2012-01-01&to=2012-12-31",
+      "u_twin": true,
+      "u_index": 90
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2011-01-01&to=2011-12-31",
+      "u_twin": true,
+      "u_index": 91
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2010-01-01&to=2010-12-31",
+      "u_twin": true,
+      "u_index": 92
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2009-01-01&to=2009-12-31",
+      "u_twin": true,
+      "u_index": 93
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2008-01-01&to=2008-12-31",
+      "u_twin": true,
+      "u_index": 94
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2007-01-01&to=2007-12-31",
+      "u_twin": true,
+      "u_index": 95
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2006-01-01&to=2006-12-31",
+      "u_twin": true,
+      "u_index": 96
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2005-01-01&to=2005-12-31",
+      "u_twin": true,
+      "u_index": 97
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2004-01-01&to=2004-12-31",
+      "u_twin": true,
+      "u_index": 98
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2003-01-01&to=2003-12-31",
+      "u_twin": true,
+      "u_index": 99
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2002-01-01&to=2002-12-31",
+      "u_twin": true,
+      "u_index": 100
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2001-01-01&to=2001-12-31",
+      "u_twin": true,
+      "u_index": 101
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2000-01-01&to=2000-12-31",
+      "u_twin": true,
+      "u_index": 102
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1999-01-01&to=1999-12-31",
+      "u_twin": true,
+      "u_index": 103
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1998-01-01&to=1998-12-31",
+      "u_twin": true,
+      "u_index": 104
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1997-01-01&to=1997-12-31",
+      "u_twin": true,
+      "u_index": 105
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1996-01-01&to=1996-12-31",
+      "u_twin": true,
+      "u_index": 106
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1995-01-01&to=1995-12-31",
+      "u_twin": true,
+      "u_index": 107
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1994-01-01&to=1994-12-31",
+      "u_twin": true,
+      "u_index": 108
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1993-01-01&to=1993-12-31",
+      "u_twin": true,
+      "u_index": 109
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1992-01-01&to=1992-12-31",
+      "u_twin": true,
+      "u_index": 110
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1991-01-01&to=1991-12-31",
+      "u_twin": true,
+      "u_index": 111
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1990-01-01&to=1990-12-31",
+      "u_twin": true,
+      "u_index": 112
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1989-01-01&to=1989-12-31",
+      "u_twin": true,
+      "u_index": 113
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1988-01-01&to=1988-12-31",
+      "u_twin": true,
+      "u_index": 114
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1987-01-01&to=1987-12-31",
+      "u_twin": true,
+      "u_index": 115
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1986-01-01&to=1986-12-31",
+      "u_twin": true,
+      "u_index": 116
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1985-01-01&to=1985-12-31",
+      "u_twin": true,
+      "u_index": 117
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1984-01-01&to=1984-12-31",
+      "u_twin": true,
+      "u_index": 118
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1983-01-01&to=1983-12-31",
+      "u_twin": true,
+      "u_index": 119
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1982-01-01&to=1982-12-31",
+      "u_twin": true,
+      "u_index": 120
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1981-01-01&to=1981-12-31",
+      "u_twin": true,
+      "u_index": 121
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1980-01-01&to=1980-12-31",
+      "u_twin": true,
+      "u_index": 122
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1979-01-01&to=1979-12-31",
+      "u_twin": true,
+      "u_index": 123
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1978-01-01&to=1978-12-31",
+      "u_twin": true,
+      "u_index": 124
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1977-01-01&to=1977-12-31",
+      "u_twin": true,
+      "u_index": 125
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1976-01-01&to=1976-12-31",
+      "u_twin": true,
+      "u_index": 126
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1975-01-01&to=1975-12-31",
+      "u_twin": true,
+      "u_index": 127
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1974-01-01&to=1974-12-31",
+      "u_twin": true,
+      "u_index": 128
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1973-01-01&to=1973-12-31",
+      "u_twin": true,
+      "u_index": 129
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1972-01-01&to=1972-12-31",
+      "u_twin": true,
+      "u_index": 130
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1971-01-01&to=1971-12-31",
+      "u_twin": true,
+      "u_index": 131
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1970-01-01&to=1970-12-31",
+      "u_twin": true,
+      "u_index": 132
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1969-01-01&to=1969-12-31",
+      "u_twin": true,
+      "u_index": 133
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1968-01-01&to=1968-12-31",
+      "u_twin": true,
+      "u_index": 134
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1967-01-01&to=1967-12-31",
+      "u_twin": true,
+      "u_index": 135
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1966-01-01&to=1966-12-31",
+      "u_twin": true,
+      "u_index": 136
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1965-01-01&to=1965-12-31",
+      "u_twin": true,
+      "u_index": 137
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1964-01-01&to=1964-12-31",
+      "u_twin": true,
+      "u_index": 138
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1963-01-01&to=1963-12-31",
+      "u_twin": true,
+      "u_index": 139
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1962-01-01&to=1962-12-31",
+      "u_twin": true,
+      "u_index": 140
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1961-01-01&to=1961-12-31",
+      "u_twin": true,
+      "u_index": 141
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1960-01-01&to=1960-12-31",
+      "u_twin": true,
+      "u_index": 142
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1959-01-01&to=1959-12-31",
+      "u_twin": true,
+      "u_index": 143
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1958-01-01&to=1958-12-31",
+      "u_twin": true,
+      "u_index": 144
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1957-01-01&to=1957-12-31",
+      "u_twin": true,
+      "u_index": 145
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1956-01-01&to=1956-12-31",
+      "u_twin": true,
+      "u_index": 146
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1955-01-01&to=1955-12-31",
+      "u_twin": true,
+      "u_index": 147
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2020-01-01&to=2029-12-31",
+      "u_twin": true,
+      "u_index": 148
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2010-01-01&to=2019-12-31",
+      "u_twin": true,
+      "u_index": 149
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=2000-01-01&to=2009-12-31",
+      "u_twin": true,
+      "u_index": 150
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1990-01-01&to=1999-12-31",
+      "u_twin": true,
+      "u_index": 151
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1980-01-01&to=1989-12-31",
+      "u_twin": true,
+      "u_index": 152
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1970-01-01&to=1979-12-31",
+      "u_twin": true,
+      "u_index": 153
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1960-01-01&to=1969-12-31",
+      "u_twin": true,
+      "u_index": 154
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&from_=1950-01-01&to=1959-12-31",
+      "u_twin": true,
+      "u_index": 155
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Chia%20Shi-Lu%3B%20Lam%20Pin%20Min%3B%20Murali%20Pillai%3B%20Louis%20Ng%20Kok%20Kwang%3B%20Irene%20Quay%20Siew%20Ching%3B%20Lee%20Bee%20Wah%3B%20Fatimah%20Lateef",
+      "u_twin": true,
+      "u_index": 156
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Chia%20Shi-Lu%3B%20Sylvia%20Lim%3B%20Murali%20Pillai%3B%20Louis%20Ng%20Kok%20Kwang%3B%20Edwin%20Tong%20Chun%20Fai%3B%20Gan%20Thiam%20Poh%3B%20Christopher%20De%20Souza%3B%20Irene%20Quay%20Siew%20Ching%3B%20Leon%20Perera%3B%20Lee%20Bee%20Wah%3B%20Joan%20Pereira%3B%20Lim%20Biow%20Chuan%3B%20Fatimah%20Lateef%3B%20Melvin%20Yong%20Yik%20Chye",
+      "u_twin": true,
+      "u_index": 157
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Chua%20Sian%20Chin%3B%20Chan%20Choy%20Siong%3B%20Yeoh%20Ghim%20Seng%3B%20L%20P%20Rodrigo%3B%20Teong%20Eng%20Siong%3B%20J%20F%20Conceicao",
+      "u_twin": true,
+      "u_index": 158
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Chua%20Sian%20Chin%3B%20Ho%20Kah%20Leong%3B%20Hwang%20Soo%20Jin%3B%20Yeoh%20Ghim%20Seng%3B%20P%20Selvadurai%3B%20L%20P%20Rodrigo%3B%20Ch%27Ng%20Jit%20Koon%3B%20Lee%20Teck%20Him%3B%20P%20Coomaraswamy",
+      "u_twin": true,
+      "u_index": 159
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Claire%20Chiang%20See%20Ngoh%3B%20Lily%20Neo%3B%20Aline%20K%20Wong%3B%20Tan%20Soo%20Khoon",
+      "u_twin": true,
+      "u_index": 160
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Dennis%20Tan%20Lip%20Fong%3B%20Chia%20Shi-Lu%3B%20Lim%20Sun%20Sun%3B%20Gan%20Thiam%20Poh%3B%20Louis%20Ng%20Kok%20Kwang%3B%20Edwin%20Tong%20Chun%20Fai%3B%20Lee%20Bee%20Wah%3B%20Fatimah%20Lateef",
+      "u_twin": true,
+      "u_index": 161
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Ganesh%20Rajaram%3B%20Pritam%20Singh%3B%20Daniel%20Goh%20Pei%20Siong%3B%20Azmoon%20Ahmad%3B%20Christopher%20De%20Souza%3B%20Zaqy%20Mohamad%3B%20K%20Thanaletchimi%3B%20Darryl%20David%3B%20Kwek%20Hian%20Chuan%20Henry%3B%20Joan%20Pereira",
+      "u_twin": true,
+      "u_index": 162
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Lam%20Pin%20Min%3B%20Chiam%20See%20Tong%3B%20Abdullah%20Bin%20Tarmugi%3B%20Thio%20Li-Ann%3B%20Khaw%20Boon%20Wan%3B%20Sam%20Tan%20Chin%20Siong%3B%20Fatimah%20Lateef%3B%20Halimah%20Yacob",
+      "u_twin": true,
+      "u_index": 163
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Lam%20Pin%20Min%3B%20Khaw%20Boon%20Wan%3B%20Sam%20Tan%20Chin%20Siong%3B%20Fatimah%20Lateef%3B%20Halimah%20Yacob",
+      "u_twin": true,
+      "u_index": 164
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Lam%20Pin%20Min%3B%20Sylvia%20Lim%3B%20Abdullah%20Bin%20Tarmugi%3B%20Thio%20Li-Ann%3B%20Khaw%20Boon%20Wan%3B%20Fatimah%20Lateef%3B%20Halimah%20Yacob",
+      "u_twin": true,
+      "u_index": 165
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Leong%20Mun%20Wai%3B%20Tan%20See%20Leng%3B%20Patrick%20Tay%20Teck%20Guan%3B%20Louis%20Ng%20Kok%20Kwang%3B%20Pritam%20Singh%3B%20Seah%20Kian%20Peng",
+      "u_twin": true,
+      "u_index": 166
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Lim%20Wee%20Kiak%3B%20Penny%20Low%3B%20Jessica%20Tan%20Soon%20Neo%3B%20Lee%20Bee%20Wah%3B%20Alex%20Yam%20Ziming%3B%20Lina%20Chiam%3B%20Halimah%20Yacob%3B%20Chia%20Shi-Lu%3B%20Baey%20Yam%20Keng%3B%20Ang%20Wei%20Neng%3B%20Tin%20Pei%20Ling%3B%20Ellen%20Lee%3B%20Amy%20Khor%20Lean%20Suan%3B%20Lily%20Neo%3B%20Lee%20Li%20Lian%3B%20Teo%20Chee%20Hean%3B%20Fatimah%20Lateef%3B%20Lam%20Pin%20Min%3B%20Denise%20Phua%20Lay%20Peng%3B%20Zaqy%20Mohamad%3B%20K%20Karthikeyan%3B%20Janil%20Puthucheary%3B%20Gerald%20Giam%20Yean%20Song%3B%20Gan%20Kim%20Yong%3B%20Png%20Eng%20Huat%3B%20Gan%20Thiam%20Poh%3B%20Chia%20Yong%20Yong%3B%20Charles%20Chong%3B%20Hri%20Kumar%20Nair",
+      "u_twin": true,
+      "u_index": 167
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Ong%20Ye%20Kung%3B%20Wan%20Rizal",
+      "u_twin": true,
+      "u_index": 168
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Ong%20Ye%20Kung%3B%20Yip%20Hon%20Weng",
+      "u_twin": true,
+      "u_index": 169
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=S%20Jayakumar",
+      "u_twin": true,
+      "u_index": 170
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&speaker=Yeo%20Guat%20Kwang%3B%20Tan%20Soo%20Khoon%3B%20Lim%20Hng%20Kiang%3B%20Lily%20Neo%3B%20Chiam%20See%20Tong",
+      "u_twin": true,
+      "u_index": 171
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill",
+      "u_twin": true,
+      "u_index": 172
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=bill",
+      "u_twin": true,
+      "u_index": 173
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=bill-intro",
+      "u_twin": true,
+      "u_index": 174
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=SUPPLY%20BILL",
+      "u_twin": true,
+      "u_index": 175
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=INCOME%20TAX%20%28AMENDMENT%29%20BILL",
+      "u_twin": true,
+      "u_index": 176
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=CENTRAL%20PROVIDENT%20FUND%20%28AMENDMENT%29%20BILL",
+      "u_twin": true,
+      "u_index": 177
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=SUPPLEMENTARY%20SUPPLY%20BILL",
+      "u_twin": true,
+      "u_index": 178
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=CONSTITUTION%20OF%20THE%20REPUBLIC%20OF%20SINGAPORE%20%28AMENDMENT%29%20BILL",
+      "u_twin": true,
+      "u_index": 179
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=ROAD%20TRAFFIC%20%28AMENDMENT%29%20BILL",
+      "u_twin": true,
+      "u_index": 180
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=BUDGET%2C%20MINISTRY%20OF%20HEALTH",
+      "u_twin": true,
+      "u_index": 181
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=LEGAL%20PROFESSION%20%28AMENDMENT%29%20BILL",
+      "u_twin": true,
+      "u_index": 182
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=HOUSING%20AND%20DEVELOPMENT%20%28AMENDMENT%29%20BILL",
+      "u_twin": true,
+      "u_index": 183
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=ECONOMIC%20EXPANSION%20INCENTIVES%20%28RELIEF%20FROM%20INCOME%20TAX%29%20%28AMENDMENT%29%20BILL",
+      "u_twin": true,
+      "u_index": 184
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=CUSTOMS%20%28AMENDMENT%29%20BILL",
+      "u_twin": true,
+      "u_index": 185
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Goods%20and%20Services%20Tax%20%28Amendment%29%20Bill",
+      "u_twin": true,
+      "u_index": 186
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=COMPANIES%20%28AMENDMENT%29%20BILL",
+      "u_twin": true,
+      "u_index": 187
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=CRIMINAL%20PROCEDURE%20CODE%20%28AMENDMENT%29%20BILL",
+      "u_twin": true,
+      "u_index": 188
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=STATUTES%20%28MISCELLANEOUS%20AMENDMENTS%29%20BILL",
+      "u_twin": true,
+      "u_index": 189
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=CRIMINAL%20LAW%20%28TEMPORARY%20PROVISIONS%29%20%28AMENDMENT%29%20BILL",
+      "u_twin": true,
+      "u_index": 190
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=PARLIAMENTARY%20ELECTIONS%20%28AMENDMENT%29%20BILL",
+      "u_twin": true,
+      "u_index": 191
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=50",
+      "u_twin": true,
+      "u_index": 192
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=2&limit=50",
+      "u_twin": true,
+      "u_index": 199
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=3&limit=50",
+      "u_twin": true,
+      "u_index": 194
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=4&limit=50",
+      "u_twin": true,
+      "u_index": 195
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=5&limit=50",
+      "u_twin": true,
+      "u_index": 196
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=6&limit=50",
+      "u_twin": true,
+      "u_index": 197
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=7&limit=50",
+      "u_twin": true,
+      "u_index": 198
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&page=2&limit=50",
+      "u_twin": true,
+      "u_index": 199
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/",
+      "u_twin": true,
+      "u_index": 202
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/",
+      "u_twin": true,
+      "u_index": 202
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/",
+      "u_twin": true,
+      "u_index": 202
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/years",
+      "u_twin": true,
+      "u_index": 203
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/members",
+      "u_twin": true,
+      "u_index": 204
+    },
+    {
+      "href": "https://hansard.098020.xyz/a/hg_…/bills",
+      "u_twin": true,
+      "u_index": 205
+    }
+  ],
+  "counts": {
+    "total_anchors": 206,
+    "absolute_anchors": 206,
+    "u_spans": 206
+  },
+  "nav_strip": 2,
+  "format_links": {
+    "json": [
+      "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=50&format=json"
+    ],
+    "text": [
+      "https://hansard.098020.xyz/a/hg_…/search?q=Health%20Information%20Bill&limit=50&format=text"
+    ]
+  },
+  "byte_size": 105931,
+  "meta": {
+    "entry": "search_hib_p1",
+    "route": "/search?q=Health%20Information%20Bill",
+    "source": "live",
+    "token_shape": "hg_…(live, redacted)",
+    "html_sha256": "e91cd564bf05ec83d29097d7fc2d85f3874707986ecf759ed36f613d80d73ad2",
+    "text_sha256": "4adb8467c9bc2b0c94c708e987b711ab69ca5cc5bc7606eb4e1c47c713c1990e",
+    "text_bytes": 12870,
+    "base_url": "https://hansard.098020.xyz"
+  }
+}

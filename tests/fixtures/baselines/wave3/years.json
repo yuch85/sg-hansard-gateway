@@ -1,0 +1,187 @@
+{
+  "hrefs": [
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills",
+    "https://hansard.example.org/a/hg_…/year/2025",
+    "https://hansard.example.org/a/hg_…/year/2024",
+    "https://hansard.example.org/a/hg_…/year/2023",
+    "https://hansard.example.org/a/hg_…/year/2020",
+    "https://hansard.example.org/a/hg_…/year/2001",
+    "https://hansard.example.org/a/hg_…/year/1988",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years?format=json",
+    "https://hansard.example.org/a/hg_…/years?format=text",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills"
+  ],
+  "anchor_texts": [
+    "Home",
+    "Find a topic A-Z",
+    "Years",
+    "Members",
+    "Bills",
+    "2025",
+    "2024",
+    "2023",
+    "2020",
+    "2001",
+    "1988",
+    "Back to the launcher",
+    "This page as JSON",
+    "This page as text",
+    "Home",
+    "Find a topic A-Z",
+    "Years",
+    "Members",
+    "Bills"
+  ],
+  "u_texts": [
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills",
+    "https://hansard.example.org/a/hg_…/year/2025",
+    "https://hansard.example.org/a/hg_…/year/2024",
+    "https://hansard.example.org/a/hg_…/year/2023",
+    "https://hansard.example.org/a/hg_…/year/2020",
+    "https://hansard.example.org/a/hg_…/year/2001",
+    "https://hansard.example.org/a/hg_…/year/1988",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years?format=json",
+    "https://hansard.example.org/a/hg_…/years?format=text",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills"
+  ],
+  "correspondence": [
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 15
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 15
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/years",
+      "u_twin": true,
+      "u_index": 16
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members",
+      "u_twin": true,
+      "u_index": 17
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/bills",
+      "u_twin": true,
+      "u_index": 18
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/year/2025",
+      "u_twin": true,
+      "u_index": 5
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/year/2024",
+      "u_twin": true,
+      "u_index": 6
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/year/2023",
+      "u_twin": true,
+      "u_index": 7
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/year/2020",
+      "u_twin": true,
+      "u_index": 8
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/year/2001",
+      "u_twin": true,
+      "u_index": 9
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/year/1988",
+      "u_twin": true,
+      "u_index": 10
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 15
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/years?format=json",
+      "u_twin": true,
+      "u_index": 12
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/years?format=text",
+      "u_twin": true,
+      "u_index": 13
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 15
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 15
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/years",
+      "u_twin": true,
+      "u_index": 16
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members",
+      "u_twin": true,
+      "u_index": 17
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/bills",
+      "u_twin": true,
+      "u_index": 18
+    }
+  ],
+  "counts": {
+    "total_anchors": 19,
+    "absolute_anchors": 19,
+    "u_spans": 19
+  },
+  "nav_strip": 2,
+  "format_links": {
+    "json": [
+      "https://hansard.example.org/a/hg_…/years?format=json"
+    ],
+    "text": [
+      "https://hansard.example.org/a/hg_…/years?format=text"
+    ]
+  },
+  "byte_size": 11475,
+  "meta": {
+    "entry": "years",
+    "route": "/years",
+    "source": "offline",
+    "token_shape": "hg_…(offline test token)",
+    "html_sha256": "073fa1bbf5fe1c38fe93c74b1b1b3fc7f0e6a5fe08d967ba6ca1ec859ba16146",
+    "text_sha256": "9352ac431b4d2a88157625341cf54eadd5a8fd5c9427a89b73f1a82c035239b3",
+    "text_bytes": 633,
+    "base_url": "https://hansard.example.org"
+  }
+}
