@@ -408,7 +408,9 @@ def test_report_sha_footer_and_provenance(client_with_index: TestClient) -> None
     assert r.status_code == 200
     assert "Transcript SHA-256" in r.text
     assert 'rel="noopener noreferrer"' in r.text
-    assert "Official SPRS sitting record" in r.text
+    assert "Official SPRS record" in r.text
+    # Mission 008: the provenance URL points at the SECTION route
+    assert "#/topic?reportid=" in r.text
 
 
 def test_cache_split_headers(client_with_index: TestClient) -> None:

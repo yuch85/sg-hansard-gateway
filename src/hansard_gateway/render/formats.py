@@ -52,7 +52,7 @@ def render_report_format(*, report: HansardReport, fmt: str, token: str) -> str:
         f"Date: {report.date.isoformat()}",
         f"Report ID: {report.report_id}",
         f"Source: Singapore Parliamentary Reports",
-        f"Official SPRS sitting record: {report.source_url}",
+        f"Official SPRS record: {report.source_url}",
         f"Gateway URL: /a/{token}/report/{report.report_id}",
         "",
     ]

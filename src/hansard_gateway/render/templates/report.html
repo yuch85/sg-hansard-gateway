@@ -45,11 +45,11 @@
     <dd>Singapore Parliamentary Reports</dd>
     <dt>Retrieved</dt>
     <dd>{{ retrieved }}</dd>
-    <dt>Official SPRS sitting record</dt>
+    <dt>Official SPRS record</dt>
     <dd>
       <a href="{{ report.source_url }}" rel="noopener noreferrer">{{ report.source_url }}</a>
       <span class="u">{{ report.source_url }}</span>
-      <small>(the sitting this report belongs to — SPRS has no public per-report page; the topic id <code>{{ report.report_id }}</code> is the gateway's)</small>
+      <small>(this section on the official site — opens in a normal browser; the id <code>{{ report.report_id }}</code> is the gateway's)</small>
     </dd>
   </dl>
   <p><code>Transcript SHA-256: {{ report.transcript_sha256 }}</code></p>
@@ -66,7 +66,7 @@
   </section>
   <footer>
     <p>Retrieved live from Singapore Parliamentary Reports.</p>
-    <p><a href="{{ report.source_url }}" rel="noopener noreferrer">Official SPRS sitting record</a>
+    <p><a href="{{ report.source_url }}" rel="noopener noreferrer">Official SPRS record</a>
     <span class="u">{{ report.source_url }}</span></p>
     <p>
       This report as:

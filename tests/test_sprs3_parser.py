@@ -115,14 +115,14 @@ def test_metadata_fields(fixtures_dir: Path) -> None:
 
 
 def test_source_url_no_token(fixtures_dir: Path) -> None:
-    """The provenance URL is the official SPRS sitting record, no token.
+    """The provenance URL is the official SPRS SECTION record, no token.
 
-    sprs3 (post-2012) sits land on the SPA's #/fullreport route with the
-    sitting date (the /hansard/<id> scheme 404s — SPRS is an SPA with no
-    public per-report URL; verified live 2026-09-19).
+    Mission 008 (verified in a real browser 2026-09-20): live ids land on
+    the SPA's #/sprs3topic route with the reportId — the section page,
+    not the full sitting.
     """
     report = _report(fixtures_dir)
     assert report.source_url == (
-        "https://sprs.parl.gov.sg/search/#/fullreport?sittingdate=8-01-2025"
+        "https://sprs.parl.gov.sg/search/#/sprs3topic?reportid=bill-742"
     )
     assert "hg_" not in report.source_url

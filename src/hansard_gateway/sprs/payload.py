@@ -9,7 +9,9 @@ the parsers consume, and ``parse_topic`` branches on ``reportVersion``.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
+from datetime import date
 from typing import Any, Callable, Optional
 
 from hansard_gateway.models import HansardReport
@@ -57,42 +59,84 @@ def _opt_str(value: Any) -> Optional[str]:
     return text or None
 
 
-#: SPRS is an Angular SPA: its only real page is ``/search/``. A sitting's
-#: official record IS addressable, though — the app's own "show full report"
-#: flow opens the pre-2013 silo at ``#/report?sittingdate=<D-M-YYYY>`` and the
-#: post-2012 silo at ``#/fullreport?sittingdate=<D-M-YYYY>`` (verified live
-#: 2026-09-19: both routes render the full sitting transcript). There is NO
-#: public per-REPORT (topic) URL — a topic is reachable only via an in-app
-#: search. ``/hansard/<id>`` (the former scheme) 404s.
+#: SPRS is an Angular SPA: its only real page is ``/search/``. Two kinds of
+#: official page are addressable (both verified in a real browser
+#: 2026-09-20, mission 008):
+#:
+#: * SECTION routes — the topic the gateway's report page shows, on its own:
+#:   legacy ``#/topic?reportid=<htmlFileName>`` (pre-2015 ids) and modern
+#:   ``#/sprs3topic?reportid=<reportId>`` (live ids such as ``bill-773``).
+#:   These are the URLs SPRS's own search results link to.
+#: * FULL-SITTING routes — the app's "view in full" flow: pre-2013 silo
+#:   ``#/report?sittingdate=<D-M-YYYY>``, post-2012 silo
+#:   ``#/fullreport?sittingdate=<D-M-YYYY>`` (fallback only).
+#:
+#: ``/hansard/<id>`` (the former scheme) 404s.
+_SPRS2_TOPIC_ROUTE = "/search/#/topic"
+_SPRS3_TOPIC_ROUTE = "/search/#/sprs3topic"
 _SPRS2_REPORT_ROUTE = "/search/#/report"
 _SPRS3_REPORT_ROUTE = "/search/#/fullreport"
 #: Sitting dates strictly after this one live in the sprs3 silo (SPRS SPA
 #: boundary, 2012-09-10).
 _SPRS3_BOUNDARY_ISO = "2012-09-10"
 
+#: Spec-style ``htmlFileName`` grammar (D-02), e.g. ``026_19950301_S0002_T0009``.
+#: The ``_S{N}_T{N}`` suffix makes the era unambiguous from the id alone, and
+#: the embedded 8 digits are the sitting date.
+_SPEC_STYLE_ID_RE = re.compile(r"^\d{1,6}_(\d{8})_S\d+_T\d+$")
+
+
+def _spec_style_id_info(report_id: str) -> tuple[str, str] | None:
+    """(id, sitting ISO date) for a spec-style id, else ``None``.
+
+    The embedded date is the SITTING date (``026_19950301_…`` →
+    ``1995-03-01``) — the same date the sprs2 ``Sit_Date`` meta carries.
+    """
+    m = _SPEC_STYLE_ID_RE.match(report_id)
+    if m is None:
+        return None
+    raw = m.group(1)
+    iso = f"{raw[0:4]}-{raw[4:6]}-{raw[6:8]}"
+    try:
+        date.fromisoformat(iso)
+    except ValueError:
+        return None
+    return report_id, iso
+
 
 def topic_source_url(*, report_id: str, sitting_date_iso: str) -> str:
-    """Official public SPRS sitting-record URL for provenance (spec §13).
+    """Official public SPRS SECTION URL for provenance (spec §13).
 
-    Points at the SPA sitting route for the sitting the report belongs to
-    (pre-2013 ``#/report``, post-2012 ``#/fullreport``). Uses the public base
+    Points at the SPA topic route that renders THIS report's section — not
+    the whole sitting: legacy ids (``026_19950301_S0002_T0009``) at
+    ``#/topic?reportid=<id>``, live ids (``bill-773``) at
+    ``#/sprs3topic?reportid=<id>`` (mission 008). Uses the public base
     (config), NOT the ``/search`` API base, and carries no capability token.
-    ``sitting_date_iso`` must be the report's sitting date as ISO ``YYYY-MM-DD``.
-    """
-    from datetime import date as _date
 
+    Fallback: an id that matches neither era's topic route (unknown shape +
+    unparsable sitting date) degrades to the full-sitting route for the
+    pre-2013 silo — the pre-mission-008 behaviour, still an official page.
+    """
     from hansard_gateway.config import settings as _settings
 
-    d = _date.fromisoformat(sitting_date_iso)
+    base = _settings.upstream_public_base
+
+    spec = _spec_style_id_info(report_id)
+    if spec is not None:
+        html_file, _iso = spec
+        return f"{base}{_SPRS2_TOPIC_ROUTE}?reportid={html_file}"
+
+    try:
+        date.fromisoformat(sitting_date_iso)
+    except ValueError:
+        return f"{base}{_SPRS2_REPORT_ROUTE}?sittingdate=1-01-0001"
+
     route = (
-        _SPRS3_REPORT_ROUTE
+        _SPRS3_TOPIC_ROUTE
         if sitting_date_iso > _SPRS3_BOUNDARY_ISO
-        else _SPRS2_REPORT_ROUTE
+        else _SPRS2_TOPIC_ROUTE
     )
-    return (
-        f"{_settings.upstream_public_base}{route}"
-        f"?sittingdate={d.day}-{d.month:02d}-{d.year}"
-    )
+    return f"{base}{route}?reportid={report_id}"
 
 
 def from_result_html(
