@@ -5,7 +5,7 @@
 
   {% if terms %}
   <h2>Topics</h2>
-  <ul>
+  <ul class="term-columns">
     {% for t in terms %}
     <li>
       <a href="{{ search_url(t.surface) }}">{{ t.surface }}</a>
@@ -26,6 +26,7 @@
   {% endif %}
 
   {% if children %}
+  <section class="narrow-further">
   <h2>Narrow further</h2>
   <ul>
     {% for c in children %}
@@ -41,6 +42,7 @@
     {% endif %}
     {% endfor %}
   </ul>
+  </section>
   {% endif %}
 
   <h2>Navigation</h2>

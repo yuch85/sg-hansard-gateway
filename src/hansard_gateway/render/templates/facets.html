@@ -4,7 +4,7 @@
   <h1>{{ heading }}</h1>
 
   {% if entries %}
-  <ul>
+  <ul class="card-grid">
     {% for e in entries %}
     <li>
       <a href="{{ e.url }}">{{ e.label }}</a>

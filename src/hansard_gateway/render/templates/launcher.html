@@ -10,7 +10,7 @@
   </p>
 
   <h2>Find a topic by word</h2>
-  <ul>
+  <ul class="letter-grid">
     {% for c in alphabet %}
     <li>
       <a href="{{ nav_url(c) }}">{{ c }}</a>
@@ -20,7 +20,7 @@
   </ul>
 
   <h2>Common topics</h2>
-  <ul>
+  <ul class="card-grid">
     {% for surface, doc_count in common_terms %}
     <li>
       <a href="{{ search_url(surface) }}">{{ surface }}</a>
@@ -30,7 +30,7 @@
   </ul>
 
   <h2>Recent sittings</h2>
-  <ul>
+  <ul class="card-grid">
     {% for day in recent_sittings %}
     <li>
       <a href="{{ date_url(day) }}">{{ day }}</a>
@@ -40,7 +40,7 @@
   </ul>
 
   <h2>Browse</h2>
-  <ul>
+  <ul class="card-grid">
     <li>
       <a href="{{ years_url }}">Browse by year</a>
       <span class="u">{{ years_url }}</span>

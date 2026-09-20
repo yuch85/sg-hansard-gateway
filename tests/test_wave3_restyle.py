@@ -282,6 +282,60 @@ def test_nonreport_budgets_hold(
 # --------------------------------------------------------------------------- #
 
 
+def test_launcher_layout_classes_present(
+    client_with_index: TestClient,
+) -> None:
+    """The launcher: two-column letter ladder + common-topics card grid +
+    recent-sittings grid (DOM order of every anchor unchanged — proven by
+    the zero-diff test; the classes only reposition visually)."""
+    html, _ = _render(client_with_index, _corpus_entry("launcher"))
+    assert 'class="letter-grid"' in html, (
+        "launcher: the two-column letter ladder class is missing"
+    )
+    assert 'class="card-grid"' in html, (
+        "launcher: the card grid class is missing"
+    )
+
+
+def test_nav_layout_classes_present(
+    client_with_index: TestClient,
+) -> None:
+    """The nav (letter) page: two-column term list + the sticky
+    narrow-further band (CSS only — the existing child links untouched)."""
+    html, _ = _render(client_with_index, _corpus_entry("nav_h"))
+    assert 'class="term-columns"' in html, (
+        "nav: the two-column term list class is missing"
+    )
+    assert 'class="narrow-further"' in html, (
+        "nav: the sticky narrow-further band class is missing"
+    )
+
+
+def test_facet_layout_classes_present(
+    client_with_index: TestClient,
+) -> None:
+    """The facet pages (years / members / bills share facets.html): card
+    grid for the entries list (DOM order kept — zero-diff proves it)."""
+    for name in ("years", "members", "bills"):
+        html, _ = _render(client_with_index, _corpus_entry(name))
+        assert 'class="card-grid"' in html, (
+            f"{name}: the facet card grid class is missing"
+        )
+
+
+def test_date_layout_classes_present(
+    client_with_index: TestClient,
+) -> None:
+    """The date page: card grid for the sitting-reports list (each li a
+    card: title + section dl; DOM order kept — zero-diff proves it)."""
+    html, _ = _render(client_with_index, _corpus_entry("date_2026-01-12"))
+    assert 'class="card-grid"' in html, (
+        "date: the sitting-reports card grid class is missing"
+    )
+
+
+
+
 def test_search_layout_classes_present(
     client_with_index: TestClient,
 ) -> None:

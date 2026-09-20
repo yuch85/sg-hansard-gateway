@@ -106,16 +106,16 @@ WAVE3_BASE_CSS_DELTA = 2002
 WAVE3_TEMPLATE_WHITESPACE = 0
 #: The per-entry growth BEYOND the shared base.html CSS delta (the 6058 B
 #: total per offline page minus Wave-1 604 + Wave-2 3452 + Wave-3 2002 =
-#: 0 — the layout wrappers are in base.html, not the page templates, so the
-#: per-entry map is all zeros at the Task-1 boundary; Task 2 extends it as
-#: the page templates gain their own class attributes).
+#: measured per entry at the Task-2 boundary — the class attributes the
+#: page templates gain (letter-grid / card-grid / term-columns /
+#: narrow-further wrappers).
 WAVE3_ENTRY_CLASS_DELTAS = {
-    "launcher": 0,
-    "nav_h": 0,
-    "years": 0,
-    "members": 0,
-    "bills": 0,
-    "date_2026-01-12": 0,
+    "launcher": 74,
+    "nav_h": 69,
+    "years": 18,
+    "members": 18,
+    "bills": 18,
+    "date_2026-01-12": 18,
 }
 
 #: The surface fields compared for FULL equality on offline entries.

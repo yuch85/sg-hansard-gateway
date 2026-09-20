@@ -38,7 +38,7 @@
     <span class="u">{{ text_url }}</span>
   </p>
   {% if hits %}
-  <ol>
+  <ol class="card-grid">
     {% for hit in hits %}
     <li>
       <a href="{{ report_url(hit.link_id) }}">{{ hit.title }}</a>
