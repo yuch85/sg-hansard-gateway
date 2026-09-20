@@ -1,0 +1,601 @@
+{
+  "hrefs": [
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills",
+    "https://hansard.example.org/a/hg_…/nav/a",
+    "https://hansard.example.org/a/hg_…/nav/b",
+    "https://hansard.example.org/a/hg_…/nav/c",
+    "https://hansard.example.org/a/hg_…/nav/d",
+    "https://hansard.example.org/a/hg_…/nav/e",
+    "https://hansard.example.org/a/hg_…/nav/f",
+    "https://hansard.example.org/a/hg_…/nav/g",
+    "https://hansard.example.org/a/hg_…/nav/h",
+    "https://hansard.example.org/a/hg_…/nav/i",
+    "https://hansard.example.org/a/hg_…/nav/j",
+    "https://hansard.example.org/a/hg_…/nav/k",
+    "https://hansard.example.org/a/hg_…/nav/l",
+    "https://hansard.example.org/a/hg_…/nav/m",
+    "https://hansard.example.org/a/hg_…/nav/n",
+    "https://hansard.example.org/a/hg_…/nav/o",
+    "https://hansard.example.org/a/hg_…/nav/p",
+    "https://hansard.example.org/a/hg_…/nav/q",
+    "https://hansard.example.org/a/hg_…/nav/r",
+    "https://hansard.example.org/a/hg_…/nav/s",
+    "https://hansard.example.org/a/hg_…/nav/t",
+    "https://hansard.example.org/a/hg_…/nav/u",
+    "https://hansard.example.org/a/hg_…/nav/v",
+    "https://hansard.example.org/a/hg_…/nav/w",
+    "https://hansard.example.org/a/hg_…/nav/x",
+    "https://hansard.example.org/a/hg_…/nav/y",
+    "https://hansard.example.org/a/hg_…/nav/z",
+    "https://hansard.example.org/a/hg_…/nav/0",
+    "https://hansard.example.org/a/hg_…/nav/1",
+    "https://hansard.example.org/a/hg_…/nav/2",
+    "https://hansard.example.org/a/hg_…/nav/3",
+    "https://hansard.example.org/a/hg_…/nav/4",
+    "https://hansard.example.org/a/hg_…/nav/5",
+    "https://hansard.example.org/a/hg_…/nav/6",
+    "https://hansard.example.org/a/hg_…/nav/7",
+    "https://hansard.example.org/a/hg_…/nav/8",
+    "https://hansard.example.org/a/hg_…/nav/9",
+    "https://hansard.example.org/a/hg_…/search?q=oral-answer",
+    "https://hansard.example.org/a/hg_…/search?q=bill",
+    "https://hansard.example.org/a/hg_…/search?q=written-answer",
+    "https://hansard.example.org/a/hg_…/search?q=Economic%20Recovery%20and%20Jobs",
+    "https://hansard.example.org/a/hg_…/search?q=Fisheries%20and%20Marine%20Policy",
+    "https://hansard.example.org/a/hg_…/search?q=Government%20Accounting%20and%20Audit",
+    "https://hansard.example.org/a/hg_…/search?q=Health%20Information",
+    "https://hansard.example.org/a/hg_…/search?q=Tan%20Chun%20Seng",
+    "https://hansard.example.org/a/hg_…/search?q=Alice%20Tan",
+    "https://hansard.example.org/a/hg_…/search?q=Data%20Protection%20and%20Cybersecurity",
+    "https://hansard.example.org/a/hg_…/search?q=Foo%20Ah%20Kow",
+    "https://hansard.example.org/a/hg_…/search?q=Health%20Information%20Bill",
+    "https://hansard.example.org/a/hg_…/search?q=Health%20Information%20Bill%20%28Amendment%20No.%202%29",
+    "https://hansard.example.org/a/hg_…/search?q=Heng%20Chee%20How",
+    "https://hansard.example.org/a/hg_…/search?q=Use%20of%20Bus%20Boarding%20Ramps",
+    "https://hansard.example.org/a/hg_…/date/2025-01-08",
+    "https://hansard.example.org/a/hg_…/date/2024-02-20",
+    "https://hansard.example.org/a/hg_…/date/2023-05-10",
+    "https://hansard.example.org/a/hg_…/date/2020-03-01",
+    "https://hansard.example.org/a/hg_…/date/2001-06-20",
+    "https://hansard.example.org/a/hg_…/date/1988-11-15",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills",
+    "https://hansard.example.org/a/hg_…/?format=json",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills"
+  ],
+  "anchor_texts": [
+    "Home",
+    "Find a topic A-Z",
+    "Years",
+    "Members",
+    "Bills",
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "oral-answer",
+    "bill",
+    "written-answer",
+    "Economic Recovery and Jobs",
+    "Fisheries and Marine Policy",
+    "Government Accounting and Audit",
+    "Health Information",
+    "Tan Chun Seng",
+    "Alice Tan",
+    "Data Protection and Cybersecurity",
+    "Foo Ah Kow",
+    "Health Information Bill",
+    "Health Information Bill (Amendment No. 2)",
+    "Heng Chee How",
+    "Use of Bus Boarding Ramps",
+    "2025-01-08",
+    "2024-02-20",
+    "2023-05-10",
+    "2020-03-01",
+    "2001-06-20",
+    "1988-11-15",
+    "Browse by year",
+    "Browse by member",
+    "Bills A-Z",
+    "This page as JSON",
+    "Home",
+    "Find a topic A-Z",
+    "Years",
+    "Members",
+    "Bills"
+  ],
+  "u_texts": [
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills",
+    "https://hansard.example.org/a/hg_…/nav/a",
+    "https://hansard.example.org/a/hg_…/nav/b",
+    "https://hansard.example.org/a/hg_…/nav/c",
+    "https://hansard.example.org/a/hg_…/nav/d",
+    "https://hansard.example.org/a/hg_…/nav/e",
+    "https://hansard.example.org/a/hg_…/nav/f",
+    "https://hansard.example.org/a/hg_…/nav/g",
+    "https://hansard.example.org/a/hg_…/nav/h",
+    "https://hansard.example.org/a/hg_…/nav/i",
+    "https://hansard.example.org/a/hg_…/nav/j",
+    "https://hansard.example.org/a/hg_…/nav/k",
+    "https://hansard.example.org/a/hg_…/nav/l",
+    "https://hansard.example.org/a/hg_…/nav/m",
+    "https://hansard.example.org/a/hg_…/nav/n",
+    "https://hansard.example.org/a/hg_…/nav/o",
+    "https://hansard.example.org/a/hg_…/nav/p",
+    "https://hansard.example.org/a/hg_…/nav/q",
+    "https://hansard.example.org/a/hg_…/nav/r",
+    "https://hansard.example.org/a/hg_…/nav/s",
+    "https://hansard.example.org/a/hg_…/nav/t",
+    "https://hansard.example.org/a/hg_…/nav/u",
+    "https://hansard.example.org/a/hg_…/nav/v",
+    "https://hansard.example.org/a/hg_…/nav/w",
+    "https://hansard.example.org/a/hg_…/nav/x",
+    "https://hansard.example.org/a/hg_…/nav/y",
+    "https://hansard.example.org/a/hg_…/nav/z",
+    "https://hansard.example.org/a/hg_…/nav/0",
+    "https://hansard.example.org/a/hg_…/nav/1",
+    "https://hansard.example.org/a/hg_…/nav/2",
+    "https://hansard.example.org/a/hg_…/nav/3",
+    "https://hansard.example.org/a/hg_…/nav/4",
+    "https://hansard.example.org/a/hg_…/nav/5",
+    "https://hansard.example.org/a/hg_…/nav/6",
+    "https://hansard.example.org/a/hg_…/nav/7",
+    "https://hansard.example.org/a/hg_…/nav/8",
+    "https://hansard.example.org/a/hg_…/nav/9",
+    "https://hansard.example.org/a/hg_…/search?q=oral-answer",
+    "https://hansard.example.org/a/hg_…/search?q=bill",
+    "https://hansard.example.org/a/hg_…/search?q=written-answer",
+    "https://hansard.example.org/a/hg_…/search?q=Economic%20Recovery%20and%20Jobs",
+    "https://hansard.example.org/a/hg_…/search?q=Fisheries%20and%20Marine%20Policy",
+    "https://hansard.example.org/a/hg_…/search?q=Government%20Accounting%20and%20Audit",
+    "https://hansard.example.org/a/hg_…/search?q=Health%20Information",
+    "https://hansard.example.org/a/hg_…/search?q=Tan%20Chun%20Seng",
+    "https://hansard.example.org/a/hg_…/search?q=Alice%20Tan",
+    "https://hansard.example.org/a/hg_…/search?q=Data%20Protection%20and%20Cybersecurity",
+    "https://hansard.example.org/a/hg_…/search?q=Foo%20Ah%20Kow",
+    "https://hansard.example.org/a/hg_…/search?q=Health%20Information%20Bill",
+    "https://hansard.example.org/a/hg_…/search?q=Health%20Information%20Bill%20%28Amendment%20No.%202%29",
+    "https://hansard.example.org/a/hg_…/search?q=Heng%20Chee%20How",
+    "https://hansard.example.org/a/hg_…/search?q=Use%20of%20Bus%20Boarding%20Ramps",
+    "https://hansard.example.org/a/hg_…/date/2025-01-08",
+    "https://hansard.example.org/a/hg_…/date/2024-02-20",
+    "https://hansard.example.org/a/hg_…/date/2023-05-10",
+    "https://hansard.example.org/a/hg_…/date/2020-03-01",
+    "https://hansard.example.org/a/hg_…/date/2001-06-20",
+    "https://hansard.example.org/a/hg_…/date/1988-11-15",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills",
+    "https://hansard.example.org/a/hg_…/?format=json",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills"
+  ],
+  "correspondence": [
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 67
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 67
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/years",
+      "u_twin": true,
+      "u_index": 68
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members",
+      "u_twin": true,
+      "u_index": 69
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/bills",
+      "u_twin": true,
+      "u_index": 70
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/a",
+      "u_twin": true,
+      "u_index": 5
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/b",
+      "u_twin": true,
+      "u_index": 6
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/c",
+      "u_twin": true,
+      "u_index": 7
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/d",
+      "u_twin": true,
+      "u_index": 8
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/e",
+      "u_twin": true,
+      "u_index": 9
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/f",
+      "u_twin": true,
+      "u_index": 10
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/g",
+      "u_twin": true,
+      "u_index": 11
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/h",
+      "u_twin": true,
+      "u_index": 12
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/i",
+      "u_twin": true,
+      "u_index": 13
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/j",
+      "u_twin": true,
+      "u_index": 14
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/k",
+      "u_twin": true,
+      "u_index": 15
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/l",
+      "u_twin": true,
+      "u_index": 16
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/m",
+      "u_twin": true,
+      "u_index": 17
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/n",
+      "u_twin": true,
+      "u_index": 18
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/o",
+      "u_twin": true,
+      "u_index": 19
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/p",
+      "u_twin": true,
+      "u_index": 20
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/q",
+      "u_twin": true,
+      "u_index": 21
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/r",
+      "u_twin": true,
+      "u_index": 22
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/s",
+      "u_twin": true,
+      "u_index": 23
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/t",
+      "u_twin": true,
+      "u_index": 24
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/u",
+      "u_twin": true,
+      "u_index": 25
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/v",
+      "u_twin": true,
+      "u_index": 26
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/w",
+      "u_twin": true,
+      "u_index": 27
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/x",
+      "u_twin": true,
+      "u_index": 28
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/y",
+      "u_twin": true,
+      "u_index": 29
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/z",
+      "u_twin": true,
+      "u_index": 30
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/0",
+      "u_twin": true,
+      "u_index": 31
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/1",
+      "u_twin": true,
+      "u_index": 32
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/2",
+      "u_twin": true,
+      "u_index": 33
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/3",
+      "u_twin": true,
+      "u_index": 34
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/4",
+      "u_twin": true,
+      "u_index": 35
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/5",
+      "u_twin": true,
+      "u_index": 36
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/6",
+      "u_twin": true,
+      "u_index": 37
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/7",
+      "u_twin": true,
+      "u_index": 38
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/8",
+      "u_twin": true,
+      "u_index": 39
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/nav/9",
+      "u_twin": true,
+      "u_index": 40
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=oral-answer",
+      "u_twin": true,
+      "u_index": 41
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=bill",
+      "u_twin": true,
+      "u_index": 42
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=written-answer",
+      "u_twin": true,
+      "u_index": 43
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Economic%20Recovery%20and%20Jobs",
+      "u_twin": true,
+      "u_index": 44
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Fisheries%20and%20Marine%20Policy",
+      "u_twin": true,
+      "u_index": 45
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Government%20Accounting%20and%20Audit",
+      "u_twin": true,
+      "u_index": 46
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Health%20Information",
+      "u_twin": true,
+      "u_index": 47
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Tan%20Chun%20Seng",
+      "u_twin": true,
+      "u_index": 48
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Alice%20Tan",
+      "u_twin": true,
+      "u_index": 49
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Data%20Protection%20and%20Cybersecurity",
+      "u_twin": true,
+      "u_index": 50
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Foo%20Ah%20Kow",
+      "u_twin": true,
+      "u_index": 51
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Health%20Information%20Bill",
+      "u_twin": true,
+      "u_index": 52
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Health%20Information%20Bill%20%28Amendment%20No.%202%29",
+      "u_twin": true,
+      "u_index": 53
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Heng%20Chee%20How",
+      "u_twin": true,
+      "u_index": 54
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/search?q=Use%20of%20Bus%20Boarding%20Ramps",
+      "u_twin": true,
+      "u_index": 55
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/date/2025-01-08",
+      "u_twin": true,
+      "u_index": 56
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/date/2024-02-20",
+      "u_twin": true,
+      "u_index": 57
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/date/2023-05-10",
+      "u_twin": true,
+      "u_index": 58
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/date/2020-03-01",
+      "u_twin": true,
+      "u_index": 59
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/date/2001-06-20",
+      "u_twin": true,
+      "u_index": 60
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/date/1988-11-15",
+      "u_twin": true,
+      "u_index": 61
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/years",
+      "u_twin": true,
+      "u_index": 68
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members",
+      "u_twin": true,
+      "u_index": 69
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/bills",
+      "u_twin": true,
+      "u_index": 70
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/?format=json",
+      "u_twin": true,
+      "u_index": 65
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 67
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 67
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/years",
+      "u_twin": true,
+      "u_index": 68
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members",
+      "u_twin": true,
+      "u_index": 69
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/bills",
+      "u_twin": true,
+      "u_index": 70
+    }
+  ],
+  "counts": {
+    "total_anchors": 71,
+    "absolute_anchors": 71,
+    "u_spans": 71
+  },
+  "nav_strip": 2,
+  "format_links": {
+    "json": [
+      "https://hansard.example.org/a/hg_…/?format=json"
+    ],
+    "text": []
+  },
+  "byte_size": 19144,
+  "meta": {
+    "entry": "launcher",
+    "route": "/",
+    "source": "offline",
+    "token_shape": "hg_…(offline test token)",
+    "html_sha256": "1a8ffee14ac138705aac7399f0f9af99f804322d7efd68fa75030c43f8f2a808",
+    "text_sha256": "bd03f4f9912156a69bb19bb2ad3440e8accfb2a8b0910d36b226e8778b5d7efd",
+    "text_bytes": 1551,
+    "base_url": "https://hansard.example.org"
+  }
+}

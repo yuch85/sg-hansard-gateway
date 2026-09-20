@@ -379,6 +379,303 @@ def test_u_span_css_is_visible() -> None:
         assert banned not in css, f".u must stay visible: {banned!r} found"
 
 
+# --- Wave-1 (27.3-02) additions: cite cap, .u two-tier invariant, extraction --
+
+
+#: The synthetic long-sitting speech count for the cite-cap conformance test
+#: (G-A5-3: per-speech Cite lines on long sittings must stay within the caps).
+SYNTHETIC_SPEECH_COUNT = 300
+
+
+def _synthetic_long_report() -> Any:
+    """A 300-speech HansardReport for the cap assertion (test-local dataclass
+    construction, no fixture file — plan 27.3-02 Task 3)."""
+    from datetime import date
+
+    from hansard_gateway.models import HansardReport, Speech
+
+    return HansardReport(
+        report_id="synth-300",
+        date=date(2020, 1, 1),
+        title="Synthetic Long Sitting",
+        topic_type=None,
+        source_url="https://sprs.parl.gov.sg/search/#/topic?reportid=synth-300",
+        volume=None,
+        parliament_no=None,
+        session_no=None,
+        sitting_no=None,
+        speeches=[
+            Speech(
+                sequence=i + 1,
+                speaker_original=(
+                    None if i % 7 == 0 else f"Member {i} (PPM)"
+                ),
+                speaker_name=None,
+                speaker_role=None,
+                paragraphs=[f"Paragraph {i} of the synthetic sitting."],
+            )
+            for i in range(SYNTHETIC_SPEECH_COUNT)
+        ],
+        transcript_sha256="synthetic",
+    )
+
+
+def _render_report_direct(report: Any, *, token: str) -> str:
+    """Render one report straight through the render layer (no HTTP)."""
+    from hansard_gateway.render import render_report
+
+    return render_report(
+        report=report, token=token, retrieved="2020-01-01T00:00:00Z"
+    )
+
+
+def test_cite_cap_conformance() -> None:
+    """The cap rule holds numerically on a 300-speech synthetic sitting.
+
+    Renders the report through the real render layer, then asserts:
+    (a) the link cap holds (≤400) — the byte cap is verified as an
+        ESTIMATE-BRANCH invariant below (the pre-render estimate is a
+        conservative upper bound: a synthetic 300-speech page with 170 Cite
+        lines + ~40 KB of body text legitimately exceeds 100 KB on the body
+        alone, so the byte cap is asserted on the estimate branch, not on the
+        synthetic's measured bytes);
+    (b) the rendered Cite-line count == cite_speech_limit(...) recomputed with
+        the SAME inputs (the cap function, imported, not re-implemented —
+        G-A6-2 determinism);
+    (c) every rendered Cite line's href carries the request token (R3) and has
+        a .u twin (R2);
+    (d) speeches past the cap have NO Cite line but DO keep id="speech-N"
+        (ids are uncapped — the cap limits rendered Cite LINKS only).
+    """
+    from hansard_gateway.render.cite import (
+        build_cite_context,
+        cite_speech_limit,
+    )
+
+    report = _synthetic_long_report()
+    body = _render_report_direct(report, token=TEST_TOKEN)
+
+    # (a) the link cap.
+    parser = _AnchorParser()
+    parser.feed(body)
+    assert len(parser.anchors) <= PAGE_BUDGET_LINKS, (
+        f"synthetic page over link budget: {len(parser.anchors)}"
+    )
+
+    # (b) rendered Cite count == the cap function's own output. Recompute
+    # with the same inputs the render layer used: non-Cite links = total
+    # anchors minus the rendered Cite lines; base_bytes = page size minus the
+    # rendered Cite-line bytes (each Cite line contributes its anchor + twin).
+    # Count Cite LINES precisely: each is <p class="cite">Cite: <a …
+    # (a bare class="cite" count would also match .cite-note / .cite a
+    # occurrences, and the linter's own cap counts <a> anchors, not <p>).
+    cite_count = len(re.findall(r'<p class="cite">Cite: <a ', body))
+    # (b) determinism (G-A6-2): the rendered Cite count == the cap function's
+    # output at the SAME inputs the render layer used. The render layer
+    # measures the PRE-CITE page (measure_non_cite_page: the page's absolute
+    # link count + byte size, without Cite lines). Recompute those exact
+    # inputs from the final page: strip the Cite lines + the cite-note
+    # (rendered only when a Cite line exists), then count the absolute
+    # (https) links — ALL of them, token-bearing or not (the linter's own
+    # §7.1 link cap counts every anchor, and the 2 SPRS provenance links are
+    # absolute https). Each Cite line adds exactly one absolute anchor.
+    cite_line_re = re.compile(r"\s*<p class=\"cite\">.*?</p>", re.DOTALL)
+    pre_cite = cite_line_re.sub("", body).replace(
+        '<p class="cite-note">To cite a specific speech, copy its Cite URL — '
+        "opening it in a browser highlights that speech.</p>\n    ",
+        "",
+    )
+    pre_cite_parser = _AnchorParser()
+    pre_cite_parser.feed(pre_cite)
+    # The render layer's measurement (measure_non_cite_page) counts the
+    # page's TOKEN-BEARING absolute links (B in the cap rule) — not the
+    # 2 external SPRS provenance links. Count the same set:
+    non_cite_links = len([
+        a for a in pre_cite_parser.anchors
+        if urlsplit(a["href"]).scheme == "https"
+        and f"/a/{TEST_TOKEN}/" in a["href"]
+    ])
+    base_bytes = len(pre_cite.encode("utf-8"))
+    from hansard_gateway.render.cite import CITE_EST_BYTES_PER_LINE
+
+    expected = cite_speech_limit(
+        speech_count=SYNTHETIC_SPEECH_COUNT,
+        non_cite_links=non_cite_links,
+        base_bytes=base_bytes,
+        est_bytes_per_cite=CITE_EST_BYTES_PER_LINE,
+    )
+    assert cite_count == expected, (
+        f"rendered Cite lines {cite_count} != cap function {expected} "
+        f"(non_cite_links={non_cite_links}, base_bytes={base_bytes}, "
+        f"est={CITE_EST_BYTES_PER_LINE})"
+    )
+
+    # (c) every Cite line: token in href (R3) + .u twin (R2).
+    cite_hrefs = re.findall(r'<p class="cite">.*?href="([^"]+)"', body)
+    for href in cite_hrefs:
+        assert f"/a/{TEST_TOKEN}/" in href, f"Cite href missing token: {href}"
+        assert href in parser.twins, f"Cite href missing .u twin: {href}"
+
+    # (d) uncapped ids: every speech keeps id="speech-N" whether or not cited.
+    for n in range(1, SYNTHETIC_SPEECH_COUNT + 1):
+        assert f'id="speech-{n}"' in body, f"missing id speech-{n}"
+    # And the past-cap speeches really have no Cite line.
+    assert cite_count < SYNTHETIC_SPEECH_COUNT, (
+        "cap should bind on a 300-speech sitting"
+    )
+    # Cross-check with build_cite_context (the context builder's own None
+    # placement matches the rendered Cite count).
+    urls, _labels = build_cite_context(
+        report=report, token=TEST_TOKEN,
+        non_cite_links=non_cite_links, base_bytes=base_bytes,
+    )
+    assert sum(1 for u in urls if u is not None) == cite_count
+
+    # (e) the byte branch of the cap is a real bound: the cap function must
+    # reduce the limit when the estimated Cite bytes exceed the headroom.
+    # (The synthetic page's MEASURED bytes can exceed 100 KB on body text
+    # alone — the byte cap is enforced pre-render by the ESTIMATE branch, and
+    # post-render by the linter on real pages.)
+    from hansard_gateway.render.cite import CITE_EST_BYTES_PER_LINE
+
+    tight_base = PAGE_BUDGET_HTML_BYTES - CITE_EST_BYTES_PER_LINE * 2
+    tight_limit = cite_speech_limit(
+        speech_count=SYNTHETIC_SPEECH_COUNT,
+        non_cite_links=non_cite_links,
+        base_bytes=tight_base,
+    )
+    assert tight_limit == 2, (
+        f"byte branch should bind at base={tight_base}: got {tight_limit}"
+    )
+    assert tight_limit < expected, "byte branch must reduce the limit"
+
+
+def _style_blocks(html: str) -> list[str]:
+    """All inline <style> block contents of one rendered page."""
+    return re.findall(r"<style>(.*?)</style>", html, re.DOTALL)
+
+
+#: Hiding declarations that must never appear on .u or an ancestor (a6
+#: amendment 2 — the static tier).
+_HIDDING_PATTERNS: tuple[str, ...] = (
+    "display: none", "display:none",
+    "visibility: hidden", "visibility:hidden",
+    "opacity: 0;", "opacity:0;",
+    "font-size: 0;", "font-size:0;",
+    "width: 0;", "width:0;",
+    "height: 0;", "height:0;",
+    "aria-hidden",
+)
+
+
+def _rule_applies_to_u(selector: str) -> bool:
+    """Whether a CSS selector targets .u or an ancestor element of .u."""
+    selector = selector.strip()
+    if ".u" in selector:
+        return True
+    for ancestor in ("body", "main", "article", "section", "footer", "nav"):
+        if selector == ancestor or selector.startswith(ancestor + " ") \
+                or selector.startswith(ancestor + ","):
+            return True
+    return False
+
+
+def _no_hiding_on_u(css_text: str) -> list[str]:
+    """Return violations: hiding declarations on .u or an ancestor selector.
+
+    Selector-scoped (not a global grep): each { } rule's selector is checked
+    against the .u/ancestor set, so a rule hiding, e.g., nav.toc in a print
+    context is legal while hiding span.u (or body/main/…) is not.
+    """
+    violations: list[str] = []
+    for match in re.finditer(r"([^{}]+)\{([^}]*)\}", css_text):
+        selector, declarations = match.group(1).strip(), match.group(2)
+        if not _rule_applies_to_u(selector):
+            continue
+        for banned in _HIDDING_PATTERNS:
+            if banned in declarations:
+                violations.append(
+                    f"hiding declaration {banned!r} on {selector!r}"
+                )
+    return violations
+
+
+def _rendered_corpus_bodies(client: TestClient) -> dict[str, str]:
+    """Render every corpus page type offline; return {name: body}."""
+    bodies: dict[str, str] = {}
+    with respx.mock(base_url=UPSTREAM_BASE, assert_all_called=False) as mock:
+        _stub_search(mock)
+        mock.post("/getHansardTopic").respond(json=_topic_fixture())
+        pair = respx.mock(base_url=PAIR_BASE, assert_all_called=False,
+                          assert_all_mocked=False)
+        pair.start()
+        try:
+            bodies["report"] = (
+                client.get(f"/a/{TEST_TOKEN}/report/{E2E_REPORT_ID}").text
+            )
+            bodies["search"] = (
+                client.get(f"/a/{TEST_TOKEN}/search?q=Pension%20Fund").text
+            )
+            bodies["date"] = (
+                client.get(f"/a/{TEST_TOKEN}/date/2004-10-19").text
+            )
+        finally:
+            pair.stop()
+    bodies["launcher"] = client.get(f"/a/{TEST_TOKEN}/").text
+    bodies["nav_a"] = client.get(f"/a/{TEST_TOKEN}/nav/a").text
+    bodies["years"] = client.get(f"/a/{TEST_TOKEN}/years").text
+    bodies["members"] = client.get(f"/a/{TEST_TOKEN}/members").text
+    bodies["bills"] = client.get(f"/a/{TEST_TOKEN}/bills").text
+    # 422 error page (valid token).
+    bodies["error_422"] = client.get(f"/a/{TEST_TOKEN}/report/bad id").text
+    return bodies
+
+
+def test_u_not_hidden_static_all_pages(client_with_index: TestClient) -> None:
+    """STATIC tier (a6 amendment 2): no hiding declaration on .u or any
+    ancestor in the rendered output of EVERY corpus page type (screen CSS —
+    the print stylesheet is Wave 2/Plan 03, and this check is selector-scoped
+    so a future print rule hiding nav chrome stays legal)."""
+    for name, body in _rendered_corpus_bodies(client_with_index).items():
+        for css in _style_blocks(body):
+            violations = _no_hiding_on_u(css)
+            assert not violations, (
+                f"{name}: .u or an ancestor is hidden: {violations}"
+            )
+
+
+def test_u_rendered_extraction_all_pages(client_with_index: TestClient) -> None:
+    """RENDERED extraction tier (a6 amendment 2, the load-bearing one a grep
+    cannot provide): every absolute token-bearing href's URL survives a
+    representative text-extraction path (strip <style>/<script>, remove tags,
+    unescape) — i.e. its .u twin is extractable — on every corpus page type."""
+    from html import unescape
+
+    for name, body in _rendered_corpus_bodies(client_with_index).items():
+        # The representative extraction: strip style/script, remove tags,
+        # unescape entities, collapse whitespace.
+        stripped = re.sub(
+            r"<(style|script)[^>]*>.*?</\1>", "", body,
+            flags=re.DOTALL,
+        )
+        text = unescape(re.sub(r"<[^>]+>", " ", stripped))
+        text = re.sub(r"\s+", " ", text)
+        parser = _AnchorParser()
+        parser.feed(body)
+        abs_token = [
+            a["href"] for a in parser.anchors
+            if a["rel"] != "noopener noreferrer"
+            and urlsplit(a["href"]).scheme == "https"
+            and f"/a/{TEST_TOKEN}/" in a["href"]
+        ]
+        assert abs_token, f"{name}: no absolute token hrefs found"
+        missing = [h for h in abs_token if h not in text]
+        assert not missing, (
+            f"{name}: {len(missing)} absolute href URLs absent from the "
+            f"extracted text (.u twin not extractable): {missing[:3]}"
+        )
+
+
 def test_search_result_link_ids_percent_encoded(client_with_index: TestClient) -> None:
     """A link_id containing '#' renders quote()d and round-trips (R5)."""
     rows = _search_fixture_rows()

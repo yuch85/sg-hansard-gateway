@@ -1,0 +1,315 @@
+{
+  "hrefs": [
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills",
+    "https://hansard.example.org/a/hg_…/date/2025-01-08",
+    "https://hansard.example.org/a/hg_…/year/2026",
+    "https://hansard.example.org/a/hg_…/date/2026-01-12?format=json",
+    "https://hansard.example.org/a/hg_…/date/2026-01-12?format=text",
+    "https://hansard.example.org/a/hg_…/report/003_20041019_S0002",
+    "https://hansard.example.org/a/hg_…/report/026_20041019_S0004_T0016",
+    "https://hansard.example.org/a/hg_…/report/038_20041019_S0004_T0004",
+    "https://hansard.example.org/a/hg_…/report/007_20041019_S0006_T0003",
+    "https://hansard.example.org/a/hg_…/report/037_20041019_S0004_T0023",
+    "https://hansard.example.org/a/hg_…/report/045_20041019_S0007_T0005",
+    "https://hansard.example.org/a/hg_…/report/050_20041019_S0009_T0006",
+    "https://hansard.example.org/a/hg_…/report/021_20041019_S0004_T0018",
+    "https://hansard.example.org/a/hg_…/report/036_20041019_S0004_T0012",
+    "https://hansard.example.org/a/hg_…/report/010_20041019_S0006_T0006",
+    "https://hansard.example.org/a/hg_…/report/043_20041019_S0007_T0002",
+    "https://hansard.example.org/a/hg_…/report/047_20041019_S0009_T0003",
+    "https://hansard.example.org/a/hg_…/report/044_20041019_S0007_T0001",
+    "https://hansard.example.org/a/hg_…/report/023_20041019_S0004_T0019",
+    "https://hansard.example.org/a/hg_…/report/014_20041019_S0004_T0022",
+    "https://hansard.example.org/a/hg_…/report/028_20041019_S0004_T0024",
+    "https://hansard.example.org/a/hg_…/report/008_20041019_S0006_T0002",
+    "https://hansard.example.org/a/hg_…/report/033_20041019_S0004_T0021",
+    "https://hansard.example.org/a/hg_…/report/041_20041019_S0007_T0004",
+    "https://hansard.example.org/a/hg_…/report/046_20041019_S0009_T0005",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills"
+  ],
+  "anchor_texts": [
+    "Home",
+    "Find a topic A-Z",
+    "Years",
+    "Members",
+    "Bills",
+    "Sitting of 2025-01-08",
+    "All sittings of 2026",
+    "JSON",
+    "text",
+    "ASSENTS TO BILLS PASSED",
+    "INCOME TAX (AMENDMENT) BILL",
+    "BUILDING MAINTENANCE AND STRATA MANAGEMENT BILL (As reported from Select Committee)",
+    "FIVE-DAY WORK WEEK IN SCHOOLS",
+    "SINGAPORE ARMED FORCES (AMENDMENT NO. 2) BILL",
+    "UTILITIES BILL",
+    "TRAINING PROGRAMMES",
+    "MERCHANT SHIPPING (AMENDMENT) BILL",
+    "EXEMPTED BUSINESS (Motion)",
+    "MEDIFUND (Review of eligibility criteria)",
+    "PROGRAMMES FOR RETIRING POLICE OFFICERS",
+    "FIRE-RATED DOORS FOR HDB FLATS",
+    "CARPARK CHARGES",
+    "PARKS AND TREES BILL",
+    "SECURITIES AND FUTURES (AMENDMENT NO. 2) BILL",
+    "STAMP DUTIES (AMENDMENT) BILL",
+    "EMPLOYABILITY SKILLS SYSTEM (Rationale for implementation)",
+    "REGISTERED DESIGNS (AMENDMENT) BILL",
+    "SYNTHETIC DRUGS",
+    "SINGAPORE CITIZENSHIP",
+    "Back to your home",
+    "Home",
+    "Find a topic A-Z",
+    "Years",
+    "Members",
+    "Bills"
+  ],
+  "u_texts": [
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills",
+    "https://hansard.example.org/a/hg_…/date/2025-01-08",
+    "https://hansard.example.org/a/hg_…/year/2026",
+    "https://hansard.example.org/a/hg_…/date/2026-01-12?format=json",
+    "https://hansard.example.org/a/hg_…/date/2026-01-12?format=text",
+    "https://hansard.example.org/a/hg_…/report/003_20041019_S0002",
+    "https://hansard.example.org/a/hg_…/report/026_20041019_S0004_T0016",
+    "https://hansard.example.org/a/hg_…/report/038_20041019_S0004_T0004",
+    "https://hansard.example.org/a/hg_…/report/007_20041019_S0006_T0003",
+    "https://hansard.example.org/a/hg_…/report/037_20041019_S0004_T0023",
+    "https://hansard.example.org/a/hg_…/report/045_20041019_S0007_T0005",
+    "https://hansard.example.org/a/hg_…/report/050_20041019_S0009_T0006",
+    "https://hansard.example.org/a/hg_…/report/021_20041019_S0004_T0018",
+    "https://hansard.example.org/a/hg_…/report/036_20041019_S0004_T0012",
+    "https://hansard.example.org/a/hg_…/report/010_20041019_S0006_T0006",
+    "https://hansard.example.org/a/hg_…/report/043_20041019_S0007_T0002",
+    "https://hansard.example.org/a/hg_…/report/047_20041019_S0009_T0003",
+    "https://hansard.example.org/a/hg_…/report/044_20041019_S0007_T0001",
+    "https://hansard.example.org/a/hg_…/report/023_20041019_S0004_T0019",
+    "https://hansard.example.org/a/hg_…/report/014_20041019_S0004_T0022",
+    "https://hansard.example.org/a/hg_…/report/028_20041019_S0004_T0024",
+    "https://hansard.example.org/a/hg_…/report/008_20041019_S0006_T0002",
+    "https://hansard.example.org/a/hg_…/report/033_20041019_S0004_T0021",
+    "https://hansard.example.org/a/hg_…/report/041_20041019_S0007_T0004",
+    "https://hansard.example.org/a/hg_…/report/046_20041019_S0009_T0005",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/",
+    "https://hansard.example.org/a/hg_…/years",
+    "https://hansard.example.org/a/hg_…/members",
+    "https://hansard.example.org/a/hg_…/bills"
+  ],
+  "correspondence": [
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 31
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 31
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/years",
+      "u_twin": true,
+      "u_index": 32
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members",
+      "u_twin": true,
+      "u_index": 33
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/bills",
+      "u_twin": true,
+      "u_index": 34
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/date/2025-01-08",
+      "u_twin": true,
+      "u_index": 5
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/year/2026",
+      "u_twin": true,
+      "u_index": 6
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/date/2026-01-12?format=json",
+      "u_twin": true,
+      "u_index": 7
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/date/2026-01-12?format=text",
+      "u_twin": true,
+      "u_index": 8
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/003_20041019_S0002",
+      "u_twin": true,
+      "u_index": 9
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/026_20041019_S0004_T0016",
+      "u_twin": true,
+      "u_index": 10
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/038_20041019_S0004_T0004",
+      "u_twin": true,
+      "u_index": 11
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/007_20041019_S0006_T0003",
+      "u_twin": true,
+      "u_index": 12
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/037_20041019_S0004_T0023",
+      "u_twin": true,
+      "u_index": 13
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/045_20041019_S0007_T0005",
+      "u_twin": true,
+      "u_index": 14
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/050_20041019_S0009_T0006",
+      "u_twin": true,
+      "u_index": 15
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/021_20041019_S0004_T0018",
+      "u_twin": true,
+      "u_index": 16
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/036_20041019_S0004_T0012",
+      "u_twin": true,
+      "u_index": 17
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/010_20041019_S0006_T0006",
+      "u_twin": true,
+      "u_index": 18
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/043_20041019_S0007_T0002",
+      "u_twin": true,
+      "u_index": 19
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/047_20041019_S0009_T0003",
+      "u_twin": true,
+      "u_index": 20
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/044_20041019_S0007_T0001",
+      "u_twin": true,
+      "u_index": 21
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/023_20041019_S0004_T0019",
+      "u_twin": true,
+      "u_index": 22
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/014_20041019_S0004_T0022",
+      "u_twin": true,
+      "u_index": 23
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/028_20041019_S0004_T0024",
+      "u_twin": true,
+      "u_index": 24
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/008_20041019_S0006_T0002",
+      "u_twin": true,
+      "u_index": 25
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/033_20041019_S0004_T0021",
+      "u_twin": true,
+      "u_index": 26
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/041_20041019_S0007_T0004",
+      "u_twin": true,
+      "u_index": 27
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/report/046_20041019_S0009_T0005",
+      "u_twin": true,
+      "u_index": 28
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 31
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 31
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/",
+      "u_twin": true,
+      "u_index": 31
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/years",
+      "u_twin": true,
+      "u_index": 32
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/members",
+      "u_twin": true,
+      "u_index": 33
+    },
+    {
+      "href": "https://hansard.example.org/a/hg_…/bills",
+      "u_twin": true,
+      "u_index": 34
+    }
+  ],
+  "counts": {
+    "total_anchors": 35,
+    "absolute_anchors": 35,
+    "u_spans": 35
+  },
+  "nav_strip": 2,
+  "format_links": {
+    "json": [
+      "https://hansard.example.org/a/hg_…/date/2026-01-12?format=json"
+    ],
+    "text": [
+      "https://hansard.example.org/a/hg_…/date/2026-01-12?format=text"
+    ]
+  },
+  "byte_size": 12484,
+  "meta": {
+    "entry": "date_2026-01-12",
+    "route": "/date/2026-01-12",
+    "source": "offline",
+    "token_shape": "hg_…(offline test token)",
+    "html_sha256": "458a0e4cded7981a02faa316ee0a626d577f3a75e9b7ea90dc4a2179a61fd255",
+    "text_sha256": "bc62a98402242049e74040f215fb04b9994a05717dfc1e91b19be072d786d74b",
+    "text_bytes": 2794,
+    "base_url": "https://hansard.example.org"
+  }
+}

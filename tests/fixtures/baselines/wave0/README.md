@@ -140,11 +140,25 @@ pre-existing external SPRS provenance links.
 
 ## Change-attribution table (which later waves may change which fields)
 
-- **Wave 1 (citation highlight, Plan 02)**: report pages gain N absolute
-  token-bearing `Cite` hrefs + N `.u` spans (N = capped Cite lines, G-A5-3).
-  `counts.absolute_anchors`, `counts.u_spans`, `hrefs`, `u_texts`,
-  `correspondence` grow on **report** entries only. Search/launcher/nav/
-  date/facet entries must NOT change.
+- **Wave 1 (citation highlight, Plan 02)** — CONSUMED 2026-09-20 (Plan 02
+  Task 3): report pages gain N absolute token-bearing `Cite` hrefs + N `.u`
+  spans (N = capped Cite lines, G-A5-3; for bill-774, N = 14 — all speeches,
+  since 14 < (400 − 23) // 2). `counts.absolute_anchors` (21→35),
+  `counts.u_spans` (23→37), `counts.total_anchors` (23→37), `hrefs`,
+  `u_texts`, `correspondence` grow on **report** entries only, plus a fixed
+  +604-byte inline-CSS delta on EVERY page (the `:target` + production `.u`
+  + `.cite`/`.cite-note` rules in base.html, inherited by all 8 entries).
+  Search/launcher/nav/date/facet href/`.u` sets must NOT change.
+  **Attribution note (two-dir scheme):** the `baselines/wave1/` fixture
+  directory holds the per-wave regression capture; its `report_bill-774.json`
+  is the LIVE reference (captured from the 0.1.2 deployment, which does not
+  yet carry the Cite feature — the v0.1.3 cutover is Plan 05), so the +14
+  Cite delta is NOT yet visible in wave1/. The delta itself is proven offline
+  by `tests/test_citation.py` (verbatim Cite href + `.u` twin per speech, cap
+  = 14 for bill-774) and reconciled here against this table. The per-wave
+  `--verify` against wave1/ passes on the 0.1.2 deployment (no drift); the
+  FINAL `--verify` against this wave0/ directory will show the +14 report
+  delta once 0.1.3 is live (Plan 05 Task 4).
 - **Wave 2 (report restyle, Plan 03)**: report pages gain N in-page
   `#speech-N` hrefs for the TOC (N = rendered TOC entries, capped). This adds
   hrefs containing `#` to **report** entries (the first citation/TOC `#`
