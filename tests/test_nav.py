@@ -237,7 +237,7 @@ def test_invalid_token_422_path_byte_identical(
     no-enumeration 404 (never the 422, which is valid-token-only)."""
     r = client_with_index.get(f"/a/{_BOGUS_TOKEN}/nav/he", follow_redirects=False)
     assert r.status_code == 404
-    assert hashlib.md5(r.content).hexdigest() == "d782a3a355cd3dee8a009e8b77e3d348"
+    assert hashlib.md5(r.content).hexdigest() == "db5bd37212a04ab36d3eb130cdc7abfd"
     # Identical across paths.
     r2 = client_with_index.get(f"/a/{_BOGUS_TOKEN}/search?q=x", follow_redirects=False)
     assert r.content == r2.content

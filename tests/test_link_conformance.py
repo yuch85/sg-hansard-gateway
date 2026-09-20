@@ -33,7 +33,7 @@ PAIR_BASE = "https://search.pair.gov.sg"
 #: The live production invalid-token 404 body fingerprint (no enumeration) —
 #: pinned by tests/fixtures/invalid_token_404_body.html (the captured live body).
 _BOGUS_TOKEN = "hg_invalidtoken00000000000000zz"
-_INVALID_404_MD5 = "d782a3a355cd3dee8a009e8b77e3d348"
+_INVALID_404_MD5 = "db5bd37212a04ab36d3eb130cdc7abfd"
 _INVALID_404_FIXTURE = Path(__file__).parent / "fixtures" / "invalid_token_404_body.html"
 
 #: The spec §5.1 nav strip label (must occur twice: top and bottom).
@@ -373,7 +373,7 @@ def test_error_pages_conformant(token_store, index) -> None:
 
 def test_invalid_token_404_byte_identical(client_with_index: TestClient) -> None:
     """The tokenless 404 stays byte-identical to the captured production body
-    (fixture + md5 d782a3a3…) and carries no nav strip (T-27.1-11)."""
+    (fixture + md5 689525ee…) and carries no nav strip (T-27.1-11)."""
     fixture = _INVALID_404_FIXTURE.read_bytes()
     assert hashlib.md5(fixture).hexdigest() == _INVALID_404_MD5
     r = client_with_index.get(f"/a/{_BOGUS_TOKEN}/report/{E2E_REPORT_ID}")

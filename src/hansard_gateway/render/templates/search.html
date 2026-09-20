@@ -16,6 +16,8 @@
     <span class="u">{{ text_url }}</span>
   </p>
   {% if hits %}
+  <div class="search-layout">
+  <div class="search-results">
   {% for hit in hits %}
   <article class="search-result">
     <h2>
@@ -41,8 +43,10 @@
     {% endif %}
   </article>
   {% endfor %}
+  </div>
 
   {% if refine %}
+  <aside class="refine">
   {% if refine.limits %}
   <h2>Page size</h2>
   <ul>
@@ -89,7 +93,7 @@
   {% endif %}
   {% if refine.pagination %}
   <h2>Pages</h2>
-  <ul>
+  <ul class="pager">
     {% for link in refine.pagination %}
     <li>
       <a href="{{ link.url }}">{{ link.label }}</a>
@@ -98,7 +102,9 @@
     {% endfor %}
   </ul>
   {% endif %}
+  </aside>
   {% endif %}
+  </div>
 
   <footer>
     <p><a href="{{ home_url }}">Back to your home</a>
@@ -141,7 +147,7 @@
   {% endif %}
   {% if refine.ladder %}
   <h2>Find it in the A-Z index</h2>
-  <ul>
+  <ul class="letter-grid">
     {% for link in refine.ladder %}
     <li>
       <a href="{{ link.url }}">{{ link.label }}</a>

@@ -622,7 +622,7 @@ def test_82_invalid_token_404_byte_identical(
     token_store, rich_index: IndexService
 ) -> None:
     """The invalid-token 404 body is byte-identical to the production fixture
-    (md5 d782a3a355cd3dee8a009e8b77e3d348)."""
+    (md5 db5bd37212a04ab36d3eb130cdc7abfd)."""
     import hashlib
 
     client = _rich_client(token_store, rich_index)

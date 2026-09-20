@@ -84,6 +84,37 @@ article.speech:target{background:var(--gb);box-shadow:inset 3px 0 0 var(--ge);pa
 article.speech:target::after{content:"Cited passage";position:absolute;top:0;right:.5rem;font-size:.65rem;text-transform:uppercase;color:var(--ge)}
 @media (max-width:62rem){article.speech:target{padding-left:3px}}
 {% endif %}
+/* Wave-3 layout system (27.3-04): 2-column search results + refine panel,
+   card grids, the A-Z letter ladder, the sticky narrow-further band.
+   LAYOUT-ONLY — the machine surface (hrefs/.u/order/counts) is unchanged;
+   grid/flex reposition visually, never reorder (R7 DOM order is the rank).
+   No added container declares overflow (sticky-safe: .narrow-further and
+   the Wave-2 .sp-head rows rely on no overflow:hidden ancestor). */
+.search-layout{display:grid;grid-template-columns:minmax(0,1fr) 16rem;gap:2rem;align-items:start}
+.search-results{display:grid;gap:1rem}
+.search-result{background:var(--c);border:1px solid var(--r);padding:.9rem 1.1rem .95rem}
+.search-result h2{margin:0 0 .5rem;font-size:1.12rem}
+.search-result h2 .u{display:block;margin:.15rem 0 0}
+.search-result .excerpt{color:#5d574d;font-size:.95rem}
+.refine{background:var(--c);border:1px solid var(--r);padding:.9rem 1.1rem .95rem;position:sticky;top:.75rem;max-height:calc(100vh - 1.5rem)}
+.refine h2{font-size:.7rem;text-transform:uppercase;color:var(--m);margin:0 0 .5rem}
+.refine ul{list-style:none;margin:0 0 1.1rem;padding:0}
+.refine li{margin:0 0 .5rem;line-height:1.4}
+.pager{display:flex;flex-wrap:wrap;gap:.15rem .4rem}
+.pager li{margin:0}
+.letter-grid{columns:2;column-gap:2rem;list-style:none;padding:0}
+.letter-grid li{margin:0 0 .5rem;break-inside:avoid}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));gap:.9rem;list-style:none;padding:0}
+.card-grid li{background:var(--c);border:1px solid var(--r);padding:.6rem .8rem;margin:0}
+.card-grid dl{margin:.3rem 0 0}
+.term-columns{columns:2;column-gap:2rem}
+.term-columns li{break-inside:avoid}
+.narrow-further{position:sticky;top:.5rem;background:var(--c);border:1px solid var(--r);padding:.6rem .9rem;z-index:4}
+.narrow-further h2{font-size:.7rem;text-transform:uppercase;color:var(--m);margin:0 0 .4rem}
+@media (max-width:62rem){
+.search-layout{grid-template-columns:1fr}
+.refine{position:static;max-height:none;order:2}
+}
   </style>
 </head>
 <body>

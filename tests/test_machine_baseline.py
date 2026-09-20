@@ -93,6 +93,31 @@ WAVE1_BASE_CSS_DELTA = 604
 #: plus 10 bytes of template whitespace from the restructure.
 WAVE2_BASE_CSS_DELTA = 3452
 
+#: Wave-3 (27.3-04) CSS delta on the offline entries. The wave is
+#: LAYOUT-ONLY: every offline page's growth is IDENTICAL (6058 B each,
+#: measured per entry at the Task-1 boundary) — the shared base.html layout
+#: CSS (search-layout / card grids / letter-grid / narrow-further: 4954 B
+#: wave2 CSS -> 6956 B wave3 CSS = +2002 B) plus the search.html wrapper
+#: markup inherited by every page via base.html. The machine-surface fields
+#: (hrefs/.u/counts/correspondence) stay byte-identical to wave0 — only the
+#: byte_size moves. Task 2's per-template class attributes extend the
+#: per-entry WAVE3_ENTRY_CLASS_DELTAS map as they land.
+WAVE3_BASE_CSS_DELTA = 2002
+WAVE3_TEMPLATE_WHITESPACE = 0
+#: The per-entry growth BEYOND the shared base.html CSS delta (the 6058 B
+#: total per offline page minus Wave-1 604 + Wave-2 3452 + Wave-3 2002 =
+#: 0 — the layout wrappers are in base.html, not the page templates, so the
+#: per-entry map is all zeros at the Task-1 boundary; Task 2 extends it as
+#: the page templates gain their own class attributes).
+WAVE3_ENTRY_CLASS_DELTAS = {
+    "launcher": 0,
+    "nav_h": 0,
+    "years": 0,
+    "members": 0,
+    "bills": 0,
+    "date_2026-01-12": 0,
+}
+
 #: The surface fields compared for FULL equality on offline entries.
 _EQUALITY_KEYS: tuple[str, ...] = (
     "hrefs", "u_texts", "anchor_texts", "correspondence",
@@ -175,18 +200,27 @@ def test_machine_surface_matches_wave0(
     if entry.source == "offline":
         for key in _EQUALITY_KEYS:
             if key == "byte_size":
-                # Wave-1 + Wave-2 base.html CSS deltas (the :target + .u +
-                # .cite rules + the a8 wireframe system) are inherited by
-                # EVERY page type — the machine surface fields
+                # Wave-1 + Wave-2 + Wave-3 base.html CSS deltas are inherited
+                # by EVERY page type — the machine surface fields
                 # (hrefs/.u/counts/correspondence) stay byte-identical to
-                # wave0; only the shared <style> block grew. Account for
-                # both explicitly.
-                assert surface[key] == (
-                    baseline[key] + WAVE1_BASE_CSS_DELTA + WAVE2_BASE_CSS_DELTA
-                ), (
+                # wave0; only the shared <style> block grew, plus the
+                # per-entry class attributes the Wave-3 layout restyle added
+                # to that page's own markup. Account for all explicitly.
+                expected = (
+                    baseline[key]
+                    + WAVE1_BASE_CSS_DELTA
+                    + WAVE2_BASE_CSS_DELTA
+                    + WAVE3_BASE_CSS_DELTA
+                    + WAVE3_TEMPLATE_WHITESPACE
+                    + WAVE3_ENTRY_CLASS_DELTAS.get(entry.name, 0)
+                )
+                assert surface[key] == expected, (
                     f"{entry.name}: byte_size {surface[key]} != wave0 "
                     f"{baseline[key]} + Wave-1 {WAVE1_BASE_CSS_DELTA} + "
-                    f"Wave-2 {WAVE2_BASE_CSS_DELTA} CSS deltas"
+                    f"Wave-2 {WAVE2_BASE_CSS_DELTA} + Wave-3 "
+                    f"{WAVE3_BASE_CSS_DELTA} + ws {WAVE3_TEMPLATE_WHITESPACE} "
+                    f"+ class "
+                    f"{WAVE3_ENTRY_CLASS_DELTAS.get(entry.name, 0)}"
                 )
             else:
                 assert surface[key] == baseline[key], (
