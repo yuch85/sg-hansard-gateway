@@ -22,8 +22,11 @@ from hansard_gateway.render.cite import (
     build_cite_context,
     measure_non_cite_page,
 )
+from hansard_gateway.render.urls import abs_report_url  # noqa: F401
 from hansard_gateway.render.toc import (
     build_toc_entries,
+    classify_speaker,
+    speaker_label,
     toc_max,
 )
 # Absolute token-bearing URL builders live in :mod:`.urls` (spec R1/R3/R5);
@@ -62,6 +65,36 @@ _RETRIEVED_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
 #: The long form used for the report page's human-readable date.
 _DATE_LONG = "%d %B %Y"
+
+
+def _byline_parts(report: HansardReport, date_long: str) -> str:
+    """The masthead byline: one line of human metadata (topic type · date ·
+    {ordinal} Parliament · {ordinal} Session · Sitting N · Vol. N), omitting
+    absent fields, joined with " · ". Pure layout text — every machine id it
+    contains is ALSO present in the Provenance block (nothing is moved out of
+    the extractable surface, only de-promoted in weight)."""
+    def _ordinal(value: str) -> str:
+        """'1' -> '1st', '2' -> '2nd', '3' -> '3rd', '11' -> '11th' …"""
+        num = int(value)
+        if 10 <= num % 100 <= 12:
+            suffix = "th"
+        else:
+            suffix = {1: "st", 2: "nd", 3: "rd"}.get(num % 10, "th")
+        return f"{num}{suffix}"
+
+    parts: list[str] = []
+    if report.topic_type:
+        parts.append(report.topic_type)
+    parts.append(date_long)
+    if report.parliament_no:
+        parts.append(f"{_ordinal(report.parliament_no)} Parliament")
+    if report.session_no:
+        parts.append(f"{_ordinal(report.session_no)} Session")
+    if report.sitting_no:
+        parts.append(f"Sitting {report.sitting_no}")
+    if report.volume:
+        parts.append(f"Vol. {report.volume}")
+    return " · ".join(parts)
 
 
 def _nav_context(token: Optional[str]) -> dict[str, Any]:
@@ -121,7 +154,15 @@ def parse_iso_date(value: Optional[str]) -> Optional[date]:
 
 def _render(template: str, protected: bool, token: Optional[str] = None,
             **context: object) -> str:
-    """Render a template with the shared base context injected."""
+    """Render a template with the shared base context injected.
+
+    Wave-2 restyle defaults (report.html consumes them; the other page
+    templates ignore them): empty TOC context + the shared speaker-label /
+    classification helpers (so the template never re-implements the label
+    rule the TOC builder uses — TOC and h3 can never drift).
+    """
+    context.setdefault("toc_entries", [])
+    context.setdefault("toc_dropped_count", 0)
     env = _env()
     tmpl = env.get_template(template)
     return tmpl.render(
@@ -129,6 +170,8 @@ def _render(template: str, protected: bool, token: Optional[str] = None,
         referrer=_REFERRER_POLICY,
         base=settings.public_base_url.rstrip("/"),
         token=token,
+        speaker_label=speaker_label,
+        classify_speaker=classify_speaker,
         **_nav_context(token),
         **context,
     )
@@ -158,6 +201,7 @@ def render_report(*, report: HansardReport, token: str, retrieved: str,
         "report": report,
         "retrieved": retrieved,
         "date_long": date_long(report.date),
+        "byline": _byline_parts(report, date_long(report.date)),
         "report_nav": report_nav or {},
         "sitting_url": abs_date_url(token=token, day_iso=report.date.isoformat()),
         "home_url": abs_launcher_url(token=token),

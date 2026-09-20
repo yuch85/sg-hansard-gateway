@@ -49,8 +49,14 @@ CITE_EST_BYTES_PER_LINE: int = 220
 #: count AND twin-text byte growth inside both caps with margin).
 CITE_CAP_DIVISOR: int = 2
 
-#: The anchor text for a speech with no speaker name (procedural turn).
-PROCEDURAL_LABEL: str = "[procedural]"
+# The procedural label + the shared label/class helpers now live in
+# :mod:`.toc` (the ONE source for the TOC label AND the speech h3 — they
+# can never drift); re-exported here for existing imports.
+from hansard_gateway.render.toc import (  # noqa: E402,F401
+    PROCEDURAL_LABEL,
+    classify_speaker,
+    speaker_label,
+)
 
 
 def cite_speech_limit(
@@ -90,6 +96,15 @@ def measure_non_cite_page(
     from hansard_gateway.config import settings
 
     env = _env()
+    context = dict(context)
+    # The pre-Cite measurement render must see the SAME shared context the
+    # final render does (Wave-2 restyle defaults: TOC context + the label
+    # helpers report.html consumes) — otherwise the measured base page is not
+    # the real pre-Cite page.
+    context.setdefault("toc_entries", [])
+    context.setdefault("toc_dropped_count", 0)
+    context.setdefault("speaker_label", speaker_label)
+    context.setdefault("classify_speaker", classify_speaker)
     html = env.get_template(template).render(
         robots=_PROTECTED_ROBOTS,
         referrer=_REFERRER_POLICY,

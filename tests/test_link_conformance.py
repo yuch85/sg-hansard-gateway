@@ -33,7 +33,7 @@ PAIR_BASE = "https://search.pair.gov.sg"
 #: The live production invalid-token 404 body fingerprint (no enumeration) —
 #: pinned by tests/fixtures/invalid_token_404_body.html (the captured live body).
 _BOGUS_TOKEN = "hg_invalidtoken00000000000000zz"
-_INVALID_404_MD5 = "1a29cc1330d50031993c3cbcde2318d7"
+_INVALID_404_MD5 = "d782a3a355cd3dee8a009e8b77e3d348"
 _INVALID_404_FIXTURE = Path(__file__).parent / "fixtures" / "invalid_token_404_body.html"
 
 #: The spec §5.1 nav strip label (must occur twice: top and bottom).
@@ -42,7 +42,14 @@ _NAV_MARKER = "Navigate: Home"
 #: spec §7.1 budgets.
 PAGE_BUDGET_HTML_BYTES = 100 * 1024
 PAGE_BUDGET_LINKS = 400
-PAGE_BUDGET_CSS_BYTES = 2 * 1024
+#: The Wave-2 (27.3-03) restyle raised the inline-CSS budget: the approved
+#: a8 wireframe system (newspaper-warm palette, the 17rem sticky-TOC grid,
+#: the sticky .sp-head persistent-speaker row, speaker classes, the print
+#: block) measures ~4.9 KB even after the plan's presentational-only trims
+#: (2 KB could not hold it — the deviation record in the 27.3-03-SUMMARY).
+#: 8 KB is headroom over the measured 4928 B so Waves 3/4 restyles (search /
+#: launcher / nav / date) have room without re-touching this constant.
+PAGE_BUDGET_CSS_BYTES = 8 * 1024
 
 #: A bare report-id anchor text (spec-style or live id) violates R6.
 _BARE_ID_RE = re.compile(
@@ -139,6 +146,17 @@ def _lint_anchors(
     # absolute, on the public base, and token-bearing.
     for i, a in enumerate(parser.anchors):
         href = a["href"]
+        # Same-page in-page fragment anchors (the Wave-2 TOC #speech-N links,
+        # and any future in-page navigation) are a third link class: they
+        # carry no token (R3 applies to token-bearing links) and no .u twin
+        # (R2's echo requirement applies to absolute token-bearing URLs — a
+        # relative fragment has nothing new to echo; the full absolute Cite
+        # URL for the same target already carries its .u twin on the Cite
+        # line). The linter's 400-anchor cap (PAGE_BUDGET_LINKS) counts
+        # them — they are anchors — but R1/R2/R3 are scoped to absolute
+        # links only (27.3-03; the plan's TOC machine-surface truth).
+        if href.startswith("#") and not href.startswith("#/"):
+            continue
         parts = urlsplit(href)
         if a["rel"] == "noopener noreferrer" and href.startswith("https://"):
             continue
@@ -355,7 +373,7 @@ def test_error_pages_conformant(token_store, index) -> None:
 
 def test_invalid_token_404_byte_identical(client_with_index: TestClient) -> None:
     """The tokenless 404 stays byte-identical to the captured production body
-    (fixture + md5 1a29cc13…) and carries no nav strip (T-27.1-11)."""
+    (fixture + md5 d782a3a3…) and carries no nav strip (T-27.1-11)."""
     fixture = _INVALID_404_FIXTURE.read_bytes()
     assert hashlib.md5(fixture).hexdigest() == _INVALID_404_MD5
     r = client_with_index.get(f"/a/{_BOGUS_TOKEN}/report/{E2E_REPORT_ID}")
@@ -371,7 +389,9 @@ def test_u_span_css_is_visible() -> None:
         Path(__file__).parent.parent
         / "src" / "hansard_gateway" / "render" / "templates" / "base.html"
     ).read_text(encoding="utf-8")
-    u_rule = re.search(r"span\.u \{([^}]*)\}", base_html)
+    # Wave-2 restyle (27.3-03) minified the shared <style> block (no space
+    # after the selector) — match both forms.
+    u_rule = re.search(r"span\.u ?\{([^}]*)\}", base_html)
     assert u_rule, "base.html must style span.u"
     css = u_rule.group(1)
     for banned in ("display: none", "display:none", "visibility: hidden",

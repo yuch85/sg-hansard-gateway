@@ -30,21 +30,34 @@
     {% endif %}
     {% endif %}
   </nav>
-  <h1>{{ report.title }}</h1>
+  {% if toc_entries %}
+  <nav class="toc" aria-label="Speaker index">
+    <h2>Speaker index</h2>
+    <ol>
+      {% for entry in toc_entries %}
+      <li class="toc-{{ entry.speaker_class }}">
+        <a href="#speech-{{ entry.sequence }}"><span class="toc-turn">{{ entry.sequence }}</span> {{ entry.speaker_label }}</a>
+        <em class="toc-first">{{ entry.preview }}</em>
+      </li>
+      {% endfor %}
+    </ol>
+    {% if toc_dropped_count %}
+    <p class="toc-note">(index shows first {{ toc_entries|length }} of {{ toc_entries|length + toc_dropped_count }} speeches)</p>
+    {% endif %}
+  </nav>
+  {% endif %}
+  <div class="masthead">
+    <h1>{{ report.title }}</h1>
+    <p class="byline">{{ byline }}</p>
+    <hr class="rule">
+  </div>
   <dl>
     <dt>Date</dt>
     <dd>{{ date_long }}</dd>
-    <dt>Report ID</dt>
-    <dd><code>{{ report.report_id }}</code></dd>
-    {% if report.parliament_no %}<dt>Parliament No</dt><dd>{{ report.parliament_no }}</dd>{% endif %}
-    {% if report.session_no %}<dt>Session No</dt><dd>{{ report.session_no }}</dd>{% endif %}
-    {% if report.sitting_no %}<dt>Sitting No</dt><dd>{{ report.sitting_no }}</dd>{% endif %}
-    {% if report.volume %}<dt>Volume</dt><dd>{{ report.volume }}</dd>{% endif %}
-    {% if report.topic_type %}<dt>Section</dt><dd>{{ report.topic_type }}</dd>{% endif %}
+    <dt>Section</dt>
+    <dd>{{ report.topic_type or '—' }}</dd>
     <dt>Source</dt>
     <dd>Singapore Parliamentary Reports</dd>
-    <dt>Retrieved</dt>
-    <dd>{{ retrieved }}</dd>
     <dt>Official SPRS record</dt>
     <dd>
       <a href="{{ report.source_url }}" rel="noopener noreferrer">{{ report.source_url }}</a>
@@ -52,7 +65,6 @@
       <small>(this section on the official site — opens in a normal browser; the id <code>{{ report.report_id }}</code> is the gateway's)</small>
     </dd>
   </dl>
-  <p><code>Transcript SHA-256: {{ report.transcript_sha256 }}</code></p>
   <section id="transcript">
     <h2>Transcript</h2>
     {% if cite_note %}
@@ -60,16 +72,33 @@
     {% endif %}
     {% for speech in report.speeches %}
     {% set cite = speech_cites[loop.index0] %}
-    <article class="speech" id="speech-{{ speech.sequence }}">
-      <h3>{{ speech.speaker_original if speech.speaker_original else "[procedural]" }}</h3>
-      {% if cite is defined and cite[0] is not none %}
-      <p class="cite">Cite: <a href="{{ cite[0] }}">{{ cite[1] }}</a><span class="u">{{ cite[0] }}</span></p>
-      {% endif %}
+    <article class="speech {{ classify_speaker(speaker_original=speech.speaker_original) }}" id="speech-{{ speech.sequence }}">
+      <header class="sp-head">
+        <span class="turn">{{ speech.sequence }}</span>
+        <h3>{{ speaker_label(speech=speech) }}</h3>
+        {% if cite is defined and cite[0] is not none %}
+        <p class="cite">Cite: <a href="{{ cite[0] }}">{{ cite[1] }}</a><span class="u">{{ cite[0] }}</span></p>
+        {% endif %}
+      </header>
       {% for paragraph in speech.paragraphs %}
       <p>{{ paragraph }}</p>
       {% endfor %}
     </article>
     {% endfor %}
+  </section>
+  <section class="provenance">
+    <h2>Provenance</h2>
+    <dl>
+      <dt>Report ID</dt>
+      <dd><code>{{ report.report_id }}</code></dd>
+      {% if report.parliament_no %}<dt>Parliament No</dt><dd>{{ report.parliament_no }}</dd>{% endif %}
+      {% if report.session_no %}<dt>Session No</dt><dd>{{ report.session_no }}</dd>{% endif %}
+      {% if report.sitting_no %}<dt>Sitting No</dt><dd>{{ report.sitting_no }}</dd>{% endif %}
+      {% if report.volume %}<dt>Volume</dt><dd>{{ report.volume }}</dd>{% endif %}
+      <dt>Retrieved</dt>
+      <dd>{{ retrieved }}</dd>
+    </dl>
+    <p><code>Transcript SHA-256: {{ report.transcript_sha256 }}</code></p>
   </section>
   <footer>
     <p>Retrieved live from Singapore Parliamentary Reports.</p>

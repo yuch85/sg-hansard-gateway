@@ -5,17 +5,74 @@
   <meta name="referrer" content="no-referrer">
   <title>Upstream temporarily unavailable</title>
   <style>
-    body { font-family: Georgia, "Times New Roman", serif; max-width: 60rem;
-           margin: 0 auto; padding: 1rem 1.5rem; line-height: 1.5; color: #1a1a1a; }
-    h1 { font-size: 1.6rem; } h2 { font-size: 1.3rem; } h3 { font-size: 1.05rem; }
-    dl dt { font-weight: bold; margin-top: 0.4rem; }
-    article.speech { margin: 1rem 0; padding: 0.75rem 1rem; border-left: 3px solid #444;
-                     background: #fafafa; }
-    article.speech p { margin: 0.4rem 0; }
-    footer { margin-top: 2rem; font-size: 0.9rem; color: #555; border-top: 1px solid #ddd;
-             padding-top: 0.75rem; }
-    code { background: #eee; padding: 0.1rem 0.3rem; }
-    a { color: #0b3d91; }
+/* a8 wireframe system (newspaper-warm). Trimmed to the 2 KB linter budget
+   (PAGE_BUDGET_CSS_BYTES, summed over ALL <style> blocks per page; trims
+   list in 27.3-03-SUMMARY). NEVER trimmed: .u visibility (screen+print),
+   the gold :target state, the sticky .sp-head persistent-speaker row. */
+:root{--p:#f7f4ee;--i:#1a1a1a;--t:#9b3d2b;--m:#8a8178;--gb:#fff3b0;--ge:#b8860b;--c:#fbf9f4;--r:#ddd3c2}
+body{font-family:Georgia,serif;background:var(--p);color:var(--i);margin:0;font-size:1rem;line-height:1.55}
+main{max-width:78rem;margin:0 auto;padding:0 1.5rem 2rem;display:grid;grid-template-columns:17rem minmax(0,1fr);gap:2.5rem;align-items:start}
+main>*{grid-column:2;min-width:0}
+h1{font-size:1.75rem}
+h2{font-size:1.3rem}
+dl{display:grid;grid-template-columns:auto 1fr;gap:.15rem 1rem}
+dl dt{font-weight:700;margin-top:.35rem}
+dl dd{margin:0}
+a{color:var(--t)}
+code{font-family:monospace;font-size:.85em;background:#efe9dc;padding:.05rem .3rem}
+nav.global-nav{grid-column:1/-1;font-size:.85rem;color:var(--m);padding:.35rem 0;margin-bottom:1.25rem}
+nav.global-nav.bottom{margin-top:2.5rem}
+nav.global-nav a{color:var(--m)}
+nav.page-nav{font-size:.9rem;color:var(--m);margin:0 0 1.5rem;padding:.5rem 0}
+nav.page-nav p{margin:.2rem 0}
+.masthead{margin-bottom:1.25rem}
+.masthead .byline{font-style:italic;color:#4c463d;margin:0;font-size:.95rem}
+.masthead .rule{border:0;border-top:3px double var(--r);margin:.75rem 0 0}
+nav.toc{grid-column:1;position:sticky;top:.75rem;max-height:calc(100vh - 1.5rem);overflow-y:auto;font-size:.85rem;background:var(--c);border:1px solid var(--r);padding:.75rem .9rem .9rem}
+nav.toc h2{font-size:.7rem;text-transform:uppercase;color:var(--m);margin:0 0 .5rem}
+nav.toc ol{list-style:none;margin:0;padding:0}
+nav.toc li{margin:0 0 .55rem;line-height:1.35}
+nav.toc .toc-turn{font-size:.7rem;color:var(--m);display:inline-block;min-width:1.4rem}
+nav.toc .toc-first{display:block;font-size:.72rem;color:var(--m);font-style:italic;margin:0 0 0 1.9rem;max-width:15rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+nav.toc a{color:var(--i)}
+nav.toc li.toc-speaker a{color:var(--m);font-weight:400;font-size:.8rem}
+nav.toc li.toc-procedural a{color:var(--m);font-size:.75rem}
+section#transcript>h2{font-size:1.1rem;text-transform:uppercase;color:var(--t);border-bottom:2px solid var(--t);padding-bottom:.3rem;margin:1.75rem 0 .5rem}
+article.speech{position:relative;margin:0 0 .5rem;padding:0 0 1.4rem 3.2rem}
+article.speech>.sp-head{position:sticky;top:0;z-index:5;background:var(--p);padding:.55rem 0 .45rem;margin-bottom:.25rem}
+.turn{position:absolute;left:-3.2rem;top:.7rem;font-size:.75rem;color:var(--m);width:2.6rem;text-align:right}
+h3{margin:0;font-size:1.02rem}
+article.speech.mp h3{color:var(--t);font-weight:700;font-variant:small-caps}
+article.speech.mp>.sp-head{border-bottom:1px solid var(--r)}
+article.speech.speaker h3{color:#4c463d;font-weight:600;font-size:.95rem}
+article.speech.procedural h3{color:var(--m);font-weight:400;font-size:.88rem;font-style:italic}
+article.speech.procedural p{color:#5d574d;font-size:.95rem}
+article.speech p{margin:.55rem 0}
+.provenance{margin-top:2rem;padding:.9rem 1.1rem;background:var(--c);border:1px solid var(--r);font-size:.8rem;color:#5d574d}
+.provenance h2{font-size:.7rem;text-transform:uppercase;color:var(--m);margin:0 0 .5rem}
+.provenance dt{font-weight:700;color:#4c463d}
+footer{margin-top:2rem;font-size:.9rem;color:#5d574d;border-top:3px double var(--r);padding-top:.75rem}
+footer p{margin:.35rem 0}
+@media (max-width:62rem){
+main{grid-template-columns:1fr}
+main>*{grid-column:1}
+nav.toc{position:static;max-height:none}
+nav.toc ol{display:grid;grid-template-columns:1fr 1fr;gap:0 1.5rem}
+article.speech{padding-left:0}
+.turn{position:static;display:inline-block;text-align:left;min-width:0;width:auto;margin-right:.6rem}
+}
+@media print{
+body{background:#fff;font-size:10.5pt}
+nav.global-nav,nav.page-nav,nav.toc,.cite{display:none}
+main{display:block;max-width:none;padding:0}
+main>*{grid-column:auto}
+article.speech{break-inside:avoid-page;padding:0 0 .6rem 0}
+article.speech>.sp-head{position:static;background:#fff;padding-top:0}
+.turn{position:static;display:inline;width:auto}
+span.u{font-size:7.5pt;color:#666}
+a{color:#000}
+article.speech:target{background:var(--gb)}
+}
   </style>
 </head>
 <body>

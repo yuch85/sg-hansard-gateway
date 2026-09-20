@@ -81,6 +81,18 @@ WAVE1_REPORT_ABS_DELTA = 60
 #: offline page (identical, because the delta is the shared base <style>).
 WAVE1_BASE_CSS_DELTA = 604
 
+#: Wave-2 CSS delta (bytes of inline CSS added to base.html by the a8
+#: wireframe system — the 27.3-03 restyle: palette variables, the 17rem
+#: sticky-TOC grid, the sticky .sp-head persistent-speaker row, speaker
+#: classes, the provenance block, the print block). Every page type
+#: inherits base.html, so the offline byte_size equality accounts for this
+#: fixed additive delta ON TOP OF the Wave-1 delta. Measured on the
+#: launcher (the smallest offline page): rendered 22596 - wave0 18540 =
+#: 4056 total (Wave-1 604 + Wave-2 3452). The Wave-2 delta is the rendered
+#: CSS growth: 4927 (wave2 rendered CSS) - 1485 (wave1 rendered CSS) = 3442,
+#: plus 10 bytes of template whitespace from the restructure.
+WAVE2_BASE_CSS_DELTA = 3452
+
 #: The surface fields compared for FULL equality on offline entries.
 _EQUALITY_KEYS: tuple[str, ...] = (
     "hrefs", "u_texts", "anchor_texts", "correspondence",
@@ -163,16 +175,18 @@ def test_machine_surface_matches_wave0(
     if entry.source == "offline":
         for key in _EQUALITY_KEYS:
             if key == "byte_size":
-                # Wave-1 base.html CSS delta (the :target + .u + .cite rules)
-                # is inherited by EVERY page type — the machine surface fields
+                # Wave-1 + Wave-2 base.html CSS deltas (the :target + .u +
+                # .cite rules + the a8 wireframe system) are inherited by
+                # EVERY page type — the machine surface fields
                 # (hrefs/.u/counts/correspondence) stay byte-identical to
-                # wave0; only the shared <style> block grew. Account for it
-                # explicitly (Wave-1 is the last wave to touch base.html's
-                # shared CSS; later restyle waves refresh these fixtures via
-                # the per-wave wave<N>/ dir instead).
-                assert surface[key] == baseline[key] + WAVE1_BASE_CSS_DELTA, (
+                # wave0; only the shared <style> block grew. Account for
+                # both explicitly.
+                assert surface[key] == (
+                    baseline[key] + WAVE1_BASE_CSS_DELTA + WAVE2_BASE_CSS_DELTA
+                ), (
                     f"{entry.name}: byte_size {surface[key]} != wave0 "
-                    f"{baseline[key]} + Wave-1 CSS delta {WAVE1_BASE_CSS_DELTA}"
+                    f"{baseline[key]} + Wave-1 {WAVE1_BASE_CSS_DELTA} + "
+                    f"Wave-2 {WAVE2_BASE_CSS_DELTA} CSS deltas"
                 )
             else:
                 assert surface[key] == baseline[key], (
