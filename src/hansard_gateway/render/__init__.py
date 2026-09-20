@@ -22,6 +22,10 @@ from hansard_gateway.render.cite import (
     build_cite_context,
     measure_non_cite_page,
 )
+from hansard_gateway.render.toc import (
+    build_toc_entries,
+    toc_max,
+)
 # Absolute token-bearing URL builders live in :mod:`.urls` (spec R1/R3/R5);
 # re-exported here so existing imports keep working (plan 27.1-02).
 from hansard_gateway.render.urls import (  # noqa: F401
@@ -167,10 +171,30 @@ def render_report(*, report: HansardReport, token: str, retrieved: str,
         report=report, token=token,
         non_cite_links=non_cite_links, base_bytes=base_bytes,
     )
+    cite_count = sum(1 for url in cite_urls if url is not None)
+    # Wave 2: the TOC is a machine-surface change (in-page #speech-N
+    # anchors). It is subject to BOTH caps (G-A6-2): the combined
+    # link+byte allocation (toc_max) is computed BEFORE rendering from
+    # the measured pre-Cite page, then the TOC is built CAPPED (M3).
+    toc_limit = toc_max(
+        speech_count=len(report.speeches),
+        non_cite_links=non_cite_links,
+        base_bytes=base_bytes,
+        cite_count=cite_count,
+    )
+    toc_entries = build_toc_entries(
+        report=report, max_entries=toc_limit
+    )
     return _render(
         "report.html", protected=True, token=token,
         speech_cites=list(zip(cite_urls, cite_labels)),
         cite_note=any(url is not None for url in cite_urls),
+        toc_entries=toc_entries,
+        toc_dropped_count=(
+            len(report.speeches) - len(toc_entries)
+            if toc_limit < len(report.speeches)
+            else 0
+        ),
         **base_context,
     )
 
