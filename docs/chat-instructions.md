@@ -24,6 +24,8 @@ To find a topic: on the start page, use "Find a topic by word". Pick any distinc
 
 To read a debate: follow a search result link to the full transcript. The page gives you links to the rest of that sitting, to related topics, and to a JSON version.
 
+Citing specific speeches: each report has a JSON version (the "JSON" link at the bottom of the page, or `?format=json`). Example: `{BASE_URL}/a/{TOKEN}/report/bill-774?format=json`. In that JSON, every speech object has a "cite_url" field. When you cite a specific speech to support a point, copy the cite_url value verbatim from that speech's JSON object — do not derive it from the speech number, the speaker's order, or its position in the page. Opening it in a browser scrolls to and highlights that speech. Do not invent or edit these URLs.
+
 Work like a researcher: start broad, read the promising transcripts in full, and note who said what and on what date. Cite the report id and the SHA-256 digest shown in the transcript footer so claims can be re-verified. Quote sparingly and attribute every quote to a named speaker and date.
 
 If something fails: never retry by inventing a different URL. Go back to the start page or use the "Navigate" bar at the top of any page, and take a different route. If a search returns nothing, the page will suggest alternatives — follow one.
@@ -36,7 +38,7 @@ Search: {BASE_URL}/a/{TOKEN}/search?q=YOUR+QUERY
 Sitting table of contents: {BASE_URL}/a/{TOKEN}/date/YYYY-MM-DD
 One report/transcript: {BASE_URL}/a/{TOKEN}/report/REPORT_ID
 
-Optional format on any of the three: append &format=json (structured results, or the full transcript as JSON with a transcript_sha256 field) or &format=text (plain text).
+Optional format on any of the three: append `?format=json` (structured results, or the full transcript as JSON with a transcript_sha256 field) or `?format=text` (plain text). Use `&format=…` instead of `?format=…` only when the URL already has a query string.
 
 Search parameters (all optional): &from=YYYY-MM-DD &to=YYYY-MM-DD &speaker=NAME &page=N &limit=50 (limit max 50; the default page shows the top 50 of the estimated total, and larger result sets offer rendered page links — in MODE 2 just increase page).
 
@@ -60,3 +62,8 @@ Research the same way in either mode: start with a search on a distinctive phras
   is advisory retrieval policy.
 - Tokens rotate without downtime to the URL pattern: `hg-tokens rotate <label>`
   prints the new plaintext once; old tokens 404 immediately after.
+- Cite lines on the HTML report page are PRESENTATION and page-budget-capped:
+  a large report may show zero of them (e.g. a 150 KB base page renders at
+  cap 0 at any per-line constant). The JSON `cite_url` is UNIVERSAL — every
+  speech object always carries one (v0.1.7 c9), so cite from the JSON, never
+  from the presence or absence of HTML Cite lines.
