@@ -128,6 +128,12 @@ WAVE3_ENTRY_CLASS_DELTAS = {
 #: byte-identical to wave0 throughout.
 CHARLIE_BASE_CSS_DELTA = 1218
 
+#: c7 (260921) base.html viewport-meta delta: the one added <head> line
+#: ``<meta name="viewport" content="width=device-width, initial-scale=1">``
+#: (71 bytes, measured 2026-09-21) — inherited by EVERY HTML page type,
+#: machine-surface fields (hrefs/.u/counts/correspondence) unaffected.
+C7_VIEWPORT_META_DELTA = 71
+
 #: The surface fields compared for FULL equality on offline entries.
 _EQUALITY_KEYS: tuple[str, ...] = (
     "hrefs", "u_texts", "anchor_texts", "correspondence",
@@ -224,6 +230,7 @@ def test_machine_surface_matches_wave0(
                     + WAVE3_TEMPLATE_WHITESPACE
                     + WAVE3_ENTRY_CLASS_DELTAS.get(entry.name, 0)
                     + CHARLIE_BASE_CSS_DELTA
+                    + C7_VIEWPORT_META_DELTA
                 )
                 assert surface[key] == expected, (
                     f"{entry.name}: byte_size {surface[key]} != wave0 "

@@ -122,7 +122,7 @@ def test_invalid_token_404_byte_identical(client_with_index: TestClient) -> None
     assert r.status_code == 404
     body = r.content
     assert body == _get(client_with_index, f"/a/{_BOGUS_TOKEN}/search?q=x").content
-    assert hashlib.md5(body).hexdigest() == "c8605b585f493a6b5e6d936f111c9793"
+    assert hashlib.md5(body).hexdigest() == "e9c1042cedfcab41e4276facb5ae39e8"
 
 
 def test_launcher_json_format(client_with_index: TestClient) -> None:
