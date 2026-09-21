@@ -68,33 +68,22 @@ _DATE_LONG = "%d %B %Y"
 
 
 def _byline_parts(report: HansardReport, date_long: str) -> str:
-    """The masthead byline: one line of human metadata (topic type · date ·
-    {ordinal} Parliament · {ordinal} Session · Sitting N · Vol. N), omitting
-    absent fields, joined with " · ". Pure layout text — every machine id it
-    contains is ALSO present in the Provenance block (nothing is moved out of
-    the extractable surface, only de-promoted in weight)."""
-    def _ordinal(value: str) -> str:
-        """'1' -> '1st', '2' -> '2nd', '3' -> '3rd', '11' -> '11th' …"""
-        num = int(value)
-        if 10 <= num % 100 <= 12:
-            suffix = "th"
-        else:
-            suffix = {1: "st", 2: "nd", 3: "rd"}.get(num % 10, "th")
-        return f"{num}{suffix}"
+    """The masthead byline — SLIMMED (v0.1.7 item A, dedup against the dls).
 
-    parts: list[str] = []
+    The information ``<dl>`` (Date/Section/Source) + the provenance ``<dl>``
+    (Report ID/Parliament No/Session No/Sitting No/Volume) OWN all structured
+    metadata, so the byline repeats NONE of it (no date, parliament, session,
+    sitting, or volume). It carries only what the dls do not: a compact
+    descriptor — ``Hansard report — {topic_type}`` (or the bare descriptor
+    when the report carries no topic type). HTML-only layout text (the text /
+    json serializers never read it).
+
+    ``date_long`` is accepted (not consumed) to keep the call site stable
+    through the slimming — the slimmed byline carries no date."""
+    del date_long  # unused by the slimmed byline (signature stability)
     if report.topic_type:
-        parts.append(report.topic_type)
-    parts.append(date_long)
-    if report.parliament_no:
-        parts.append(f"{_ordinal(report.parliament_no)} Parliament")
-    if report.session_no:
-        parts.append(f"{_ordinal(report.session_no)} Session")
-    if report.sitting_no:
-        parts.append(f"Sitting {report.sitting_no}")
-    if report.volume:
-        parts.append(f"Vol. {report.volume}")
-    return " · ".join(parts)
+        return f"Hansard report — {report.topic_type}"
+    return "Hansard report"
 
 
 def _nav_context(token: Optional[str]) -> dict[str, Any]:
@@ -201,7 +190,7 @@ def render_report(*, report: HansardReport, token: str, retrieved: str,
         "report": report,
         "retrieved": retrieved,
         "date_long": date_long(report.date),
-        "byline": _byline_parts(report, date_long(report.date)),
+        "byline": _byline_parts(report, date_long=report.date.isoformat()),
         "report_nav": report_nav or {},
         "sitting_url": abs_date_url(token=token, day_iso=report.date.isoformat()),
         "home_url": abs_launcher_url(token=token),

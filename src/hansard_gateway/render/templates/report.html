@@ -1,35 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{ report.title }} — {{ date_long }}{% endblock %}
 {% block content %}
-  <nav class="page-nav">
-    <p>
-      <a href="{{ sitting_url }}">This sitting</a>
-      <span class="u">{{ sitting_url }}</span>
-      ·
-      <a href="{{ home_url }}">Home</a>
-      <span class="u">{{ home_url }}</span>
-    </p>
-    {% if report_nav %}
-    {% if report_nav.prev_report_url %}
-    <p>Previous report:
-      <a href="{{ report_nav.prev_report_url }}">{{ report_nav.prev_report_label }}</a>
-      <span class="u">{{ report_nav.prev_report_url }}</span></p>
-    {% endif %}
-    {% if report_nav.next_report_url %}
-    <p>Next report:
-      <a href="{{ report_nav.next_report_url }}">{{ report_nav.next_report_label }}</a>
-      <span class="u">{{ report_nav.next_report_url }}</span></p>
-    {% endif %}
-    {% if report_nav.title_terms %}
-    <p>Search title terms:
-      {% for link in report_nav.title_terms %}
-      <a href="{{ link.url }}">{{ link.label }}</a>
-      <span class="u">{{ link.url }}</span>
-      {% endfor %}
-    </p>
-    {% endif %}
-    {% endif %}
-  </nav>
   {% if toc_entries %}
   <nav class="toc" aria-label="Speaker index">
     <h2>Speaker index</h2>
@@ -116,5 +87,34 @@
     <span class="u">{{ sitting_url }}</span></p>
     <p><a href="{{ home_url }}">Back to your home</a>
     <span class="u">{{ home_url }}</span></p>
+    <nav class="page-nav">
+      <p>
+        <a href="{{ sitting_url }}">This sitting</a>
+        <span class="u">{{ sitting_url }}</span>
+        ·
+        <a href="{{ home_url }}">Home</a>
+        <span class="u">{{ home_url }}</span>
+      </p>
+      {% if report_nav %}
+      {% if report_nav.prev_report_url %}
+      <p>Previous report:
+        <a href="{{ report_nav.prev_report_url }}">{{ report_nav.prev_report_label }}</a>
+        <span class="u">{{ report_nav.prev_report_url }}</span></p>
+      {% endif %}
+      {% if report_nav.next_report_url %}
+      <p>Next report:
+        <a href="{{ report_nav.next_report_url }}">{{ report_nav.next_report_label }}</a>
+        <span class="u">{{ report_nav.next_report_url }}</span></p>
+      {% endif %}
+      {% if report_nav.title_terms %}
+      <p>Search title terms:
+        {% for link in report_nav.title_terms %}
+        <a href="{{ link.url }}">{{ link.label }}</a>
+        <span class="u">{{ link.url }}</span>
+        {% endfor %}
+      </p>
+      {% endif %}
+      {% endif %}
+    </nav>
   </footer>
 {% endblock %}

@@ -409,10 +409,25 @@ def test_report_provenance_block_complete(client_with_index: TestClient) -> None
     assert "Official SPRS record" in body
     # retrieved timestamp (ISO Zulu) present
     assert re.search(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", body)
-    # masthead byline carries the human metadata one-liner
+    # masthead byline — SLIMMED (v0.1.7 item A): the compact descriptor only;
+    # NO metadata (date/parliament/session/sitting/volume/section) repeated
+    # between the byline and the dls (the dls own all structured metadata).
     assert 'class="byline"' in body
     byline = re.search(r'<p class="byline">(.*?)</p>', body, re.DOTALL)
-    assert byline and "·" in byline.group(1)
+    assert byline, "byline missing"
+    byline_text = byline.group(1)
+    assert byline_text.strip() in (
+        "Hansard report",
+        "Hansard report — BILLS",
+    ), f"byline not the slimmed descriptor: {byline_text!r}"
+    # no dl-owned metadata in the byline: no "·" separators (the old multi-part
+    # byline), no date/parliament/session/sitting/volume vocabulary.
+    assert "·" not in byline_text
+    for forbidden in ("Parliament", "Session", "Sitting", "Vol.", "October",
+                      "19 ", "2004"):
+        assert forbidden not in byline_text, (
+            f"byline repeats dl metadata: {forbidden!r} in {byline_text!r}"
+        )
 
 
 def test_report_wave1_invariants_still_hold(client_with_index: TestClient) -> None:
@@ -485,6 +500,108 @@ def test_report_css_budget_report_and_search(
     assert r.status_code == 200
     css2 = "\n".join(re.findall(r"<style>(.*?)</style>", r.text, re.DOTALL))
     assert len(css2.encode("utf-8")) == size
+
+
+# --- v0.1.7 item A: page-nav in footer + slimmed byline (regression) ---------
+
+
+def test_page_nav_lives_in_footer_with_link_set_intact(
+    client_with_index: TestClient,
+) -> None:
+    """Item A regression: .page-nav renders INSIDE the <footer> (after the
+    provenance section), retains its exact link set + .u twins (verbatim, R2),
+    and is hidden by the EXISTING print rule (position-independent — no CSS
+    change was needed for the move)."""
+    body = _render_e2e_report(client_with_index)
+    footer_start = body.index("<footer>")
+    footer_end = body.index("</footer>")
+    nav_start = body.index('<nav class="page-nav">')
+    nav_end = body.index("</nav>", nav_start)
+    # The nav is inside the footer, and the footer is after the provenance
+    # section (the move target: after the provenance dl, inside the footer).
+    provenance = body.index('<section class="provenance">')
+    assert provenance < footer_start < nav_start < nav_end < footer_end, (
+        "page-nav not nested after provenance inside the footer"
+    )
+    nav_html = body[nav_start:nav_end]
+    # Exact link set: This sitting + Home (the offline E2E render carries no
+    # report_nav — prev/next/title-terms come from the live index sweep).
+    hrefs = re.findall(r'<a [^>]*href="([^"]+)"', nav_html)
+    assert len(hrefs) == 2, f"unexpected page-nav link set: {hrefs}"
+    assert all(f"/a/{TEST_TOKEN}" in h for h in hrefs), hrefs
+    assert any(h.endswith("/date/2004-10-19") for h in hrefs), hrefs
+    # the Home link = the launcher (the /a/{token}/ prefix — the token's
+    # trailing chars must not be mistaken for the path tail).
+    assert any(h.rstrip("/").endswith(TEST_TOKEN) for h in hrefs), hrefs
+    # .u twins: every nav href appears verbatim in a span.u (R2).
+    for href in hrefs:
+        assert f'<span class="u">{href}</span>' in nav_html, (
+            f"page-nav href lost its .u twin: {href}"
+        )
+    # Print rule: the shared base <style> hides nav.page-nav on print —
+    # position-independent, so the move needs no CSS change.
+    css = "\n".join(re.findall(r"<style>(.*?)</style>", body, re.DOTALL))
+    # The print block is nested (inner braces) — find its full extent by
+    # brace-matching from "@media print{" rather than a shallow [^}]* cut.
+    start = css.index("@media print{")
+    depth, i = 0, start + len("@media print")
+    while i < len(css):
+        if css[i] == "{":
+            depth += 1
+        elif css[i] == "}":
+            depth -= 1
+            if depth == 0:
+                break
+        i += 1
+    print_block = css[start:i + 1]
+    assert "nav.page-nav" in print_block and "display:none" in print_block, (
+        "print rule no longer hides nav.page-nav"
+    )
+
+
+def test_byline_slimmed_no_metadata_dup_with_dls(
+    client_with_index: TestClient,
+) -> None:
+    """Item A dedup (pass-1 MAJOR A-1 + pass-2 residual): the slimmed byline
+    repeats NONE of the dl-owned metadata — checked against the ACTUAL dl
+    fields on the rendered page (date/section/provenance values), not just a
+    vocabulary list."""
+    body = _render_e2e_report(client_with_index)
+    report = _e2e_report()
+    byline = re.search(r'<p class="byline">(.*?)</p>', body, re.DOTALL)
+    assert byline
+    byline_text = byline.group(1).strip()
+    # The descriptor form only.
+    assert byline_text in (
+        "Hansard report",
+        f"Hansard report — {report.topic_type}" if report.topic_type
+        else "Hansard report",
+    ), f"byline not slimmed: {byline_text!r}"
+    # No dl-owned value appears in the byline (accidental re-duplication).
+    info_dls = re.findall(
+        r"<dl>\s*<dt>.*?</dl>", body, re.DOTALL,
+    )
+    info_dl = next(
+        (dl for dl in info_dls if "<dt>Date</dt>" in dl), info_dls[0],
+    )
+    for value in re.findall(r"<dd>(.*?)</dd>", info_dl, re.DOTALL):
+        value = re.sub(r"<[^>]+>", "", value).strip()
+        # The Section dd is report.topic_type — the slimmed descriptor
+        # legitimately carries it ("Hansard report — BILLS"); every OTHER
+        # info-dl value (Date/Source) must not appear in the byline.
+        if value and value != "—" and value != (report.topic_type or ""):
+            assert value not in byline_text, (
+                f"byline repeats info-dl value: {value!r}"
+            )
+    for field in ("parliament_no", "session_no", "sitting_no", "volume"):
+        value = getattr(report, field)
+        if value:
+            assert str(value) not in byline_text, (
+                f"byline repeats provenance field {field}: {value!r}"
+            )
+    assert report.date.isoformat() not in byline_text
+    long_date = report.date.strftime("%d %B %Y")
+    assert long_date not in byline_text
 
 
 # --- Task 3: combined TOC cap arithmetic (link + byte, M2/M3) ---------------
