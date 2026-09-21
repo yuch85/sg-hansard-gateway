@@ -140,6 +140,20 @@ C7_VIEWPORT_META_DELTA = 71
 #: the shared <style> block); machine-surface fields unaffected.
 C7_F4B_NAV_U_WRAP_DELTA = -6
 
+#: c7c-F (260921) base.html CSS delta: the narrow-width overflow fix
+#: (F — the 390px CDP diagnosis named the offenders: the provenance
+#: SHA-256 ``code`` at 705px, the speech ``span.u`` clip URLs at up to
+#: 879px, and the TOC grid-item min-content at 642px). Three rules added
+#: to the shared <style>: (a) the ``code`` wrap (word-break +
+#: overflow-wrap, folded into the existing narrow ``code`` rule), (b)
+#: ``nav.toc li{min-width:0}`` + ``.toc-first{max-width:100%}`` at narrow
+#: width, (c) ``nav.toc`` ``overflow-y:auto`` -> ``overflow:auto`` so the
+#: TOC's own scroll clips its child's min-content (the vertical scroll is
+#: preserved). Measured on the launcher (smallest offline page): rendered
+#: CSS 8141 -> 8371 = +230 bytes; IDENTICAL on all six offline entries.
+#: Machine-surface fields (hrefs/.u/counts/correspondence) unaffected.
+C7C_F_OVERFLOW_DELTA = 230
+
 #: The surface fields compared for FULL equality on offline entries.
 _EQUALITY_KEYS: tuple[str, ...] = (
     "hrefs", "u_texts", "anchor_texts", "correspondence",
@@ -238,6 +252,7 @@ def test_machine_surface_matches_wave0(
                     + CHARLIE_BASE_CSS_DELTA
                     + C7_VIEWPORT_META_DELTA
                     + C7_F4B_NAV_U_WRAP_DELTA
+                    + C7C_F_OVERFLOW_DELTA
                 )
                 assert surface[key] == expected, (
                     f"{entry.name}: byte_size {surface[key]} != wave0 "

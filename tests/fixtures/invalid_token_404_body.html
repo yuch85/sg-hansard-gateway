@@ -29,7 +29,7 @@ nav.page-nav p{margin:.2rem 0}
 .masthead{margin-bottom:1.25rem}
 .masthead .byline{font-style:italic;color:#4c463d;margin:0;font-size:.95rem}
 .masthead .rule{border:0;border-top:3px double var(--r);margin:.75rem 0 0}
-nav.toc{grid-column:1;position:sticky;top:.75rem;max-height:calc(100vh - 1.5rem);overflow-y:auto;font-size:.85rem;background:var(--c);border:1px solid var(--r);padding:.75rem .9rem .9rem}
+nav.toc{grid-column:1;position:sticky;top:.75rem;max-height:calc(100vh - 1.5rem);overflow:auto;font-size:.85rem;background:var(--c);border:1px solid var(--r);padding:.75rem .9rem .9rem}
 nav.toc h2{font-size:.7rem;text-transform:uppercase;color:var(--m);margin:0 0 .5rem}
 nav.toc ol{list-style:none;margin:0;padding:0}
 nav.toc li{margin:0 0 .55rem;line-height:1.35}
@@ -67,7 +67,8 @@ nav.global-nav span.u,nav.page-nav span.u,dd span.u{display:inline;white-space:n
 html{font-size:106.25%}
 nav.toc h2{font-size:1rem}
 nav.toc .toc-turn{font-size:1rem}
-nav.toc .toc-first{font-size:.83rem}
+nav.toc .toc-first{font-size:.83rem;max-width:100%}
+nav.toc li{min-width:0}
 nav.toc li.toc-speaker a{font-size:.83rem}
 nav.toc li.toc-procedural a{font-size:.83rem}
 .turn{font-size:.83rem}
@@ -79,7 +80,9 @@ nav.toc li.toc-procedural a{font-size:.83rem}
 article.speech p{font-size:.83rem}
 article.speech:target::after{font-size:.83rem}
 span.u{font-size:.83rem}
-code{font-size:1rem}
+/* F (260921): provenance SHA-256 code — wrap at phone width (it overflowed
+   the viewport like the nav did; F4b covered dd span.u, not this). */
+code{word-break:break-all;overflow-wrap:anywhere;font-size:1rem}
 small{font-size:1rem}
 }
 @media print{

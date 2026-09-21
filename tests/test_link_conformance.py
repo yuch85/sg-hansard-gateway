@@ -33,7 +33,7 @@ PAIR_BASE = "https://search.pair.gov.sg"
 #: The live production invalid-token 404 body fingerprint (no enumeration) —
 #: pinned by tests/fixtures/invalid_token_404_body.html (the captured live body).
 _BOGUS_TOKEN = "hg_invalidtoken00000000000000zz"
-_INVALID_404_MD5 = "d9eb47423d3230fb8bda25763636eb35"
+_INVALID_404_MD5 = "6e81518dd6c3f8363f8943d2bf6d9397"
 _INVALID_404_FIXTURE = Path(__file__).parent / "fixtures" / "invalid_token_404_body.html"
 
 #: The spec §5.1 nav strip label (must occur twice: top and bottom).
@@ -782,6 +782,56 @@ def test_u_single_line_not_clipped_narrow(client_with_index: TestClient) -> None
             speech_clip += 1
     assert speech_clip >= 1, "no narrow .u clip rule (speech .u) found"
     assert nav_wrap >= 1, "no narrow .u nav-wrap rule (F4b) found"
+
+
+def test_f_narrow_overflow_rules_present() -> None:
+    """F (v0.1.8, c7c): the narrow-width overflow fix is present in the
+    shared <style> block — the three offenders named by the 390px CDP
+    diagnosis (doc.scrollWidth 879 @390vw on the E2E report):
+
+    (a) the provenance SHA-256 ``code`` wraps (it was the widest non-.u
+        offender at 705px — the pre-existing '705 @390vw' number);
+    (b) the TOC column cannot widen past its track: ``nav.toc`` carries
+        ``min-width:0`` + ``overflow:auto`` (the vertical scroll is
+        preserved; the grid item's min-content can no longer force the
+        track wider), and ``nav.toc li{min-width:0}`` +
+        ``.toc-first{max-width:100%}`` bound the child's min-content;
+    (c) the desktop (non-narrow) block is untouched — the wrapping and
+        the TOC constraints live ONLY inside @media (max-width:62rem).
+    """
+    css = (Path(__file__).resolve().parent.parent / "src" / "hansard_gateway"
+           / "render" / "templates" / "base.html").read_text(encoding="utf-8")
+    # The narrow media block(s): extract everything inside the 62rem block.
+    narrow = ""
+    for media in re.finditer(r"@media[^{]*62rem[^{]*\{", css):
+        depth = 1
+        pos = media.end()
+        while pos < len(css) and depth:
+            if css[pos] == "{":
+                depth += 1
+            elif css[pos] == "}":
+                depth -= 1
+            pos += 1
+        narrow += css[media.end(): pos - 1]
+    assert "word-break:break-all" in narrow, (
+        "F: provenance code must wrap at narrow width"
+    )
+    assert "nav.toc li{min-width:0}" in narrow, (
+        "F: TOC list items must carry min-width:0 at narrow width"
+    )
+    assert "max-width:100%" in narrow, (
+        "F: .toc-first must be bounded by max-width:100% at narrow width"
+    )
+    # (c) the min-width:0 / wrap constraints must NOT leak into the base
+    # (desktop) TOC rule — desktop keeps the 17rem sticky column.
+    base_toc = re.search(r"nav\.toc\{([^}]*)\}", css)
+    assert base_toc is not None
+    assert "min-width:0" not in base_toc.group(1), (
+        "F: nav.toc min-width:0 must live in the narrow media block only"
+    )
+    assert "overflow:auto" in base_toc.group(1), (
+        "F: nav.toc must keep its (vertical) scroll mechanism"
+    )
 
 
 def test_search_result_link_ids_percent_encoded(client_with_index: TestClient) -> None:
