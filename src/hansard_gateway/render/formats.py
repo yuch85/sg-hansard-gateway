@@ -46,6 +46,22 @@ def render_report_format(*, report: HansardReport, fmt: str, token: str) -> str:
             "self": abs_report_url(token=token, link_id=report.report_id),
             "sitting": abs_date_url(token=token, day_iso=report.date.isoformat()),
         }
+        # v0.1.7 c9 (approved additive amendment): EVERY speech gains
+        # ``speech_id`` + ``cite_url`` REGARDLESS of the HTML Cite cap (the
+        # cap limits rendered PRESENTATION; JSON addressability is
+        # uncapped). cite_url calls the SAME abs_report_url helper the HTML
+        # Cite line uses (single source of truth — NOT the cap-aware
+        # build_cite_context). The two keys are APPENDED after the existing
+        # speech keys (no reordering); opening a cite_url focuses +
+        # gold-highlights the WHOLE speech article (article.speech:target),
+        # not a per-speech extraction.
+        for speech in data["speeches"]:
+            sequence = speech["sequence"]
+            speech_id = f"speech-{sequence}"
+            speech["speech_id"] = speech_id
+            speech["cite_url"] = abs_report_url(
+                token=token, link_id=report.report_id, fragment=speech_id,
+            )
         return json.dumps(data, default=_json_default, indent=2)
     lines = [
         report.title,
