@@ -148,8 +148,8 @@ The gateway is deliberately a thin layer, not a platform:
 ## Releases
 
 `latest` tracks the newest release — see [RELEASES.md](RELEASES.md) for the
-per-version notes (current: **0.1.4**). Upgrading is a pull + container
-recreate; your `/data` volume (index + tokens) carries over unchanged.
+per-version notes. Upgrading is a pull + container recreate; your `/data`
+volume (index + tokens) carries over unchanged.
 
 ## Quickstart
 
@@ -264,9 +264,9 @@ degrades to the empty state.
 
 Two vars need operator attention:
 
-- `HANSARD_PUBLIC_BASE_URL` **MUST be set to your domain.** The code default
-  is the live origin and must never ship into a new deployment — absolute
-  token-bearing URLs are built from it.
+- `HANSARD_PUBLIC_BASE_URL` **MUST be set to your domain** (the code default
+  is a placeholder — `https://hansard.example.org` — and must never ship
+  into a real deployment): absolute token-bearing URLs are built from it.
 - `HANSARD_LOG_FILE` + `HANSARD_LOG_STREAM=1` for production logging (the app
   creates the log parent dir itself at boot — no pre-creation step anywhere).
 
