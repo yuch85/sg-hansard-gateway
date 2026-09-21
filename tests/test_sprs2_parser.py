@@ -88,6 +88,71 @@ def test_column_mark_preserved(fixtures_dir: Path) -> None:
     assert "Column:" in transcript
 
 
+def test_paragraph_counts_derived_from_fixture(fixtures_dir: Path) -> None:
+    """F3: per-speech paragraph counts match the fixture's real <p> structure.
+
+    The expected count is computed PROGRAMMATICALLY from the committed fixture
+    (count the actual <p> blocks per speaker segment using the same cleaning
+    the parser applies) — never hard-coded.
+    """
+    from hansard_gateway.sprs.legacy import (
+        _clean_text,
+        _paragraph_blocks,
+        _split_segments,
+    )
+
+    raw = _load_payload(fixtures_dir)
+    html = raw["htmlContent"]  # type: ignore[index]
+    segments = _split_segments(html)
+
+    report = _report(fixtures_dir)
+    substantive = [
+        frag for _, frag in segments if len(_clean_text(frag)) >= 3
+    ]
+    assert len(report.speeches) == len(substantive), (
+        f"speech count {len(report.speeches)} != "
+        f"substantive segments {len(substantive)}"
+    )
+
+    for speech, (speaker, fragment) in zip(report.speeches, segments):
+        if len(_clean_text(fragment)) < 3:
+            continue
+        expected = _paragraph_blocks(fragment)
+        assert len(speech.paragraphs) == len(expected), (
+            f"speaker {speaker!r}: got {len(speech.paragraphs)} paragraphs, "
+            f"expected {len(expected)} from fixture <p> blocks"
+        )
+
+
+def test_exact_transformation_preservation(fixtures_dir: Path) -> None:
+    """F3 (copilot pass-1 Major 6): per-segment exact-transformation proof.
+
+    For each speaker segment: old_text = _clean_text(segment) and
+    new_paragraphs = [clean(p) for p in <p> blocks if nonempty], then
+    old_text == " ".join(new_paragraphs). This proves ONLY paragraph
+    boundaries were restored — no body character edited.
+    """
+    from hansard_gateway.sprs.legacy import (
+        _clean_text,
+        _paragraph_blocks,
+        _split_segments,
+    )
+
+    raw = _load_payload(fixtures_dir)
+    html = raw["htmlContent"]  # type: ignore[index]
+    segments = _split_segments(html)
+
+    for speaker, fragment in segments:
+        old_text = _clean_text(fragment)
+        if len(old_text) < 3:
+            continue
+        new_paragraphs = _paragraph_blocks(fragment)
+        assert old_text == " ".join(new_paragraphs), (
+            f"speaker {speaker!r}: old_text != ' '.join(new_paragraphs) — "
+            f"a body character was edited, not just boundaries restored"
+        )
+
+
 def test_transcript_sha256_stable(fixtures_dir: Path) -> None:
     """The SHA-256 fingerprint is 64 hex chars and stable across re-parses."""
     first = _report(fixtures_dir)

@@ -121,6 +121,30 @@ def _clean_text(fragment: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+#: Block tags whose text forms one transcript paragraph (F3 boundary restore).
+_LEGACY_PARA_TAGS: tuple[str, ...] = ("p",)
+
+
+def _paragraph_blocks(fragment: str) -> list[str]:
+    """Split a segment into cleaned paragraph blocks (one per <p>).
+
+    Each block is cleaned with the same per-paragraph collapse as
+    ``_clean_text`` (strip entities, collapse whitespace). Empty blocks
+    (&nbsp;-only spacers) are dropped. ``Column: N`` marks stay inside
+    their paragraph (the <p align=left>Column: N</p> is its own block).
+    """
+    soup = BeautifulSoup(fragment, "lxml")
+    blocks: list[str] = []
+    for tag_name in _LEGACY_PARA_TAGS:
+        for block in soup.find_all(tag_name):
+            text = re.sub(
+                r"\s+", " ", block.get_text(" ", strip=True)
+            ).strip()
+            if text:
+                blocks.append(text)
+    return blocks
+
+
 def _bold_speaker_segments(html: str) -> list[tuple[Optional[str], str]]:
     """Fallback walk for pre-comment docs: split on bold/strong speaker tags."""
     soup = BeautifulSoup(html, "lxml")
@@ -208,13 +232,16 @@ def parse(
         text = _clean_text(fragment)
         if len(text) < _MIN_SEGMENT_CHARS:
             continue
+        paragraphs = _paragraph_blocks(fragment)
+        if not paragraphs:
+            paragraphs = [text]
         speeches.append(
             Speech(
                 sequence=len(speeches) + 1,
                 speaker_original=speaker,
                 speaker_name=None,
                 speaker_role=None,
-                paragraphs=[text],
+                paragraphs=paragraphs,
             )
         )
 
