@@ -148,7 +148,7 @@ The gateway is deliberately a thin layer, not a platform:
 ## Releases
 
 `latest` tracks the newest release — see [RELEASES.md](RELEASES.md) for the
-per-version notes (current: **0.1.3**). Upgrading is a pull + container
+per-version notes (current: **0.1.4**). Upgrading is a pull + container
 recreate; your `/data` volume (index + tokens) carries over unchanged.
 
 ## Quickstart

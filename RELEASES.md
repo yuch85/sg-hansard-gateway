@@ -5,6 +5,65 @@ points at the newest release. The gateway is a self-contained container —
 upgrading is `docker pull` + recreate (your `/data` volume carries the index
 and tokens; no migration is needed between these releases).
 
+## 0.1.4 — 2026-09-21 (mobile responsiveness, mission 010 CHARLIE)
+
+Image: `ghcr.io/yuch85/sg-hansard-gateway:0.1.4` (= `:latest`)
+digest `sha256:3aeb1d2ebab3b5b9138dc330968c0fbbcfa0c3a8921c752fe3a16981105a2a1e`
+(= local image ID `6afd9c3e332e`, built once from commit `d94170d`; the exact
+image that passed local Docker QC is the image running in production).
+Rollback: recreate the container from `ghcr.io/yuch85/sg-hansard-gateway:0.1.3`
+(image ID `323a5ec42059`, retained locally).
+
+Mobile fixes (390 px, phone-class; desktop rendering unchanged — all changes
+are under the `@media (max-width:62rem)` query or parser-side):
+
+- **F4 — `.u` echo single-line at narrow width.** `span.u` was wrapping to
+  4–6 lines per URL (230 spans ≈ 17 KB of vertical space on bill-774; the
+  first speech sat 2,020 px down). Now `display:inline-block;
+  white-space:nowrap; overflow-x:auto` — one line, full URL horizontally
+  reachable, nothing hidden (R2: the text stays in the DOM and in extraction;
+  `overflow-x:auto` is not a hiding declaration). Global nav collapses from
+  222 px to ≈ one row; page nav from 501 px to ≈3–4 compact rows.
+- **F2 — mobile type scale.** The 62rem query was layout-only (no font-size
+  rules). Now `html{font-size:106.25%}` (17px root lifts the whole rem scale)
+  + every sub-14px declaration overridden to a 0.83rem (14.11px) floor
+  (`.u` included — quietness now comes from single-line + muted color, not
+  size). Measured: no element below 14px at 390px.
+- **F1 — `:target` highlight de-occlusion.** The gold highlight was applied
+  but the sticky `.sp-head` painted over the "Cited passage" marker + the
+  top of the gold. Now `scroll-margin-top:var(--sp-head-clear)` (11rem =
+  187px, from the measured worst-case header height of 160px on the
+  production container — the plan's 8rem/136px was a single-element
+  measurement, corrected at QC) + the marker deterministically anchored
+  below the header band. Verified: fragment navigation lands with the
+  highlight top edge and marker clear of the sticky header.
+- **F3 — legacy-sitting paragraph restore.** Pre-2003 payloads carry NO
+  `<p>` markup (the 1993 Application of English Law Bill payload: 22 KB,
+  0 `<p>`, 112 `<br>`, wrapped in full `<html>`) and 2004-era payloads use
+  `<p>` blocks; the parser collapsed both into one string per speech. Now
+  both eras are split on their real boundaries at parse time. **Intentional
+  compatibility change, confined to legacy reports outside the frozen
+  compatibility corpus:** legacy `?format=text` gains the restored paragraph
+  newlines (character content excluding boundary whitespace is provably
+  unchanged — machine-asserted), and legacy `transcript_sha256` values
+  change correspondingly. Modern reports (the frozen corpus, e.g. bill-774)
+  remain `?format=text` byte-identical.
+- **404 re-pin.** The tokenless invalid-token 404 body inherits base.html's
+  `<style>`; new md5 `c8605b585f493a6b5e6d936f111c9793` (token-free +
+  nav-free no-enumeration invariant intact; capture on an EXISTING route).
+
+Caps (measured on the production container, bill-774): inline CSS 8,141 B
+≤ 8,192 B budget; anchors 51 ≤ 400; page 101,258 B — see the known
+pre-existing exception below (unchanged by this release). Zero JS/forms/
+iframes/external resources (R4 gate green). Suite: 431 passed / 2
+deselected.
+
+Known pre-existing exception (carried from 0.1.3, unchanged): the live
+206-hit search rendering is 105.9 KB against the 100 KB page budget. This
+condition predates 0.1.3 (and therefore 0.1.4); the offline conformance
+suite does not lint that live worst-case page, so the 100 KB budget is not
+claimed as universally enforced. Future work will reduce it.
+
 ## 0.1.3 (2026-09-21)
 
 **Human-facing restyle + speech citation** (mission 010, phase 27.3).
