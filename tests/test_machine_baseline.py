@@ -118,18 +118,15 @@ WAVE3_ENTRY_CLASS_DELTAS = {
     "date_2026-01-12": 18,
 }
 
-#: CHARLIE (260921) CSS delta on the offline entries. The mobile
-#: responsiveness fixes (F4 .u clip, F2 type scale, F1 :target de-occlusion)
-#: add CSS under @media(max-width:62rem) in base.html. Every page type
-#: inherits base.html, so the offline byte_size equality accounts for this
-#: fixed additive delta ON TOP OF the Wave-1/2/3 deltas. Measured per entry
-#: at the CHARLIE boundary (2026-09-21):
-#:   launcher 25759-24672=1087, nav_h 13236-12149=1087, years 12562-11475=1087,
-#:   members 17190-16103=1087, bills 17012-15925=1087, date 19043-17956=1087.
-#: The delta is IDENTICAL (1087 B) on every offline page — the shared
-#: base.html narrow-query CSS block. The machine-surface fields
-#: (hrefs/.u/counts/correspondence) stay byte-identical to wave0.
-CHARLIE_BASE_CSS_DELTA = 1104
+#: CHARLIE (260921) base.html CSS delta: the growth of the shared
+#: narrow-query CSS block from the wave3 (pre-CHARLIE) fixture to the
+#: CHARLIE tree — launcher 25890-24672, IDENTICAL on all six offline
+#: entries (measured 2026-09-21, post the F1 clearance fix). The
+#: offline equality target is wave0 (IMMUTABLE), so the assertion below
+#: adds the per-wave increments (WAVE1/2/3) PLUS this constant. The
+#: machine-surface fields (hrefs/.u/counts/correspondence) stay
+#: byte-identical to wave0 throughout.
+CHARLIE_BASE_CSS_DELTA = 1218
 
 #: The surface fields compared for FULL equality on offline entries.
 _EQUALITY_KEYS: tuple[str, ...] = (
