@@ -37,8 +37,9 @@ BUDGET_LINKS = 400
 #: Wave-2 (27.3-03) raised the inline-CSS budget from 2 KB to 8 KB: the
 #: approved a8 wireframe system measures ~4.9 KB even after the plan's
 #: presentational-only trims (the deviation record in the 27.3-03-SUMMARY).
-#: 8 KB is headroom over the measured 4927 B so Waves 3/4 restyles have room.
-BUDGET_CSS_BYTES = 8 * 1024
+#: 8 KB was headroom over the measured 4927 B; raised to 12 KB (YC, 260921)
+#: after CHARLIE consumed the last headroom — see test_link_conformance.
+BUDGET_CSS_BYTES = 12 * 1024
 
 #: The spec §7.2 header values.
 ROBOTS_HEADER = "noindex, nofollow, noarchive"

@@ -47,9 +47,13 @@ PAGE_BUDGET_LINKS = 400
 #: the sticky .sp-head persistent-speaker row, speaker classes, the print
 #: block) measures ~4.9 KB even after the plan's presentational-only trims
 #: (2 KB could not hold it — the deviation record in the 27.3-03-SUMMARY).
-#: 8 KB is headroom over the measured 4928 B so Waves 3/4 restyles (search /
-#: launcher / nav / date) have room without re-touching this constant.
-PAGE_BUDGET_CSS_BYTES = 8 * 1024
+#: 8 KB was headroom over the measured 4928 B; CHARLIE (260921) consumed the
+#: last of it (8,168 B at the v0.1.4 baseline), so every mobile fix since
+#: needed CSS-comment trimming to fit. YC approved raising it to 12 KB
+#: (260921) — still a real bloat guard (the inline <style> ships on every
+#: page), ~4 KB working room for the header→footer / sticky-speaker /
+#: Cite-on-all-reports fixes. TEST-ONLY: not enforced by the running app.
+PAGE_BUDGET_CSS_BYTES = 12 * 1024
 
 #: A bare report-id anchor text (spec-style or live id) violates R6.
 _BARE_ID_RE = re.compile(
