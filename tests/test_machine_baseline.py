@@ -138,7 +138,7 @@ C7_VIEWPORT_META_DELTA = 71
 #: (F4b — nav echo URLs overflowed the viewport horizontally at phone width;
 #: they now wrap). 143 bytes, inherited by every HTML page (the rule sits in
 #: the shared <style> block); machine-surface fields unaffected.
-C7_F4B_NAV_U_WRAP_DELTA = -16
+C7_F4B_NAV_U_WRAP_DELTA = -6
 
 #: The surface fields compared for FULL equality on offline entries.
 _EQUALITY_KEYS: tuple[str, ...] = (

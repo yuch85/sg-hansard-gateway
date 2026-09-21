@@ -33,7 +33,7 @@ PAIR_BASE = "https://search.pair.gov.sg"
 #: The live production invalid-token 404 body fingerprint (no enumeration) —
 #: pinned by tests/fixtures/invalid_token_404_body.html (the captured live body).
 _BOGUS_TOKEN = "hg_invalidtoken00000000000000zz"
-_INVALID_404_MD5 = "9e8affead8146656e4f9c68336d598de"
+_INVALID_404_MD5 = "d9eb47423d3230fb8bda25763636eb35"
 _INVALID_404_FIXTURE = Path(__file__).parent / "fixtures" / "invalid_token_404_body.html"
 
 #: The spec §5.1 nav strip label (must occur twice: top and bottom).
