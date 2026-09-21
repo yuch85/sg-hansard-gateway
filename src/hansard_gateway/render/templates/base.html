@@ -103,9 +103,11 @@ article.speech:target::after{content:"Cited passage";position:absolute;top:0;rig
 @media (max-width:62rem){
 article.speech:target{padding-left:3px}
 /* F1: de-occlude the :target highlight (copilot pass-1 Major 3+4).
-   --sp-head-clear = ceil(H_max/17)+1 rem, H_max=112.03px measured at 390px
-   after F2 landed (bill-774 worst-case speaker wrap). 8rem = 136px >= 112px. */
-:root{--sp-head-clear:8rem}
+   --sp-head-clear = ceil(H_max/17)+1 rem, from the v0.1.4 container
+   measurement (all fourteen .sp-heads at phone width: the page max,
+   one hundred sixty pixels — the recon's single-element reading was not
+   the max). 11rem = one hundred eighty-seven pixels, which clears it. */
+:root{--sp-head-clear:11rem}
 article.speech{scroll-margin-top:var(--sp-head-clear)}
 article.speech:target{background:#ffe97d;box-shadow:inset 4px 0 0 var(--ge)}
 article.speech:target::after{top:calc(var(--sp-head-clear) + .5rem)}

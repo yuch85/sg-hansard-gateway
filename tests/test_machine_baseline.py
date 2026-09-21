@@ -129,7 +129,7 @@ WAVE3_ENTRY_CLASS_DELTAS = {
 #: The delta is IDENTICAL (1087 B) on every offline page — the shared
 #: base.html narrow-query CSS block. The machine-surface fields
 #: (hrefs/.u/counts/correspondence) stay byte-identical to wave0.
-CHARLIE_BASE_CSS_DELTA = 1087
+CHARLIE_BASE_CSS_DELTA = 1095
 
 #: The surface fields compared for FULL equality on offline entries.
 _EQUALITY_KEYS: tuple[str, ...] = (
