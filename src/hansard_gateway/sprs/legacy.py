@@ -121,8 +121,60 @@ def _clean_text(fragment: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-#: Block tags whose text forms one transcript paragraph (F3 boundary restore).
-_LEGACY_PARA_TAGS: tuple[str, ...] = ("p",)
+#: Tags whose text forms one transcript paragraph (F3 boundary restore).
+#: Two eras: pre-2003 payloads use bare <br> line breaks (no block markup —
+#: verified live 2026-09-21: the 1993 APPLICATION OF ENGLISH LAW BILL
+#: payload is 22 KB, 0 <p> tags, 112 <br>); later payloads use <p> blocks
+#: (the 2004 SAF fixture: 45 <p>, 0 <br>). <p> takes precedence when both
+#: exist (the 2004-era docs never mix the two).
+_LEGACY_PARA_TAGS: tuple[str, ...] = ("p", "br")
+
+
+def _has_block_markup(fragment: str) -> bool:
+    """True if the fragment carries <p> paragraph blocks (2004+ era)."""
+    return "<p" in fragment
+
+
+def _br_paragraph_blocks(fragment: str) -> list[str]:
+    """Split a <br>-delimited fragment into cleaned paragraph blocks.
+
+    Bare-<br> era payloads carry no block markup: each <br> is a paragraph
+    boundary. The run of text between boundaries is cleaned with the same
+    per-paragraph collapse as _clean_text; empty runs (&nbsp; spacers) are
+    dropped. The leading ``MP_NAME:`` marker (an artifact of the segment
+    slicing, not transcript) is stripped first — the same normalization
+    _clean_text gets for free via the comment-based segment walk.
+    """
+    fragment = re.sub(r"^MP_NAME:\s*", "", fragment)
+    soup = BeautifulSoup(fragment, "lxml")
+    # The bare-<br> era wraps the transcript in full <html> markup (verified
+    # live 2026-09-21: the 1993 payload carries <html><head>…<meta>…</head>
+    # <body>…). Only the <body> subtree is transcript — walking the whole
+    # soup would swallow <head> (and BeautifulSoup's get_text skips
+    # <script>/<style> but not <meta>), so scope the walk to <body>.
+    body = soup.body or soup
+    blocks: list[str] = []
+    current: list[str] = []
+
+    def flush() -> None:
+        text = re.sub(r"\s+", " ", " ".join(current)).strip()
+        if text:
+            blocks.append(text)
+        current.clear()
+
+    def walk(node: Any) -> None:
+        for child in node.children:
+            name = getattr(child, "name", None)
+            if name == "br":
+                flush()
+            elif name is not None:
+                walk(child)
+            else:
+                current.append(str(child))
+
+    walk(body)
+    flush()
+    return blocks
 
 
 def _paragraph_blocks(fragment: str) -> list[str]:
@@ -133,16 +185,18 @@ def _paragraph_blocks(fragment: str) -> list[str]:
     (&nbsp;-only spacers) are dropped. ``Column: N`` marks stay inside
     their paragraph (the <p align=left>Column: N</p> is its own block).
     """
-    soup = BeautifulSoup(fragment, "lxml")
-    blocks: list[str] = []
-    for tag_name in _LEGACY_PARA_TAGS:
-        for block in soup.find_all(tag_name):
-            text = re.sub(
-                r"\s+", " ", block.get_text(" ", strip=True)
-            ).strip()
-            if text:
-                blocks.append(text)
-    return blocks
+    if _has_block_markup(fragment):
+        soup = BeautifulSoup(fragment, "lxml")
+        blocks: list[str] = []
+        for tag_name in _LEGACY_PARA_TAGS:
+            for block in soup.find_all(tag_name):
+                text = re.sub(
+                    r"\s+", " ", block.get_text(" ", strip=True)
+                ).strip()
+                if text:
+                    blocks.append(text)
+        return blocks
+    return _br_paragraph_blocks(fragment)
 
 
 def _bold_speaker_segments(html: str) -> list[tuple[Optional[str], str]]:
