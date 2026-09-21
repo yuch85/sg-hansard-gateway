@@ -696,6 +696,72 @@ def test_u_rendered_extraction_all_pages(client_with_index: TestClient) -> None:
         )
 
 
+def test_u_single_line_not_clipped_narrow(client_with_index: TestClient) -> None:
+    """F4 rendered gate (copilot pass-1 Major 1): the narrow-query .u rule
+    keeps the URL DOM-preserved AND visually reachable — the mechanism must be
+    a one-line scroll container, never a clip.
+
+    (a) DOM-preserved: every span.u's full URL text is present in the
+        rendered report page (existing strip-tags/un-escape extraction).
+    (b) Not visually clipped: the narrow-query (max-width:62rem) .u rule
+        declares white-space:nowrap and either overflow-x:auto (scroll) or
+        no overflow at all — and contains NO overflow:hidden (a clip).
+    """
+    with respx.mock(base_url=UPSTREAM_BASE, assert_all_called=False) as mock:
+        mock.post("/getHansardTopic").respond(json=_topic_fixture())
+        pair = respx.mock(base_url=PAIR_BASE, assert_all_called=False,
+                          assert_all_mocked=False)
+        pair.start()
+        try:
+            body = client_with_index.get(
+                f"/a/{TEST_TOKEN}/report/{E2E_REPORT_ID}"
+            ).text
+        finally:
+            pair.stop()
+
+    # (a) DOM-preserved: extraction path finds every .u URL in the DOM.
+    stripped = re.sub(
+        r"<(style|script)[^>]*>.*?</\1>", "", body, flags=re.DOTALL
+    )
+    from html import unescape
+    text = unescape(re.sub(r"<[^>]+>", " ", stripped))
+    text = re.sub(r"\s+", " ", text)
+    u_urls = re.findall(
+        r'<span class="u"[^>]*>(.*?)</span>', body, re.DOTALL
+    )
+    assert u_urls, "report page rendered no span.u echoes"
+    missing = [u for u in u_urls if u not in unescape(text)]
+    assert not missing, f"span.u URLs missing from DOM extraction: {missing[:3]}"
+
+    # (b) The narrow-query .u rule is a scroll container, not a clip.
+    # Bracket-balanced scan: each @media … 62rem block is extracted by
+    # counting nested braces (the media bodies contain rule blocks).
+    narrow_rules: list[str] = []
+    for css in _style_blocks(body):
+        for media in re.finditer(r"@media[^{]*62rem[^{]*\{", css):
+            depth = 1
+            pos = media.end()
+            while pos < len(css) and depth:
+                if css[pos] == "{":
+                    depth += 1
+                elif css[pos] == "}":
+                    depth -= 1
+                pos += 1
+            media_body = css[media.end():pos - 1]
+            for rule in re.finditer(r"([^{}]+)\{([^}]*)\}", media_body):
+                selector, declarations = rule.group(1).strip(), rule.group(2)
+                if ".u" in selector:
+                    narrow_rules.append(declarations)
+    assert narrow_rules, "no narrow-query (max-width:62rem) .u rule found"
+    for decls in narrow_rules:
+        assert "white-space:nowrap" in decls, (
+            f"narrow .u rule lacks white-space:nowrap: {decls}"
+        )
+        assert "overflow:hidden" not in decls.replace(" ", ""), (
+            f"narrow .u rule visually clips (overflow:hidden): {decls}"
+        )
+
+
 def test_search_result_link_ids_percent_encoded(client_with_index: TestClient) -> None:
     """A link_id containing '#' renders quote()d and round-trips (R5)."""
     rows = _search_fixture_rows()
