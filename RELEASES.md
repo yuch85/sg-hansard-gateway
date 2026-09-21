@@ -5,6 +5,78 @@ points at the newest release. The gateway is a self-contained container —
 upgrading is `docker pull` + recreate (your `/data` volume carries the index
 and tokens; no migration is needed between these releases).
 
+## 0.1.7 — 2026-09-21 (footer nav + slim byline, universal JSON citation, safe cite cap — mission 010 v0.1.7)
+
+Image: `ghcr.io/yuch85/sg-hansard-gateway:0.1.7` (= `:latest`)
+digest `sha256:5a21cb8b48c689e595615c89f0397eb556cfc7b41815805f79a3ee9d477c9214`
+(= local image ID built from commit `d196072`; the exact image that passed
+the offline suite (443), the 390 px named checks, and the hard
+machine-contract gate (7/7) is the image running in production).
+Rollback: recreate the container from
+`ghcr.io/yuch85/sg-hansard-gateway:0.1.6`
+(digest `sha256:59337d154aca5bb872ec1a959eaec5d2e4653e107d1253f0e1a4c0bbfa15341a`)
+— copy the FULL env list from a `docker inspect` config capture (T-27-77).
+
+**What changed (three work items, copilot-reviewed plan — 3-pass
+SOUNDS-GOOD gate):**
+
+- **Report page-nav moved to the footer + byline slimmed (HTML-only).**
+  The report page's page navigation (This sitting / Home / Previous /
+  Next / Search title terms) now renders in the footer, after the
+  provenance section; the report's info `dl` (Date/Section/Source/Official
+  SPRS record) stays at the top — the human's first "what is this" answer.
+  The byline no longer duplicates any `dl`-owned metadata (date,
+  parliament, session, sitting, volume, section): it is now a compact
+  descriptor, e.g. "Hansard report — Second Reading Bills". The
+  global nav (every page) is untouched.
+- **Per-speech citation URLs in `?format=json` (the one approved additive
+  machine-contract amendment).** Every speech object now carries
+  `"speech_id": "speech-N"` and `"cite_url"` — the absolute report URL +
+  `#speech-N`, built by the SAME `abs_report_url` helper the HTML Cite
+  lines use (no separate URL logic). This is UNIVERSAL: it does not depend
+  on the HTML Cite cap, so even reports whose HTML shows zero Cite lines
+  (e.g. bill-773) expose a valid cite URL for every speech. An AI reading
+  the JSON can now cite the exact speech that supports a point; opening
+  the `cite_url` in a browser scrolls to and gold-highlights that speech
+  (the existing CSS `:target`). All pre-existing JSON fields are
+  value-identical; the two new keys are appended per speech.
+  `?format=text` is byte-identical.
+- **Cite-cap constant replaced by a provable worst-case bound.**
+  `CITE_EST_BYTES_PER_LINE = 220` → `CITE_WORST_BYTES_PER_LINE = 700`,
+  derived from the maximum allowed dimensions of every variable component
+  (token ≤ `settings.token_max_len`, report id ≤ 64, fragment ≤ 10 chars,
+  post-escape speaker label ≤ 80, fixed public base URL) — O(1), enforced
+  by tests, not measured from one fixture. Consequence: on reports where
+  the old estimate over-admitted Cite lines, the HTML Cite count is now
+  more conservative (bill-774: 14 → 11 live). Addressability is not
+  affected — the JSON `cite_url` (above) is universal, and every speech
+  keeps its `id="speech-N"` target regardless of the cap.
+- **Sticky speaker name: diagnosed, no CSS change.** At 390 px under CDP
+  the per-speech sticky header behaves exactly as designed: it persists
+  while its own speech is scrolling, and the next speaker's header takes
+  over at the article boundary. No overflow-creating ancestor exists in
+  the computed style chain. The acceptance behavior is per-article sticky +
+  next-speaker takeover (not a global cross-article speaker bar — that
+  would duplicate speaker text, which the machine-readability invariant
+  forbids). If a specific phone still shows the header disappearing
+  mid-speech, that is a device-specific observation to report (it did not
+  reproduce under CDP at 390 px).
+
+**Known pre-existing issue (NOT introduced by 0.1.7, unchanged since
+0.1.6/0.1.5):** the speaker-index TOC (`nav.toc li.toc-mp`) causes
+horizontal overflow at phone width (document scrollWidth ≈ 705 px at a
+390 px viewport). Measured identical on the pre-0.1.7 tree. Out of scope
+for 0.1.7; will be addressed in a follow-up release.
+
+- Machine contract: `?format=text` byte-identical (asserted live + offline);
+  `?format=json` — exactly two additive per-speech fields
+  (`speech_id`, `cite_url`), all pre-existing fields value-identical
+  (hard build gate, 7/7 PASS before the image was built).
+- 404 body UNCHANGED (md5 `d9eb4742…`): base.html was not modified, so no
+  T-27-62 re-pin was required (verified live post-cutover).
+- CSS budget: unchanged (no base.html CSS delta this release).
+- Suite: 443 passed / 2 deselected.
+
 ## 0.1.6 — 2026-09-21 (mobile nav word-wrap fix, mission 010 c7-F4b)
 
 Image: `ghcr.io/yuch85/sg-hansard-gateway:0.1.6` (= `:latest`)
