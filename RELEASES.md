@@ -5,6 +5,37 @@ points at the newest release. The gateway is a self-contained container —
 upgrading is `docker pull` + recreate (your `/data` volume carries the index
 and tokens; no migration is needed between these releases).
 
+## 0.1.6 — 2026-09-21 (mobile nav word-wrap fix, mission 010 c7-F4b)
+
+Image: `ghcr.io/yuch85/sg-hansard-gateway:0.1.6` (= `:latest`)
+digest `sha256:59337d154aca5bb872ec1a959eaec5d2e4653e107d1253f0e1a4c0bbfa15341a`
+(= local image ID built from commit `4ad229f`; the exact image that passed
+local + 390 px QC is the image running in production).
+Rollback: recreate the container from
+`ghcr.io/yuch85/sg-hansard-gateway:0.1.5`
+(digest `sha256:7d48200636a96287969b795dbc6d8b0b8e7ac8c3780f4df348016b17e9ac8df9`)
+— copy the FULL env list from a `docker inspect` config capture (T-27-77).
+
+**The fix:** on 0.1.5 the pre-transcript block (global nav + page nav +
+search-term echoes) did not word-wrap to the window width on phones. Cause:
+the 0.1.4 F4 single-line `.u` clip
+(`white-space:nowrap; overflow-x:auto`) made the nav echo URLs — the longest
+tokens on the page — overflow the viewport horizontally instead of wrapping.
+The transcript itself has no `.u`, which is why it wrapped fine. 0.1.6 adds
+a narrow-width rule so the nav `.u` URLs wrap:
+`nav.global-nav span.u, nav.page-nav span.u { display:inline;
+white-space:normal; overflow:visible; max-height:none; margin-top:0;
+word-break:break-all }`. Speech `.u` keeps the single-line clip (it sits
+inside a padded speech card, no page overflow). R2-safe: the URL text stays
+in the DOM and in extraction; only the wrap behavior changes.
+
+- Machine contract: `?format=text` / `?format=json` unchanged (CSS-only).
+- 404 body re-pinned (T-27-62): md5 `e9c1042c…` → `9e8affea…`; no-enumeration
+  invariant (token-free + nav-free) intact.
+- Offline suite: 431 passed / 2 deselected. 390 px verification: document
+  width == viewport (no horizontal overflow), nav `.u` wraps
+  (`white-space:normal`, `word-break:break-all`), transcript unchanged.
+
 ## 0.1.5 — 2026-09-21 (mobile viewport fix, mission 010 c7)
 
 Image: `ghcr.io/yuch85/sg-hansard-gateway:0.1.5` (= `:latest`)
