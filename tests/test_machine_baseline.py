@@ -152,7 +152,9 @@ C7_F4B_NAV_U_WRAP_DELTA = -6
 #: preserved). Measured on the launcher (smallest offline page): rendered
 #: CSS 8141 -> 8371 = +230 bytes; IDENTICAL on all six offline entries.
 #: Machine-surface fields (hrefs/.u/counts/correspondence) unaffected.
-C7C_F_OVERFLOW_DELTA = 230
+#: Includes the E-clear comment growth (11rem→14rem var + the v0.1.8
+#: measurement note: +1 B on the launcher, identical on all six entries).
+C7C_F_OVERFLOW_DELTA = 231
 
 #: c7c-E (260921) base.html CSS delta: ZERO on the offline entries. The
 #: ``.sp-sprs`` rules (per-speech "Official SPRS record" line, v0.1.8 item E)
