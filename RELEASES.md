@@ -77,6 +77,70 @@ for 0.1.7; will be addressed in a follow-up release.
 - CSS budget: unchanged (no base.html CSS delta this release).
 - Suite: 443 passed / 2 deselected.
 
+## 0.1.8 — 2026-09-22 (per-speech SPRS record link, docs cite_url, TOC mobile overflow — mission 010 v0.1.8)
+
+Image: `ghcr.io/yuch85/sg-hansard-gateway:0.1.8` (= `:latest`)
+digest `sha256:99cbbb50926519c713dce0d0283cd2204b41d0adb78005feaadf9f5b140f4a09`
+(= local image ID built from commit `0c0cdf0`; the exact image that passed
+the offline suite (445), the 390 px named checks, and the hard
+machine-contract gate (7/7, final-render combined-cap) is the image running
+in production).
+Rollback: recreate the container from
+`ghcr.io/yuch85/sg-hansard-gateway:0.1.7`
+(digest `sha256:5a21cb8b48c689e595615c89f0397eb556cfc7b41815805f79a3ee9d477c9214`)
+— copy the FULL env list from a `docker inspect` config capture (T-27-77).
+
+**What changed (copilot-reviewed plan — 2-pass SOUNDS-GOOD gate):**
+
+- **Per-speech "Official SPRS record" link under the persistent speaker
+  name (feature request).** Each speech's sticky header now carries a small
+  line: "Official SPRS record" + the SPRS section URL (with its `.u` twin).
+  The URL reuses `report.source_url` — the SAME value as the provenance
+  "Official SPRS record" (the `topic_source_url()` section route from
+  mission 008); no separate URL logic. Semantics: it is the official SPRS
+  section CONTAINING the speech — SPRS has no per-speaker anchor, so it is
+  not claimed to deep-link to the individual speech. It is UNCONDITIONAL
+  (present in the pre-Cite measurement render — regression-tested), so the
+  Cite cap's byte arithmetic sees it honestly. Machine contract: the SPRS
+  hrefs are external (they do NOT enter the `/a/hg_` token-link counter —
+  the Cite cap's link branch is untouched) but DO consume rendered bytes;
+  the final-render combined-cap assertion (Cite + TOC + SPRS lines) is a
+  hard build gate. `?format=text` / `?format=json` unchanged (asserted live
+  + offline). Side effect (accepted, documented): on reports that sit
+  close to the 100 KB budget, the extra per-speech bytes can shrink or
+  zero the HTML Cite-line count (e.g. bill-774: 11 → 0, its page now
+  ~105.8 KB) — addressability is NOT affected: the JSON `cite_url`
+  (0.1.7) is universal, and every speech keeps its `id="speech-N"` target.
+- **Sticky-header clearance re-measured.** The taller `.sp-head` (one line
+  more at phone width) → `--sp-head-clear` 11rem → 14rem (measured worst
+  case 217px @390px, all headers, per the v0.1.4 F1 lesson — measure,
+  don't guess); the `:target` "Cited passage" offset follows the same
+  variable. Verified: direct `#speech-N` navigation lands the target below
+  the header, marker not occluded, next-speaker takeover intact.
+- **Speaker-index TOC mobile overflow fixed.** The TOC's own overflow
+  (grid-item min-content, 615px @390vw) is scoped: `nav.toc` scrolls
+  internally (`overflow:auto`), `li{min-width:0}`, `.toc-first` width
+  constrained at narrow width, and the provenance `code` (the SHA-256
+  hash, 705px) now wraps. Note: the widest remaining 390px element is the
+  speech `.u` single-line clip (the F4 design — it keeps URL text in the
+  DOM for machine readability; it scrolls internally and does not break
+  layout).
+- **`docs/chat-instructions.md` (drop-in prompt) updated:** PART A gains
+  the "Citing specific speeches" section — every speech's JSON object has
+  a `cite_url`; copy it VERBATIM from that speech's object — do not derive
+  it from the speech number, the speaker's order, or its position in the
+  page (the anti-position-drift line targets the observed bill-773 failure
+  where a citation drifted two speeches). MODE 2 wording trap fixed
+  (`&format=json` → `?format=json`). PART B gains the operator note: HTML
+  Cite lines are presentation + page-budget-capped (a large report may
+  show zero); the JSON `cite_url` is universal.
+
+- Machine contract: `?format=text` byte-identical (live-verified vs the
+  0.1.7 capture); `?format=json` field-set + values identical to the
+  0.1.7 contract (live-verified — E is template-only). 404 body re-pinned
+  (T-27-62): md5 `d9eb4742…` → `6e81518d…` (CSS-only delta; verified live).
+- Suite: 445 passed / 2 deselected.
+
 ## 0.1.6 — 2026-09-21 (mobile nav word-wrap fix, mission 010 c7-F4b)
 
 Image: `ghcr.io/yuch85/sg-hansard-gateway:0.1.6` (= `:latest`)
