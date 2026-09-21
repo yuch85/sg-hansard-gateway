@@ -61,10 +61,7 @@ nav.toc{position:static;max-height:none}
 nav.toc ol{display:grid;grid-template-columns:1fr 1fr;gap:0 1.5rem}
 article.speech{padding-left:0}
 span.u{display:inline-block;white-space:nowrap;overflow-x:auto;line-height:1.15;vertical-align:bottom;margin-top:.15rem;max-height:1.3em}
-/* F2: mobile type scale — a 17px root lifts every rem-sized element at once;
-   the sub-14px declarations below are overridden to the 0.83rem (14.11px)
-   floor so NO element (including .u) renders below 14px at phone width.
-   The two uppercase h2 labels stay at 1rem to keep the label hierarchy. */
+/* F2: 17px root + 0.83rem (14.11px) floor — no element below 14px at phone width */
 html{font-size:106.25%}
 nav.toc h2{font-size:1rem}
 nav.toc .toc-turn{font-size:1rem}
@@ -76,9 +73,12 @@ nav.toc li.toc-procedural a{font-size:.83rem}
 .provenance h2{font-size:1rem}
 .refine h2{font-size:1rem}
 .narrow-further h2{font-size:1rem}
-.cite{font-size:.83rem}
+.cite,.cite a{font-size:.83rem}
+article.speech p{font-size:.83rem}
 article.speech:target::after{font-size:.83rem}
 span.u{font-size:.83rem}
+code{font-size:1rem}
+small{font-size:1rem}
 }
 @media print{
 body{background:#fff;font-size:10.5pt}
@@ -93,14 +93,23 @@ a{color:#000}
 article.speech:target{background:var(--gb)}
 }
 {% if token %}
-span.u {font-size:.65rem;color:var(--m);word-break:break-all;display:inline;margin-left:.4rem;vertical-align:baseline}
+span.u {color:var(--m);word-break:break-all;margin-left:.4rem;vertical-align:baseline}
 .cite{margin:.2rem 0 0;font-size:.75rem;color:var(--m)}
 .cite a{color:var(--m)}
 .cite a:hover{color:var(--ge)}
 .cite-note{font-size:.85rem;color:var(--m);font-style:italic;margin:.25rem 0 1rem}
 article.speech:target{background:var(--gb);box-shadow:inset 3px 0 0 var(--ge);padding-left:calc(3.2rem + 3px)}
 article.speech:target::after{content:"Cited passage";position:absolute;top:0;right:.5rem;font-size:.65rem;text-transform:uppercase;color:var(--ge)}
-@media (max-width:62rem){article.speech:target{padding-left:3px}}
+@media (max-width:62rem){
+article.speech:target{padding-left:3px}
+/* F1: de-occlude the :target highlight (copilot pass-1 Major 3+4).
+   --sp-head-clear = ceil(H_max/17)+1 rem, H_max=112.03px measured at 390px
+   after F2 landed (bill-774 worst-case speaker wrap). 8rem = 136px >= 112px. */
+:root{--sp-head-clear:8rem}
+article.speech{scroll-margin-top:var(--sp-head-clear)}
+article.speech:target{background:#ffe97d;box-shadow:inset 4px 0 0 var(--ge)}
+article.speech:target::after{top:calc(var(--sp-head-clear) + .5rem)}
+}
 {% endif %}
 /* Wave-3 layout system (27.3-04): 2-column search results + refine panel,
    card grids, the A-Z letter ladder, the sticky narrow-further band.
