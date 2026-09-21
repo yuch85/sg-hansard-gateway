@@ -5,6 +5,47 @@ points at the newest release. The gateway is a self-contained container —
 upgrading is `docker pull` + recreate (your `/data` volume carries the index
 and tokens; no migration is needed between these releases).
 
+## 0.1.5 — 2026-09-21 (mobile viewport fix, mission 010 c7)
+
+Image: `ghcr.io/yuch85/sg-hansard-gateway:0.1.5` (= `:latest`)
+digest `sha256:7d48200636a96287969b795dbc6d8b0b8e7ac8c3780f4df348016b17e9ac8df9`
+(= local image ID `b95a5094`, built once from commit `ffca05b`; the exact
+image that passed local + 390 px QC is the image running in production).
+Rollback: recreate the container from
+`ghcr.io/yuch85/sg-hansard-gateway:0.1.4`
+(digest `sha256:3aeb1d2ebab3b5b9138dc330968c0fbbcfa0c3a8921c752fe3a16981105a2a1e`,
+local ID `6afd9c3e332e`, retained) — copy the FULL env list from a
+`docker inspect` config capture (T-27-77), not just volume/port/restart.
+
+**The fix:** v0.1.4 shipped with **no `<meta name="viewport">` on any page**.
+Phones (and any narrow client) then lay the page out at the 980 px desktop
+viewport and zoom out ~2.5× — text rendered at ~6 px, and the content sat in
+a third-width column with a wide empty right margin. The 62rem narrow media
+queries (the 0.1.4 mobile type scale, the single-line `.u` clip, the
+scroll-margin clearance) never fired on a real phone. One line added to
+`base.html` head —
+`<meta name="viewport" content="width=device-width, initial-scale=1">` —
+makes every page lay out at the device width; the 0.1.4 narrow-scale CSS now
+applies as intended (17 px root, 14 px floor, readable on phones).
+
+- Machine contract: `?format=text` / `?format=json` unchanged (the meta is an
+  HTML `<head>` line; the plain-text and JSON serializers never emit it).
+- 404 body re-pinned (T-27-62): md5 `c8605b58…` → `e9c1042c…` (the invalid-
+  token 404 inherits base.html); no-enumeration invariant (token-free +
+  nav-free) intact.
+- Offline suite: 431 passed / 2 deselected. 390 px verification (CDP
+  390×844 @3x): device-width resolves (722 CSS px, not 980), narrow scale
+  active (body 17 px / speech 16.15 px / TOC 14.45 px / `.u` 14.11 px —
+  all above the 14 px floor), `:target` gold highlight visible.
+
+Known boundary (unchanged, T-27-67/T-27-79): citation Cite lines +
+`#speech-N` deep links exist in the HTML view only; a text-fetching AI's
+extracted representation does not preserve them, so the highlight fires on a
+real browser click, not from an AI's text fetch. Follow-ups queued (c8:
+deterministic Cite coverage across modern reports; c9: per-speech
+`speech_id` + `cite_url` in `?format=json` from the same URL source of truth
+as the HTML).
+
 ## 0.1.4 — 2026-09-21 (mobile responsiveness, mission 010 CHARLIE)
 
 Image: `ghcr.io/yuch85/sg-hansard-gateway:0.1.4` (= `:latest`)
