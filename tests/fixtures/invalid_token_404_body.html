@@ -59,7 +59,25 @@ main>*{grid-column:1}
 nav.toc{position:static;max-height:none}
 nav.toc ol{display:grid;grid-template-columns:1fr 1fr;gap:0 1.5rem}
 article.speech{padding-left:0}
-.turn{position:static;display:inline-block;text-align:left;min-width:0;width:auto;margin-right:.6rem}
+span.u{display:inline-block;white-space:nowrap;overflow-x:auto;line-height:1.15;vertical-align:bottom;margin-top:.15rem;max-height:1.3em}
+/* F2: 17px root + 0.83rem (14.11px) floor — no element below 14px at phone width */
+html{font-size:106.25%}
+nav.toc h2{font-size:1rem}
+nav.toc .toc-turn{font-size:1rem}
+nav.toc .toc-first{font-size:.83rem}
+nav.toc li.toc-speaker a{font-size:.83rem}
+nav.toc li.toc-procedural a{font-size:.83rem}
+.turn{font-size:.83rem}
+.provenance{font-size:.83rem}
+.provenance h2{font-size:1rem}
+.refine h2{font-size:1rem}
+.narrow-further h2{font-size:1rem}
+.cite,.cite a{font-size:.83rem}
+article.speech p{font-size:.83rem}
+article.speech:target::after{font-size:.83rem}
+span.u{font-size:.83rem}
+code{font-size:1rem}
+small{font-size:1rem}
 }
 @media print{
 body{background:#fff;font-size:10.5pt}
