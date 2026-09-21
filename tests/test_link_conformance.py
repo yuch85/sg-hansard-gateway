@@ -733,9 +733,9 @@ def test_u_single_line_not_clipped_narrow(client_with_index: TestClient) -> None
     missing = [u for u in u_urls if u not in unescape(text)]
     assert not missing, f"span.u URLs missing from DOM extraction: {missing[:3]}"
 
-    # (b) The narrow-query .u rule is a scroll container, not a clip.
-    # Bracket-balanced scan: each @media … 62rem block is extracted by
-    # counting nested braces (the media bodies contain rule blocks).
+    # (b) The narrow-query .u MECHANISM rule (the one declaring
+    # white-space:nowrap) must not be a clip. The F2 font-size floor rule on
+    # .u is a separate concern and is excluded here.
     narrow_rules: list[str] = []
     for css in _style_blocks(body):
         for media in re.finditer(r"@media[^{]*62rem[^{]*\{", css):
@@ -747,10 +747,14 @@ def test_u_single_line_not_clipped_narrow(client_with_index: TestClient) -> None
                 elif css[pos] == "}":
                     depth -= 1
                 pos += 1
-            media_body = css[media.end():pos - 1]
+            # Strip CSS comments — comment text can contain braces or
+            # selector-like tokens (e.g. "14px") that would pollute the scan.
+            media_body = re.sub(
+                r"/\*.*?\*/", "", css[media.end():pos - 1], flags=re.DOTALL
+            )
             for rule in re.finditer(r"([^{}]+)\{([^}]*)\}", media_body):
                 selector, declarations = rule.group(1).strip(), rule.group(2)
-                if ".u" in selector:
+                if ".u" in selector and "white-space" in declarations:
                     narrow_rules.append(declarations)
     assert narrow_rules, "no narrow-query (max-width:62rem) .u rule found"
     for decls in narrow_rules:

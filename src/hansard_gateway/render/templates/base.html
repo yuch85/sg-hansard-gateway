@@ -60,12 +60,25 @@ main>*{grid-column:1}
 nav.toc{position:static;max-height:none}
 nav.toc ol{display:grid;grid-template-columns:1fr 1fr;gap:0 1.5rem}
 article.speech{padding-left:0}
-.turn{position:static;display:inline-block;text-align:left;min-width:0;width:auto;margin-right:.6rem}
-/* F4: the .u echo is ONE line at phone width — nowrap keeps the full URL
-   on a single rendered line, overflow-x:auto lets it scroll horizontally
-   (every character reachable, nothing clipped — R2: .u never hidden),
-   and the 1.3em max-height is a guard against an abnormal double line. */
 span.u{display:inline-block;white-space:nowrap;overflow-x:auto;line-height:1.15;vertical-align:bottom;margin-top:.15rem;max-height:1.3em}
+/* F2: mobile type scale — a 17px root lifts every rem-sized element at once;
+   the sub-14px declarations below are overridden to the 0.83rem (14.11px)
+   floor so NO element (including .u) renders below 14px at phone width.
+   The two uppercase h2 labels stay at 1rem to keep the label hierarchy. */
+html{font-size:106.25%}
+nav.toc h2{font-size:1rem}
+nav.toc .toc-turn{font-size:1rem}
+nav.toc .toc-first{font-size:.83rem}
+nav.toc li.toc-speaker a{font-size:.83rem}
+nav.toc li.toc-procedural a{font-size:.83rem}
+.turn{font-size:.83rem}
+.provenance{font-size:.83rem}
+.provenance h2{font-size:1rem}
+.refine h2{font-size:1rem}
+.narrow-further h2{font-size:1rem}
+.cite{font-size:.83rem}
+article.speech:target::after{font-size:.83rem}
+span.u{font-size:.83rem}
 }
 @media print{
 body{background:#fff;font-size:10.5pt}
