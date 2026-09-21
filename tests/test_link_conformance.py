@@ -520,18 +520,17 @@ def test_cite_cap_conformance() -> None:
         and f"/a/{TEST_TOKEN}/" in a["href"]
     ])
     base_bytes = len(pre_cite.encode("utf-8"))
-    from hansard_gateway.render.cite import CITE_EST_BYTES_PER_LINE
+    from hansard_gateway.render.cite import CITE_WORST_BYTES_PER_LINE
 
     expected = cite_speech_limit(
         speech_count=SYNTHETIC_SPEECH_COUNT,
         non_cite_links=non_cite_links,
         base_bytes=base_bytes,
-        est_bytes_per_cite=CITE_EST_BYTES_PER_LINE,
     )
     assert cite_count == expected, (
         f"rendered Cite lines {cite_count} != cap function {expected} "
         f"(non_cite_links={non_cite_links}, base_bytes={base_bytes}, "
-        f"est={CITE_EST_BYTES_PER_LINE})"
+        f"worst={CITE_WORST_BYTES_PER_LINE})"
     )
 
     # (c) every Cite line: token in href (R3) + .u twin (R2).
@@ -560,9 +559,9 @@ def test_cite_cap_conformance() -> None:
     # (The synthetic page's MEASURED bytes can exceed 100 KB on body text
     # alone — the byte cap is enforced pre-render by the ESTIMATE branch, and
     # post-render by the linter on real pages.)
-    from hansard_gateway.render.cite import CITE_EST_BYTES_PER_LINE
+    from hansard_gateway.render.cite import CITE_WORST_BYTES_PER_LINE
 
-    tight_base = PAGE_BUDGET_HTML_BYTES - CITE_EST_BYTES_PER_LINE * 2
+    tight_base = PAGE_BUDGET_HTML_BYTES - CITE_WORST_BYTES_PER_LINE * 2
     tight_limit = cite_speech_limit(
         speech_count=SYNTHETIC_SPEECH_COUNT,
         non_cite_links=non_cite_links,

@@ -562,12 +562,12 @@ def test_toc_combined_cap_conformance() -> None:
       the page's measured non-Cite/TOC absolute-link count and Cite_count =
       cite_speech_limit(...) (the Wave-1 cap, unchanged).
     * TOC_max_bytes = max(0, (PAGE_BUDGET_BYTES - base_bytes - Cite_count *
-      CITE_EST_BYTES_PER_LINE) // EST_BYTES_PER_TOC_ENTRY).
+      CITE_WORST_BYTES_PER_LINE) // EST_BYTES_PER_TOC_ENTRY).
     * TOC_max = min(TOC_max_links, TOC_max_bytes, speech_count).
 
     The test runs the allocation function (toc_max) in-test and asserts:
     (a) the resulting page-size estimate (base_bytes + Cite_count *
-        CITE_EST_BYTES_PER_LINE + rendered_TOC_count * EST_BYTES_PER_TOC_ENTRY)
+        CITE_WORST_BYTES_PER_LINE + rendered_TOC_count * EST_BYTES_PER_TOC_ENTRY)
         is <= 100 KB (M2 byte-budget proof);
     (b) the rendered page's total anchor count <= 400 (the linter's cap);
     (c) the rendered TOC entry count == min(speech_count, TOC_max)
@@ -578,7 +578,7 @@ def test_toc_combined_cap_conformance() -> None:
     (e) the rendered page's measured byte size <= 100 KB (the fail-safe).
     """
     from hansard_gateway.render.cite import (
-        CITE_EST_BYTES_PER_LINE,
+        CITE_WORST_BYTES_PER_LINE,
         cite_speech_limit,
     )
     from hansard_gateway.render.toc import (
@@ -602,12 +602,11 @@ def test_toc_combined_cap_conformance() -> None:
     ])
     base_bytes = len(pre.encode("utf-8"))
 
-    # The Wave-1 cap (unchanged).
+    # The Wave-1 cap (unchanged in shape; v0.1.7 worst-case bound).
     cite_count = cite_speech_limit(
         speech_count=SYNTHETIC_SPEECH_COUNT,
         non_cite_links=B,
         base_bytes=base_bytes,
-        est_bytes_per_cite=CITE_EST_BYTES_PER_LINE,
     )
 
     # The combined TOC cap (M2).
@@ -623,7 +622,7 @@ def test_toc_combined_cap_conformance() -> None:
     # (a) the page-size estimate is <= 100 KB (M2 byte-budget proof).
     est = (
         base_bytes
-        + cite_count * CITE_EST_BYTES_PER_LINE
+        + cite_count * CITE_WORST_BYTES_PER_LINE
         + toc_limit * EST_BYTES_PER_TOC_ENTRY
     )
     assert est <= PAGE_BUDGET_BYTES, (

@@ -162,19 +162,19 @@ def toc_max(
       absolute anchor; each TOC entry = one in-page anchor; the linter's 400
       count covers ALL anchors).
     * byte branch: TOC_max_bytes = max(0, (PAGE_BUDGET_BYTES - base_bytes -
-      Cite_count * CITE_EST_BYTES_PER_LINE) // EST_BYTES_PER_TOC_ENTRY) — the
-      TOC entries add bytes the Wave-1 CITE estimate does not cover.
+      Cite_count * CITE_WORST_BYTES_PER_LINE) // EST_BYTES_PER_TOC_ENTRY) — the
+      TOC entries add bytes the Cite bound does not cover.
 
     Pure, total, no I/O — the conformance assertion imports THIS function
     (G-A6-2 determinism).
     """
-    from hansard_gateway.render.cite import CITE_EST_BYTES_PER_LINE
+    from hansard_gateway.render.cite import CITE_WORST_BYTES_PER_LINE
 
     link_branch = max(0, page_budget_links - non_cite_links - cite_count)
     byte_headroom = (
         page_budget_bytes
         - base_bytes
-        - cite_count * CITE_EST_BYTES_PER_LINE
+        - cite_count * CITE_WORST_BYTES_PER_LINE
     )
     byte_branch = max(0, byte_headroom // EST_BYTES_PER_TOC_ENTRY)
     return min(speech_count, link_branch, byte_branch)

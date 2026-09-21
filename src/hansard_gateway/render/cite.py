@@ -37,13 +37,49 @@ from hansard_gateway.render.urls import abs_report_url
 CITE_PAGE_BUDGET_LINKS: int = 400
 CITE_PAGE_BUDGET_BYTES: int = 100 * 1024
 
-#: CONSERVATIVE UPPER BOUND for the emitted Cite anchor + its .u echo
-#: material (anchor text + href + a .u twin of a long token URL, calibrated
-#: from the wireframe Cite line). It is headroom for the PRE-RENDER
-#: arithmetic, not a measured per-line value: the conformance assertion
-#: re-measures on real renders, and the final rendered-page <=100 KB linter
-#: is the actual safety check that must hold regardless of the estimate.
+#: WORST-CASE UPPER BOUND for one rendered Cite block
+#: ``<p class="cite">Cite: <a href="URL">LABEL</a><span class="u">URL</span></p>``
+#: (UTF-8 bytes, escaping INSIDE the bound — :func:`cite_label` truncates the
+#: label to :data:`CITE_LABEL_MAX_CHARS` by construction). Derived O(1) from
+#: the MAXIMUM ALLOWED dimensions of every variable component (v0.1.7 plan,
+#: C8-2 — a demonstrable bound, not a per-report measurement; the preferred
+#: exact-render approach was rejected as O(speech_count) renders per request):
+#:
+#: * token length <= :attr:`settings.token_max_len` (123) — enforced by the
+#:   auth shape guard;
+#: * report id <= :data:`CITE_REPORT_ID_MAX` (64) — a generous ceiling over the
+#:   ~12-24-char actual ids, asserted by the test that no stored/generated id
+#:   exceeds it (the bound is enforced, not assumed);
+#: * fragment "speech-N" <= 10 chars (N <= :data:`CITE_SPEECH_MAX`);
+#: * speaker label <= :data:`CITE_LABEL_MAX_CHARS` chars POST-ESCAPE (the
+#:   truncation makes the bound hold by construction);
+#: * base URL = :attr:`settings.public_base_url` (fixed deployment value).
+#:
+#: Computed worst case = 617 B (base URL 30 + path 14 + token 123 + id 64 +
+#: fragment 11 ("speech-9999") + label 80 + fixed markup); 700 carries
+#: headroom for base-URL whitespace/attribute variation. The 80 B label
+#: component assumes the post-escape rendered length <= 80 B, which holds for
+#: the name-shaped speaker text the corpus carries (ASCII — no escape
+#: expansion; the label bound test pins this on every committed baseline and
+#: on an over-long synthetic). Consequence (accepted): for common tokens
+#: (~29 chars, ~250 B/line) the cap is ~2-3x more conservative -> FEWER HTML
+#: Cite lines on long reports. Universal addressability is carried by the JSON
+#: ``cite_url`` (c9), so the conservatism costs the AI nothing. The conformance
+#: assertion re-measures on real renders, and the final rendered-page <=100 KB
+#: linter is the actual safety check regardless of this bound.
+CITE_WORST_BYTES_PER_LINE: int = 700
+
+#: Pre-change estimate, retained ONLY for the machine-baseline byte_size delta
+#: accounting (the historical Cite lines rendered under the 220 estimate are
+#: pinned in the wave0 baselines). Do NOT use for new cap arithmetic —
+#: :data:`CITE_WORST_BYTES_PER_LINE` replaces it.
 CITE_EST_BYTES_PER_LINE: int = 220
+
+#: The bound's component ceilings (documented so the in-test recomputation and
+#: the code derive from ONE source each).
+CITE_REPORT_ID_MAX: int = 64
+CITE_SPEECH_MAX: int = 9999
+CITE_LABEL_MAX_CHARS: int = 80
 
 #: Headroom divisor (each Cite = 1 anchor + 1 .u twin; the //2 keeps anchor
 #: count AND twin-text byte growth inside both caps with margin).
@@ -66,7 +102,7 @@ def cite_speech_limit(
     base_bytes: int,
     page_budget_links: int = CITE_PAGE_BUDGET_LINKS,
     page_budget_bytes: int = CITE_PAGE_BUDGET_BYTES,
-    est_bytes_per_cite: int = CITE_EST_BYTES_PER_LINE,
+    est_bytes_per_cite: int = CITE_WORST_BYTES_PER_LINE,
 ) -> int:
     """How many speeches (the FIRST N in sequence order) get a Cite line.
 
@@ -129,8 +165,18 @@ def measure_non_cite_page(
 
 
 def cite_label(*, sequence: int, speech: Speech) -> str:
-    """The descriptive anchor text: ``speech N — {speaker}`` (R6-safe)."""
+    """The descriptive anchor text: ``speech N — {speaker}`` (R6-safe).
+
+    The speaker part is truncated to :data:`CITE_LABEL_MAX_CHARS` (ellipsis,
+    total INCLUDING the ellipsis) so the rendered label's post-escape UTF-8
+    length is bounded BY CONSTRUCTION — :data:`CITE_WORST_BYTES_PER_LINE`
+    assumes it and the test asserts it. The h3 / TOC label
+    (:func:`toc.speaker_label`) is untouched: the bound applies to the Cite
+    anchor text only.
+    """
     speaker = speech.speaker_original or PROCEDURAL_LABEL
+    if len(speaker) > CITE_LABEL_MAX_CHARS:
+        speaker = speaker[: CITE_LABEL_MAX_CHARS - 1] + "…"
     return f"speech {sequence} — {speaker}"
 
 

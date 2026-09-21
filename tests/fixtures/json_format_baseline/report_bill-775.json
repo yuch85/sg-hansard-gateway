@@ -1,0 +1,172 @@
+{
+  "report_id": "bill-775",
+  "date": "2026-01-12",
+  "title": "Health Information Bill",
+  "topic_type": "Second Reading Bills",
+  "source_url": "https://sprs.parl.gov.sg/search/#/sprs3topic?reportid=bill-775",
+  "volume": "96",
+  "parliament_no": "15",
+  "session_no": "1",
+  "sitting_no": "12",
+  "speeches": [
+    {
+      "sequence": 1,
+      "speaker_original": null,
+      "speaker_name": null,
+      "speaker_role": null,
+      "paragraphs": [
+        "[(proc text) Debate resumed. (proc text)]"
+      ]
+    },
+    {
+      "sequence": 2,
+      "speaker_original": "Mr Speaker",
+      "speaker_name": null,
+      "speaker_role": null,
+      "paragraphs": [
+        ": Senior Minister of State, you may resume.",
+        "8.08 pm"
+      ]
+    },
+    {
+      "sequence": 3,
+      "speaker_original": "Mr Tan Kiat How",
+      "speaker_name": null,
+      "speaker_role": null,
+      "paragraphs": [
+        ": Sir, we will consider their readiness to meet the various responsibilities that come with sharing health information, such as the various requirements under the Bill. Any community health partners which are added will be publicly communicated, including through MOH's website.",
+        "Sir, to conclude, the HIB will help us achieve the goal of \"One Patient, One Health Summary, One Care Journey\". We will work with and support healthcare providers and healthcare professionals in achieving this goal. Through our collective efforts, Singaporeans can benefit from better coordinated care, enhanced quality of care and lower costs.",
+        "Sir, I believe I have addressed the questions raised by all the Members and I beg to move."
+      ]
+    },
+    {
+      "sequence": 4,
+      "speaker_original": "Mr Speaker",
+      "speaker_name": null,
+      "speaker_role": null,
+      "paragraphs": [
+        ": Are there clarifications for Senior Minister of State Tan? Mr Kenneth Tiong.",
+        "8.09 pm"
+      ]
+    },
+    {
+      "sequence": 5,
+      "speaker_original": "Mr Kenneth Tiong Boon Kiat",
+      "speaker_name": null,
+      "speaker_role": null,
+      "paragraphs": [
+        ": Thank you, Mr Speaker, for the clarifications. I also thank the Senior Minister of State. So, I mentioned the possibility of insurance. The Senior Minister of State mentioned that there will be cost support. But is there a reason why insurance is not offered, rather than general cost support? That is the first clarification.",
+        "Two, I thank the Senior Minister of State for saying there will be flexibility for IT-incapable practices, such as the senior GPs who are my constituents. Can the Senior Minister of State just double click and explain a bit what this flexibility for IT-incapable practices might entail?",
+        "Three, I think I did not hear an answer to what if there is a data breach. Can the insurers now use the now-public information in the data breach?",
+        "And I thank him for his response to my concerns about the inspection and right to audit clauses. The Senior Minister of State's response is that doctors should carefully assess what is relevant. I think that this may not be a great solution because I think the doctor is caught in the middle between the insurer and the patient, and they have to bear liability for the judgement calls as to what they put in the notes. So, I think what is probably going to happen is that there is going to be a chilling effect, where doctors will start avoiding documenting any sensitive data, both in their own medical records but also perhaps in NEHR as well. And so, if it percolates up to the NEHR, would the NEHR utility not be undermined if they cannot trust what to input?",
+        "So, I mentioned in my speech that it might be better to just go downstream and just say that we \"work with MAS to prohibit insurers from requiring NEHR-derived information as a condition of coverage, claim processing and policy renewal.\" And if I may, that is a significant part of why I posed the Parliamentary Question to Minister Ong Ye Kung earlier today about needing a dual regulation framework by MAS and MOH for insurers, so that someone is cleanly accountable for insurer behaviour as a health system actor."
+      ]
+    },
+    {
+      "sequence": 6,
+      "speaker_original": "Mr Tan Kiat How",
+      "speaker_name": null,
+      "speaker_role": null,
+      "paragraphs": [
+        ": Sir, I thank the Member for his clarifications. I believe there are four clarifications and I will take them in turn. One about offering cyber insurance to GP clinics. Can I just get the Member to confirm that this is what he is asking about? Okay.",
+        "Sir, in my speech, I did outline a few measures that we are putting in place and will continue to put in place to support GPs, especially smaller GPs, to comply with the HIB requirements, including data security and cybersecurity. And there are a number of support packages we are discussing with them. These details we will make known in due course. So, that is one.",
+        "We are supporting them, and we want them to travel the journey together with us. And there is broad support among the doctors, including those smaller GPs who see the value of contributing to and assessing NEHR, and most of the GPs are already onboard. They understand the need for the cybersecurity and data security requirements under the Bill to protect the data, and we are working with them to look at the various whitelisted services and management systems they can adopt to meet the requirements.",
+        "In terms of cybersecurity insurance, this is something we certainly will consider, but today, unfortunately, there is not a very mature market for cybersecurity insurance, specifically for GPs. So, if this is something useful, we will certainly consider as part of the support packages and discussions with the relevant stakeholders.",
+        "Second, about flexibility for senior GPs or smaller GPs. I mentioned the support packages. We do intend to provide for them, including funding support, whitelisting service providers and the different mentioned systems. But I think what we want to avoid is having different standards of cybersecurity and data security requirements for different clinics based on the size.",
+        "I think that is not the sensible and practical way to do it, as mentioned by different Members earlier. It is about making sure that different clinics and different touch points to the NEHR system meet the appropriate level of cybersecurity and data security requirements and finding ways of uplifting the different GPs and we will certainly do so in the coming months and years.",
+        "If the Member could clarify on third question for me, please?"
+      ]
+    },
+    {
+      "sequence": 7,
+      "speaker_original": "Mr Kenneth Tiong Boon Kiat",
+      "speaker_name": null,
+      "speaker_role": null,
+      "paragraphs": [
+        ": Data breaches. If there is a data breach."
+      ]
+    },
+    {
+      "sequence": 8,
+      "speaker_original": "Mr Tan Kiat How",
+      "speaker_name": null,
+      "speaker_role": null,
+      "paragraphs": [
+        ": Okay. Sir, it is quite clear that the insurance companies cannot assess NEHR for insurance or employment purposes. But in data breaches, I think it all boils down to the ethical considerations or how they access those data breaches in the first place, and that is something we have to work together with MAS, as the regulator, together with insurance companies, on understanding how they are using that information. And that is something we frown upon \u2013 using NEHR data for purpose of insurance. But it is a hypothetical scenario, something we have to think through.",
+        "On a dedicated regulation around insurance, whether they should just be prohibited, to avoid putting the healthcare providers or professionals in a very difficult situation \u2013 this is something we are working through with the healthcare providers, the industry associations as well as together with MAS with the insurance industry.",
+        "In fact, I had mentioned earlier in my closing speech that MOH has issued guidelines to the insurers and doctors on how we should think about the HIB when it is enacted. We will certainly work closely with MAS as the regulator for the insurance industry.",
+        "But I think, it is quite clear, the principle and approach under the HIB is that we prohibit the use and access of NEHR information for employment and insurance purposes. And we have to work through the insurance associations, the MAS, the professional bodies, including the healthcare professional bodies for how it is implemented on the ground. But our assurance to the public and to those Members who spoke about it, is that our approach and position is quite clear.",
+        "Did I answer all the Member's questions? Okay."
+      ]
+    },
+    {
+      "sequence": 9,
+      "speaker_original": "Mr Speaker",
+      "speaker_name": null,
+      "speaker_role": null,
+      "paragraphs": [
+        ": Mr David Hoe."
+      ]
+    },
+    {
+      "sequence": 10,
+      "speaker_original": "Mr David Hoe",
+      "speaker_name": null,
+      "speaker_role": null,
+      "paragraphs": [
+        ": I thank the Senior Minister of State for the response and the reassurance. I would like to clarify a comment that I made earlier. I wonder if I heard clearly that the access to information to electronic medical records by healthcare professionals will be captured in the NEHR access history. I ask this because the Singaporean who was particularly concerned about this Bill sent me the URL to the FAQ in HealthHub that reads, \"Your healthcare professionals may be accessing your records from their own electronic medical records (EMR) systems. Access made to your records in their EMR systems are not included in the NEHR access history.\" I would be happy to share the URL. I just wanted to clarify whether what I heard was correct."
+      ]
+    },
+    {
+      "sequence": 11,
+      "speaker_original": "Mr Tan Kiat How",
+      "speaker_name": null,
+      "speaker_role": null,
+      "paragraphs": [
+        ": Sir, just to clarify. Access to NEHR, even through the EMR, will be logged as an access to NEHR. But accessing a patient's records on the healthcare institutions' own EMR system is separate. It is an internal operations system for the hospitals, for the polyclinics or for the private healthcare clinics. So, it is quite different. But if you use EMR to log to NEHR, the logs will be recorded and tracked.",
+        "8.18 pm"
+      ]
+    },
+    {
+      "sequence": 12,
+      "speaker_original": "Mr Speaker",
+      "speaker_name": null,
+      "speaker_role": null,
+      "paragraphs": [
+        ": Any other clarifications from Members for the Senior Minister of State? No?",
+        "[(proc text) Question put, and agreed to. (proc text)]",
+        "[(proc text) Bill accordingly read a Second time and committed to a Committee of the whole House. (proc text)]",
+        "[(proc text) The House immediately resolved itself into a Committee on the Bill. \u2013 [Mr Tan Kiat How]. (proc text)]",
+        "[(proc text) Bill considered in Committee. (proc text)]"
+      ]
+    },
+    {
+      "sequence": 13,
+      "speaker_original": "The Chairman",
+      "speaker_name": null,
+      "speaker_role": null,
+      "paragraphs": [
+        ": The citation year \"2025\" will be changed to \"2026\" as indicated in the Order Paper Supplement.",
+        "[(proc text) Clauses 1 to 114 ordered to stand part of the Bill. (proc text)]",
+        "[(proc text) The First to Fourth Schedules ordered to stand part of the Bill. (proc text)]",
+        "[(proc text) Bill reported without amendment; read a Third time and passed. (proc text)]",
+        "8.20 pm"
+      ]
+    },
+    {
+      "sequence": 14,
+      "speaker_original": "Mr Speaker",
+      "speaker_name": null,
+      "speaker_role": null,
+      "paragraphs": [
+        ": Deputy Leader."
+      ]
+    }
+  ],
+  "transcript_sha256": "5d62cf61b1155ba3e7f87fe07deff2fea66436c3ef8bc5f64b3098993aaf9fae",
+  "url": "https://hansard.098020.xyz/a/hg_testvalidtoken0123456789abcdef/report/bill-775",
+  "links": {
+    "self": "https://hansard.098020.xyz/a/hg_testvalidtoken0123456789abcdef/report/bill-775",
+    "sitting": "https://hansard.098020.xyz/a/hg_testvalidtoken0123456789abcdef/date/2026-01-12"
+  }
+}

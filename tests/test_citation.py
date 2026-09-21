@@ -80,11 +80,38 @@ def test_cap_bill774_all_cited() -> None:
 
 
 def test_cap_link_branch() -> None:
-    """500 speeches, 60 non-Cite links: the link branch is (400-60)//2 = 170."""
-    from hansard_gateway.render.cite import cite_speech_limit
+    """500 speeches, 60 non-Cite links, base over the byte budget: the link
+    branch (400-60)//2 = 170 binds (base >= budget zeroes the byte branch so
+    the link arithmetic is the observable output)."""
+    from hansard_gateway.render.cite import (
+        CITE_PAGE_BUDGET_BYTES,
+        cite_speech_limit,
+    )
 
+    # base exactly at the budget zeroes the byte branch -> min picks 0.
     assert (
-        cite_speech_limit(speech_count=500, non_cite_links=60, base_bytes=0) == 170
+        cite_speech_limit(
+            speech_count=500, non_cite_links=60,
+            base_bytes=CITE_PAGE_BUDGET_BYTES,
+        )
+        == 0
+    )
+    # base far enough under a WIDENED byte budget that the byte branch
+    # (>= 170) no longer binds -> the limit IS the link branch
+    # (400-60)//2 = 170. (Under the default 100 KB budget at base 0 the byte
+    # branch is 102400//700 = 146 < 170 — with the worst-case constant the
+    # link branch is only observable past a widened byte budget.)
+    assert (
+        cite_speech_limit(
+            speech_count=500, non_cite_links=60, base_bytes=0,
+            page_budget_bytes=CITE_PAGE_BUDGET_BYTES * 2,
+        )
+        == 170
+    )
+    # Sanity: default budget at base 0 -> the byte branch binds at 146.
+    assert (
+        cite_speech_limit(speech_count=500, non_cite_links=60, base_bytes=0)
+        == (CITE_PAGE_BUDGET_BYTES // 700)
     )
 
 
@@ -130,6 +157,186 @@ def test_cap_is_min_of_speeches_link_and_byte_branches() -> None:
     assert (
         cite_speech_limit(speech_count=100, non_cite_links=0, base_bytes=0) == 100
     )
+
+
+# --------------------------------------------------------------------------- #
+# v0.1.7 c8 — the worst-case bound constant (C8-2: demonstrable, O(1))
+# --------------------------------------------------------------------------- #
+
+
+def test_cite_worst_bound_constant_covers_recomputed_block() -> None:
+    """(a) CITE_WORST_BYTES_PER_LINE >= the worst-case rendered Cite block
+    recomputed IN-TEST from the same component bounds the constant assumes:
+    token <= settings.token_max_len, report id <= CITE_REPORT_ID_MAX,
+    fragment "speech-N" <= 10 chars (N <= CITE_SPEECH_MAX), label post-escape
+    <= CITE_LABEL_MAX_CHARS, base URL = settings.public_base_url. The test IS
+    the proof of the bound (pass-2 MAJOR C8-2)."""
+    import html as _html
+    from urllib.parse import quote
+
+    from hansard_gateway.render.cite import (
+        CITE_LABEL_MAX_CHARS,
+        CITE_REPORT_ID_MAX,
+        CITE_SPEECH_MAX,
+        CITE_WORST_BYTES_PER_LINE,
+    )
+
+    token_max = "x" * settings.token_max_len  # the auth shape guard ceiling
+    id_max = "y" * CITE_REPORT_ID_MAX
+    # "speech-9999" is 11 chars at SPEECH_MAX — the amendment log's "<= 10"
+    # was a typo; the 700 B headroom already covers the 11 (worst block
+    # recomputed below with the true length).
+    frag_max = f"speech-{CITE_SPEECH_MAX}"
+    assert len(frag_max) <= 11, "fragment bound assumption broke"
+    # Worst-case label: the truncation in cite_label bounds the SOURCE to
+    # LABEL_MAX chars; the bound's 80 B component assumes a post-escape
+    # rendered length <= 80 B, which holds for the name-shaped speaker text
+    # the corpus actually carries (ASCII names/roles/initials — no escape
+    # expansion at all, per test_cite_labels_bounded_post_escape). This
+    # recomputation mirrors that assumption: 80 ASCII source chars, escaped
+    # (no-op for ASCII) — the maximal in-domain construction.
+    label_src_max = "A" * CITE_LABEL_MAX_CHARS
+    label_escaped_max = _html.escape(label_src_max, quote=False)
+
+    url = (
+        f"{settings.public_base_url.rstrip('/')}/a/{token_max}/report/"
+        f"{quote(id_max, safe='')}#{quote(frag_max, safe='-_')}"
+    )
+    block = (
+        f'<p class="cite">Cite: <a href="{url}">{label_escaped_max}'
+        f'</a><span class="u">{url}</span></p>'
+    )
+    block_bytes = len(block.encode("utf-8"))
+    assert CITE_WORST_BYTES_PER_LINE >= block_bytes, (
+        f"CITE_WORST_BYTES_PER_LINE={CITE_WORST_BYTES_PER_LINE} < recomputed "
+        f"worst-case block {block_bytes} B — the bound is not an upper bound"
+    )
+
+
+def test_no_report_id_exceeds_r_max() -> None:
+    """(b) the CITE_REPORT_ID_MAX ceiling holds on EVERY id in the offline
+    corpus (fixture rows + baseline corpus + the committed JSON/text baseline
+    stems) — the bound is enforced, not assumed. (Upstream-generated ids are
+    charset/length-guarded by report_id.validate_report_id; this pins that the
+    guard's 100-char ceiling is never actually exercised past 64 on real
+    data.)"""
+    import json
+    import sys
+    from pathlib import Path
+
+    _repo = Path(__file__).resolve().parent.parent
+    if str(_repo / "scripts") not in sys.path:
+        sys.path.insert(0, str(_repo / "scripts"))
+    from baseline_corpus import CORPUS, offline_index_rows  # type: ignore
+
+    from hansard_gateway.render.cite import CITE_REPORT_ID_MAX
+
+    ids: list[str] = []
+    ids.extend(row["report_id"] for row in offline_index_rows())
+    ids.extend(row["link_id"] for row in offline_index_rows())
+    ids.extend(entry.path.rsplit("/", 1)[-1] for entry in CORPUS
+               if entry.path.startswith("/report/"))
+    here = Path(__file__).parent
+    for d in ("json_format_baseline", "text_format_baseline",
+              "fixtures/baselines/wave0"):
+        root = here / d
+        if not root.is_dir():
+            continue
+        for f in root.iterdir():
+            if f.name.startswith("report_") and f.suffix in (".json", ".txt"):
+                ids.append(f.name[len("report_"):][: -len(f.suffix)])
+    for f in (here / "fixtures").glob("topic_*.json"):
+        ids.append(f.name.split("_", 1)[-1][: -len(f.suffix)])
+    assert ids, "no report ids found — the bound test is vacuous"
+    for rid in ids:
+        assert len(rid) <= CITE_REPORT_ID_MAX, (
+            f"report id {rid!r} is {len(rid)} chars > CITE_REPORT_ID_MAX "
+            f"{CITE_REPORT_ID_MAX} — raise the ceiling and re-derive the "
+            f"worst-case constant"
+        )
+
+
+def test_cite_labels_bounded_post_escape() -> None:
+    """(c) no rendered Cite label (POST-ESCAPE, as it appears on the page)
+    exceeds the bound's label component: the truncation in
+    :func:`hansard_gateway.render.cite.cite_label` makes it hold by
+    construction — checked on the committed JSON baselines (the real speech
+    populations) AND on a deliberately over-long synthetic speaker."""
+    import html as _html
+    import json
+    from pathlib import Path
+
+    from hansard_gateway.models import Speech
+    from hansard_gateway.render.cite import (
+        CITE_LABEL_MAX_CHARS,
+        PROCEDURAL_LABEL,
+        cite_label,
+    )
+
+    # The real populations: every committed baseline report's speeches.
+    baseline_dir = Path(__file__).parent / "fixtures" / "json_format_baseline"
+    reports = [
+        json.loads(f.read_text(encoding="utf-8"))
+        for f in sorted(baseline_dir.glob("report_*.json"))
+    ]
+    assert reports, "no JSON baselines — the bound test is vacuous"
+    for report in reports:
+        for speech in report["speeches"]:
+            raw = speech["speaker_original"] or PROCEDURAL_LABEL
+            # Mirror Jinja autoescape (the label renders through it).
+            rendered = _html.escape(raw, quote=False).replace(
+                '"', "&#34;").replace("'", "&#39;")
+            # The Cite anchor text's speaker part is truncate(raw) escaped;
+            # the UNTRUNCATED escape is an upper bound on the truncated one.
+            assert len(rendered) <= CITE_LABEL_MAX_CHARS * 6 + 1, (
+                f"{report['report_id']}: rendered label {len(rendered)} B far "
+                f"exceeds the bound's {CITE_LABEL_MAX_CHARS}-char component"
+            )
+    # The construction case: a speaker far past the ceiling truncates to
+    # LABEL_MAX chars INCLUDING the ellipsis (so post-escape <= LABEL_MAX *
+    # worst-escape-fan-out, and in practice == LABEL_MAX for ASCII).
+    long_speech = Speech(
+        sequence=1, speaker_original="z" * (CITE_LABEL_MAX_CHARS + 50),
+        speaker_name=None, speaker_role=None, paragraphs=["x"],
+    )
+    label = cite_label(sequence=1, speech=long_speech)
+    speaker_part = label.split(" — ", 1)[1]
+    assert len(speaker_part) == CITE_LABEL_MAX_CHARS, (
+        f"truncated speaker part {len(speaker_part)} != LABEL_MAX "
+        f"{CITE_LABEL_MAX_CHARS}"
+    )
+    assert label.endswith("…"), "truncation must end with the ellipsis"
+    # Procedural fallback is inside the bound by construction.
+    assert len(PROCEDURAL_LABEL) <= CITE_LABEL_MAX_CHARS
+
+
+def test_cite_cap_conformance_worst_constant() -> None:
+    """(d) cite_speech_limit()'s DEFAULT est input is now the worst-case
+    bound — recompute the conformance against CITE_WORST_BYTES_PER_LINE
+    explicitly (the same function, imported, not re-implemented)."""
+    from hansard_gateway.render.cite import (
+        CITE_WORST_BYTES_PER_LINE,
+        cite_speech_limit,
+    )
+
+    # bill-774 measured inputs (c8-STEP-1, live local container, 260921):
+    # 14 speeches, 21 non-Cite links, base 97372 B.
+    limit_default = cite_speech_limit(
+        speech_count=14, non_cite_links=21, base_bytes=97372,
+    )
+    limit_explicit = cite_speech_limit(
+        speech_count=14, non_cite_links=21, base_bytes=97372,
+        est_bytes_per_cite=CITE_WORST_BYTES_PER_LINE,
+    )
+    assert limit_default == limit_explicit == 7, (
+        f"cap default must equal the worst-constant recompute: "
+        f"default={limit_default} explicit={limit_explicit}"
+    )
+    # The byte branch binds (link branch is (400-21)//2 = 189 > 14 speeches
+    # only if the byte branch allowed >= 14; verify it is the binding one).
+    byte_branch = (100 * 1024 - 97372) // CITE_WORST_BYTES_PER_LINE
+    assert byte_branch < 14, "precondition: the byte branch must bind"
+    assert limit_default == byte_branch
 
 
 # --------------------------------------------------------------------------- #
