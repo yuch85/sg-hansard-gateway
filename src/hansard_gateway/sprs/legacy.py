@@ -146,16 +146,20 @@ def _paragraph_blocks(fragment: str) -> list[str]:
 
 
 def _bold_speaker_segments(html: str) -> list[tuple[Optional[str], str]]:
-    """Fallback walk for pre-comment docs: split on bold/strong speaker tags."""
+    """Fallback walk for pre-comment docs: split on bold/strong speaker tags.
+
+    Returns raw HTML fragments (not cleaned text) so that ``_paragraph_blocks``
+    can extract per-<p> boundaries during the F3 boundary restore.
+    """
     soup = BeautifulSoup(html, "lxml")
     segments: list[tuple[Optional[str], str]] = []
     current: Optional[str] = None
     buf: list[str] = []
 
     def _flush() -> None:
-        text = _clean_text(" ".join(buf))
-        if len(text) >= _MIN_SEGMENT_CHARS:
-            segments.append((current, text))
+        raw = " ".join(buf)
+        if len(_clean_text(raw)) >= _MIN_SEGMENT_CHARS:
+            segments.append((current, raw))
 
     for node in soup.descendants:
         name = getattr(node, "name", None)
