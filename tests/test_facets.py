@@ -202,4 +202,4 @@ def test_invalid_token_404_byte_identical(client_with_index: TestClient) -> None
 
     r = client_with_index.get(f"/a/{_BOGUS_TOKEN}/years", follow_redirects=False)
     assert r.status_code == 404
-    assert hashlib.md5(r.content).hexdigest() == "e9c1042cedfcab41e4276facb5ae39e8"
+    assert hashlib.md5(r.content).hexdigest() == "9e8affead8146656e4f9c68336d598de"

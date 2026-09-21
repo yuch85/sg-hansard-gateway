@@ -33,7 +33,7 @@ PAIR_BASE = "https://search.pair.gov.sg"
 #: The live production invalid-token 404 body fingerprint (no enumeration) —
 #: pinned by tests/fixtures/invalid_token_404_body.html (the captured live body).
 _BOGUS_TOKEN = "hg_invalidtoken00000000000000zz"
-_INVALID_404_MD5 = "e9c1042cedfcab41e4276facb5ae39e8"
+_INVALID_404_MD5 = "9e8affead8146656e4f9c68336d598de"
 _INVALID_404_FIXTURE = Path(__file__).parent / "fixtures" / "invalid_token_404_body.html"
 
 #: The spec §5.1 nav strip label (must occur twice: top and bottom).
@@ -757,13 +757,28 @@ def test_u_single_line_not_clipped_narrow(client_with_index: TestClient) -> None
                 if ".u" in selector and "white-space" in declarations:
                     narrow_rules.append(declarations)
     assert narrow_rules, "no narrow-query (max-width:62rem) .u rule found"
+    # F4b (260921): nav .u WRAPS (white-space:normal) — the single-line clip
+    # overflowed the viewport at phone width (no word wrap pre-transcript).
+    # Speech .u keeps the nowrap+scroll mechanism. Both are R2-safe (DOM +
+    # extraction unchanged). Accept the nav wrap rule + the speech clip rule.
+    nav_wrap = 0
+    speech_clip = 0
     for decls in narrow_rules:
-        assert "white-space:nowrap" in decls, (
-            f"narrow .u rule lacks white-space:nowrap: {decls}"
-        )
-        assert "overflow:hidden" not in decls.replace(" ", ""), (
-            f"narrow .u rule visually clips (overflow:hidden): {decls}"
-        )
+        if "white-space:normal" in decls and "word-break:break-all" in decls:
+            nav_wrap += 1
+            assert "overflow:hidden" not in decls.replace(" ", ""), (
+                f"nav .u wrap rule must not clip: {decls}"
+            )
+        else:
+            assert "white-space:nowrap" in decls, (
+                f"narrow .u rule is neither clip nor nav-wrap: {decls}"
+            )
+            assert "overflow:hidden" not in decls.replace(" ", ""), (
+                f"narrow .u rule visually clips (overflow:hidden): {decls}"
+            )
+            speech_clip += 1
+    assert speech_clip >= 1, "no narrow .u clip rule (speech .u) found"
+    assert nav_wrap >= 1, "no narrow .u nav-wrap rule (F4b) found"
 
 
 def test_search_result_link_ids_percent_encoded(client_with_index: TestClient) -> None:

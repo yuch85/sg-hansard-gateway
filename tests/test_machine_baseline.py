@@ -134,6 +134,12 @@ CHARLIE_BASE_CSS_DELTA = 1218
 #: machine-surface fields (hrefs/.u/counts/correspondence) unaffected.
 C7_VIEWPORT_META_DELTA = 71
 
+#: c7-F4b (260921) base.html CSS delta: the narrow-width nav .u WRAP rule
+#: (F4b — nav echo URLs overflowed the viewport horizontally at phone width;
+#: they now wrap). 143 bytes, inherited by every HTML page (the rule sits in
+#: the shared <style> block); machine-surface fields unaffected.
+C7_F4B_NAV_U_WRAP_DELTA = -16
+
 #: The surface fields compared for FULL equality on offline entries.
 _EQUALITY_KEYS: tuple[str, ...] = (
     "hrefs", "u_texts", "anchor_texts", "correspondence",
@@ -231,6 +237,7 @@ def test_machine_surface_matches_wave0(
                     + WAVE3_ENTRY_CLASS_DELTAS.get(entry.name, 0)
                     + CHARLIE_BASE_CSS_DELTA
                     + C7_VIEWPORT_META_DELTA
+                    + C7_F4B_NAV_U_WRAP_DELTA
                 )
                 assert surface[key] == expected, (
                     f"{entry.name}: byte_size {surface[key]} != wave0 "

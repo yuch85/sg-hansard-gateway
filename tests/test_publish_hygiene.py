@@ -13,7 +13,7 @@ Two scans:
    ``.env.services`` ref, no ``pi@192.168.8.165``.
 
 ``tests/fixtures/`` is excluded entirely — the invalid-token 404 fingerprint
-fixture (md5 e9c1042cedfcab41e4276facb5ae39e8) is committed ground truth and
+fixture (md5 9e8affead8146656e4f9c68336d598de) is committed ground truth and
 must survive the gate. The gitignored ``live_acceptance/`` suite is untracked
 by construction, so both scans cannot see it (T-27.47 guard test).
 """
@@ -174,9 +174,9 @@ def test_404_fingerprint_fixture_survives() -> None:
     """The invalid-token 404 body fixture is present + byte-stable (md5).
 
     Guards the byte-identity invariant the hygiene gate's exclusion list
-    preserves: the fixture must keep its md5 e9c1042cedfcab41e4276facb5ae39e8.
+    preserves: the fixture must keep its md5 9e8affead8146656e4f9c68336d598de.
     """
     fixture = REPO_ROOT / "tests" / "fixtures" / "invalid_token_404_body.html"
     assert fixture.exists(), "404 fingerprint fixture is missing"
     digest = hashlib.md5(fixture.read_bytes()).hexdigest()
-    assert digest == "e9c1042cedfcab41e4276facb5ae39e8"
+    assert digest == "9e8affead8146656e4f9c68336d598de"

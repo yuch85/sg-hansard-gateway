@@ -61,6 +61,8 @@ nav.toc{position:static;max-height:none}
 nav.toc ol{display:grid;grid-template-columns:1fr 1fr;gap:0 1.5rem}
 article.speech{padding-left:0}
 span.u{display:inline-block;white-space:nowrap;overflow-x:auto;line-height:1.15;vertical-align:bottom;margin-top:.15rem;max-height:1.3em}
+/* F4b (260921): nav .u WRAPS (clip overflowed the viewport pre-transcript). */
+nav.global-nav span.u,nav.page-nav span.u{display:inline;white-space:normal;overflow:visible;max-height:none;margin-top:0;word-break:break-all}
 /* F2: 17px root + 0.83rem (14.11px) floor — no element below 14px at phone width */
 html{font-size:106.25%}
 nav.toc h2{font-size:1rem}
@@ -92,12 +94,9 @@ span.u{font-size:7.5pt;color:#666}
 a{color:#000}
 article.speech:target{background:var(--gb)}
 }
-/* Wave-3 layout system (27.3-04): 2-column search results + refine panel,
-   card grids, the A-Z letter ladder, the sticky narrow-further band.
-   LAYOUT-ONLY — the machine surface (hrefs/.u/order/counts) is unchanged;
-   grid/flex reposition visually, never reorder (R7 DOM order is the rank).
-   No added container declares overflow (sticky-safe: .narrow-further and
-   the Wave-2 .sp-head rows rely on no overflow:hidden ancestor). */
+/* Wave-3 layout system (27.3-04): 2-col search + refine panel, card grids,
+   A-Z ladder, sticky narrow-further band. LAYOUT-ONLY — machine surface
+   unchanged; no added overflow (sticky-safe). */
 .search-layout{display:grid;grid-template-columns:minmax(0,1fr) 16rem;gap:2rem;align-items:start}
 .search-results{display:grid;gap:1rem}
 .search-result{background:var(--c);border:1px solid var(--r);padding:.9rem 1.1rem .95rem}

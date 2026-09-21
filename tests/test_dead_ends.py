@@ -36,7 +36,7 @@ PAIR_BASE = "https://search.pair.gov.sg"
 
 #: The production invalid-token 404 fingerprint (anti-enumeration, spec §6.2).
 _BOGUS_TOKEN = "hg_invalidtoken00000000000000zz"
-_INVALID_404_MD5 = "e9c1042cedfcab41e4276facb5ae39e8"
+_INVALID_404_MD5 = "9e8affead8146656e4f9c68336d598de"
 _INVALID_404_FIXTURE = Path(__file__).parent / "fixtures" / "invalid_token_404_body.html"
 
 #: A zero-hit searchResult page (offline stub body).
