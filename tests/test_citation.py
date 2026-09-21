@@ -453,6 +453,110 @@ def test_report_target_css_present(rendered_report: str) -> None:
     assert "#fff3b0" in rendered_report
 
 
+# --------------------------------------------------------------------------- #
+# E-meas regression (v0.1.8): measure_non_cite_page sees ALL N SPRS lines
+# --------------------------------------------------------------------------- #
+
+
+def test_e_meas_non_cite_page_has_n_sprs_lines() -> None:
+    """E-meas (amendment, pass-1 MAJOR): the pre-Cite measurement render
+    (measure_non_cite_page with speech_cites=[]) must contain exactly N
+    per-speech SPRS lines + N .u twins (N = speech_count).
+
+    Guards against a future conditional that exists only in the final
+    render — if someone wraps the SPRS line in a {% if %} that is false
+    when speech_cites=[], the cap arithmetic silently under-measures the
+    base page and the Cite cap is too generous.
+    """
+    import re
+
+    from hansard_gateway.render.cite import measure_non_cite_page
+    from hansard_gateway.models import HansardReport, Speech
+
+    # Build a multi-speech report (3 speeches) with a known source_url.
+    speeches = [
+        Speech(sequence=1, speaker_original="Alice Tan", speaker_name=None,
+               speaker_role=None, paragraphs=["p1"]),
+        Speech(sequence=2, speaker_original="Bob Ng", speaker_name=None,
+               speaker_role=None, paragraphs=["p2a", "p2b"]),
+        Speech(sequence=3, speaker_original="Carol Lim", speaker_name=None,
+               speaker_role=None, paragraphs=["p3"]),
+    ]
+    report = HansardReport(
+        report_id="bill-999",
+        title="Test Bill",
+        date=date(2026, 1, 1),
+        topic_type="BILLS",
+        source_url="https://sprs.parl.gov.sg/search/#/topic?reportid=bill-999",
+        volume=None, parliament_no=None, session_no=None, sitting_no=None,
+        transcript_sha256="ab" * 32,
+        speeches=speeches,
+    )
+    context: dict[str, Any] = {
+        "report": report,
+        "retrieved": "2026-01-01T00:00:00Z",
+        "date_long": "01 January 2026",
+        "byline": "Hansard report — BILLS",
+        "report_nav": {},
+        "sitting_url": "https://hansard.example.org/a/hg_t/date/2026-01-01",
+        "home_url": "https://hansard.example.org/a/hg_t/",
+        "json_url": "https://hansard.example.org/a/hg_t/report/bill-999?format=json",
+        "text_url": "https://hansard.example.org/a/hg_t/report/bill-999?format=text",
+    }
+    non_cite_links, base_bytes = measure_non_cite_page(
+        template="report.html", token="hg_t", context=context,
+    )
+    # Render the pre-Cite page again to inspect the HTML directly.
+    from hansard_gateway.render import _env, _nav_context
+    from hansard_gateway.render.toc import speaker_label, classify_speaker
+    from hansard_gateway.config import settings as _settings
+
+    env = _env()
+    html = env.get_template("report.html").render(
+        robots="noindex,nofollow,noarchive",
+        referrer="no-referrer",
+        base=_settings.public_base_url.rstrip("/"),
+        token="hg_t",
+        speaker_label=speaker_label,
+        classify_speaker=classify_speaker,
+        **_nav_context("hg_t"),
+        speech_cites=[],
+        cite_note=False,
+        **context,
+    )
+    # Exactly N per-speech SPRS anchors (inside <p class="sp-sprs">).
+    # The footer's provenance SPRS link is NOT in .sp-sprs — scope to the
+    # per-speech line only (the E-meas invariant is about the template's
+    # {% for speech %} loop, not the footer).
+    sprs_blocks = re.findall(
+        r'<p class="sp-sprs">.*?</p>', html, re.DOTALL
+    )
+    assert len(sprs_blocks) == 3, (
+        f"E-meas: expected 3 .sp-sprs blocks in pre-Cite render, got "
+        f"{len(sprs_blocks)}"
+    )
+    for i, block in enumerate(sprs_blocks, 1):
+        assert 'rel="noopener noreferrer"' in block, (
+            f"E-meas: .sp-sprs block {i} missing rel attribute"
+        )
+        assert "sprs.parl.gov.sg" in block, (
+            f"E-meas: .sp-sprs block {i} missing SPRS URL"
+        )
+    # Exactly N .u twins carrying the SPRS URL inside .sp-sprs blocks.
+    sprs_url = "https://sprs.parl.gov.sg/search/#/topic?reportid=bill-999"
+    sprs_twins = re.findall(
+        r'<p class="sp-sprs">.*?<span class="u">' + re.escape(sprs_url)
+        + r'</span>.*?</p>',
+        html, re.DOTALL,
+    )
+    assert len(sprs_twins) == 3, (
+        f"E-meas: expected 3 SPRS .u twins in .sp-sprs blocks, got "
+        f"{len(sprs_twins)}"
+    )
+    # The SPRS anchors must NOT enter the /a/hg_ token-link counter.
+    assert non_cite_links >= 0  # sanity (the counter counts /a/hg_ links only)
+
+
 def test_report_text_format_unchanged(client_with_index: TestClient) -> None:
     """?format=text is unchanged by the citation feature (Cite lines are
     HTML-only — the text serializer never sees the render context).

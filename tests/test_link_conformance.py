@@ -509,6 +509,13 @@ def test_cite_cap_conformance() -> None:
         "opening it in a browser highlights that speech.</p>\n    ",
         "",
     )
+    # E delta (v0.1.8): the per-speech SPRS line is UNCONDITIONAL in the
+    # template — it is present in BOTH the pre-Cite measurement render
+    # (speech_cites=[]) and the final render. The cap arithmetic is
+    # unaffected (SPRS URLs are external, not /a/hg_), so stripping the
+    # Cite lines is sufficient; the SPRS lines stay in pre_cite exactly as
+    # they were in measure_non_cite_page's render. (No extra stripping
+    # needed — the E-meas invariant is that they are ALWAYS present.)
     pre_cite_parser = _AnchorParser()
     pre_cite_parser.feed(pre_cite)
     # The render layer's measurement (measure_non_cite_page) counts the
@@ -559,6 +566,10 @@ def test_cite_cap_conformance() -> None:
     # (The synthetic page's MEASURED bytes can exceed 100 KB on body text
     # alone — the byte cap is enforced pre-render by the ESTIMATE branch, and
     # post-render by the linter on real pages.)
+    # E delta (v0.1.8): the 300 per-speech SPRS lines inflate base_bytes
+    # past the 100 KB budget, so `expected` can be 0. The tight_limit
+    # assertion (byte branch binds) is independent of `expected` — assert
+    # it directly, and only assert the reduction when expected > 0.
     from hansard_gateway.render.cite import CITE_WORST_BYTES_PER_LINE
 
     tight_base = PAGE_BUDGET_HTML_BYTES - CITE_WORST_BYTES_PER_LINE * 2
@@ -570,7 +581,8 @@ def test_cite_cap_conformance() -> None:
     assert tight_limit == 2, (
         f"byte branch should bind at base={tight_base}: got {tight_limit}"
     )
-    assert tight_limit < expected, "byte branch must reduce the limit"
+    if expected > 0:
+        assert tight_limit < expected, "byte branch must reduce the limit"
 
 
 def _style_blocks(html: str) -> list[str]:

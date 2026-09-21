@@ -47,6 +47,16 @@
       <header class="sp-head">
         <span class="turn">{{ speech.sequence }}</span>
         <h3>{{ speaker_label(speech=speech) }}</h3>
+        <!-- E-sem (v0.1.8): "Official SPRS record" per speech — the SPRS SECTION
+             route containing this speech (report.source_url, built by
+             topic_source_url at parse time). NOT a per-speaker deep link;
+             SPRS has no per-speaker anchor. Same URL for every speech on the
+             page (report granularity == SPRS topic granularity, a4 finding).
+             UNCONDITIONAL so measure_non_cite_page() with speech_cites=[]
+             sees exactly N lines (E-meas regression). -->
+        <p class="sp-sprs">Official SPRS record
+          <a href="{{ report.source_url }}" rel="noopener noreferrer">Official SPRS record</a>
+          <span class="u">{{ report.source_url }}</span></p>
         {% if cite is defined and cite[0] is not none %}
         <p class="cite">Cite: <a href="{{ cite[0] }}">{{ cite[1] }}</a><span class="u">{{ cite[0] }}</span></p>
         {% endif %}

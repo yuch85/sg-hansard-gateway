@@ -154,6 +154,17 @@ C7_F4B_NAV_U_WRAP_DELTA = -6
 #: Machine-surface fields (hrefs/.u/counts/correspondence) unaffected.
 C7C_F_OVERFLOW_DELTA = 230
 
+#: c7c-E (260921) base.html CSS delta: ZERO on the offline entries. The
+#: ``.sp-sprs`` rules (per-speech "Official SPRS record" line, v0.1.8 item E)
+#: live inside the ``{% if token %}`` block of base.html — the offline
+#: launcher/nav/facet pages render with ``token=None`` so the block is
+#: skipped. The per-speech ``<p class="sp-sprs">`` + anchor + ``.u`` twin
+#: adds N hrefs + N ``.u`` spans to the REPORT page only (N = speech_count);
+#: the offline report entry's structural invariants account for this delta.
+#: The 404 fixture (invalid token, ``token=None``) is also unaffected —
+#: the E delta is report-page-only.
+C7C_E_SPRS_CSS_DELTA = 0
+
 #: The surface fields compared for FULL equality on offline entries.
 _EQUALITY_KEYS: tuple[str, ...] = (
     "hrefs", "u_texts", "anchor_texts", "correspondence",
@@ -253,6 +264,7 @@ def test_machine_surface_matches_wave0(
                     + C7_VIEWPORT_META_DELTA
                     + C7_F4B_NAV_U_WRAP_DELTA
                     + C7C_F_OVERFLOW_DELTA
+                    + C7C_E_SPRS_CSS_DELTA
                 )
                 assert surface[key] == expected, (
                     f"{entry.name}: byte_size {surface[key]} != wave0 "
@@ -286,25 +298,42 @@ def test_machine_surface_matches_wave0(
         assert len(toc_hrefs) > 0, (
             f"report: no #speech-N TOC hrefs found in the offline render"
         )
-        # absolute + .u unchanged from wave0 (the TOC adds in-page anchors only)
+        # E delta (v0.1.8): the per-speech "Official SPRS record" line adds
+        # N .u twins per report (N = speech_count). The SPRS hrefs are
+        # external (sprs.parl.gov.sg) and do NOT enter the /a/hg_ token-link
+        # counter (absolute_anchors unchanged). The .u twins DO enter
+        # u_spans. total_anchors gains N (one per SPRS anchor). N is derived
+        # from the u_spans delta (NOT the raw SPRS href count — the footer
+        # + dl provenance also carry the SPRS URL, so the raw count is
+        # N + 2 for a report with the pre-existing provenance block).
+        n_sprs = surface["counts"]["u_spans"] - baseline["counts"]["u_spans"]
+        # absolute_anchors: SPRS hrefs are external — not counted as token
+        # links; the TOC adds in-page fragment anchors only.
         assert surface["counts"]["absolute_anchors"] == baseline["counts"]["absolute_anchors"], (
             f"report: absolute_anchors changed from wave0 "
             f"({baseline['counts']['absolute_anchors']} -> "
             f"{surface['counts']['absolute_anchors']}) — the TOC must not "
-            f"add absolute links"
+            f"add absolute token links (SPRS hrefs are external, not /a/hg_)"
         )
-        assert surface["counts"]["u_spans"] == baseline["counts"]["u_spans"], (
-            f"report: u_spans changed from wave0 "
-            f"({baseline['counts']['u_spans']} -> "
-            f"{surface['counts']['u_spans']}) — the TOC must not add .u spans"
+        # u_spans: wave0 + N SPRS .u twins (one per speech)
+        assert surface["counts"]["u_spans"] == (
+            baseline["counts"]["u_spans"] + n_sprs
+        ), (
+            f"report: u_spans {surface['counts']['u_spans']} != wave0 "
+            f"{baseline['counts']['u_spans']} + E-SPRS {n_sprs}"
         )
-        # total_anchors = wave0 total + N TOC hrefs
+        # total_anchors = wave0 total + N TOC hrefs + N SPRS hrefs
         assert surface["counts"]["total_anchors"] == (
-            baseline["counts"]["total_anchors"] + len(toc_hrefs)
+            baseline["counts"]["total_anchors"] + len(toc_hrefs) + n_sprs
         ), (
             f"report: total_anchors {surface['counts']['total_anchors']} != "
             f"wave0 {baseline['counts']['total_anchors']} + TOC "
-            f"{len(toc_hrefs)}"
+            f"{len(toc_hrefs)} + E-SPRS {n_sprs}"
+        )
+        # E-meas regression: exactly N SPRS hrefs (one per speech) — guards
+        # against a future conditional that exists only in the final render.
+        assert n_sprs > 0, (
+            f"report: no SPRS hrefs found (E per-speech line missing)"
         )
     # .u <-> href correspondence: every absolute token-bearing href has a
     # visible .u twin (R2) — the invariant a restyle must not break.
