@@ -1,8 +1,9 @@
 """Crawl entrypoint: date enumeration, incremental logic, index rebuild.
 
-Run via ``uv run python -m crawl.crawl_main`` (systemd --user timer, weekly).
+Run via ``uv run python -m crawl.crawl_main`` (systemd --user timer, nightly).
 Default = incremental: dates already in ``crawl_state`` are skipped unless
-their crawl is older than ``crawl_recrawl_age_days``. ``--cold`` forces a
+their crawl is older than ``crawl_recrawl_age_days`` or they had no reports
+and are newer than ``crawl_empty_recheck_days`` (late-posted reports). ``--cold`` forces a
 full rebuild from ``crawl_start_date`` (the one-off RUNBOOK step).
 
 A date whose fetch raises :class:`~crawl.crawl_client.CrawlTransientError`
@@ -20,9 +21,9 @@ from datetime import date, datetime, timedelta, timezone
 from typing import Optional
 
 from crawl.crawl_client import CrawlClient, CrawlTransientError
+from crawl import crawl_db
 from crawl.crawl_db import atomic_swap, build_staging_index, staging_path
 from hansard_gateway.config import Settings, settings as _settings
-from hansard_gateway.index.schema import BUILD_ID_KEY, init_db
 
 logger = logging.getLogger(__name__)
 
@@ -38,42 +39,43 @@ def _now_iso() -> str:
     return datetime.now(timezone.utc).strftime(_STAMP_FORMAT)
 
 
-def _state_conn(index_db: Path) -> sqlite3.Connection:
-    """Open the live index (or a fresh empty one) for crawl_state reads.
+def _dates_from_state(
+    state: dict[str, tuple[int, str]],
+    *,
+    start: date,
+    end: date,
+    recrawl_age_days: int,
+    empty_recheck_days: int,
+    cold: bool,
+) -> list[date]:
+    """Enumerate sitting dates needing a fetch (incremental or cold).
 
-    A missing, empty, or corrupt (non-SQLite) file is replaced with a fresh
-    schema-only DB so the crawl can start clean; a valid live index is left
-    untouched (the app may be reading it).
+    Incremental skips a date unless it is unknown, had reports and was last
+    crawled at least ``recrawl_age_days`` ago, or had no reports but is
+    newer than ``empty_recheck_days`` (late-posted reports).
     """
-    if not index_db.exists() or index_db.stat().st_size == 0:
-        _reinit(index_db)
-        return sqlite3.connect(str(index_db))
-    probe = sqlite3.connect(str(index_db))
-    try:
-        probe.execute("SELECT count(*) FROM sqlite_master")
-    except sqlite3.DatabaseError:
-        probe.close()
-        index_db.unlink(missing_ok=True)
-        _reinit(index_db)
-        logger.warning("live index was not a valid DB — reinitialised (%s)", index_db)
-        return sqlite3.connect(str(index_db))
-    # Ensure the schema exists even if the file pre-dates it (defensive).
-    try:
-        probe.execute("SELECT count(*) FROM crawl_state")
-    except sqlite3.OperationalError:
-        init_db(probe)
-        probe.commit()
-    probe.close()
-    return sqlite3.connect(str(index_db))
-
-
-def _reinit(index_db: Path) -> None:
-    """Create a fresh empty index DB at ``index_db`` (schema only)."""
-    conn = sqlite3.connect(str(index_db))
-    try:
-        init_db(conn)
-    finally:
-        conn.close()
+    now = datetime.now(timezone.utc)
+    out: list[date] = []
+    day = start
+    while day <= end:
+        entry = state.get(day.isoformat())
+        if not cold and entry is not None:
+            had_reports, crawled_at = entry
+            if had_reports == 0:
+                if (end - day).days >= empty_recheck_days:
+                    day += timedelta(days=1)
+                    continue
+            else:
+                try:
+                    age = now - datetime.fromisoformat(crawled_at.replace("Z", "+00:00"))
+                except ValueError:
+                    age = timedelta(days=recrawl_age_days + 1)
+                if age.days < recrawl_age_days:
+                    day += timedelta(days=1)
+                    continue
+        out.append(day)
+        day += timedelta(days=1)
+    return out
 
 
 def _dates_to_fetch(
@@ -83,35 +85,23 @@ def _dates_to_fetch(
     end: date,
     recrawl_age_days: int,
     cold: bool,
+    empty_recheck_days: int = 0,
 ) -> list[date]:
-    """Enumerate sitting dates needing a fetch (incremental or cold)."""
-    state: dict[str, tuple[int, str]] = {
+    """Enumerate sitting dates needing a fetch, reading state from ``conn``."""
+    state = {
         row[0]: (row[1], row[2])
         for row in conn.execute(
             "SELECT sitting_date, had_reports, crawled_at FROM crawl_state"
         )
     }
-    now = datetime.now(timezone.utc)
-    out: list[date] = []
-    day = start
-    while day <= end:
-        iso = day.isoformat()
-        entry = state.get(iso)
-        if not cold and entry is not None:
-            had_reports, crawled_at = entry
-            if had_reports == 0:
-                day += timedelta(days=1)
-                continue
-            try:
-                age = now - datetime.fromisoformat(crawled_at.replace("Z", "+00:00"))
-            except ValueError:
-                age = timedelta(days=recrawl_age_days + 1)
-            if age.days < recrawl_age_days:
-                day += timedelta(days=1)
-                continue
-        out.append(day)
-        day += timedelta(days=1)
-    return out
+    return _dates_from_state(
+        state,
+        start=start,
+        end=end,
+        recrawl_age_days=recrawl_age_days,
+        empty_recheck_days=empty_recheck_days,
+        cold=cold,
+    )
 
 
 def run_crawl(
@@ -121,7 +111,13 @@ def run_crawl(
     cold: bool = False,
     today: Optional[date] = None,
 ) -> int:
-    """Execute one crawl run; return a process exit code (0 = success)."""
+    """Execute one crawl run; return a process exit code (0 = success).
+
+    The new index is built in a staging file from the live index's existing
+    reports (minus the dates re-fetched this run) plus the newly fetched
+    ones, and carries the merged ``crawl_state``. Nothing is written to the
+    live file until the atomic swap, so any failure leaves it untouched.
+    """
     cfg = settings or _settings
     index_db = cfg.index_db_path
     end = today or date.today()
@@ -129,62 +125,74 @@ def run_crawl(
     own_client = client is None
     crawl_client = client or CrawlClient(settings=cfg)
     try:
-        conn = _state_conn(index_db)
-        try:
-            dates = _dates_to_fetch(
-                conn,
-                start=start,
-                end=end,
-                recrawl_age_days=cfg.crawl_recrawl_age_days,
-                cold=cold,
-            )
-            logger.info(
-                "crawl run: %d dates to fetch (%s -> %s, cold=%s)",
-                len(dates),
-                start.isoformat(),
-                end.isoformat(),
-                cold,
-            )
-            rows: list[dict] = []
-            skipped = 0
-            for day in dates:
-                try:
-                    fetched = crawl_client.search_sitting(sitting=day)
-                except CrawlTransientError as exc:
-                    # Skip (not empty): the date retries on the next run.
-                    logger.error(
-                        "skipping %s — transient upstream failure (will retry)",
-                        day.isoformat(),
-                        extra={"detail": exc.detail, "status": exc.status},
-                    )
-                    skipped += 1
-                    continue
-                stamped_at = _now_iso()
-                conn.execute(
-                    "INSERT OR REPLACE INTO crawl_state "
-                    "(sitting_date, had_reports, crawled_at) VALUES (?, ?, ?)",
-                    (day.isoformat(), int(bool(fetched)), stamped_at),
+        old_rows, state = crawl_db.read_live(index_db)
+        dates = _dates_from_state(
+            state,
+            start=start,
+            end=end,
+            recrawl_age_days=cfg.crawl_recrawl_age_days,
+            empty_recheck_days=cfg.crawl_empty_recheck_days,
+            cold=cold,
+        )
+        logger.info(
+            "crawl run: %d dates to fetch (%s -> %s, cold=%s), %d existing reports",
+            len(dates),
+            start.isoformat(),
+            end.isoformat(),
+            cold,
+            len(old_rows),
+        )
+        old_dates = {r["sitting_date"] for r in old_rows}
+        new_rows: list[dict] = []
+        replaced: set[str] = set()
+        updates: dict[str, tuple[int, str]] = {}
+        skipped = 0
+        for day in dates:
+            iso = day.isoformat()
+            try:
+                fetched = crawl_client.search_sitting(sitting=day)
+            except CrawlTransientError as exc:
+                # Skip (not empty): the date retries on the next run.
+                logger.error(
+                    "skipping %s — transient upstream failure (will retry)",
+                    iso,
+                    extra={"detail": exc.detail, "status": exc.status},
                 )
-                for row in fetched:
-                    rows.append(_to_report_row(row, day=day, stamped_at=stamped_at))
-            conn.commit()
-        finally:
-            conn.close()
+                skipped += 1
+                continue
+            if not fetched and iso in old_dates:
+                # Reports were indexed for this date; an empty answer now is
+                # not trusted to delete them (keep rows and state, retry later).
+                logger.warning("empty answer for %s which has indexed reports — kept", iso)
+                skipped += 1
+                continue
+            stamped_at = _now_iso()
+            updates[iso] = (int(bool(fetched)), stamped_at)
+            replaced.add(iso)
+            for row in fetched:
+                new_rows.append(_to_report_row(row, day=day, stamped_at=stamped_at))
+        rows = [r for r in old_rows if r["sitting_date"] not in replaced] + new_rows
 
         staging = staging_path(index_db)
         try:
             build_staging_index(rows, index_db, settings=cfg)
+            crawl_db.write_state(staging, {**state, **updates})
         except Exception:
             logger.exception(
                 "index build failed — live index untouched (%s)", index_db
             )
+            staging.unlink(missing_ok=True)
             return 1
         build_id = atomic_swap(live=index_db, settings=cfg)
         logger.info(
-            "crawl run complete: build_id=%s rows=%d dates_skipped=%d",
+            "crawl run complete: build_id=%s rows=%d new_rows=%d dates_fetched=%d "
+            "dates_skipped=%d max_sitting_date=%s",
             build_id,
             len(rows),
+            len(new_rows),
+            len(updates),
             skipped,
+            max((r["sitting_date"] for r in rows), default="none"),
         )
         return 0
     finally:
@@ -221,6 +229,11 @@ def main(argv: Optional[list[str]] = None) -> int:
         help="full rebuild from crawl_start_date (one-off RUNBOOK step)",
     )
     parser.add_argument(
+        "--seed-state",
+        action="store_true",
+        help="one-off, no network: rebuild crawl_state from the live index",
+    )
+    parser.add_argument(
         "--log-level",
         default="INFO",
         choices=("DEBUG", "INFO", "WARNING", "ERROR"),
@@ -233,6 +246,10 @@ def main(argv: Optional[list[str]] = None) -> int:
         stream=sys.stderr,
     )
     try:
+        if args.seed_state:
+            from crawl.crawl_seed import seed_state
+
+            return seed_state()
         return run_crawl(cold=args.cold)
     except Exception:
         logger.exception("crawl run failed")

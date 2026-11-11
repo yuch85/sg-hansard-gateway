@@ -243,10 +243,13 @@ exact-term search boost). Three equivalent ways:
   form is the full module invocation — a bare `crawl once` after the image
   would replace the CMD and fail):
   `docker run --rm -v hansard-index:/data <image> uv run python -m hansard_gateway crawl once [--cold]`
-- **Scheduled:** the same `docker run` line from a host timer or cron for the
-  weekly cadence. `--cold` is a full rebuild from the start date; the
-  default is incremental/resumable (dates already crawled are skipped unless
-  stale or previously empty).
+- **Scheduled:** the same line from a host timer or cron (nightly is fine: an
+  incremental run fetches only new dates, dates with reports older than 90
+  days, and empty dates from the last 14 days, so late-posted reports are
+  picked up). `--cold` is a full rebuild from the start date; the default is
+  incremental and keeps every earlier report and the crawl bookkeeping.
+  `crawl once --seed-state` (one-off, no network) rebuilds the bookkeeping
+  from an existing index whose bookkeeping was lost.
 
 The crawl writes through a staging file and an atomic `os.replace` — a
 running container follows the swap without a restart (the loader re-probes

@@ -57,6 +57,11 @@ def _build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="full rebuild from crawl_start_date (one-off RUNBOOK step)",
     )
+    once.add_argument(
+        "--seed-state",
+        action="store_true",
+        help="one-off, no network: rebuild crawl_state from the live index",
+    )
     return parser
 
 
@@ -82,7 +87,10 @@ def main(argv: Optional[list[str]] = None) -> int:
     if args.command == CRAWL_COMMAND:
         from crawl.crawl_main import main as crawl_cli
 
-        return crawl_cli(["--cold"] if args.cold else [])
+        return crawl_cli(
+            (["--cold"] if args.cold else [])
+            + (["--seed-state"] if args.seed_state else [])
+        )
 
     import uvicorn
 

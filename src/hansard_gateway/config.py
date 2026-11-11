@@ -150,6 +150,9 @@ class Settings:
     crawl_start_date: str = "1955-01-01"
     #: Re-fetch any sitting crawled more than this many days ago.
     crawl_recrawl_age_days: int = 90
+    #: Re-check a sitting that had no reports while it is newer than this many
+    #: days (late-posted reports); older empty sittings stay skipped. 0 = never.
+    crawl_empty_recheck_days: int = 14
 
     # --- Page budgets (spec §7.1) ---
     page_budget_html_bytes: int = 102400

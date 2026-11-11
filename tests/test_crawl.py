@@ -289,9 +289,10 @@ def test_mid_build_failure_leaves_live_byte_identical(tmp_path: Path, monkeypatc
     finally:
         conn.close()
     assert reports == 0 and terms == 0, "no partial index content"
-    # crawl_state has at least the fetched day recorded (the build failed
-    # AFTER the date enumeration + fetch, so state was written to live).
-    assert state >= 1
+    # 27.4 (G4): crawl_state is now written only into the staging build, so a
+    # failed build leaves the live crawl_state untouched (it used to advance
+    # in live and make the failed dates look done: defect D3).
+    assert state == 0
     assert not crawl_db.staging_path(live).exists()
 
 

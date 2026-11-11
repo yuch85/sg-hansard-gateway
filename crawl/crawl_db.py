@@ -92,3 +92,59 @@ def atomic_swap(*, live: Path, settings: Optional[Settings] = None) -> str:
         counts,
     )
     return build_id or ""
+
+
+#: Report columns carried forward from the live index into the next build.
+_CARRY_COLUMNS = "report_id, link_id, sitting_date, title, report_type, speaker"
+
+
+def read_live(live: Path) -> tuple[list[dict[str, Any]], dict[str, tuple[int, str]]]:
+    """Read the live index's reports and crawl_state without modifying it.
+
+    Opened read-only. A missing, empty, or unreadable file (or table) yields
+    nothing for that part: the crawl then rebuilds from what it fetches.
+    """
+    rows: list[dict[str, Any]] = []
+    state: dict[str, tuple[int, str]] = {}
+    if not live.exists() or live.stat().st_size == 0:
+        return rows, state
+    try:
+        conn = sqlite3.connect(f"file:{live}?mode=ro", uri=True)
+    except sqlite3.DatabaseError:
+        logger.warning("live index not readable - rebuilding from fetched data (%s)", live)
+        return rows, state
+    try:
+        try:
+            keys = [c.strip() for c in _CARRY_COLUMNS.split(",")]
+            rows = [
+                dict(zip(keys, rec))
+                for rec in conn.execute(f"SELECT {_CARRY_COLUMNS} FROM report")
+            ]
+        except sqlite3.DatabaseError:
+            logger.warning("live index has no readable report table (%s)", live)
+        try:
+            state = {
+                r[0]: (r[1], r[2])
+                for r in conn.execute(
+                    "SELECT sitting_date, had_reports, crawled_at FROM crawl_state"
+                )
+            }
+        except sqlite3.DatabaseError:
+            logger.warning("live index has no readable crawl_state (%s)", live)
+    finally:
+        conn.close()
+    return rows, state
+
+
+def write_state(staging: Path, state: dict[str, tuple[int, str]]) -> None:
+    """Write the full crawl_state into the staging index (one transaction)."""
+    conn = sqlite3.connect(staging)
+    try:
+        conn.executemany(
+            "INSERT OR REPLACE INTO crawl_state (sitting_date, had_reports, crawled_at)"
+            " VALUES (?, ?, ?)",
+            [(d, hr, at) for d, (hr, at) in sorted(state.items())],
+        )
+        conn.commit()
+    finally:
+        conn.close()
