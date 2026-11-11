@@ -80,8 +80,8 @@ class CrawlClient:
                 headers=_FIXED_HEADERS,
                 timeout=httpx.Timeout(
                     connect=self._settings.connect_timeout_s,
-                    read=self._settings.read_timeout_s,
-                    write=self._settings.read_timeout_s,
+                    read=self._settings.upstream_attempt_timeout_s,
+                    write=self._settings.upstream_attempt_timeout_s,
                     pool=self._settings.connect_timeout_s,
                 ),
             )
