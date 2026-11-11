@@ -280,3 +280,43 @@ def test_after_seed_incremental_fetches_only_new_dates(tmp_path: Path) -> None:
     # 08-02 is a seeded empty date inside the 14-day recheck window.
     assert sorted(fake.calls) == ["2026-08-02", "2026-08-04", "2026-08-05", "2026-08-06"]
     assert {"a1#", "a3#", "n#"} <= _ids(cfg)
+
+
+# --- review notes: unreadable-live guard and recheck boundary -------------
+
+
+def test_state_with_reports_but_no_report_rows_refetches_all(tmp_path: Path) -> None:
+    cfg = _cfg(tmp_path)
+    _seed(cfg, [], [("2026-08-01", 1, _stamp(1)), ("2026-08-02", 0, _stamp(1))])
+    fake = FakeClient({"2026-08-01": [_raw("a1#", "Alpha")]})
+    assert run_crawl(settings=cfg, client=fake, today=date(2026, 8, 3)) == 0
+    assert "2026-08-01" in fake.calls, "fresh state must not be trusted without rows"
+    assert "a1#" in _ids(cfg)
+
+
+def test_recheck_default_is_14_days() -> None:
+    assert Settings().crawl_empty_recheck_days == 14
+
+
+def test_empty_recheck_boundary_exactly_n_days_is_skipped(tmp_path: Path) -> None:
+    cfg = _cfg(tmp_path)  # default window: 14 days
+    _seed(cfg, [_idx_row("z#", "2026-07-30", "Existing")],
+          [("2026-08-06", 0, _stamp(20)), ("2026-08-07", 0, _stamp(20))])
+    fake = FakeClient()
+    run_crawl(settings=cfg, client=fake, today=date(2026, 8, 20))
+    assert "2026-08-06" not in fake.calls, "exactly 14 days old: skipped"
+    assert "2026-08-07" in fake.calls, "13 days old: rechecked"
+
+
+@pytest.mark.parametrize("n", [1, 3])
+def test_empty_recheck_boundary_follows_setting(tmp_path: Path, n: int) -> None:
+    cfg = _cfg(tmp_path, crawl_empty_recheck_days=n)
+    end = date(2026, 8, 20)
+    edge = (end - timedelta(days=n)).isoformat()
+    inside = (end - timedelta(days=n - 1)).isoformat()
+    _seed(cfg, [_idx_row("z#", "2026-07-30", "Existing")],
+          [(edge, 0, _stamp(30)), (inside, 0, _stamp(30))])
+    fake = FakeClient()
+    run_crawl(settings=cfg, client=fake, today=end)
+    assert edge not in fake.calls
+    assert inside in fake.calls

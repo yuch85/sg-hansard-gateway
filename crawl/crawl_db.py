@@ -133,6 +133,11 @@ def read_live(live: Path) -> tuple[list[dict[str, Any]], dict[str, tuple[int, st
             logger.warning("live index has no readable crawl_state (%s)", live)
     finally:
         conn.close()
+    if not rows and any(hr == 1 for hr, _ in state.values()):
+        # State says reports exist but none were read: the index is not
+        # trustworthy, so refetch everything instead of skipping those dates.
+        logger.warning("live crawl_state lists reports but report table is empty - refetching all")
+        return [], {}
     return rows, state
 
 
