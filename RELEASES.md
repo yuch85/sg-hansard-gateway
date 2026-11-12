@@ -77,6 +77,52 @@ for 0.1.7; will be addressed in a follow-up release.
 - CSS budget: unchanged (no base.html CSS delta this release).
 - Suite: 443 passed / 2 deselected.
 
+## 0.1.9 — 2026-11-12 (crawl correctness: incremental runs keep history, late-posted reports picked up, client timeouts — phase 27.4)
+
+Image: `ghcr.io/yuch85/sg-hansard-gateway:0.1.9` (= `:latest`)
+digest `sha256:cfa0d714988b476d149f09ce608c9c80fd7446dd808ef3a6bcd090e52fdb726f`
+(build from the release commit; fill in the digest after the image build,
+the offline suite, and the machine-contract gate, per the 0.1.8 process).
+Rollback: recreate the container from
+`ghcr.io/yuch85/sg-hansard-gateway:0.1.8`
+(digest `sha256:99cbbb50926519c713dce0d0283cd2204b41d0adb78005feaadf9f5b140f4a09`)
+— copy the FULL env list from a `docker inspect` config capture (T-27-77).
+
+**What changed (crawl + docs only — the request-serving path is untouched;
+`?format=text` / `?format=json` renders, tokens, auth, and rate limits are
+identical to 0.1.8):**
+
+- **Incremental crawls no longer lose history.** An incremental run now
+  builds the new index from the live index's existing reports plus the
+  newly fetched dates, and carries the `crawl_state` bookkeeping forward
+  (`23e296d`). Previously the incremental rebuild kept only what the run
+  itself fetched. A run that finds reports missing where state expected
+  them now distrusts the live state and re-derives it from the fetched
+  data (`657a337`).
+- **Late-posted reports are picked up.** Dates that came back empty are
+  rechecked for `crawl_empty_recheck_days` (default 14) instead of being
+  treated as permanently empty — a report the official site posts late is
+  found by a later nightly run. A date whose fetch FAILS is still never
+  recorded as empty; it is retried on the next run.
+- **`crawl once --seed-state` (one-off, no network).** Rebuilds the
+  `crawl_state` bookkeeping from an existing index whose bookkeeping was
+  lost: dates up to the newest report date are marked had-reports /
+  empty from the index, later dates stay unknown so the next incremental
+  run fetches them. Refuses (exit 2, live index untouched) if state
+  already exists or the index is empty.
+- **Crawl client timeout fix.** The crawl client's read/write timeouts now
+  use `upstream_attempt_timeout_s` (they incorrectly reused
+  `read_timeout_s`) (`b3b06bd`).
+- **README sweep.** Removed the stale version-pinned "(current: 0.1.4)"
+  from the Releases section (RELEASES.md is the source of truth);
+  corrected the `HANSARD_PUBLIC_BASE_URL` code default description
+  (placeholder `https://hansard.example.org`, not the live origin);
+  expanded the Crawl section to explain what the index is and does, and
+  how to run crawls today — the one-off cold crawl (every day since 1955,
+  ~26,000 days at ~1 req/s, so budget ~a day) vs the nightly incremental
+  (minutes), on the host, ad-hoc in a container, or from a timer
+  (`f001efb`, this release).
+
 ## 0.1.8 — 2026-09-22 (per-speech SPRS record link, docs cite_url, TOC mobile overflow — mission 010 v0.1.8)
 
 Image: `ghcr.io/yuch85/sg-hansard-gateway:0.1.8` (= `:latest`)

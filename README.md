@@ -235,8 +235,21 @@ The store has no hot-reload — restart the container after any token change.
 
 ### Crawl — building the term index
 
+A self-updating index of the whole Hansard. A nightly crawl checks every
+sitting day since 1955 and keeps a small SQLite index of every report's
+title, date, type and speaker (~40k reports and growing). From those titles
+it derives bills, topics, speakers and report types with plain deterministic
+rules (no LLM, no embeddings, no cost), and pre-computes the A-Z browse tree
+that Mode 1 clients walk link by link. It catches reports the official site
+posts late, retries failed days automatically, and swaps each new build in
+atomically, so a running gateway picks it up with no restart and a failed
+crawl never touches the live index. Without it the gateway still works (live
+retrieval); with it, the whole corpus becomes a browsable tree.
+
 The offline crawl builds the term index (A-Z topic ladder, facets,
-exact-term search boost). Three equivalent ways:
+exact-term search boost). The image does not crawl by itself — the
+container CMD is the server only, so a crawl is always a separate
+invocation, by hand or from a timer. Three equivalent ways:
 
 - **On the host:** `uv run python -m hansard_gateway crawl once [--cold]`
 - **Ad-hoc in a container** (the image has no ENTRYPOINT, so the container
@@ -244,12 +257,20 @@ exact-term search boost). Three equivalent ways:
   would replace the CMD and fail):
   `docker run --rm -v hansard-index:/data <image> uv run python -m hansard_gateway crawl once [--cold]`
 - **Scheduled:** the same line from a host timer or cron (nightly is fine: an
-  incremental run fetches only new dates, dates with reports older than 90
-  days, and empty dates from the last 14 days, so late-posted reports are
-  picked up). `--cold` is a full rebuild from the start date; the default is
+  incremental run fetches only new dates, dates last crawled 90 or more
+  days ago, and empty dates from the last 14 days, so late-posted reports
+  are picked up). `--cold` is a full rebuild from the start date; the default is
   incremental and keeps every earlier report and the crawl bookkeeping.
   `crawl once --seed-state` (one-off, no network) rebuilds the bookkeeping
   from an existing index whose bookkeeping was lost.
+
+**First run vs nightly.** The first crawl on an empty index needs `--cold`:
+it fetches every day since 1955 — about 26,000 days at a polite
+~1 request/second with jitter — so budget the better part of a day for it
+(the RUNBOOK's figure is ~1 day). It is a one-off: a failed cold run never
+touches the live index, and you re-run `--cold`. Every run after that is
+the default incremental described above — minutes, not hours. The index
+lives on the `/data` volume, so both forms survive container replacement.
 
 The crawl writes through a staging file and an atomic `os.replace` — a
 running container follows the swap without a restart (the loader re-probes
