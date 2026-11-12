@@ -6,12 +6,20 @@ env behaves identically to the pre-27.2 deployment (all locked defaults).
 
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 
 import pytest
 
 from hansard_gateway.config import (
     ENV_APP_PORT,
+    ENV_CRAWL_EMPTY_RECHECK_DAYS,
+    ENV_CRAWL_ENABLED,
+    ENV_CRAWL_FIRST_RUN_DAYS,
+    ENV_CRAWL_FULL_HISTORY,
+    ENV_CRAWL_INTERVAL_HOURS,
+    ENV_CRAWL_RECRAWL_AGE_DAYS,
+    ENV_CRAWL_START_DATE,
     ENV_INDEX_DB_PATH,
     ENV_LOG_FILE,
     ENV_PUBLIC_BASE_URL,
@@ -21,7 +29,8 @@ from hansard_gateway.config import (
     _env_settings,
 )
 
-#: The six overridable env vars (the token-shape guard is deliberately excluded).
+#: The thirteen overridable env vars: the six 27.2 deployment vars plus the
+#: seven 27.5 crawl vars (the token-shape guard is deliberately excluded).
 _ALL_ENV_VARS: tuple[str, ...] = (
     ENV_APP_PORT,
     ENV_INDEX_DB_PATH,
@@ -29,6 +38,13 @@ _ALL_ENV_VARS: tuple[str, ...] = (
     ENV_PUBLIC_BASE_URL,
     ENV_LOG_FILE,
     ENV_ROBOTS_PATH,
+    ENV_CRAWL_START_DATE,
+    ENV_CRAWL_RECRAWL_AGE_DAYS,
+    ENV_CRAWL_EMPTY_RECHECK_DAYS,
+    ENV_CRAWL_ENABLED,
+    ENV_CRAWL_INTERVAL_HOURS,
+    ENV_CRAWL_FULL_HISTORY,
+    ENV_CRAWL_FIRST_RUN_DAYS,
 )
 
 
@@ -87,6 +103,185 @@ def test_env_settings_clean_env_returns_locked_defaults(
     assert s.public_base_url == "https://hansard.example.org"
     assert s.log_file == ""
     assert s.robots_path is None
+
+
+def test_env_settings_honors_crawl_vars(monkeypatch: pytest.MonkeyPatch) -> None:
+    """27.5: all seven crawl vars hydrate Settings (dates, ints, floats, bools)."""
+    _clean_env(monkeypatch)
+    monkeypatch.setenv(ENV_CRAWL_START_DATE, "1960-04-01")
+    monkeypatch.setenv(ENV_CRAWL_RECRAWL_AGE_DAYS, "30")
+    monkeypatch.setenv(ENV_CRAWL_EMPTY_RECHECK_DAYS, "7")
+    monkeypatch.setenv(ENV_CRAWL_ENABLED, "1")
+    monkeypatch.setenv(ENV_CRAWL_INTERVAL_HOURS, "6.5")
+    monkeypatch.setenv(ENV_CRAWL_FULL_HISTORY, "true")
+    monkeypatch.setenv(ENV_CRAWL_FIRST_RUN_DAYS, "14")
+
+    s = _env_settings()
+
+    assert s.crawl_start_date == "1960-04-01"
+    assert s.crawl_recrawl_age_days == 30
+    assert s.crawl_empty_recheck_days == 7
+    assert s.crawl_enabled is True
+    assert s.crawl_interval_hours == 6.5
+    assert s.crawl_full_history is True
+    assert s.crawl_first_run_days == 14
+
+
+@pytest.mark.parametrize("raw", ["1", "true", "TRUE", "yes", "Yes"])
+def test_crawl_bool_true_words(monkeypatch: pytest.MonkeyPatch, raw: str) -> None:
+    """27.5 bool parsing: 1/true/yes (any case) are true."""
+    _clean_env(monkeypatch)
+    monkeypatch.setenv(ENV_CRAWL_ENABLED, raw)
+    assert _env_settings().crawl_enabled is True
+
+
+@pytest.mark.parametrize("raw", ["0", "", "maybe"])
+def test_crawl_bool_false_and_unrecognised(
+    monkeypatch: pytest.MonkeyPatch, raw: str
+) -> None:
+    """27.5 bool parsing: 0/empty/unrecognised are false (default)."""
+    _clean_env(monkeypatch)
+    monkeypatch.setenv(ENV_CRAWL_ENABLED, raw)
+    assert _env_settings().crawl_enabled is False
+
+
+def test_crawl_env_clean_env_returns_locked_defaults(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """27.5: pristine env -> locked crawl defaults (loop off, 24h, guard 31d)."""
+    _clean_env(monkeypatch)
+
+    s = _env_settings()
+
+    assert s.crawl_enabled is False
+    assert s.crawl_interval_hours == 24.0
+    assert s.crawl_full_history is False
+    assert s.crawl_first_run_days == 31
+    # The three pre-existing crawl defaults stay untouched.
+    assert s.crawl_start_date == "1955-01-01"
+    assert s.crawl_recrawl_age_days == 90
+    assert s.crawl_empty_recheck_days == 14
+
+
+def test_malformed_crawl_env_falls_back(
+    monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
+) -> None:
+    """27.5 (L1): a malformed HANSARD_CRAWL_* value never raises out of
+    _env_settings (the server imports config at boot): warn + locked default."""
+    _clean_env(monkeypatch)
+    monkeypatch.setenv(ENV_CRAWL_INTERVAL_HOURS, "abc")
+    monkeypatch.setenv(ENV_CRAWL_FIRST_RUN_DAYS, "x")
+    monkeypatch.setenv(ENV_CRAWL_START_DATE, "not-a-date")
+    monkeypatch.setenv(ENV_CRAWL_ENABLED, "maybe")
+
+    with caplog.at_level(logging.WARNING):
+        s = _env_settings()
+
+    assert s.crawl_interval_hours == 24.0
+    assert s.crawl_first_run_days == 31
+    assert s.crawl_start_date == "1955-01-01"
+    assert s.crawl_enabled is False
+    warnings = [r.getMessage() for r in caplog.records if r.levelno == logging.WARNING]
+    for var in (
+        ENV_CRAWL_INTERVAL_HOURS,
+        ENV_CRAWL_FIRST_RUN_DAYS,
+        ENV_CRAWL_START_DATE,
+        ENV_CRAWL_ENABLED,
+    ):
+        assert any(var in m for m in warnings), var
+
+    # Server import safety: re-running the import-time hydration under the
+    # same env must succeed (config import must never crash server boot).
+    import importlib
+
+    import hansard_gateway.config as config_mod
+
+    try:
+        importlib.reload(config_mod)
+    finally:
+        monkeypatch.undo()
+        importlib.reload(config_mod)
+
+
+@pytest.mark.parametrize(
+    "var, raw, field, default",
+    [
+        (ENV_CRAWL_FIRST_RUN_DAYS, "3_1", "crawl_first_run_days", 31),
+        (ENV_CRAWL_RECRAWL_AGE_DAYS, "9_0", "crawl_recrawl_age_days", 90),
+        (ENV_CRAWL_INTERVAL_HOURS, "2_4", "crawl_interval_hours", 24.0),
+    ],
+)
+def test_underscore_literal_crawl_env_falls_back(
+    monkeypatch: pytest.MonkeyPatch,
+    caplog: pytest.LogCaptureFixture,
+    var: str,
+    raw: str,
+    field: str,
+    default: float,
+) -> None:
+    """27.5 review 2: Python int()/float() accept "1_000" literals; an env var
+    is not a Python literal — reject with a warning + locked default."""
+    _clean_env(monkeypatch)
+    monkeypatch.setenv(var, raw)
+
+    with caplog.at_level(logging.WARNING):
+        s = _env_settings()
+
+    assert getattr(s, field) == default
+    assert any(
+        var in r.getMessage() for r in caplog.records if r.levelno == logging.WARNING
+    )
+
+
+@pytest.mark.parametrize("raw", ["nan", "inf", "-inf", "NaN", "Infinity"])
+def test_non_finite_crawl_interval_falls_back(
+    monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture, raw: str
+) -> None:
+    """27.5 review: nan/inf parse as floats but are nonsense intervals:
+    warn + locked default."""
+    _clean_env(monkeypatch)
+    monkeypatch.setenv(ENV_CRAWL_INTERVAL_HOURS, raw)
+
+    with caplog.at_level(logging.WARNING):
+        s = _env_settings()
+
+    assert s.crawl_interval_hours == 24.0
+    assert any(
+        ENV_CRAWL_INTERVAL_HOURS in r.getMessage()
+        for r in caplog.records
+        if r.levelno == logging.WARNING
+    )
+
+
+@pytest.mark.parametrize(
+    "var, raw, field, default",
+    [
+        (ENV_CRAWL_INTERVAL_HOURS, "0", "crawl_interval_hours", 24.0),
+        (ENV_CRAWL_INTERVAL_HOURS, "-3", "crawl_interval_hours", 24.0),
+        (ENV_CRAWL_FIRST_RUN_DAYS, "0", "crawl_first_run_days", 31),
+        (ENV_CRAWL_FIRST_RUN_DAYS, "-7", "crawl_first_run_days", 31),
+    ],
+)
+def test_non_positive_crawl_env_falls_back(
+    monkeypatch: pytest.MonkeyPatch,
+    caplog: pytest.LogCaptureFixture,
+    var: str,
+    raw: str,
+    field: str,
+    default: float,
+) -> None:
+    """27.5 (defect-4): a non-positive interval or guard window is nonsense:
+    warn + locked default."""
+    _clean_env(monkeypatch)
+    monkeypatch.setenv(var, raw)
+
+    with caplog.at_level(logging.WARNING):
+        s = _env_settings()
+
+    assert getattr(s, field) == default
+    assert any(
+        var in r.getMessage() for r in caplog.records if r.levelno == logging.WARNING
+    )
 
 
 def test_env_settings_ignores_token_shape_guard(

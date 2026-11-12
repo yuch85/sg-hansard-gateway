@@ -8,7 +8,8 @@ silently dead (found 2026-09-18 during the /search arrival diagnosis).
 
 Usage: ``uv run python -m hansard_gateway`` (see the deploy systemd unit), or
 ``uv run python -m hansard_gateway crawl once [--cold]`` to run an offline
-crawl (27.2-REQ-03) without the server.
+crawl (27.2-REQ-03) without the server, or ``crawl loop`` for the long-running
+in-image companion (27.5).
 """
 
 from __future__ import annotations
@@ -21,8 +22,10 @@ from typing import Optional
 SERVE_COMMAND: str = "serve"
 #: Subcommand name for the offline crawl dispatch.
 CRAWL_COMMAND: str = "crawl"
-#: The one crawl action supported from the gateway entrypoint.
+#: Crawl action: one run and exit.
 CRAWL_ACTION_ONCE: str = "once"
+#: Crawl action: tick immediately, then every crawl_interval_hours (27.5).
+CRAWL_ACTION_LOOP: str = "loop"
 #: Top-level flag that must stay accepted at BOTH levels (bare + serve).
 _HOST_FLAG: str = "--host"
 #: Top-level flag that must stay accepted at BOTH levels (bare + serve).
@@ -62,6 +65,11 @@ def _build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="one-off, no network: rebuild crawl_state from the live index",
     )
+    # No extra flags: the interval and crawl settings come from Settings/env.
+    crawl_sub.add_parser(
+        CRAWL_ACTION_LOOP,
+        help="crawl immediately, then every crawl_interval_hours (27.5)",
+    )
     return parser
 
 
@@ -87,9 +95,13 @@ def main(argv: Optional[list[str]] = None) -> int:
     if args.command == CRAWL_COMMAND:
         from crawl.crawl_main import main as crawl_cli
 
+        if args.action == CRAWL_ACTION_LOOP:
+            return crawl_cli([CRAWL_ACTION_LOOP])
+        # The loop subparser defines neither flag (F5): read them only on the
+        # once branch so ``crawl loop`` cannot AttributeError.
         return crawl_cli(
-            (["--cold"] if args.cold else [])
-            + (["--seed-state"] if args.seed_state else [])
+            (["--cold"] if getattr(args, "cold", False) else [])
+            + (["--seed-state"] if getattr(args, "seed_state", False) else [])
         )
 
     import uvicorn

@@ -73,14 +73,14 @@ curl -s https://<LIVE_HOST>/ | head -20
 The link-navigable ingress (spec §4) reads the local term index
 (`~/.hansard/index.db`). The index is built by an offline crawl
 (`python -m crawl.crawl_main`). The COLD crawl is a ONE-OFF manual step
-BEFORE live acceptance (it takes ~1 day at ~1 req/s); the weekly timer then
+BEFORE live acceptance (it takes ~1 day at ~1 req/s); the nightly timer then
 handles INCREMENTS only (never re-writes from scratch).
 
 The deploy is a human checkpoint (sudo/ssh — the owner has passwordless ssh
 to the proxy and authorised the executor to deploy, CONTEXT 7). The executor
 only writes the unit files + this RUNBOOK.
 
-### 1. Install the weekly timer
+### 1. Install the nightly timer
 
 ```bash
 mkdir -p ~/.config/systemd/user
@@ -260,6 +260,58 @@ hansard-gateway:<TAG> uv run python -m hansard_gateway crawl once [--cold]`
 from a host timer, or the systemd timer in `deploy/systemd/` for a host-side
 crawl instead.
 
+### In-image crawler (0.2.0+)
+
+The published image can crawl by itself: tini is PID 1 and
+`docker-entrypoint.sh` starts the server ALWAYS plus a supervised crawl loop
+when `HANSARD_CRAWL_ENABLED=1`. All flags: `.env.example` (also in the image
+at `/app/.env.example`).
+
+- **Enable/disable:** `-e HANSARD_CRAWL_ENABLED=1` (off by default; a bare
+  `docker run` never crawls). First tick is immediate at container start,
+  then every `HANSARD_CRAWL_INTERVAL_HOURS` (default 24). A crashed loop
+  restarts after `HANSARD_CRAWL_RESTART_SECONDS` (default 30) — the server
+  process is never touched by a loop restart.
+- **Crawl logs:** `docker logs <container>` — both process trees log to the
+  container's stderr.
+- **First run on a fresh volume:** the guard fetches only the last
+  `HANSARD_CRAWL_FIRST_RUN_DAYS` days (default 31) and records
+  `meta.crawl_floor`; later ticks are normal incrementals. Full history:
+  `HANSARD_CRAWL_FULL_HISTORY=1` or a one-off `crawl once --cold` (~26k
+  requests, many hours at ~1 req/s).
+- **Lock semantics:** every crawl run takes an exclusive flock on the index;
+  a concurrent writer skips its run with exit code 3 (a skip, not a
+  failure) and the loop retries after 15 minutes.
+- **Resume after restart:** crawl bookkeeping lives in the index on /data —
+  a recreated container resumes incrementally; nothing is re-fetched except
+  the normal recheck/recrawl windows.
+- **Upgrade:** pull the new image + recreate the container. The index,
+  floor, and tokens carry over on the volume.
+- **One writer per volume:** use EITHER a host timer/cron OR the in-image
+  loop for a given /data volume — never both (wasteful and confusing; the
+  lock prevents corruption). Multi-replica: replicas SHARING one volume are
+  safe (exactly one crawler holds the lock; the others skip); replicas with
+  SEPARATE volumes each crawl their own copy (works, but multiplies upstream
+  load).
+- **Port:** the container server always binds 8000 (the HEALTHCHECK probes
+  hardcoded 127.0.0.1:8000). Publish another port with `-p <port>:8000`;
+  `HANSARD_APP_PORT` is a host-run knob only.
+
+Edge cases:
+
+- **Pre-27.4 index (report rows but empty `crawl_state`):** run
+  `docker run --rm -v <volume>:/data <image> uv run python -m hansard_gateway crawl once --seed-state`
+  BEFORE enabling the loop — it rebuilds honest bookkeeping from the
+  existing index. Without it the first loop tick is NOT guarded (an index
+  carrying rows is an existing deployment, not a fresh one): every date
+  from `crawl_start_date` is treated as unknown and backfilled — expensive
+  but correct, and existing reports are carried forward (no data loss).
+  `--seed-state` turns that first tick into a cheap incremental.
+- **A guarded first run whose fetches all fail** still persists
+  `crawl_floor`: the floor marks where crawling starts, not what succeeded;
+  failed dates are not recorded in `crawl_state`, so later ticks retry them.
+- **`--cold` is the full-history recovery:** it ignores and clears the floor.
+
 ### The /data volume contract (live bind-mount)
 
 - The host dir contains ONLY what the app needs — `index.db` + `tokens.yaml`
@@ -271,7 +323,7 @@ crawl instead.
   `<HOME_HANSARD_DIR>` so the container never gets read/write on it.
 - Index persistence (INDEX-01): the index lives in the volume, so container
   replacement is safe; for a live bind-mount deployment the host path and
-  the volume are the same directory. The weekly crawl timer's atomic
+  the volume are the same directory. The nightly crawl timer's atomic
   `os.replace` swap is followed by the running container WITHOUT a restart
   (build_id reopen — proven in-container by the Plan-3 swap gate).
 
@@ -301,7 +353,7 @@ End-to-end option (b): the container is pre-verified on
 caddy reload (an invalid reload keeps the old config live); the systemd app
 keeps <APP_PORT> until retirement, so the two coexist (no port collision —
 the container host port MUST be 8766, NOT 8765). The index + tokens are
-MIGRATED via the bind mount — no re-crawl; the weekly crawl timer is
+MIGRATED via the bind mount — no re-crawl; the nightly crawl timer is
 UNTOUCHED. The systemd unit is stopped (not disabled, not removed) AFTER the
 live URL is verified, and stays installed + enabled as the rollback.
 
@@ -384,7 +436,7 @@ NOTE: every later token curl in this section uses the POST-MOVE path
 ### Step 2 — Migrate + synchronize the token store (no re-crawl)
 
 The container /data is BIND-MOUNTED at the existing <HOME_HANSARD_DIR>
-(RESEARCH recommendation (i): the weekly timer's atomic os.replace swap
+(RESEARCH recommendation (i): the nightly timer's atomic os.replace swap
 stays visible to the container — zero crawl-scheduling change; the crawl
 timer is NOT touched).
 
@@ -556,7 +608,7 @@ systemctl --user is-enabled alice-hansard-gateway
 curl -sf -o /dev/null -w '%{http_code}\n' https://hansard.098020.xyz/health
 # Expected: 200 — the container owns the live URL
 systemctl --user list-timers | grep alice-hansard-crawl
-# Expected: the weekly timer UNTOUCHED and still armed, writing
+# Expected: the nightly timer UNTOUCHED and still armed, writing
 # <HOME_HANSARD_DIR>/index.db (the bind mount)
 ```
 
@@ -578,7 +630,7 @@ curl -sf -o /tmp/hg-persist2.html https://hansard.098020.xyz/a/$T/report/037_200
 rm -f /tmp/hg-persist.html /tmp/hg-persist2.html
 ```
 
-The weekly timer's next os.replace swap will be visible to the container
+The nightly timer's next os.replace swap will be visible to the container
 WITHOUT a restart (loader reopens on build_id change — proven in-container
 at fixture scale by the Docker plan's swap gate) — noted, not force-run (no
 re-crawl).

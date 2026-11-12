@@ -11,9 +11,16 @@
 # os.replace swap lands on the same path the container reads. The log dir
 # (/data/logs/) is created BY THE APP at boot — no pre-creation anywhere.
 #
-# no ENTRYPOINT — container overrides use the full module form:
+# Two-process model (Phase 27.5, v0.2.0): tini is PID 1 and
+# docker-entrypoint.sh starts the server ALWAYS plus the crawl loop when
+# HANSARD_CRAWL_ENABLED=1 (a loop crash never takes the server down;
+# `docker stop` forwards cleanly to both). The canonical env reference ships
+# in the image at /app/.env.example.
+#
+# Still NO ENTRYPOINT — container overrides use the full module form:
 # docker run … <image> uv run python -m hansard_gateway crawl once
-# (any args after the image REPLACE the CMD; a bare `crawl once` would fail.)
+# (any args after the image REPLACE the CMD — tini included — so one-shot
+# crawls run exactly as on 0.1.x; a bare `crawl once` would fail.)
 #
 # Token admin runs in the same image:
 #   docker exec <container> hg-tokens <list|generate|rotate|disable>
@@ -22,6 +29,13 @@
 FROM python:3.12-slim
 
 WORKDIR /app
+
+# tini: a real PID 1 for the two-process model (signal forwarding, zombie
+# reaping). python:3.12-slim has none; `--init` is a runtime flag the
+# fire-and-forget form cannot rely on.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends tini \
+    && rm -rf /var/lib/apt/lists/*
 
 # Dependency layer: app deps from the lockfile ONLY. --no-dev keeps the dev
 # group (pytest/respx) out; --no-install-project skips the project package
@@ -38,6 +52,12 @@ RUN pip install --no-cache-dir uv \
 COPY src/ ./src/
 COPY crawl/ ./crawl/
 COPY manage_tokens.py ./
+# 27.5: the two-process entrypoint + the canonical env reference (shipped so
+# operators can read the flag docs from inside the image).
+COPY .env.example docker-entrypoint.sh ./
+# The committed 0755 mode is the primary path; chmod is belt-and-braces for
+# non-git build contexts.
+RUN chmod +x docker-entrypoint.sh
 
 # Second pass: NOW installs the project package + the [project.scripts]
 # hg-tokens console entrypoint.
@@ -58,7 +78,8 @@ VOLUME /data
 HEALTHCHECK --interval=30s --start-period=10s --retries=3 \
     CMD ["python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5).status == 200 else 1)"]
 
-# The MODULE entrypoint, never the uvicorn CLI (T-27-38: `uvicorn …:app`
-# imports the app but skips configure_logging, so HANSARD_LOG_FILE /
-# HANSARD_LOG_STREAM would be dead).
-CMD ["uv", "run", "python", "-m", "hansard_gateway", "--host", "0.0.0.0", "--port", "8000"]
+# tini as PID 1; the entrypoint starts the server (the MODULE form, never
+# the uvicorn CLI — T-27-38: `uvicorn …:app` imports the app but skips
+# configure_logging, so HANSARD_LOG_FILE / HANSARD_LOG_STREAM would be dead)
+# and, when HANSARD_CRAWL_ENABLED=1, the supervised crawl loop.
+CMD ["tini", "--", "/app/docker-entrypoint.sh"]

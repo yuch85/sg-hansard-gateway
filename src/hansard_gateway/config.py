@@ -8,10 +8,13 @@ constants.
 
 from __future__ import annotations
 
+import logging
 import os
 from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Optional
+
+logger = logging.getLogger(__name__)
 
 # --- Deployment env var names (27.2-REQ-02) ------------------------------------
 #: Bind port override (systemd unit / Docker image).
@@ -26,6 +29,22 @@ ENV_PUBLIC_BASE_URL = "HANSARD_PUBLIC_BASE_URL"
 ENV_LOG_FILE = "HANSARD_LOG_FILE"
 #: robots.txt override file (27.2-REQ-05); unset = the built-in default body.
 ENV_ROBOTS_PATH = "HANSARD_ROBOTS_PATH"
+
+# --- Crawl env var names (27.5: crawl settings become env-overridable) ---------
+#: Enumeration floor for sitting dates (YYYY-MM-DD).
+ENV_CRAWL_START_DATE = "HANSARD_CRAWL_START_DATE"
+#: Re-fetch any sitting crawled more than this many days ago.
+ENV_CRAWL_RECRAWL_AGE_DAYS = "HANSARD_CRAWL_RECRAWL_AGE_DAYS"
+#: Re-check report-less sittings newer than this many days (0 = never).
+ENV_CRAWL_EMPTY_RECHECK_DAYS = "HANSARD_CRAWL_EMPTY_RECHECK_DAYS"
+#: =1: run the in-image crawl loop alongside the server (off by default).
+ENV_CRAWL_ENABLED = "HANSARD_CRAWL_ENABLED"
+#: Hours between crawl-loop ticks (the first tick is immediate).
+ENV_CRAWL_INTERVAL_HOURS = "HANSARD_CRAWL_INTERVAL_HOURS"
+#: =1: crawl full history from crawl_start_date (disables the first-run guard).
+ENV_CRAWL_FULL_HISTORY = "HANSARD_CRAWL_FULL_HISTORY"
+#: First-run guard: a fresh index crawls only this many days back.
+ENV_CRAWL_FIRST_RUN_DAYS = "HANSARD_CRAWL_FIRST_RUN_DAYS"
 
 
 @dataclass(frozen=True)
@@ -154,6 +173,19 @@ class Settings:
     #: days (late-posted reports); older empty sittings stay skipped. 0 = never.
     crawl_empty_recheck_days: int = 14
 
+    # --- In-image crawl loop (Phase 27.5) ---
+    #: =1 runs the crawl loop next to the server; off by default so a bare
+    #: `docker run` never crawls.
+    crawl_enabled: bool = False
+    #: Hours between crawl-loop ticks (the first tick runs immediately).
+    crawl_interval_hours: float = 24.0
+    #: =1 disables the first-run guard: crawl from crawl_start_date and clear
+    #: any stored crawl floor.
+    crawl_full_history: bool = False
+    #: First-run guard window: a fresh deployment crawls only this many days
+    #: back (persisted as meta.crawl_floor) instead of full history.
+    crawl_first_run_days: int = 31
+
     # --- Page budgets (spec §7.1) ---
     page_budget_html_bytes: int = 102400
     page_budget_links: int = 400
@@ -188,6 +220,96 @@ class Settings:
     http_gateway_timeout: int = 504
 
 
+#: Words that hydrate a boolean env var as True (any case).
+_ENV_TRUE_WORDS = frozenset({"1", "true", "yes"})
+#: Words that hydrate a boolean env var as False (any case); anything else
+#: warns and falls back to the default.
+_ENV_FALSE_WORDS = frozenset({"0", "false", "no"})
+
+
+def _env_bool(name: str, default: bool) -> bool:
+    """Hydrate a boolean env var; unrecognised values warn + keep the default.
+
+    27.5 warn-and-default hydration: a malformed HANSARD_CRAWL_* value must
+    never raise out of config import — the server imports this module at boot.
+    """
+    raw = os.environ.get(name)
+    if raw is None or raw.strip() == "":
+        return default
+    word = raw.strip().lower()
+    if word in _ENV_TRUE_WORDS:
+        return True
+    if word in _ENV_FALSE_WORDS:
+        return False
+    logger.warning("ignoring unrecognised boolean %s=%r - using default %s", name, raw, default)
+    return default
+
+
+def _env_int(name: str, default: int, *, positive: bool = False, minimum: Optional[int] = None) -> int:
+    """Hydrate an integer env var; malformed/out-of-range warns + default.
+
+    Underscore literals ("1_000") are rejected: Python's int() accepts them,
+    but an env var is not a Python literal (review 2, finding 4).
+    """
+    raw = os.environ.get(name)
+    if raw is None or raw.strip() == "":
+        return default
+    if "_" in raw:
+        logger.warning("ignoring non-integer %s=%r - using default %s", name, raw, default)
+        return default
+    try:
+        value = int(raw.strip())
+    except ValueError:
+        logger.warning("ignoring non-integer %s=%r - using default %s", name, raw, default)
+        return default
+    if positive and value <= 0:
+        logger.warning("ignoring non-positive %s=%r - using default %s", name, raw, default)
+        return default
+    if minimum is not None and value < minimum:
+        logger.warning("ignoring out-of-range %s=%r (minimum %d) - using default %s", name, raw, minimum, default)
+        return default
+    return value
+
+
+def _env_float(name: str, default: float, *, positive: bool = False) -> float:
+    """Hydrate a float env var; malformed/non-positive warns + default."""
+    raw = os.environ.get(name)
+    if raw is None or raw.strip() == "":
+        return default
+    import math
+
+    if "_" in raw:
+        logger.warning("ignoring non-numeric %s=%r - using default %s", name, raw, default)
+        return default
+    try:
+        value = float(raw.strip())
+    except ValueError:
+        logger.warning("ignoring non-numeric %s=%r - using default %s", name, raw, default)
+        return default
+    if not math.isfinite(value):
+        logger.warning("ignoring non-finite %s=%r - using default %s", name, raw, default)
+        return default
+    if positive and value <= 0:
+        logger.warning("ignoring non-positive %s=%r - using default %s", name, raw, default)
+        return default
+    return value
+
+
+def _env_date(name: str, default: str) -> str:
+    """Hydrate a YYYY-MM-DD date env var; malformed warns + default."""
+    import datetime as _dt
+
+    raw = os.environ.get(name)
+    if raw is None or raw.strip() == "":
+        return default
+    try:
+        _dt.datetime.strptime(raw.strip(), "%Y-%m-%d")
+    except ValueError:
+        logger.warning("ignoring malformed date %s=%r (want YYYY-MM-DD) - using default %s", name, raw, default)
+        return default
+    return raw.strip()
+
+
 def _env_settings() -> Settings:
     """Build the Settings singleton from the locked defaults + HANSARD_* env.
 
@@ -195,8 +317,10 @@ def _env_settings() -> Settings:
     capability-token shape guard (token_min_len/token_max_len) is deliberately
     NOT overridable — auth.py builds its token regex from those at import.
     Hydrating here (before any consumer import) is what makes a fresh
-    container honor its env.
+    container honor its env. The six 27.2 deployment vars keep their strict
+    behavior; the seven 27.5 crawl vars hydrate warn-and-default.
     """
+    defaults = Settings()
     overrides: dict[str, object] = {}
     if os.environ.get(ENV_APP_PORT):
         overrides["app_port"] = int(os.environ[ENV_APP_PORT])
@@ -210,7 +334,30 @@ def _env_settings() -> Settings:
         overrides["log_file"] = str(os.environ[ENV_LOG_FILE])
     if os.environ.get(ENV_ROBOTS_PATH):
         overrides["robots_path"] = Path(os.environ[ENV_ROBOTS_PATH]).expanduser()
-    return replace(Settings(), **overrides)
+    # 27.5 crawl vars (warn-and-default: never raise out of config import).
+    if os.environ.get(ENV_CRAWL_START_DATE):
+        overrides["crawl_start_date"] = _env_date(ENV_CRAWL_START_DATE, defaults.crawl_start_date)
+    if os.environ.get(ENV_CRAWL_RECRAWL_AGE_DAYS):
+        overrides["crawl_recrawl_age_days"] = _env_int(
+            ENV_CRAWL_RECRAWL_AGE_DAYS, defaults.crawl_recrawl_age_days, minimum=0
+        )
+    if os.environ.get(ENV_CRAWL_EMPTY_RECHECK_DAYS):
+        overrides["crawl_empty_recheck_days"] = _env_int(
+            ENV_CRAWL_EMPTY_RECHECK_DAYS, defaults.crawl_empty_recheck_days, minimum=0
+        )
+    if os.environ.get(ENV_CRAWL_ENABLED):
+        overrides["crawl_enabled"] = _env_bool(ENV_CRAWL_ENABLED, defaults.crawl_enabled)
+    if os.environ.get(ENV_CRAWL_INTERVAL_HOURS):
+        overrides["crawl_interval_hours"] = _env_float(
+            ENV_CRAWL_INTERVAL_HOURS, defaults.crawl_interval_hours, positive=True
+        )
+    if os.environ.get(ENV_CRAWL_FULL_HISTORY):
+        overrides["crawl_full_history"] = _env_bool(ENV_CRAWL_FULL_HISTORY, defaults.crawl_full_history)
+    if os.environ.get(ENV_CRAWL_FIRST_RUN_DAYS):
+        overrides["crawl_first_run_days"] = _env_int(
+            ENV_CRAWL_FIRST_RUN_DAYS, defaults.crawl_first_run_days, positive=True
+        )
+    return replace(defaults, **overrides)
 
 
 #: Module-level singleton consumed across the package.

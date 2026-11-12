@@ -46,10 +46,26 @@ def _build_time(live) -> Optional[datetime]:
 
 
 def seed_state(*, settings: Optional[Settings] = None) -> int:
-    """Seed ``crawl_state`` from the live index; return an exit code."""
+    """Seed ``crawl_state`` from the live index; return an exit code.
+
+    0 = seeded, 1 = build failure, 2 = refused (state exists / empty index),
+    3 = another crawl holds the single-writer lock (skipped; live untouched).
+    """
     cfg = settings or _settings
     live = cfg.index_db_path
-    rows, state = crawl_db.read_live(live)
+    try:
+        with crawl_db.index_lock(live):
+            return _seed_state_locked(cfg, live)
+    except crawl_db.CrawlLockedError:
+        logger.warning(
+            "another crawl holds the lock on %s — skipping seed-state", live
+        )
+        return 3
+
+
+def _seed_state_locked(cfg: Settings, live) -> int:
+    """The seed body, run under ``index_lock`` (see :func:`seed_state`)."""
+    rows, state, _distrusted = crawl_db.read_live(live)
     if state:
         logger.error("seed-state refused: crawl_state already has %d rows", len(state))
         return 2

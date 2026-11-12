@@ -77,6 +77,56 @@ for 0.1.7; will be addressed in a follow-up release.
 - CSS budget: unchanged (no base.html CSS delta this release).
 - Suite: 443 passed / 2 deselected.
 
+## 0.2.0 — 2026-11-12 (self-crawling image — phase 27.5)
+
+Image: `ghcr.io/yuch85/sg-hansard-gateway:0.2.0` (= `:latest`)
+digest `sha256:9fdeff28b0e477c204b6378a729fa21f5fb55905d13123e185d533407b07c7c3`
+
+Real-upstream crawl smoke could not be completed on 2026-11-12:
+sprs.parl.gov.sg returned HTTP 500 on every search request; fetch code
+is unchanged from 0.1.9.
+Rollback: recreate the container from
+`ghcr.io/yuch85/sg-hansard-gateway:0.1.9`
+(digest as recorded in the 0.1.9 entry)
+— copy the FULL env list from a `docker inspect` config capture (T-27-77).
+
+**What changed (GSD phase 27.5, plans 01+02):**
+
+- **The image can crawl by itself.** Off by default — a bare `docker run`
+  never crawls. `HANSARD_CRAWL_ENABLED=1` runs a supervised crawl loop next
+  to the server in the same container: first crawl immediately at container
+  start, then every `HANSARD_CRAWL_INTERVAL_HOURS` (default 24). A crashed
+  loop restarts after `HANSARD_CRAWL_RESTART_SECONDS` (default 30) without
+  touching the server; `docker stop` shuts both down cleanly (tini is
+  PID 1).
+- **First-run guard.** On a FRESH volume the first crawl fetches only the
+  last `HANSARD_CRAWL_FIRST_RUN_DAYS` days (default 31) and records the
+  floor, so a new deployment is useful in minutes instead of backfilling
+  ~26k daily requests (many hours at ~1 req/s).
+  `HANSARD_CRAWL_FULL_HISTORY=1` (or `crawl once --cold`) backfills
+  everything and clears the floor.
+- **Single crawl writer per index.** Every crawl run takes an exclusive
+  flock; a concurrent writer skips with exit code 3. Use EITHER a host
+  timer/cron OR the in-image loop per volume — never both.
+- **All crawl settings are env-overridable** (HANSARD_CRAWL_START_DATE,
+  RECRAWL_AGE_DAYS, EMPTY_RECHECK_DAYS, ENABLED, INTERVAL_HOURS,
+  FULL_HISTORY, FIRST_RUN_DAYS) with warn-and-default parsing — a malformed
+  value logs a warning and never crashes the server. `.env.example` is the
+  canonical reference and now ships in the image at `/app/.env.example`.
+- **The one-shot contract is unchanged**: the image still has no ENTRYPOINT,
+  so `docker run <image> uv run python -m hansard_gateway crawl once`
+  replaces the CMD (tini included) and runs exactly as on 0.1.x.
+- **In-container HANSARD_APP_PORT is ignored.** The container server
+  always binds 8000 (the HEALTHCHECK probes hardcoded 127.0.0.1:8000, so
+  honoring it would leave the container permanently unhealthy);
+  HANSARD_APP_PORT stays a host-run knob. Map ports with
+  `docker run -p 9000:8000`.
+- **`docker stop` now exits 0.** tini forwards SIGTERM to the entrypoint,
+  which stops both children and reports a clean shutdown.
+
+Upgrade: `docker pull` + recreate — `/data` carries the index and tokens,
+no migration; the crawler stays off unless explicitly enabled.
+
 ## 0.1.9 — 2026-11-12 (crawl correctness: incremental runs keep history, late-posted reports picked up, client timeouts — phase 27.4)
 
 Image: `ghcr.io/yuch85/sg-hansard-gateway:0.1.9` (= `:latest`)

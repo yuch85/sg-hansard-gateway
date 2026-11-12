@@ -247,9 +247,10 @@ crawl never touches the live index. Without it the gateway still works (live
 retrieval); with it, the whole corpus becomes a browsable tree.
 
 The offline crawl builds the term index (A-Z topic ladder, facets,
-exact-term search boost). The image does not crawl by itself — the
-container CMD is the server only, so a crawl is always a separate
-invocation, by hand or from a timer. Three equivalent ways:
+exact-term search boost). By default the image does not crawl by itself —
+the container CMD is the server only, so a crawl is a separate
+invocation, by hand or from a timer (0.2.0 adds an opt-in self-crawling
+mode — see "Let the container crawl by itself" below). Three equivalent ways:
 
 - **On the host:** `uv run python -m hansard_gateway crawl once [--cold]`
 - **Ad-hoc in a container** (the image has no ENTRYPOINT, so the container
@@ -275,6 +276,38 @@ lives on the `/data` volume, so both forms survive container replacement.
 The crawl writes through a staging file and an atomic `os.replace` — a
 running container follows the swap without a restart (the loader re-probes
 `meta.build_id` on each query and reopens when it changes).
+
+#### Let the container crawl by itself (0.2.0+)
+
+One env var turns the published image into a self-crawling deployment:
+
+```
+docker run -e HANSARD_CRAWL_ENABLED=1 -v hansard-index:/data <image>
+```
+
+The container then runs two process trees: the server (always) and a
+supervised crawl loop that ticks immediately at container start and then
+every `HANSARD_CRAWL_INTERVAL_HOURS` (default 24). A loop crash restarts
+after `HANSARD_CRAWL_RESTART_SECONDS` (default 30) without touching the
+server; `docker stop` shuts both down cleanly. All crawler flags are
+documented in [.env.example](.env.example) (the canonical reference — also
+shipped inside the image at `/app/.env.example`).
+
+**First-run guard:** on a FRESH volume the first crawl fetches only the last
+`HANSARD_CRAWL_FIRST_RUN_DAYS` days (default 31) and records that floor, so
+a new deployment is useful in minutes. Full history from 1955 is ~26k daily
+requests — many hours at ~1 req/s. Set `HANSARD_CRAWL_FULL_HISTORY=1` (or
+run `crawl once --cold`) to backfill everything; both ignore and clear the
+floor.
+
+**One writer per volume:** every crawl run takes an exclusive lock on the
+index; a concurrent writer skips its run (exit code 3). Use EITHER a host
+timer/cron OR the in-image loop for a given /data volume — never both.
+
+The ad-hoc and scheduled forms above are unchanged: the image still has no
+ENTRYPOINT, so `docker run … <image> uv run python -m hansard_gateway crawl
+once` replaces the CMD (tini included) and runs a one-shot crawl exactly as
+on 0.1.x.
 
 ## Operator reference
 

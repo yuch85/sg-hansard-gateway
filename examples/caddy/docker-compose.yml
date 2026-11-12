@@ -33,6 +33,18 @@ services:
       HANSARD_PUBLIC_BASE_URL: https://hansard.example.org
       # JSON request lines to stderr for container log collection (D-09).
       HANSARD_LOG_STREAM: "1"
+      # --- In-image crawler (0.2.0+). Off by default. Uncomment to let the
+      # container crawl by itself (first tick immediate, then every
+      # HANSARD_CRAWL_INTERVAL_HOURS, default 24).
+      # EITHER/OR: one crawl writer per /data volume — use EITHER a host
+      # timer/cron OR the in-image loop for a given volume, never both. The
+      # single-writer lock prevents corruption (the contender skips with
+      # exit 3), but running both is wasteful and confusing.
+      #HANSARD_CRAWL_ENABLED: "1"
+      #HANSARD_CRAWL_INTERVAL_HOURS: "24"
+      # On a FRESH volume the first crawl covers only the last 31 days.
+      # Uncomment for full history from 1955 (~26k requests, many hours).
+      #HANSARD_CRAWL_FULL_HISTORY: "1"
     restart: unless-stopped
 
   caddy:

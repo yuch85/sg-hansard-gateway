@@ -68,3 +68,41 @@ def test_crawl_parser_routes_once_to_crawl_subparser() -> None:
     # Bare / explicit serve both land on the serve branch.
     assert _build_parser().parse_args(["serve"]).command == "serve"
     assert _build_parser().parse_args([]).command is None  # rewritten to serve
+
+
+def test_crawl_loop_subcommand_dispatch(monkeypatch: pytest.MonkeyPatch) -> None:
+    """27.5: ``crawl loop`` routes to crawl.crawl_loop.run_loop (stubbed).
+
+    The loop subparser defines no --cold/--seed-state flags, so this also
+    covers the F5 dispatch path (no AttributeError on the loop branch).
+    """
+    import crawl.crawl_loop as crawl_loop
+
+    calls: list[dict[str, Any]] = []
+
+    def fake_run_loop(**kwargs: Any) -> int:
+        calls.append(kwargs)
+        return 0
+
+    monkeypatch.setattr(crawl_loop, "run_loop", fake_run_loop)
+
+    from hansard_gateway.__main__ import main
+
+    assert main(["crawl", "loop"]) == 0
+    assert len(calls) == 1
+
+    # The crawl module's own CLI parses the action too.
+    import crawl.crawl_main as crawl_main
+
+    calls.clear()
+    assert crawl_main.main(["loop"]) == 0
+    assert len(calls) == 1
+
+
+def test_crawl_parser_routes_loop_action() -> None:
+    """27.5: the parser maps ``crawl loop`` to the loop action (no flags)."""
+    from hansard_gateway.__main__ import _build_parser
+
+    args = _build_parser().parse_args(["crawl", "loop"])
+    assert args.command == "crawl"
+    assert args.action == "loop"

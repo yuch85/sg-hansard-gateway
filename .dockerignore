@@ -24,6 +24,9 @@ logs/
 # Env files (the image carries its defaults in ENV; .env.example is docs)
 .env
 .env.*
+# …except the example: shipped in the image since 0.2.0 as the canonical
+# flag reference (/app/.env.example).
+!.env.example
 
 # Prior-art reference clones + tests + deploy artifacts: not runtime
 reference/
