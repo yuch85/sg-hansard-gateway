@@ -66,10 +66,16 @@ RUN uv sync --frozen --no-dev
 # Absolute container-valid PATH list (NEVER $PATH — that would bake the
 # build host's entries into the tracked Dockerfile). /app/.venv/bin first
 # so the hg-tokens console script is directly executable.
+# UV_NO_SYNC=1 (27.5-04): the venv is the build artifact (uv sync --frozen
+# --no-dev above); a bare `uv run` at container start must never re-sync —
+# without this it tries to install the dev group on EVERY start, which
+# needs network (fails under `docker run --network none`) and pulls test
+# packages into production.
 ENV PATH=/app/.venv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin \
     HANSARD_INDEX_DB_PATH=/data/index.db \
     HANSARD_TOKENS_PATH=/data/tokens.yaml \
-    HANSARD_APP_PORT=8000
+    HANSARD_APP_PORT=8000 \
+    UV_NO_SYNC=1
 
 EXPOSE 8000
 VOLUME /data

@@ -267,6 +267,12 @@ The published image can crawl by itself: tini is PID 1 and
 when `HANSARD_CRAWL_ENABLED=1`. All flags: `.env.example` (also in the image
 at `/app/.env.example`).
 
+The image sets `UV_NO_SYNC=1`: in-image `uv run` (server, crawl loop, and
+the ad-hoc forms above) never re-syncs the environment — the virtualenv is
+the build artifact (`uv sync --frozen --no-dev`), so container start needs
+no network (`docker run --network none` works). Host-side `uv run` is
+unaffected.
+
 - **Enable/disable:** `-e HANSARD_CRAWL_ENABLED=1` (off by default; a bare
   `docker run` never crawls). First tick is immediate at container start,
   then every `HANSARD_CRAWL_INTERVAL_HOURS` (default 24). A crashed loop

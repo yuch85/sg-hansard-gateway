@@ -24,6 +24,22 @@ REPO = Path(__file__).resolve().parent.parent
 # --- Group 1: source assertions (T1.1 - T1.5) ------------------------------
 
 
+def test_dockerfile_disables_runtime_sync() -> None:
+    """27.5-04 T1: the image sets UV_NO_SYNC=1 so a bare `uv run` at
+    container start never re-syncs the environment (the venv is the build
+    artifact, synced `uv sync --frozen --no-dev`). Without it, `uv run`
+    tries to install the dev group (pytest/respx) on EVERY start — needs
+    network, fails under `--network none`, pulls test packages into prod."""
+    dockerfile = (REPO / "Dockerfile").read_text()
+    # ENV instructions span multiple lines via backslash continuations.
+    logical = dockerfile.replace("\\\n", " ")
+    env_lines = [l for l in logical.splitlines() if l.strip().startswith("ENV ")]
+    assert any("UV_NO_SYNC=1" in l for l in env_lines), (
+        "Dockerfile must set ENV UV_NO_SYNC=1 (27.5-04): in-image `uv run` "
+        "must never sync at runtime"
+    )
+
+
 def test_dockerfile_installs_tini() -> None:
     dockerfile = (REPO / "Dockerfile").read_text()
     assert "apt-get install" in dockerfile and "tini" in dockerfile

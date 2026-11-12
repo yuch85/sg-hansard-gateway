@@ -77,6 +77,30 @@ for 0.1.7; will be addressed in a follow-up release.
 - CSS budget: unchanged (no base.html CSS delta this release).
 - Suite: 443 passed / 2 deselected.
 
+## 0.2.1 — 2026-11-12 (no runtime dependency sync — phase 27.5 plan 04)
+
+Image: `ghcr.io/yuch85/sg-hansard-gateway:0.2.1` (= `:latest`)
+digest `sha256:1eed0cd8f84d630430c9a160069ed221c7f785ed3a2399650ff5840797a0c6a0`
+Rollback: recreate the container from
+`ghcr.io/yuch85/sg-hansard-gateway:0.2.0`
+(digest as recorded in the 0.2.0 entry)
+— copy the FULL env list from a `docker inspect` config capture (T-27-77).
+
+**What changed (one ENV line + test + docs; serve/crawl logic is identical
+to 0.2.0):**
+
+- **The image sets `UV_NO_SYNC=1`.** A bare `uv run` at container start no
+  longer re-syncs the environment. Previously every start tried to install
+  the dev dependency group (pytest/respx — the image venv is built
+  `uv sync --frozen --no-dev`): that needed network, failed outright under
+  `docker run --network none` (Ishi's gate 9), and pulled test packages
+  into a production container. Pre-existing since v0.1.9; exposed now by
+  the network-none gate. The virtualenv is the build artifact; container
+  start needs no network. Host-side `uv run` is unaffected.
+
+Upgrade: `docker pull` + recreate — `/data` carries the index and tokens,
+no migration; the crawler stays off unless explicitly enabled.
+
 ## 0.2.0 — 2026-11-12 (self-crawling image — phase 27.5)
 
 Image: `ghcr.io/yuch85/sg-hansard-gateway:0.2.0` (= `:latest`)

@@ -257,6 +257,9 @@ mode — see "Let the container crawl by itself" below). Three equivalent ways:
   form is the full module invocation — a bare `crawl once` after the image
   would replace the CMD and fail):
   `docker run --rm -v hansard-index:/data <image> uv run python -m hansard_gateway crawl once [--cold]`
+  (in-image `uv run` never syncs: the image sets `UV_NO_SYNC=1` — the
+  virtualenv is the build artifact, so no network is needed to START any
+  container command, including this one)
 - **Scheduled:** the same line from a host timer or cron (nightly is fine: an
   incremental run fetches only new dates, dates last crawled 90 or more
   days ago, and empty dates from the last 14 days, so late-posted reports
